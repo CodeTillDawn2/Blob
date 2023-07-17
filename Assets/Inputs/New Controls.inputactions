@@ -1,0 +1,191 @@
+{
+    "name": "New Controls",
+    "maps": [
+        {
+            "name": "Blob",
+            "id": "b8e238a0-69f6-4b6d-add9-ffe034e0e145",
+            "actions": [
+                {
+                    "name": "Forward",
+                    "type": "Value",
+                    "id": "3cd07ae6-bba4-453e-9570-20f5e926812e",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Backward",
+                    "type": "Value",
+                    "id": "ba154664-4217-4899-bd8e-e1bdb48e2416",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TurnLeft",
+                    "type": "Value",
+                    "id": "f5f381aa-faa2-49ff-bbcb-a2af017e9837",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TurnRight",
+                    "type": "Value",
+                    "id": "a40a04f6-e168-4721-ab56-c0b6da7f1174",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "TentacleForward",
+                    "type": "Button",
+                    "id": "2328a701-504e-4f75-8254-267998975c75",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TentacleBackward",
+                    "type": "Button",
+                    "id": "7c164502-ab2f-4541-8d77-71183ef6cf3f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TentacleLeft",
+                    "type": "Button",
+                    "id": "9095b82e-b489-41d8-ab6d-837dd27cd92a",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "TentacleRight",
+                    "type": "Button",
+                    "id": "0ff0e2c3-a0aa-44d1-9455-a4bdc6dc0475",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "62a8a497-0c2d-46ca-8170-d98b2eb068cf",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC Keyboard + Mouse",
+                    "action": "Forward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d552ec2-ac46-4d34-835a-691e7d6f4dfa",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC Keyboard + Mouse",
+                    "action": "Backward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a4849deb-d97d-4bcf-b621-f4e3e21abb98",
+                    "path": "<Keyboard>/a",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC Keyboard + Mouse",
+                    "action": "TurnLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "44fe67fc-0746-4f61-ae9a-58c2a6e63eb3",
+                    "path": "<Keyboard>/d",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC Keyboard + Mouse",
+                    "action": "TurnRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "95a7ded4-deff-46ee-a892-6e9fec1ee2be",
+                    "path": "<Keyboard>/t",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC Keyboard + Mouse",
+                    "action": "TentacleForward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "780216ce-56dc-4eaf-b02b-d42fd658b741",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC Keyboard + Mouse",
+                    "action": "TentacleBackward",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "11a81fe1-50ea-4342-8cd5-b402260e122a",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC Keyboard + Mouse",
+                    "action": "TentacleLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "966a7893-2e17-46ec-82d8-177d5c23e56d",
+                    "path": "<Keyboard>/h",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC Keyboard + Mouse",
+                    "action": "TentacleRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": [
+        {
+            "name": "PC Keyboard + Mouse",
+            "bindingGroup": "PC Keyboard + Mouse",
+            "devices": [
+                {
+                    "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                },
+                {
+                    "devicePath": "<Keyboard>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        }
+    ]
+}
