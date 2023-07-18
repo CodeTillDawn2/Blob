@@ -18,6 +18,13 @@ public abstract class ActorController : MonoBehaviour
     public bool Intersects;
     public bool Contained;
 
+    public bool TouchingFront = false;
+    public bool TouchingBack = false;
+    public bool TouchingTop = false;
+    public bool TouchingBottom = false;
+    public bool TouchingLeft = false;
+    public bool TouchingRight = false;
+
     public Int32 FramesSinceDeclip;
 
     // every instance registers to and removes itself from here
@@ -43,7 +50,7 @@ public abstract class ActorController : MonoBehaviour
     {
         myCollider = GetComponent<Collider>();
         rb = GetComponent<Rigidbody>();
-        
+
     }
 
     protected virtual void Start()
@@ -54,6 +61,7 @@ public abstract class ActorController : MonoBehaviour
 
 
     }
+
 
     private void OnDestroy()
     {
@@ -88,7 +96,44 @@ public abstract class ActorController : MonoBehaviour
 
     public float ColliderArea { get; private set; }
 
+    public void CheckBounds2()
+    {
+        float TopDistance = 0;
+        List<RaycastHit> FoundObjects = new List<RaycastHit>();
+        foreach (RaycastHit cast in PlayerController.Player.detection.InsideHits)
+        {
+            if (cast.collider.transform.GetPath() == PlayerController.Player.topSideCollider.transform.GetPath())
+            {
+                TopDistance = cast.distance;
+                break;
+            }
+            else
+            {
+                FoundObjects.Add(cast);
+            }
+        }
 
+        foreach (RaycastHit cast in FoundObjects)
+        {
+
+            
+
+            if (cast.collider.transform.GetPath() == myCollider.transform.GetPath() && (cast.distance <= TopDistance || TopDistance == 0))
+            {
+                Intersects = true;
+                if (!myCollider.bounds.Intersects(PlayerController.Player.frontSideCollider.bounds) 
+                    && !myCollider.bounds.Intersects(PlayerController.Player.backSideCollider.bounds)
+                    && !myCollider.bounds.Intersects(PlayerController.Player.leftSideCollider.bounds)
+                    && !myCollider.bounds.Intersects(PlayerController.Player.rightSideCollider.bounds)
+                    && !myCollider.bounds.Intersects(PlayerController.Player.topSideCollider.bounds)
+                    && !myCollider.bounds.Intersects(PlayerController.Player.bottomSideCollider.bounds))
+                {
+                    Contained = true;
+                }
+
+            }
+        }
+    }
 
     public void CheckBounds()
     {
@@ -112,7 +157,7 @@ public abstract class ActorController : MonoBehaviour
             Vector3 localPoint4 = new Vector3(localPoint1.x, localPoint2.y, localPoint1.z);
             Vector3 localPoint6 = new Vector3(localPoint1.x, localPoint2.y, localPoint2.z);
 
-            
+
             Vector3 localPoint5 = new Vector3(localPoint2.x, localPoint1.y, localPoint1.z);
             Vector3 localPoint7 = new Vector3(localPoint2.x, localPoint1.y, localPoint2.z);
             Vector3 localPoint8 = new Vector3(localPoint2.x, localPoint2.y, localPoint1.z);
@@ -176,97 +221,8 @@ public abstract class ActorController : MonoBehaviour
             throw new NotImplementedException();
         }
 
-
-
-
-
-
-
-
-        //Old attempt
-
-        //float xSize = PlayerController.Player.topSideCollider.size.x;
-        //Vector3 playerSize = new Vector3(xSize, xSize, xSize);
-        //Vector3 Player_boundPoint1 = PlayerController.Player.transform.position - (playerSize / 2f);
-        //Vector3 Player_boundPoint2 = PlayerController.Player.transform.position + (playerSize / 2f);
-        //Vector3 Player_boundPoint3 = new Vector3(Player_boundPoint1.x, Player_boundPoint1.y, Player_boundPoint2.z);
-        //Vector3 Player_boundPoint4 = new Vector3(Player_boundPoint1.x, Player_boundPoint2.y, Player_boundPoint1.z);
-        //Vector3 Player_boundPoint5 = new Vector3(Player_boundPoint2.x, Player_boundPoint1.y, Player_boundPoint1.z);
-        //Vector3 Player_boundPoint6 = new Vector3(Player_boundPoint1.x, Player_boundPoint2.y, Player_boundPoint2.z);
-        //Vector3 Player_boundPoint7 = new Vector3(Player_boundPoint2.x, Player_boundPoint1.y, Player_boundPoint2.z);
-        //Vector3 Player_boundPoint8 = new Vector3(Player_boundPoint2.x, Player_boundPoint2.y, Player_boundPoint1.z);
-
-        //float maxX = Player_boundPoint1.x;
-        //float minX = Player_boundPoint1.x;
-        //float maxY = Player_boundPoint1.y;
-        //float minY = Player_boundPoint1.y;
-        //float maxZ = Player_boundPoint1.z;
-        //float minZ = Player_boundPoint1.z;
-
-        //foreach (Vector3 vector3 in new List<Vector3>() { Player_boundPoint2, Player_boundPoint3, Player_boundPoint4,
-        //                                                Player_boundPoint5, Player_boundPoint6, Player_boundPoint7, Player_boundPoint8})
-        //{
-        //    if (vector3.x > maxX)
-        //        maxX = vector3.x;
-        //    if (vector3.x < minX)
-        //        minX = vector3.x;
-
-        //    if (vector3.y > maxY)
-        //        maxY = vector3.y;
-        //    if (vector3.y < minY)
-        //        minY = vector3.y;
-
-        //    if (vector3.z > maxZ)
-        //        maxZ = vector3.z;
-        //    if (vector3.z < minZ)
-        //        minZ = vector3.z;
-        //}
-
-        //Vector3 boundPoint1 = worldBounds.center - (worldBounds.size / 2f); 
-        //Vector3 boundPoint2 = worldBounds.center + (worldBounds.size / 2f);
-        //Vector3 boundPoint3 = new Vector3(boundPoint1.x, boundPoint1.y, boundPoint2.z);
-        //Vector3 boundPoint4 = new Vector3(boundPoint1.x, boundPoint2.y, boundPoint1.z);
-        //Vector3 boundPoint5 = new Vector3(boundPoint2.x, boundPoint1.y, boundPoint1.z);
-        //Vector3 boundPoint6 = new Vector3(boundPoint1.x, boundPoint2.y, boundPoint2.z);
-        //Vector3 boundPoint7 = new Vector3(boundPoint2.x, boundPoint1.y, boundPoint2.z);
-        //Vector3 boundPoint8 = new Vector3(boundPoint2.x, boundPoint2.y, boundPoint1.z);
-
-        //bool IsContained = true;
-        //bool DoesIntersects = false;
-
-        //foreach (Vector3 vector3 in new List<Vector3>() { boundPoint1, boundPoint2, boundPoint3, boundPoint4,
-        //                                                boundPoint5, boundPoint6, boundPoint7, boundPoint8})
-        //{
-        //    if (vector3.x >= minX && vector3.x <= maxX && vector3.y >= minY && vector3.y <= maxY && vector3.z >= minZ && vector3.z <= maxZ)
-        //    {
-        //        DoesIntersects = true;
-        //    }
-        //    else
-        //    {
-        //        IsContained = false;
-        //    }
-        //}
-
-        //Intersects = DoesIntersects;
-        //Contained = IsContained;
-
-        //Even older attempt
-
-        //Vector3[] verticies = worldBounds.;
-        //Vector3[] verticies2 = PlayerController.Player.myMesh.vertices;
-        //bool Contained = BoundsExtension.Contains(PlayerController.Player.PlayerObject.colliderTrigger.bounds, myCollider.bounds);
-
-        //return Contained;
-        //return Contained;
     }
 
 
-
-    //public Boolean DoesIntersect()
-    //{
-    //    return false;
-    //    //return myCollider.bounds.Intersects(PlayerController.Player.colliderTrigger.bounds);
-
-    //}
 
 }

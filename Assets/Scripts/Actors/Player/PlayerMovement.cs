@@ -228,8 +228,8 @@ public class PlayerMovement : MonoBehaviour
 
 
         PlayerController.Player.Animator.SetBool("Walking", Moved);
-        
-        
+
+
 
 
 

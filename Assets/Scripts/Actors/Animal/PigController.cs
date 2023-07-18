@@ -27,7 +27,7 @@ public class PigController : CreatureController, IAmEdible
         BeingSuckedIn = false;
         BeingSpatOut = false;
         currentNutrition = animalStats.Nutrition;
-        meshRenderer = GetComponent<MeshRenderer>();
+        meshRenderer = GetComponentInChildren<MeshRenderer>();
         localBounds = meshRenderer.localBounds;
         worldBounds = meshRenderer.bounds;
     }
@@ -43,7 +43,7 @@ public class PigController : CreatureController, IAmEdible
     protected override void Update()
     {
         base.Update();
-        CheckBounds();
+        CheckBounds2();
         CheckSuckedIn();
     }
 
@@ -96,19 +96,20 @@ public class PigController : CreatureController, IAmEdible
         {
             EatingJoint = gameObject.AddComponent<SpringJoint>();
             EatingJoint.connectedBody = PlayerController.Player.rb;
+            EatingJoint.autoConfigureConnectedAnchor = false;
             //joint.maxDistance = .01f;
             //joint.maxDistance = myCollider.bounds.extents.x - playerCollider.bounds.extents.x;
-            EatingJoint.spring = 5;
-            EatingJoint.damper = 50;
-            
+            EatingJoint.spring = 0.01f;
+            EatingJoint.damper = 5000;
+
             //joint.transform.position = rb.position;
-            EatingJoint.connectedAnchor = new Vector3(0, 0f, 0);
+            EatingJoint.connectedAnchor = new Vector3(0, 0, 0);
             //joint.connectedAnchor = rb.centerOfMass;
             //joint.connectedAnchor = transform.position;
-            EatingJoint.anchor = new Vector3(0, 0, 0);
+            //EatingJoint.anchor = new Vector3(0, 0, 0);
             EatingJoint.transform.parent = PlayerController.Player.transform;
             //joint.anchor = playerBase.transform.position.normalized;
-            EatingJoint.autoConfigureConnectedAnchor = false;
+            
             EatingJoint.enableCollision = true;
 
         }

@@ -11,18 +11,6 @@ public class Eye
     public RaycastHit? groundHit;
 
 
-    //public static int LayerMask_GroundOnly;
-    //public static int LayerMask_EdibleOnly;
-    //public static int LayerMask_NotPlayer;
-
-    //[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.SubsystemRegistration)]
-    //static void Init()
-    //{
-    //    LayerMask_GroundOnly = 1 << 3;
-    //    LayerMask_EdibleOnly = 1 << 7;
-    //    LayerMask_NotPlayer = ~(1 << 6);
-    //}
-
     public GameObject hitObject
     {
         get
@@ -89,6 +77,8 @@ public class PlayerDetection : MonoBehaviour
 
     private static List<Eye> AllEyes;
 
+    public RaycastHit[] InsideHits;
+
     private void Awake()
     {
         Front_0_0 = new Eye(Eyes.Where(x => x.name == "Front_0-0").First());
@@ -152,6 +142,11 @@ public class PlayerDetection : MonoBehaviour
     private void SeeThings()
     {
 
+        float halfExtents = .449f;
+        Vector3 CubeHalfExtents = new Vector3(PlayerController.Player.CubeWidth * halfExtents, PlayerController.Player.CubeWidth * halfExtents, PlayerController.Player.CubeWidth * halfExtents);
+        InsideHits = Physics.BoxCastAll(PlayerController.Player.transform.position, CubeHalfExtents, 
+            PlayerController.Player.transform.up, Quaternion.identity, PlayerController.Player.CubeWidth / 2f, (int)LayerMasks.LayerMask_NotGround);
+       
         foreach (Eye eye in AllEyes)
         {
             Ray ray = new Ray(eye.gameObject.transform.position, eye.gameObject.transform.forward);
@@ -290,6 +285,7 @@ public class PlayerDetection : MonoBehaviour
     {
         LayerMask_GroundOnly = 1 << UnityLayers.Ground,
         LayerMask_EdibleOnly = 1 << UnityLayers.CanBeEaten,
-        LayerMask_NotPlayer = ~(1 << UnityLayers.Player)
+        LayerMask_NotPlayer = ~(1 << UnityLayers.Player),
+        LayerMask_NotGround = ~(1 << UnityLayers.Ground)
     }
 }

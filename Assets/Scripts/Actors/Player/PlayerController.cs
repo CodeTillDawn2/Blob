@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -36,6 +35,8 @@ public class PlayerController : MonoBehaviour
     public GameObject PlayerObject;
     public GameObject PlayerEatingObject;
     public GameObject PlayerGameMesh;
+    public GameObject TentacleNub;
+    public GameObject TentaclePrefab;
 
     [HideInInspector]
     public Animator Animator;
@@ -62,12 +63,21 @@ public class PlayerController : MonoBehaviour
     public BoxCollider BoxTriggerObjectCollider;
 
 
-    [Header("MoveToScriptableOrStatic")]
+
+    [HideInInspector]
     public float currentMassPerCubicFoot;
+    [HideInInspector]
     public float currentAngularDragInsideStomach;
+    [HideInInspector]
     public float currentDragInsideStomach;
+    [HideInInspector]
     public float currentGrowthSpeedModifier;
+    [HideInInspector]
     public float currentSuckSpeedModifier;
+    [HideInInspector]
+    public int currentTentacleSegments;
+
+    private GameObject[] TentacleParts = new GameObject[10];
 
     //Static Variables
     public static PlayerController Player;
@@ -75,7 +85,7 @@ public class PlayerController : MonoBehaviour
     //Unity Functions
     protected void Awake()
     {
-        
+
         rb = GetComponent<Rigidbody>();
         detection = GetComponent<PlayerDetection>();
         lineRenderer = FindObjectOfType<Camera>().GetComponent<LineRenderer>();
@@ -94,19 +104,20 @@ public class PlayerController : MonoBehaviour
     protected void Start()
     {
 
-        
+
         DebugTools.ClearLine();
         BeingEaten = new List<MonoBehaviour>();
         currentRotationSpeed = playerStats.RotateSpeed;
         currentMoveSpeed = playerStats.MoveSpeed;
         currentDigestDamage = playerStats.DigestDamage;
         currentMassPerCubicFoot = playerStats.MassPerCubicFoot;
-    currentAngularDragInsideStomach = playerStats.AngularDragInsideStomach;
+        currentAngularDragInsideStomach = playerStats.AngularDragInsideStomach;
         currentDragInsideStomach = playerStats.DragInsideStomach;
         currentGrowthSpeedModifier = playerStats.GrowthSpeedModifier;
         currentSuckSpeedModifier = playerStats.SuckSpeedModifier;
-    rb.mass = playerStats.Mass;
+        rb.mass = playerStats.Mass;
         MassTarget = playerStats.Mass;
+        currentTentacleSegments = 0;
         ResetCubeWidth();
 
     }
@@ -147,6 +158,68 @@ public class PlayerController : MonoBehaviour
         }
 
         CheckIfBelowTerrain();
+        //CheckTentacle();
+    }
+
+    private void CheckTentacle()
+    {
+        if (currentTentacleSegments < 1)
+        {
+
+            if (currentTentacleSegments == 0)
+            {
+                TentacleNub.SetActive(true);
+                TentacleParts[0] = TentacleNub.transform.GetChild(0).gameObject;
+                currentTentacleSegments += 1;
+            }
+            else
+            {
+                Vector3 previousScale = TentacleNub.transform.localScale;
+                TentacleNub.transform.localScale = Vector3.one;
+                float zJointOffset = -.01f;
+                float zTentacleOffset = zJointOffset - .001f;
+
+
+                GameObject emptyFather = new GameObject();
+                
+                emptyFather.transform.position = TentacleParts[currentTentacleSegments - 1].transform.position;
+                emptyFather.transform.position += new Vector3(0, 0, zJointOffset);
+                emptyFather.transform.SetParent(TentacleParts[currentTentacleSegments - 1].transform);
+                emptyFather.transform.localScale = Vector3.one;
+                GameObject newTentacle = Instantiate(TentaclePrefab, emptyFather.transform.position, Quaternion.identity);
+                TentacleParts[currentTentacleSegments] = newTentacle.transform.GetChild(0).gameObject;
+                newTentacle.transform.localScale = Vector3.one;
+
+                newTentacle.transform.position += new Vector3(0, 0, zTentacleOffset);
+                
+                
+                HingeJoint hingeJoint = TentacleParts[currentTentacleSegments].AddComponent<HingeJoint>();
+                hingeJoint.autoConfigureConnectedAnchor = false;
+                hingeJoint.connectedBody = TentacleParts[currentTentacleSegments-1].GetComponent<Rigidbody>();
+                hingeJoint.anchor = (TentacleParts[currentTentacleSegments - 1].transform.position - TentacleParts[currentTentacleSegments].transform.position)  * 10;
+                hingeJoint.connectedAnchor = TentacleParts[currentTentacleSegments-1].transform.position - TentacleParts[currentTentacleSegments].transform.position;
+
+                hingeJoint.axis = new Vector3(1, 0, 0);
+                hingeJoint.useLimits = true;
+                JointLimits limits = hingeJoint.limits;
+                limits.min = -40;
+                limits.max = 40;
+                limits.bounciness = 0;
+                limits.bounceMinVelocity = 0;
+
+                hingeJoint.limits = limits;
+                newTentacle.transform.SetParent(emptyFather.transform);
+                newTentacle.transform.localScale = Vector3.one;
+
+                //HingeJoint hingeJoint = newTentacle.AddComponent<HingeJoint>();
+                //hingeJoint.connectedBody = TentacleParts[currentTentacleSegments-1].GetComponent<Rigidbody>();
+
+
+                currentTentacleSegments += 1;
+                TentacleNub.transform.localScale = previousScale;
+            }
+
+        }
     }
 
 
@@ -165,7 +238,8 @@ public class PlayerController : MonoBehaviour
         int layerMask = 1 << layer;   // means take 1 and rotate it left by "layer" bit positions
 
         //If ground isn't below, look above and teleport
-        Vector3 RayTraceStart = transform.position - transform.rotation * new Vector3(0, topSideCollider.size.x * transform.localScale.x / 2, 0);
+        Vector3 RayTraceStart = transform.position;
+        //Vector3 RayTraceStart = transform.position - transform.rotation * new Vector3(0, topSideCollider.size.x * transform.localScale.x / 2, 0);
 
         if (!Physics.Raycast(RayTraceStart, down, out RaycastHit hit, 10, layerMask)) //Ground found
         {
@@ -180,7 +254,7 @@ public class PlayerController : MonoBehaviour
 
     private void SuckIn(ActorController victim)
     {
-        victim.transform.position = Vector3.Slerp(victim.transform.position, transform.position, Time.deltaTime * currentSuckSpeedModifier);
+        victim.transform.position = Vector3.Slerp(victim.transform.position, transform.position + new Vector3(0,PlayerController.Player.CubeWidth * .75f,0), Time.deltaTime * currentSuckSpeedModifier);
     }
 
     private float ResetCubeWidth()
@@ -229,7 +303,7 @@ public class PlayerController : MonoBehaviour
                 UnparentEdibles();
                 transform.localScale = new Vector3(transform.localScale.x * ratio, transform.localScale.y * ratio, transform.localScale.z * ratio);
 
-                  ParentEdibles();
+                ParentEdibles();
                 print("Set mas to target " + MassTarget);
                 rb.mass = MassTarget;
                 ResetCubeWidth();

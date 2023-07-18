@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\Actors\Player\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Actors\ActorController.cs" />
     <Compile Include="Assets\Scripts\Actors\Player\PlayerTentacles.cs" />
+    <Compile Include="Assets\Scripts\Helpers\Shortcuts.cs" />
     <Compile Include="Assets\Scripts\Actors\Player\PlayerDetection.cs" />
     <Compile Include="Assets\ScriptableObjects\PlayerScriptableObject.cs" />
     <Compile Include="Assets\Scripts\Actors\Animal\CreatureController.cs" />
@@ -79,7 +80,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Imported\Kevin Iglesias\3DCharacterDummy\Readme.txt" />
+    <None Include="Assets\Shaders\NewSurfaceShader.shader" />
     <None Include="Assets\Imported\Real Stars Skybox\Demo Scene\Documentation.txt" />
+    <None Include="Assets\Shaders\ColorMask0.shader" />
     <None Include="Assets\Imported\VertexColorFarmAnimals\Shaders\VertexColorUnlit.shader" />
   </ItemGroup>
   <ItemGroup>
@@ -722,6 +725,9 @@
     <Reference Include="Unity.2D.Common.Path.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Path.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Animation.Rigging.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -830,6 +836,9 @@
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Animation.Rigging">
+      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.SpriteShape.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
     </Reference>
@@ -844,6 +853,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="AdjustPivot.Editor.csproj">
+      <Project>{942EE966-DED0-F8B3-92D7-B2E88412F9A7}</Project>
+      <Name>AdjustPivot.Editor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
