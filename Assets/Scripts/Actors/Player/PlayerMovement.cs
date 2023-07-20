@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -34,90 +35,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         Move();
-        //CorrectRoll();
-    }
 
-    private void CorrectRoll()
-    {
-        bool NeedsRotated = false;
-        float oldx = PlayerController.Player.transform.rotation.eulerAngles.x;
-        float oldz = PlayerController.Player.transform.rotation.eulerAngles.z;
-
-        float newx = 0;
-        float newy = 0;
-        float newz = 0;
-
-        if (oldx > 45 && oldx < 315)
-        {
-            if (oldx > (45 + 315) / 2) //Add
-            {
-                newx = (315 + 45) - oldx;
-            }
-            else //Subtract
-            {
-                newx = (45 - 45) - oldx;
-            }
-            NeedsRotated = true;
-        }
-
-        if (oldz > 45 && oldz < 315)
-        {
-            if (oldz > (45 + 315) / 2) //Add
-            {
-                newz = (315 + 45) - oldz;
-
-            }
-            else //Subtract
-            {
-                newz = (45 - 45) - oldz;
-            }
-            NeedsRotated = true;
-        }
-        if (NeedsRotated)
-        {
-            PlayerController.Player.transform.Rotate(new Vector3(newx, newy, newz) * Time.deltaTime);
-        }
-
-    }
-
-    void OnTentacleForward(InputValue value)
-    {
-        if (value.isPressed)
-        {
-
-            PlayerController.Player.Animator.SetBool("TentacleForward", true);
-            TentacleDeployed = true;
-        }
-    }
-
-    void OnTentacleBackward(InputValue value)
-    {
-        if (value.isPressed)
-        {
-            PlayerController.Player.Tentacles.UseBackTentacle = true;
-            PlayerController.Player.Animator.SetBool("TentacleBack", true);
-            TentacleDeployed = true;
-        }
-    }
-
-    void OnTentacleLeft(InputValue value)
-    {
-        if (value.isPressed)
-        {
-
-            PlayerController.Player.Animator.SetBool("TentacleLeft", true);
-            TentacleDeployed = true;
-        }
-    }
-
-    void OnTentacleRight(InputValue value)
-    {
-        if (value.isPressed)
-        {
-
-            PlayerController.Player.Animator.SetBool("TentacleRight", true);
-            TentacleDeployed = true;
-        }
     }
 
     void OnForward(InputValue value)
@@ -184,50 +102,63 @@ public class PlayerMovement : MonoBehaviour
 
         if (RotateLeft && !RotateRight)
         {
-            if (PlayerController.Player.detection.CanTurnLeft())
-            {
-                PlayerController.Player.transform.Rotate(0, -PlayerController.Player.currentRotationSpeed * Time.deltaTime, 0);
-            }
+            //if (PlayerController.Player.detection.CanTurnLeft())
+            //{
+                PlayerController.me.transform.Rotate(0, -PlayerController.me.currentRotationSpeed * Time.deltaTime, 0);
+            //}
 
 
         }
         else if (RotateRight && !RotateLeft)
         {
-            if (PlayerController.Player.detection.CanTurnRight())
-            {
-                PlayerController.Player.transform.Rotate(0, PlayerController.Player.currentRotationSpeed * Time.deltaTime, 0);
-            }
+            //if (PlayerController.Player.detection.CanTurnRight())
+            //{
+                PlayerController.me.transform.Rotate(0, PlayerController.me.currentRotationSpeed * Time.deltaTime, 0);
+            //}
 
         }
 
 
-        bool Moved = false;
 
         if (IsMovingForward || IsMovingBackward)
         {
-            if (IsMovingForward && !IsMovingBackward)
+            if (IsMovingForward)
             {
-                if (PlayerController.Player.detection.CanMoveForward())
-                {
-                    moveDir = PlayerController.Player.transform.forward;
-                    Moved = true;
-                }
-            }
-            else if (IsMovingBackward && !IsMovingForward)
-            {
-                if (PlayerController.Player.detection.CanMoveBackwards())
-                {
-                    moveDir = -PlayerController.Player.transform.forward;
-                    Moved = true;
-                }
-            }
-            Vector3 MoveVector = new Vector3(moveDir.x, PlayerController.Player.rb.velocity.y, moveDir.z);
-            PlayerController.Player.transform.position = Vector3.MoveTowards(PlayerController.Player.rb.position, PlayerController.Player.rb.position + MoveVector, PlayerController.Player.currentMoveSpeed * Time.deltaTime);
+ 
+                    moveDir = PlayerController.me.transform.forward;
 
+                Vector3 MoveVector = new Vector3(moveDir.x, PlayerController.me.rb.velocity.y, moveDir.z);
+
+                float CanMoveDistance = PlayerController.me.Brain.CanMoveInDirection(PlayerController.me.currentMoveSpeed * Time.deltaTime, PlayerController.me.transform.forward);
+                if (CanMoveDistance > 0)
+                {
+                    PlayerController.me.transform.position = Vector3.MoveTowards(PlayerController.me.rb.position, PlayerController.me.rb.position + MoveVector, CanMoveDistance);
+                }
+
+            }
+            else if (IsMovingBackward)
+            {
+      
+                moveDir = -PlayerController.me.transform.forward;
+
+                Vector3 MoveVector = new Vector3(moveDir.x, PlayerController.me.rb.velocity.y, moveDir.z);
+
+                float CanMoveDistance = PlayerController.me.Brain.CanMoveInDirection(PlayerController.me.currentMoveSpeed * Time.deltaTime, -PlayerController.me.transform.forward);
+                if (CanMoveDistance > 0)
+                {
+                    PlayerController.me.transform.position = Vector3.MoveTowards(PlayerController.me.rb.position, PlayerController.me.rb.position + MoveVector, CanMoveDistance);
+                }
+            }
+
+            PlayerController.me.Animator.SetBool("Walking", true);
+        }
+        else
+        {
+            PlayerController.me.Animator.SetBool("Walking", false);
         }
 
 
-        PlayerController.Player.Animator.SetBool("Walking", Moved);
+        
 
 
 

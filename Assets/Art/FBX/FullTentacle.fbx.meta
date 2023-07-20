@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a50458365922f4141847c30b4b7355eb
+guid: 3f05cf8c7e7417146a70cddd5040f636
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -33,9 +33,9 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Walk
-      takeName: Armature|Walking
-      internalID: -4274770991410265338
+      name: Wave
+      takeName: Armature|Wave
+      internalID: 5404347575020875500
       firstFrame: 0
       lastFrame: 40
       wrapMode: 0
@@ -44,7 +44,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

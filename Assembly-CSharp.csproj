@@ -63,18 +63,20 @@
     <Compile Include="Assets\Scripts\Actors\Animal\PigController.cs" />
     <Compile Include="Assets\Scripts\Actors\IAmEdible.cs" />
     <Compile Include="Assets\Scripts\Actors\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\World\PhysicsTools.cs" />
     <Compile Include="Assets\Scripts\Actors\Player\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\Actors\ActorController.cs" />
     <Compile Include="Assets\Scripts\Actors\Player\PlayerTentacles.cs" />
+    <Compile Include="Assets\ScriptableObjects\PhysicsScriptableObject.cs" />
     <Compile Include="Assets\Scripts\Helpers\Shortcuts.cs" />
-    <Compile Include="Assets\Scripts\Actors\Player\PlayerDetection.cs" />
     <Compile Include="Assets\ScriptableObjects\PlayerScriptableObject.cs" />
     <Compile Include="Assets\Scripts\Actors\Animal\CreatureController.cs" />
-    <Compile Include="Assets\Scripts\Helpers\PhysicsTools.cs" />
+    <Compile Include="Assets\Scripts\Helpers\HelperClasses.cs" />
     <Compile Include="Assets\ScriptableObjects\CreatureScriptableObject.cs" />
     <Compile Include="Assets\Animation_TentacleBack.cs" />
     <Compile Include="Assets\Animation_TentacleForward.cs" />
     <Compile Include="Assets\Animation_TentacleLeft.cs" />
+    <Compile Include="Assets\Scripts\Actors\Player\PlayerBrain.cs" />
     <Compile Include="Assets\Animation_TentacleRight.cs" />
     <Compile Include="Assets\Scripts\Actors\Player\PlayerController.cs" />
   </ItemGroup>

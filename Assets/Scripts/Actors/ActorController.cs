@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerBrain;
 
 public abstract class ActorController : MonoBehaviour
 {
@@ -27,10 +28,15 @@ public abstract class ActorController : MonoBehaviour
 
     public Int32 FramesSinceDeclip;
 
+    public bool IsSeenByPlayer = false;
+
+    public bool TargetedByTentacle = false;
+
+
+
     // every instance registers to and removes itself from here
     private static List<ActorController> _actors = new List<ActorController>();
 
-    // Readonly property, I would return a new HashSet so nobody on the outside can alter the content
     public static List<ActorController> Actors
     {
         get
@@ -90,7 +96,7 @@ public abstract class ActorController : MonoBehaviour
         }
 
         ColliderArea = x * y * z;
-        float magnitude = (transform.position - PlayerController.Player.transform.position).sqrMagnitude;
+        float magnitude = (transform.position - PlayerController.me.transform.position).sqrMagnitude;
         SqDistanceFromPlayer = magnitude;
     }
 
@@ -100,38 +106,58 @@ public abstract class ActorController : MonoBehaviour
     {
         float TopDistance = 0;
         List<RaycastHit> FoundObjects = new List<RaycastHit>();
-        foreach (RaycastHit cast in PlayerController.Player.detection.InsideHits)
+        if (PlayerController.me.Brain.InsideHits != null)
         {
-            if (cast.collider.transform.GetPath() == PlayerController.Player.topSideCollider.transform.GetPath())
+            foreach (RaycastHit cast in PlayerController.me.Brain.InsideHits)
             {
-                TopDistance = cast.distance;
-                break;
-            }
-            else
-            {
-                FoundObjects.Add(cast);
+                if (cast.collider.gameObject.Matches(PlayerController.me.collider_TopSide.gameObject))
+                {
+                    TopDistance = cast.distance;
+                    break;
+                }
+                else
+                {
+                    FoundObjects.Add(cast);
+                }
             }
         }
 
+        Intersects = false;
+        Contained = false;
         foreach (RaycastHit cast in FoundObjects)
         {
 
-            
-
-            if (cast.collider.transform.GetPath() == myCollider.transform.GetPath() && (cast.distance <= TopDistance || TopDistance == 0))
+            if (cast.collider.gameObject.layer != (int)UnityLayers.Player)
             {
-                Intersects = true;
-                if (!myCollider.bounds.Intersects(PlayerController.Player.frontSideCollider.bounds) 
-                    && !myCollider.bounds.Intersects(PlayerController.Player.backSideCollider.bounds)
-                    && !myCollider.bounds.Intersects(PlayerController.Player.leftSideCollider.bounds)
-                    && !myCollider.bounds.Intersects(PlayerController.Player.rightSideCollider.bounds)
-                    && !myCollider.bounds.Intersects(PlayerController.Player.topSideCollider.bounds)
-                    && !myCollider.bounds.Intersects(PlayerController.Player.bottomSideCollider.bounds))
-                {
-                    Contained = true;
-                }
 
+
+                if (cast.collider.gameObject.Matches(myCollider.gameObject) && (cast.distance <= TopDistance || TopDistance == 0))
+                {
+                    Intersects = true;
+                    float overlapTolerance = PlayerController.me.collider_TopSide.size.x * .1f;
+                    if (PhysicsTools.ReturnColliderOverlapAmount(myCollider, PlayerController.me.collider_FrontSide) < overlapTolerance
+                        && PhysicsTools.ReturnColliderOverlapAmount(myCollider, PlayerController.me.collider_BackSide) < overlapTolerance
+                        && PhysicsTools.ReturnColliderOverlapAmount(myCollider, PlayerController.me.collider_LeftSide) < overlapTolerance
+                        && PhysicsTools.ReturnColliderOverlapAmount(myCollider, PlayerController.me.collider_RightSide) < overlapTolerance
+                        && PhysicsTools.ReturnColliderOverlapAmount(myCollider, PlayerController.me.collider_TopSide) < overlapTolerance
+                        && PhysicsTools.ReturnColliderOverlapAmount(myCollider, PlayerController.me.collider_BottomSide) < overlapTolerance)
+                    {
+                        Contained = true;
+                    }
+                    //if (!myCollider.bounds.Intersects(PlayerController.me.collider_FrontSide.)
+                    //    && !myCollider.bounds.Intersects(PlayerController.me.collider_BackSide.bounds)
+                    //    && !myCollider.bounds.Intersects(PlayerController.me.collider_LeftSide.bounds)
+                    //    && !myCollider.bounds.Intersects(PlayerController.me.collider_RightSide.bounds)
+                    //    && !myCollider.bounds.Intersects(PlayerController.me.collider_TopSide.bounds)
+                    //    && !myCollider.bounds.Intersects(PlayerController.me.collider_BottomSide.bounds))
+                    //{
+                    //    Contained = true;
+                    //}
+
+                }
             }
+
+           
         }
     }
 
@@ -174,26 +200,26 @@ public abstract class ActorController : MonoBehaviour
             Vector3 rotatedLocalPoint8 = rotation * localPoint8;
 
             //Rotated
-            rotatedLocalPoint1 = PlayerController.Player.transform.rotation * localPoint1;
-            rotatedLocalPoint2 = PlayerController.Player.transform.rotation * localPoint2;
-            rotatedLocalPoint3 = PlayerController.Player.transform.rotation * localPoint3;
-            rotatedLocalPoint4 = PlayerController.Player.transform.rotation * localPoint4;
-            rotatedLocalPoint5 = PlayerController.Player.transform.rotation * localPoint5;
-            rotatedLocalPoint6 = PlayerController.Player.transform.rotation * localPoint6;
-            rotatedLocalPoint7 = PlayerController.Player.transform.rotation * localPoint7;
-            rotatedLocalPoint8 = PlayerController.Player.transform.rotation * localPoint8;
+            rotatedLocalPoint1 = PlayerController.me.transform.rotation * localPoint1;
+            rotatedLocalPoint2 = PlayerController.me.transform.rotation * localPoint2;
+            rotatedLocalPoint3 = PlayerController.me.transform.rotation * localPoint3;
+            rotatedLocalPoint4 = PlayerController.me.transform.rotation * localPoint4;
+            rotatedLocalPoint5 = PlayerController.me.transform.rotation * localPoint5;
+            rotatedLocalPoint6 = PlayerController.me.transform.rotation * localPoint6;
+            rotatedLocalPoint7 = PlayerController.me.transform.rotation * localPoint7;
+            rotatedLocalPoint8 = PlayerController.me.transform.rotation * localPoint8;
 
             //Local To Player Bounds
-            Vector3 localizedPoint1 = rotatedLocalPoint1 + transform.position - PlayerController.Player.transform.position;
-            Vector3 localizedPoint2 = rotatedLocalPoint2 + transform.position - PlayerController.Player.transform.position;
-            Vector3 localizedPoint3 = rotatedLocalPoint3 + transform.position - PlayerController.Player.transform.position;
-            Vector3 localizedPoint4 = rotatedLocalPoint4 + transform.position - PlayerController.Player.transform.position;
-            Vector3 localizedPoint5 = rotatedLocalPoint5 + transform.position - PlayerController.Player.transform.position;
-            Vector3 localizedPoint6 = rotatedLocalPoint6 + transform.position - PlayerController.Player.transform.position;
-            Vector3 localizedPoint7 = rotatedLocalPoint7 + transform.position - PlayerController.Player.transform.position;
-            Vector3 localizedPoint8 = rotatedLocalPoint8 + transform.position - PlayerController.Player.transform.position;
+            Vector3 localizedPoint1 = rotatedLocalPoint1 + transform.position - PlayerController.me.transform.position;
+            Vector3 localizedPoint2 = rotatedLocalPoint2 + transform.position - PlayerController.me.transform.position;
+            Vector3 localizedPoint3 = rotatedLocalPoint3 + transform.position - PlayerController.me.transform.position;
+            Vector3 localizedPoint4 = rotatedLocalPoint4 + transform.position - PlayerController.me.transform.position;
+            Vector3 localizedPoint5 = rotatedLocalPoint5 + transform.position - PlayerController.me.transform.position;
+            Vector3 localizedPoint6 = rotatedLocalPoint6 + transform.position - PlayerController.me.transform.position;
+            Vector3 localizedPoint7 = rotatedLocalPoint7 + transform.position - PlayerController.me.transform.position;
+            Vector3 localizedPoint8 = rotatedLocalPoint8 + transform.position - PlayerController.me.transform.position;
 
-            Bounds playerBounds = new Bounds(Vector3.zero, new Vector3(PlayerController.Player.CubeWidth, PlayerController.Player.CubeWidth, PlayerController.Player.CubeWidth));
+            Bounds playerBounds = new Bounds(Vector3.zero, new Vector3(PlayerController.me.CubeWidth, PlayerController.me.CubeWidth, PlayerController.me.CubeWidth));
 
             bool DoesIntersect = false;
             bool IsContained = true;

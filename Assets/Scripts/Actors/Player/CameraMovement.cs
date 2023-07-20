@@ -11,7 +11,7 @@ public class CameraMovement : MonoBehaviour
     private void Start()
     {
 
-        target = PlayerController.Player.transform;
+        target = PlayerController.me.transform;
     }
 
     void Update()
@@ -19,7 +19,7 @@ public class CameraMovement : MonoBehaviour
         if (target != null)
         {
 
-            float TrueCameraDistance = PlayerController.Player.CubeWidth * CameraDistance;
+            float TrueCameraDistance = PlayerController.me.CubeWidth * CameraDistance;
 
 
             Vector3 BackwardsVector = -target.forward;

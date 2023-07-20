@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerBrain;
 
 public class PigController : CreatureController, IAmEdible
 {
@@ -52,7 +53,7 @@ public class PigController : CreatureController, IAmEdible
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-        //transform.position = Vector3.MoveTowards(transform.position, PlayerController.Player.transform.position, 10 * Time.deltaTime);
+
 
 
 
@@ -69,14 +70,14 @@ public class PigController : CreatureController, IAmEdible
             {
                 string test = "";
             }
-            PlayerController.Player.ChangeMass(-currentHitPoints);
+            PlayerController.me.ChangeMass(-currentHitPoints);
             currentNutrition += currentHitPoints;
             currentHitPoints = 0;
         }
 
         if (currentNutrition <= 0 && currentHitPoints <= 0)
         {
-            PlayerController.Player.BeingEaten.Remove(this);
+            PlayerController.me.BeingEaten.Remove(this);
             Destroy(gameObject);
         }
 
@@ -95,7 +96,7 @@ public class PigController : CreatureController, IAmEdible
         if (EatingJoint == null)
         {
             EatingJoint = gameObject.AddComponent<SpringJoint>();
-            EatingJoint.connectedBody = PlayerController.Player.rb;
+            EatingJoint.connectedBody = PlayerController.me.rb;
             EatingJoint.autoConfigureConnectedAnchor = false;
             //joint.maxDistance = .01f;
             //joint.maxDistance = myCollider.bounds.extents.x - playerCollider.bounds.extents.x;
@@ -107,7 +108,7 @@ public class PigController : CreatureController, IAmEdible
             //joint.connectedAnchor = rb.centerOfMass;
             //joint.connectedAnchor = transform.position;
             //EatingJoint.anchor = new Vector3(0, 0, 0);
-            EatingJoint.transform.parent = PlayerController.Player.transform;
+            EatingJoint.transform.parent = PlayerController.me.transform;
             //joint.anchor = playerBase.transform.position.normalized;
             
             EatingJoint.enableCollision = true;
@@ -117,38 +118,38 @@ public class PigController : CreatureController, IAmEdible
 
     private void CheckSuckedIn()
     {
-        bool CanBeSwallowed = ColliderArea < PlayerController.Player.CubeArea * .5;
+        bool CanBeSwallowed = ColliderArea < PlayerController.me.CubeArea * .5;
         if (Intersects && CanBeSwallowed) //Suck in or eat
         {
-            transform.parent = PlayerController.Player.PlayerEatingObject.transform;
+            transform.parent = PlayerController.me.PlayerEatingObject.transform;
             currentMass = 0;
 
             if (Contained)
             {
                 BeingSuckedIn = false;
                 BeingEaten = true;
-                if (!PlayerController.Player.BeingEaten.Contains(this))
+                if (!PlayerController.me.BeingEaten.Contains(this))
                 {
-                    PlayerController.Player.BeingEaten.Add(this);
+                    PlayerController.me.BeingEaten.Add(this);
                 }
-                CreateEatingJoint();
+                //CreateEatingJoint();
                 rb.useGravity = false;
-                rb.drag = PlayerController.Player.currentDragInsideStomach;
-                rb.angularDrag = PlayerController.Player.currentAngularDragInsideStomach;
+                rb.drag = PlayerController.me.currentDragInsideStomach;
+                rb.angularDrag = PlayerController.me.currentAngularDragInsideStomach;
                 //rb.velocity = PlayerController.Player.rb.velocity;
                 //rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX;
-                gameObject.layer = LayerMask.NameToLayer("BeingEaten");
+                gameObject.layer = (int)UnityLayers.BeingEaten;
 
                 //If min number of frames between declip exceeded, check again
                 if (FramesSinceDeclip > 15)
                 {
-                    foreach (BoxCollider side in new List<BoxCollider>() { PlayerController.Player.topSideCollider, PlayerController.Player.bottomSideCollider,
-                                                                PlayerController.Player.frontSideCollider, PlayerController.Player.backSideCollider,
-                                                                PlayerController.Player.leftSideCollider, PlayerController.Player.rightSideCollider})
+                    foreach (BoxCollider side in new List<BoxCollider>() { PlayerController.me.collider_TopSide, PlayerController.me.collider_BottomSide,
+                                                                PlayerController.me.collider_FrontSide, PlayerController.me.collider_BackSide,
+                                                                PlayerController.me.collider_LeftSide, PlayerController.me.collider_RightSide})
                     {
                         Vector3 Normalizer = PhysicsTools.GetPlayerSideDirectionNormalizer(side);
                         PhysicsTools.NormalizedDeclip(this, myCollider, transform.position, transform.rotation,
-                            side, side.transform.position, PlayerController.Player.transform.rotation * side.transform.rotation, Normalizer);
+                            side, side.transform.position, PlayerController.me.transform.rotation * side.transform.rotation, Normalizer);
 
                     }
                     FramesSinceDeclip = 0;
@@ -163,14 +164,14 @@ public class PigController : CreatureController, IAmEdible
                 BeingEaten = false;
                 DestroyEatingJoint();
                 rb.useGravity = true;
-                rb.drag = PlayerController.Player.currentDragInsideStomach / 2;
-                rb.angularDrag = PlayerController.Player.currentAngularDragInsideStomach / 2;
-                if (PlayerController.Player.BeingEaten.Contains(this))
+                rb.drag = PlayerController.me.currentDragInsideStomach / 2;
+                rb.angularDrag = PlayerController.me.currentAngularDragInsideStomach / 2;
+                if (PlayerController.me.BeingEaten.Contains(this))
                 {
-                    PlayerController.Player.BeingEaten.Remove(this);
+                    PlayerController.me.BeingEaten.Remove(this);
                 }
                 //rb.constraints = RigidbodyConstraints.None;
-                gameObject.layer = LayerMask.NameToLayer("CanBeEaten");
+                gameObject.layer = (int)UnityLayers.CanBeEaten;
             }
         }
         else //Release
@@ -181,9 +182,9 @@ public class PigController : CreatureController, IAmEdible
             transform.parent = null;
             DestroyEatingJoint();
             rb.useGravity = true;
-            if (PlayerController.Player.BeingEaten.Contains(this))
+            if (PlayerController.me.BeingEaten.Contains(this))
             {
-                PlayerController.Player.BeingEaten.Remove(this);
+                PlayerController.me.BeingEaten.Remove(this);
             }
             rb.constraints = RigidbodyConstraints.None;
             rb.drag = 0;
@@ -191,11 +192,11 @@ public class PigController : CreatureController, IAmEdible
 
             if (CanBeSwallowed)
             {
-                gameObject.layer = LayerMask.NameToLayer("CanBeEaten");
+                gameObject.layer = (int)UnityLayers.CanBeEaten;
             }
             else
             {
-                gameObject.layer = LayerMask.NameToLayer("Default");
+                gameObject.layer = (int)UnityLayers.Default;
             }
 
         }

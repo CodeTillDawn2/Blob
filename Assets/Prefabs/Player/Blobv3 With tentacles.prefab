@@ -63,7 +63,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3338266210306207147}
   m_Layer: 6
-  m_Name: Front_0-0
+  m_Name: FrontBottomLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7529735971159479882}
   m_Layer: 6
-  m_Name: Back_8-8
+  m_Name: BackTopRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -125,7 +125,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4391072949202663258}
   m_Layer: 6
-  m_Name: Back_8-0
+  m_Name: BackBottomRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,7 +156,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1531520068480210986}
   m_Layer: 6
-  m_Name: Right_0-0
+  m_Name: RightBottomBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -249,7 +249,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7516698905016809638}
   m_Layer: 6
-  m_Name: Front_4-0
+  m_Name: FrontBottomMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -280,7 +280,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3829695240708068599}
   m_Layer: 6
-  m_Name: Back_4-4
+  m_Name: BackMiddleMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -311,7 +311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8631571264325229211}
   m_Layer: 6
-  m_Name: Right_0-4
+  m_Name: RightMiddleBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -342,7 +342,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5079820180578466816}
   m_Layer: 6
-  m_Name: Left_8-0
+  m_Name: LeftBottomBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -373,7 +373,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6666887405341615427}
   m_Layer: 6
-  m_Name: Front_4-8
+  m_Name: FrontTopMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -404,7 +404,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4631854060884515692}
   m_Layer: 6
-  m_Name: Left_4-8
+  m_Name: LeftTopMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -435,7 +435,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5486412132686027311}
   m_Layer: 6
-  m_Name: Back_4-0
+  m_Name: BackBottomMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -466,7 +466,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2820386262242295603}
   m_Layer: 6
-  m_Name: Back_0-0
+  m_Name: BackBottomLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -497,7 +497,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4655985133915138668}
   m_Layer: 6
-  m_Name: Front_8-0
+  m_Name: FrontBottomRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -528,7 +528,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6550483006422087606}
   m_Layer: 6
-  m_Name: Right_8-0
+  m_Name: RightBottomFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -559,7 +559,7 @@ GameObject:
   m_Component:
   - component: {fileID: 945226870689653283}
   m_Layer: 6
-  m_Name: Front_8-4
+  m_Name: FrontMiddleRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -590,7 +590,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9202712306005729579}
   m_Layer: 6
-  m_Name: Front_0-8
+  m_Name: FrontTopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -621,7 +621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4768393246213207524}
   m_Layer: 6
-  m_Name: Back_0-4
+  m_Name: BackMiddleLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -652,7 +652,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4041571754061476096}
   m_Layer: 6
-  m_Name: Front_0-4
+  m_Name: FrontMiddleLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -683,7 +683,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8114881751031296888}
   m_Layer: 6
-  m_Name: Front_8-8
+  m_Name: FrontTopRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -714,7 +714,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3527253272009773570}
   m_Layer: 6
-  m_Name: Left_4-4
+  m_Name: LeftMiddleMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -745,7 +745,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7320881030692761046}
   m_Layer: 6
-  m_Name: Right_8-4
+  m_Name: RightMiddleFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -869,7 +869,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2270479247862973296}
   m_Layer: 6
-  m_Name: Back_8-4
+  m_Name: BackMiddleRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -900,7 +900,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1818152124520338311}
   m_Layer: 6
-  m_Name: Left_0-4
+  m_Name: LeftMiddleFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -931,7 +931,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5944006805231189900}
   m_Layer: 6
-  m_Name: Right_4-4
+  m_Name: RightMiddleMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -962,7 +962,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2932027888521810397}
   m_Layer: 6
-  m_Name: Left_0-0
+  m_Name: LeftBottomFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -993,7 +993,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4672361962479804811}
   m_Layer: 6
-  m_Name: Right_8-8
+  m_Name: RightTopFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1024,7 +1024,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7070253198496584962}
   m_Layer: 6
-  m_Name: Back_0-8
+  m_Name: BackTopLeft
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1055,7 +1055,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6147578851244740126}
   m_Layer: 6
-  m_Name: Front_4-4
+  m_Name: FrontMiddleMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1093,7 +1093,7 @@ GameObject:
   - component: {fileID: 2491798945417317561}
   - component: {fileID: 2717519274193024769}
   m_Layer: 6
-  m_Name: Blobv3
+  m_Name: Blobv3 With tentacles
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1111,9 +1111,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 3630294770560990238}
   - {fileID: 3878056499714358876}
   - {fileID: 5450792051317287656}
+  - {fileID: 1642081040567982880}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1169,12 +1169,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  detection: {fileID: 0}
+  Brain: {fileID: 0}
   BeingEaten: []
+  MassTarget: 100
+  CubeArea: 0
   currentMoveSpeed: 0
   currentRotationSpeed: 0
   currentDigestDamage: 10
-  MassTarget: 100
+  currentTentacleReach: 0
+  currentMaxTentacles: 0
+  currentTentacles: 0
+  currentSightDistance: 0
   lineRenderer: {fileID: 0}
   playerStats: {fileID: 11400000, guid: 2f97634487625f645a67fa46463464fd, type: 2}
   frontSide: {fileID: 7780973396020813736}
@@ -1186,16 +1191,14 @@ MonoBehaviour:
   PlayerObject: {fileID: 7289718236628751502}
   PlayerEatingObject: {fileID: 5208512108678843547}
   PlayerGameMesh: {fileID: 3575783072986531744}
-  TentacleNub: {fileID: 7013114172379098566}
-  TentaclePrefab: {fileID: 6598931581612930395, guid: 07b33f50d1e84324fb6f4cf7fc6d0821, type: 3}
   Animator: {fileID: 0}
   Tentacles: {fileID: 0}
-  frontSideCollider: {fileID: 0}
-  backSideCollider: {fileID: 0}
-  leftSideCollider: {fileID: 0}
-  rightSideCollider: {fileID: 0}
-  topSideCollider: {fileID: 0}
-  bottomSideCollider: {fileID: 0}
+  collider_FrontSide: {fileID: 0}
+  collider_BackSide: {fileID: 0}
+  collider_LeftSide: {fileID: 0}
+  collider_RightSide: {fileID: 0}
+  collider_TopSide: {fileID: 0}
+  collider_BottomSide: {fileID: 0}
   PlayerObjectCollider: {fileID: 0}
   PlayerEatingObjectCollider: {fileID: 0}
   BoxTriggerObjectCollider: {fileID: 0}
@@ -1204,7 +1207,6 @@ MonoBehaviour:
   currentDragInsideStomach: 0
   currentGrowthSpeedModifier: 0
   currentSuckSpeedModifier: 0
-  currentTentacleSegments: 0
 --- !u!114 &2235925175652649958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1310,37 +1312,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TentaclePrefab: {fileID: 0}
---- !u!1 &7013114172379098566
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3630294770560990238}
-  m_Layer: 6
-  m_Name: TentacleNub
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &3630294770560990238
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7013114172379098566}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8890584811720592281}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &7151672194728677062
 GameObject:
   m_ObjectHideFlags: 0
@@ -1351,7 +1322,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8396799143089637735}
   m_Layer: 6
-  m_Name: Right_0-8
+  m_Name: RightTopBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1482,7 +1453,7 @@ GameObject:
   m_Component:
   - component: {fileID: 150102104198039844}
   m_Layer: 6
-  m_Name: Left_8-4
+  m_Name: LeftMiddleBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1513,7 +1484,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8404826773820001037}
   m_Layer: 6
-  m_Name: Back_4-8
+  m_Name: BackTopMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1544,7 +1515,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4968219861106866668}
   m_Layer: 6
-  m_Name: Left_4-0
+  m_Name: LeftBottomMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1575,7 +1546,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4742759790121060033}
   m_Layer: 6
-  m_Name: Right_4-0
+  m_Name: RightBottomMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1721,7 +1692,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2944131627640347777}
   m_Layer: 6
-  m_Name: Right_4-8
+  m_Name: RightTopMid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1752,7 +1723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3670007729717553859}
   m_Layer: 6
-  m_Name: Left_0-8
+  m_Name: LeftTopFront
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1783,7 +1754,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5085088748153222534}
   m_Layer: 6
-  m_Name: Left_8-8
+  m_Name: LeftTopBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1804,6 +1775,72 @@ Transform:
   m_Father: {fileID: 1220147277991519659}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 270, z: 0}
+--- !u!1001 &235289435321993685
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 8890584811720592281}
+    m_Modifications:
+    - target: {fileID: 1552108543441654517, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552108543441654517, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552108543441654517, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552108543441654517, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552108543441654517, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552108543441654517, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552108543441654517, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552108543441654517, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552108543441654517, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552108543441654517, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1552108543441654517, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8657116136127018626, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
+      propertyPath: m_Name
+      value: SmoothTentacle
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
+--- !u!4 &1642081040567982880 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1552108543441654517, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
+  m_PrefabInstance: {fileID: 235289435321993685}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4422202865707825905
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1858,7 +1895,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: a50458365922f4141847c30b4b7355eb, type: 3}
       propertyPath: m_Name
-      value: Cubev3
+      value: CubeMesh
       objectReference: {fileID: 0}
     - target: {fileID: 8417361359673230750, guid: a50458365922f4141847c30b4b7355eb, type: 3}
       propertyPath: m_Quality

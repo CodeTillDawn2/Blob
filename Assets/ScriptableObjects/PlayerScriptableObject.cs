@@ -39,4 +39,16 @@ public class PlayerScriptableObject : ScriptableObject
     float growthSpeedModifier;
     public float GrowthSpeedModifier { get => growthSpeedModifier; private set => growthSpeedModifier = value; }
 
+    [SerializeField]
+    float sightDistance;
+    public float SightDistance { get => sightDistance; private set => sightDistance = value; }
+
+    [SerializeField]
+    float tentacleReach;
+    public float TentacleReach { get => tentacleReach; private set => tentacleReach = value; }
+
+    [SerializeField]
+    int maxTentacles;
+    public int MaxTentacles { get => maxTentacles; private set => maxTentacles = value; }
+
 }

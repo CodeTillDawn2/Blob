@@ -10,16 +10,34 @@ public class PlayerController : MonoBehaviour
     public Rigidbody rb;
 
     [HideInInspector]
-    public PlayerDetection detection;
+    public PlayerBrain Brain;
 
     [Header("Debug")]
     public List<MonoBehaviour> BeingEaten;
     public float CubeWidth { get; set; }
-    public float CubeArea { get; set; }
+    public float CubeHalfExtents {
+        get { return CubeWidth * .449f; }  
+                                }
+    public Vector3 Vector3_CubeHalfExtents
+    {
+        get { return new Vector3(CubeWidth * .449f, CubeWidth * .449f, CubeWidth * .449f); }
+    }
+    public Vector3 Vector3_Cube
+    {
+        get { return new Vector3(CubeWidth, CubeWidth, CubeWidth); }
+    }
+
+    [Header("Stat Block")]
+    public float MassTarget;
+    public float CubeArea;
     public float currentMoveSpeed;
     public float currentRotationSpeed;
     public float currentDigestDamage;
-    public float MassTarget;
+    public float currentTentacleReach;
+    public int currentMaxTentacles;
+    public int currentTentacles;
+    public float currentSightDistance;
+    
     [HideInInspector]
     public LineRenderer lineRenderer;
 
@@ -35,8 +53,6 @@ public class PlayerController : MonoBehaviour
     public GameObject PlayerObject;
     public GameObject PlayerEatingObject;
     public GameObject PlayerGameMesh;
-    public GameObject TentacleNub;
-    public GameObject TentaclePrefab;
 
     [HideInInspector]
     public Animator Animator;
@@ -44,17 +60,17 @@ public class PlayerController : MonoBehaviour
     public PlayerTentacles Tentacles;
 
     [HideInInspector]
-    public BoxCollider frontSideCollider;
+    public BoxCollider collider_FrontSide;
     [HideInInspector]
-    public BoxCollider backSideCollider;
+    public BoxCollider collider_BackSide;
     [HideInInspector]
-    public BoxCollider leftSideCollider;
+    public BoxCollider collider_LeftSide;
     [HideInInspector]
-    public BoxCollider rightSideCollider;
+    public BoxCollider collider_RightSide;
     [HideInInspector]
-    public BoxCollider topSideCollider;
+    public BoxCollider collider_TopSide;
     [HideInInspector]
-    public BoxCollider bottomSideCollider;
+    public BoxCollider collider_BottomSide;
     [HideInInspector]
     public BoxCollider PlayerObjectCollider;
     [HideInInspector]
@@ -74,30 +90,27 @@ public class PlayerController : MonoBehaviour
     public float currentGrowthSpeedModifier;
     [HideInInspector]
     public float currentSuckSpeedModifier;
-    [HideInInspector]
-    public int currentTentacleSegments;
 
-    private GameObject[] TentacleParts = new GameObject[10];
 
     //Static Variables
-    public static PlayerController Player;
+    public static PlayerController me;
 
     //Unity Functions
     protected void Awake()
     {
 
         rb = GetComponent<Rigidbody>();
-        detection = GetComponent<PlayerDetection>();
+        Brain = GetComponent<PlayerBrain>();
         lineRenderer = FindObjectOfType<Camera>().GetComponent<LineRenderer>();
-        frontSideCollider = frontSide.GetComponent<BoxCollider>();
-        backSideCollider = backSide.GetComponent<BoxCollider>();
-        leftSideCollider = leftSide.GetComponent<BoxCollider>();
-        rightSideCollider = rightSide.GetComponent<BoxCollider>();
-        topSideCollider = topSide.GetComponent<BoxCollider>();
-        bottomSideCollider = bottomSide.GetComponent<BoxCollider>();
+        collider_FrontSide = frontSide.GetComponent<BoxCollider>();
+        collider_BackSide = backSide.GetComponent<BoxCollider>();
+        collider_LeftSide = leftSide.GetComponent<BoxCollider>();
+        collider_RightSide = rightSide.GetComponent<BoxCollider>();
+        collider_TopSide = topSide.GetComponent<BoxCollider>();
+        collider_BottomSide = bottomSide.GetComponent<BoxCollider>();
         Animator = PlayerGameMesh.GetComponent<Animator>();
         Tentacles = GetComponent<PlayerTentacles>();
-        Player = this;
+        me = this;
 
     }
 
@@ -115,9 +128,12 @@ public class PlayerController : MonoBehaviour
         currentDragInsideStomach = playerStats.DragInsideStomach;
         currentGrowthSpeedModifier = playerStats.GrowthSpeedModifier;
         currentSuckSpeedModifier = playerStats.SuckSpeedModifier;
+        currentTentacleReach = playerStats.TentacleReach;
+        currentMaxTentacles = playerStats.MaxTentacles;
+        currentSightDistance = playerStats.SightDistance;
         rb.mass = playerStats.Mass;
         MassTarget = playerStats.Mass;
-        currentTentacleSegments = 0;
+        currentTentacles = 0;
         ResetCubeWidth();
 
     }
@@ -158,74 +174,7 @@ public class PlayerController : MonoBehaviour
         }
 
         CheckIfBelowTerrain();
-        //CheckTentacle();
-    }
 
-    private void CheckTentacle()
-    {
-        if (currentTentacleSegments < 1)
-        {
-
-            if (currentTentacleSegments == 0)
-            {
-                TentacleNub.SetActive(true);
-                TentacleParts[0] = TentacleNub.transform.GetChild(0).gameObject;
-                currentTentacleSegments += 1;
-            }
-            else
-            {
-                Vector3 previousScale = TentacleNub.transform.localScale;
-                TentacleNub.transform.localScale = Vector3.one;
-                float zJointOffset = -.01f;
-                float zTentacleOffset = zJointOffset - .001f;
-
-
-                GameObject emptyFather = new GameObject();
-                
-                emptyFather.transform.position = TentacleParts[currentTentacleSegments - 1].transform.position;
-                emptyFather.transform.position += new Vector3(0, 0, zJointOffset);
-                emptyFather.transform.SetParent(TentacleParts[currentTentacleSegments - 1].transform);
-                emptyFather.transform.localScale = Vector3.one;
-                GameObject newTentacle = Instantiate(TentaclePrefab, emptyFather.transform.position, Quaternion.identity);
-                TentacleParts[currentTentacleSegments] = newTentacle.transform.GetChild(0).gameObject;
-                newTentacle.transform.localScale = Vector3.one;
-
-                newTentacle.transform.position += new Vector3(0, 0, zTentacleOffset);
-                
-                
-                HingeJoint hingeJoint = TentacleParts[currentTentacleSegments].AddComponent<HingeJoint>();
-                hingeJoint.autoConfigureConnectedAnchor = false;
-                hingeJoint.connectedBody = TentacleParts[currentTentacleSegments-1].GetComponent<Rigidbody>();
-                hingeJoint.anchor = (TentacleParts[currentTentacleSegments - 1].transform.position - TentacleParts[currentTentacleSegments].transform.position)  * 10;
-                hingeJoint.connectedAnchor = TentacleParts[currentTentacleSegments-1].transform.position - TentacleParts[currentTentacleSegments].transform.position;
-
-                hingeJoint.axis = new Vector3(1, 0, 0);
-                hingeJoint.useLimits = true;
-                JointLimits limits = hingeJoint.limits;
-                limits.min = -40;
-                limits.max = 40;
-                limits.bounciness = 0;
-                limits.bounceMinVelocity = 0;
-
-                hingeJoint.limits = limits;
-                newTentacle.transform.SetParent(emptyFather.transform);
-                newTentacle.transform.localScale = Vector3.one;
-
-                //HingeJoint hingeJoint = newTentacle.AddComponent<HingeJoint>();
-                //hingeJoint.connectedBody = TentacleParts[currentTentacleSegments-1].GetComponent<Rigidbody>();
-
-
-                currentTentacleSegments += 1;
-                TentacleNub.transform.localScale = previousScale;
-            }
-
-        }
-    }
-
-
-    private void OnCollisionEnter(Collision collision)
-    {
-        string test = "";
     }
 
     private void CheckIfBelowTerrain()
@@ -241,10 +190,10 @@ public class PlayerController : MonoBehaviour
         Vector3 RayTraceStart = transform.position;
         //Vector3 RayTraceStart = transform.position - transform.rotation * new Vector3(0, topSideCollider.size.x * transform.localScale.x / 2, 0);
 
-        if (!Physics.Raycast(RayTraceStart, down, out RaycastHit hit, 10, layerMask)) //Ground found
+        if (!Physics.Raycast(RayTraceStart, down, out RaycastHit hit, 10, (int)PlayerBrain.LayerMasks.LayerMask_GroundOnly)) //Ground found
         {
             Vector3 up = transform.TransformDirection(Vector3.up);
-            if (Physics.Raycast(RayTraceStart, up, out RaycastHit hit2, 10, layerMask)) //Ground found
+            if (Physics.Raycast(RayTraceStart, up, out RaycastHit hit2, 10, (int)PlayerBrain.LayerMasks.LayerMask_GroundOnly)) //Ground found
             {
                 transform.position += new Vector3(0, hit2.distance, 0);
             }
@@ -254,12 +203,13 @@ public class PlayerController : MonoBehaviour
 
     private void SuckIn(ActorController victim)
     {
-        victim.transform.position = Vector3.Slerp(victim.transform.position, transform.position + new Vector3(0,PlayerController.Player.CubeWidth * .75f,0), Time.deltaTime * currentSuckSpeedModifier);
+        victim.transform.position = Vector3.Slerp(victim.transform.position, 
+            transform.position + new Vector3(0,PlayerController.me.CubeWidth * .5f,0), Time.deltaTime * currentSuckSpeedModifier);
     }
 
     private float ResetCubeWidth()
     {
-        CubeWidth = topSideCollider.size.x * transform.localScale.x;
+        CubeWidth = collider_TopSide.size.x * transform.localScale.x;
         CubeArea = CubeWidth * CubeWidth * CubeWidth;
         return CubeWidth;
 

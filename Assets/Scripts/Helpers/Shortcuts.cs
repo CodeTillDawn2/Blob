@@ -13,6 +13,18 @@ public static class Shortcuts
         return current.parent.GetPath() + "/" + current.name;
     }
 
+    public static bool Matches(this GameObject obj1, GameObject obj2)
+    {
+        string path1 = GetPath(obj1.transform);
+        string path2 = GetPath(obj2.transform);
+
+        if (path1 == path2) 
+        { 
+            return true;
+        }
+        return false;
+    }
+
 
 }
 

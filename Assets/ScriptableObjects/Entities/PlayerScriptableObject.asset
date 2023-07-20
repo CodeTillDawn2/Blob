@@ -21,3 +21,6 @@ MonoBehaviour:
   dragInsideStomach: 40
   suckSpeedModifier: 2.5
   growthSpeedModifier: 0.25
+  sightDistance: 30
+  tentacleReach: 4.5
+  maxTentacles: 4
