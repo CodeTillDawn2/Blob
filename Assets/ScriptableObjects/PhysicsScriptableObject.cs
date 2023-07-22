@@ -1,6 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CreatureScriptableObject", menuName = "ScriptableObjects/Creature")]
+[CreateAssetMenu(fileName = "PhysicsScriptableObject", menuName = "ScriptableObjects/Physics")]
 public class PhysicsScriptableObject : ScriptableObject
 {
     [SerializeField]

@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CameraMovement : MonoBehaviour
@@ -5,13 +6,15 @@ public class CameraMovement : MonoBehaviour
     [HideInInspector]
     public UnityEngine.Transform target;
 
+    [Header("Stat Block")]
     public float CameraDistance;
     public float CameraAngle;
+    [Serialize] public FloatVariable CubeWidth;
 
     private void Start()
     {
 
-        target = PlayerController.me.transform;
+        target = transform;
     }
 
     void Update()
@@ -19,7 +22,7 @@ public class CameraMovement : MonoBehaviour
         if (target != null)
         {
 
-            float TrueCameraDistance = PlayerController.me.CubeWidth * CameraDistance;
+            float TrueCameraDistance = CubeWidth.Value * CameraDistance;
 
 
             Vector3 BackwardsVector = -target.forward;

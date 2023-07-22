@@ -5,7 +5,7 @@ public interface IAmEdible
     public abstract bool BeingEaten { get; set; }
     public abstract bool BeingSuckedIn { get; set; }
 
-    public abstract void BeEaten(float digestDamage);
+    public abstract void BeEaten(FloatVariable damage);
 
 
 }

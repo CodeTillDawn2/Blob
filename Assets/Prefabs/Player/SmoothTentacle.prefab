@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2352450935954967456}
   - component: {fileID: 6154799027358872556}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Segment 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -65,7 +65,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7312062963905703929}
   - component: {fileID: 6353006872319103448}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Rig 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -127,7 +127,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2377814196360660624}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Target
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -158,7 +158,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1552108543441654517}
-  m_Layer: 0
+  - component: {fileID: 5521536580460967818}
+  m_Layer: 9
   m_Name: SmoothTentacle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -181,6 +182,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5521536580460967818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8657116136127018626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b79c0ba52cce27742a9df62868b7f3ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 3237699869177637277}
 --- !u!1001 &4263538763494770589
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -233,17 +247,73 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -6316246102886096793, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -4427866515568061226, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -4052151291951209021, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -3555519620878915429, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -2540951060102937408, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -543324708277377831, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: -462960025492235707, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 188058655708357034, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 4e32313303e5e824ba7e8b9be20a38f9, type: 2}
+    - target: {fileID: 458648069991782664, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
       propertyPath: m_Name
       value: SmoothTentacle
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 3914825685233915809, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 5415388599835504622, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6905609870639353253, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 7036213049465896255, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 9013638940889411661, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
       propertyPath: m_Name
       value: TentacleBody
+      objectReference: {fileID: 0}
+    - target: {fileID: 9013638940889411661, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -264,9 +334,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1406631138802155145}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2530160432122648365}
   m_SourcePrefab: {fileID: 100100000, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}
 --- !u!1 &4029112236625361612 stripped
 GameObject:
@@ -345,27 +412,6 @@ MonoBehaviour:
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0}
     m_Visible: 1
---- !u!65 &2530160432122648365
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4029112236625361612}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.40764427, y: 0.39268678, z: 3.3859224}
-  m_Center: {x: 0.0050447583, y: 0.19495526, z: 2.0495076}
 --- !u!4 &4368940891902812278 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 67ea47dc7897cda4296c19056d10f604, type: 3}

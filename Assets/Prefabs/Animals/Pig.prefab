@@ -15,6 +15,9 @@ GameObject:
   - component: {fileID: 2998677985184753309}
   - component: {fileID: 7060777979632830875}
   - component: {fileID: 3104750327922658897}
+  - component: {fileID: 2416840538971152718}
+  - component: {fileID: 140584763666978723}
+  - component: {fileID: 3137001559964060996}
   m_Layer: 7
   m_Name: Pig
   m_TagString: Untagged
@@ -147,18 +150,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7e81d39f6ee0e784388fce92c761d96a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CubeWidth: {fileID: 11400000, guid: 8b106adef0f37e247bc9e94d78befe6c, type: 2}
   StartingMass: 0
   myCollider: {fileID: 0}
   rb: {fileID: 0}
-  localBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  worldBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  Intersects: 0
-  Contained: 0
+  FramesSinceDeclip: 0
+  IsSeenByPlayer: 0
+  TargetedByTentacle: 0
   animalStats: {fileID: 11400000, guid: 088da23e05495674ab59a174165544a6, type: 2}
+  DragInsideStomach: {fileID: 11400000, guid: 4bcc72ff0165cfc40899738623a15aff, type: 2}
+  AngularDragInsideStomach: {fileID: 11400000, guid: b17cc75b8f5740141a11e7b877c51bed, type: 2}
+  PlayerMassTarget: {fileID: 11400000, guid: 52efadcd3f6c20e40a5d10f86b32c8f4, type: 2}
+  CubeVolume: {fileID: 11400000, guid: b2a5f27858d56e844abb7708ecfd8d43, type: 2}
   meshRenderer: {fileID: 0}
 --- !u!65 &3104750327922658897
 BoxCollider:
@@ -181,3 +184,87 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4093125, y: 0.697812, z: 1.1939198}
   m_Center: {x: 0.000000014901161, y: 0.34174016, z: 0.11479871}
+--- !u!114 &2416840538971152718
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2486617767586004082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6acb10a1860ef654f86051c4933ca94c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: fa6bfcf5c79bc714cb8d952245e708ec, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2486617767586004082}
+        m_TargetAssemblyTypeName: PigController, Assembly-CSharp
+        m_MethodName: BeSuckedIn
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &140584763666978723
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2486617767586004082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6acb10a1860ef654f86051c4933ca94c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 9564730e38baeb44da75f8b21eeba7f0, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2486617767586004082}
+        m_TargetAssemblyTypeName: PigController, Assembly-CSharp
+        m_MethodName: BeEaten
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 11400000, guid: 2e1142439f32d1d459231acd123e10a4, type: 2}
+          m_ObjectArgumentAssemblyTypeName: FloatVariable, Assembly-CSharp
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &3137001559964060996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2486617767586004082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6acb10a1860ef654f86051c4933ca94c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Event: {fileID: 11400000, guid: 7e74e61525a342c47b7ecc84995f48bc, type: 2}
+  Response:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 7060777979632830875}
+        m_TargetAssemblyTypeName: PigController, Assembly-CSharp
+        m_MethodName: BeReleased
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -1,10 +1,25 @@
+using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static HelperClasses;
 
 public class PlayerMovement : MonoBehaviour
 {
+    [Header("Stat Block")]
+    [Serialize] public FloatVariable CurrentRotationSpeed;
+    [Serialize] public FloatVariable CurrentMoveSpeed;
 
+    public GameObject Eye_FrontTopRight;
+    public GameObject Eye_FrontMiddleRight;
+    public GameObject Eye_LeftTopFront;
+    public GameObject Eye_LeftMiddleFront;
+    public GameObject Eye_FrontTopLeft;
+    public GameObject Eye_FrontMiddleLeft;
+    public GameObject Eye_RightTopFront;
+    public GameObject Eye_RightMiddleFront;
+
+    private Rigidbody rb;
 
     protected Vector3 moveDir;
     protected Vector3 lastMovedVector;
@@ -12,8 +27,6 @@ public class PlayerMovement : MonoBehaviour
     private bool IsMovingBackward = false;
     private bool RotateLeft = false;
     private bool RotateRight = false;
-
-    private bool TentacleDeployed = false;
 
     private void Awake()
     {
@@ -23,6 +36,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        rb = GetComponent<Rigidbody>();
 
 
     }
@@ -104,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //if (PlayerController.Player.detection.CanTurnLeft())
             //{
-                PlayerController.me.transform.Rotate(0, -PlayerController.me.currentRotationSpeed * Time.deltaTime, 0);
+            transform.Rotate(0, -CurrentRotationSpeed.Value * Time.deltaTime, 0);
             //}
 
 
@@ -113,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //if (PlayerController.Player.detection.CanTurnRight())
             //{
-                PlayerController.me.transform.Rotate(0, PlayerController.me.currentRotationSpeed * Time.deltaTime, 0);
+            transform.Rotate(0, CurrentRotationSpeed.Value * Time.deltaTime, 0);
             //}
 
         }
@@ -124,46 +138,117 @@ public class PlayerMovement : MonoBehaviour
         {
             if (IsMovingForward)
             {
- 
-                    moveDir = PlayerController.me.transform.forward;
 
-                Vector3 MoveVector = new Vector3(moveDir.x, PlayerController.me.rb.velocity.y, moveDir.z);
+                moveDir = transform.forward;
 
-                float CanMoveDistance = PlayerController.me.Brain.CanMoveInDirection(PlayerController.me.currentMoveSpeed * Time.deltaTime, PlayerController.me.transform.forward);
+                Vector3 MoveVector = new Vector3(moveDir.x, rb.velocity.y, moveDir.z);
+
+                float CanMoveDistance = CanMoveInDirection(CurrentMoveSpeed.Value * Time.deltaTime, transform.forward);
                 if (CanMoveDistance > 0)
                 {
-                    PlayerController.me.transform.position = Vector3.MoveTowards(PlayerController.me.rb.position, PlayerController.me.rb.position + MoveVector, CanMoveDistance);
+                    transform.position = Vector3.MoveTowards(rb.position, rb.position + MoveVector, CanMoveDistance);
                 }
 
             }
             else if (IsMovingBackward)
             {
-      
-                moveDir = -PlayerController.me.transform.forward;
 
-                Vector3 MoveVector = new Vector3(moveDir.x, PlayerController.me.rb.velocity.y, moveDir.z);
+                moveDir = -transform.forward;
 
-                float CanMoveDistance = PlayerController.me.Brain.CanMoveInDirection(PlayerController.me.currentMoveSpeed * Time.deltaTime, -PlayerController.me.transform.forward);
+                Vector3 MoveVector = new Vector3(moveDir.x, rb.velocity.y, moveDir.z);
+
+                float CanMoveDistance = CanMoveInDirection(CurrentMoveSpeed.Value * Time.deltaTime, -transform.forward);
                 if (CanMoveDistance > 0)
                 {
-                    PlayerController.me.transform.position = Vector3.MoveTowards(PlayerController.me.rb.position, PlayerController.me.rb.position + MoveVector, CanMoveDistance);
+                    transform.position = Vector3.MoveTowards(rb.position, rb.position + MoveVector, CanMoveDistance);
                 }
             }
 
-            PlayerController.me.Animator.SetBool("Walking", true);
+            //PlayerManager.me.Animator.SetBool("Walking", true);
         }
         else
         {
-            PlayerController.me.Animator.SetBool("Walking", false);
+            //PlayerManager.me.Animator.SetBool("Walking", false);
         }
 
 
-        
 
 
 
 
 
+
+
+    }
+
+    public bool CanTurnRight()
+    {
+
+        foreach (GameObject eyeGO in new List<GameObject>() { Eye_FrontTopLeft, Eye_FrontMiddleLeft, Eye_RightTopFront, Eye_RightMiddleFront })
+        {
+            Eye eye = eyeGO.GetComponent<Eye>();
+            if (eye != null)
+            {
+                if (eye.hit != null && eye.hitObject != null)
+                {
+                    Shortcuts.UnityLayers FoundLayer = (Shortcuts.UnityLayers)eye.hitObject.layer;
+                    if (FoundLayer == Shortcuts.UnityLayers.Ground && ((RaycastHit)eye.hit).distance < .1f)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+        }
+
+        return true;
+
+    }
+
+    public bool CanTurnLeft()
+    {
+
+        foreach (GameObject eyeGO in new List<GameObject>() { Eye_FrontTopRight, Eye_FrontMiddleRight, Eye_LeftTopFront, Eye_LeftMiddleFront })
+        {
+            Eye eye = eyeGO.GetComponent<Eye>();
+            if (eye != null)
+            {
+                if (eye.hit != null && eye.hitObject != null)
+                {
+                    Shortcuts.UnityLayers FoundLayer = (Shortcuts.UnityLayers)eye.hitObject.layer;
+                    if (FoundLayer == Shortcuts.UnityLayers.Ground && ((RaycastHit)eye.hit).distance < .1f)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+
+        }
+
+        return true;
+
+    }
+
+    public float CanMoveInDirection(float distance, Vector3 castDirection)
+    {
+
+        RaycastHit hitResult;
+
+        if (rb.SweepTest(castDirection, out hitResult, distance, QueryTriggerInteraction.Ignore))
+        {
+
+            if (hitResult.collider.gameObject.layer == (int)Shortcuts.UnityLayers.Ground)
+            {
+                return hitResult.distance;
+            }
+
+
+
+
+        }
+
+        return distance;
 
     }
 }

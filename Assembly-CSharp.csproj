@@ -58,18 +58,30 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.4f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\Actors\Player\PlayerEats.cs" />
+    <Compile Include="Assets\ScriptableObjects\Events\GameEventListener.cs" />
+    <Compile Include="Assets\ScriptableObjects\VariableTemplates\QuaternionVariable.cs" />
+    <Compile Include="Assets\ScriptableObjects\Events\GameEvent.cs" />
     <Compile Include="Assets\Scripts\Helpers\DebugTools.cs" />
     <Compile Include="Assets\Scripts\Actors\Animal\PigController.cs" />
     <Compile Include="Assets\Scripts\Actors\IAmEdible.cs" />
+    <Compile Include="Assets\Scripts\Actors\Player\PlayerStomach.cs" />
+    <Compile Include="Assets\Scripts\Actors\Player\TentacleController.cs" />
     <Compile Include="Assets\Scripts\Actors\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\World\PhysicsTools.cs" />
     <Compile Include="Assets\Scripts\Actors\Player\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Actors\Player\PlayerVision.cs" />
+    <Compile Include="Assets\ScriptableObjects\VariableTemplates\FloatVariable.cs" />
+    <Compile Include="Assets\Scripts\Actors\Player\PlayerManager.cs" />
+    <Compile Include="Assets\Scripts\Executive\EnemySucker.cs" />
     <Compile Include="Assets\Scripts\Actors\ActorController.cs" />
     <Compile Include="Assets\Scripts\Actors\Player\PlayerTentacles.cs" />
     <Compile Include="Assets\ScriptableObjects\PhysicsScriptableObject.cs" />
+    <Compile Include="Assets\ScriptableObjects\VariableTemplates\RuntimeSet.cs" />
     <Compile Include="Assets\Scripts\Helpers\Shortcuts.cs" />
+    <Compile Include="Assets\Scripts\Executive\EnemyConsumer.cs" />
+    <Compile Include="Assets\ScriptableObjects\VariableTemplates\Vector3Variable.cs" />
     <Compile Include="Assets\ScriptableObjects\PlayerScriptableObject.cs" />
+    <Compile Include="Assets\Scripts\Executive\EnemyReleaser.cs" />
     <Compile Include="Assets\Scripts\Actors\Animal\CreatureController.cs" />
     <Compile Include="Assets\Scripts\Helpers\HelperClasses.cs" />
     <Compile Include="Assets\ScriptableObjects\CreatureScriptableObject.cs" />
@@ -78,7 +90,7 @@
     <Compile Include="Assets\Animation_TentacleLeft.cs" />
     <Compile Include="Assets\Scripts\Actors\Player\PlayerBrain.cs" />
     <Compile Include="Assets\Animation_TentacleRight.cs" />
-    <Compile Include="Assets\Scripts\Actors\Player\PlayerController.cs" />
+    <Compile Include="Assets\ScriptableObjects\VariableTemplates\IntegerVariable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Imported\Kevin Iglesias\3DCharacterDummy\Readme.txt" />

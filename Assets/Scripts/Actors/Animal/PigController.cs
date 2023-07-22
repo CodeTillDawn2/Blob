@@ -1,10 +1,15 @@
+using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
-using static PlayerBrain;
 
 public class PigController : CreatureController, IAmEdible
 {
-
+    [Header("Stat Block")]
+    [Serialize] public FloatVariable DragInsideStomach;
+    [Serialize] public FloatVariable AngularDragInsideStomach;
+    [Serialize] public FloatVariable PlayerMassTarget;
+    [Serialize] public FloatVariable CubeVolume;
 
     SpringJoint EatingJoint;
 
@@ -18,8 +23,6 @@ public class PigController : CreatureController, IAmEdible
     [HideInInspector]
     public MeshRenderer meshRenderer;
 
-
-
     // Start is called before the first frame update
     protected override void Start()
     {
@@ -29,8 +32,7 @@ public class PigController : CreatureController, IAmEdible
         BeingSpatOut = false;
         currentNutrition = animalStats.Nutrition;
         meshRenderer = GetComponentInChildren<MeshRenderer>();
-        localBounds = meshRenderer.localBounds;
-        worldBounds = meshRenderer.bounds;
+
     }
 
     protected override void Awake()
@@ -44,8 +46,7 @@ public class PigController : CreatureController, IAmEdible
     protected override void Update()
     {
         base.Update();
-        CheckBounds2();
-        CheckSuckedIn();
+        //CheckSuckedIn();
     }
 
 
@@ -60,28 +61,87 @@ public class PigController : CreatureController, IAmEdible
         //StartCoroutine(SuckIn());
     }
 
-    public void BeEaten(float digestDamage)
+    public void BeReleased()
+    {
+        currentMass = StartingMass;
+        transform.parent = null;
+        DestroyEatingJoint();
+        rb.useGravity = true;
+        rb.constraints = RigidbodyConstraints.None;
+        rb.drag = 0;
+        rb.angularDrag = 0;
+
+
+    }
+
+    public void BeSuckedIn()
+    {
+        
+        currentMass = 0;
+        DestroyEatingJoint();
+        rb.useGravity = true;
+        rb.drag = DragInsideStomach.Value / 2;
+        rb.angularDrag = AngularDragInsideStomach.Value / 2;
+
+    }
+
+    public void BeEaten(FloatVariable Damage)
     {
 
-        TakeDamage(digestDamage);
+        if (!BeingEaten)
+        {
+            rb.useGravity = false;
+            rb.drag = DragInsideStomach.Value;
+            rb.angularDrag = AngularDragInsideStomach.Value;
+
+            gameObject.layer = (int)Shortcuts.UnityLayers.BeingEaten;
+        }
+
+        BeingEaten = true;
+      
+
+        ////If min number of frames between declip exceeded, check again
+        //if (FramesSinceDeclip > 15)
+        //{
+        //    foreach (BoxCollider side in new List<BoxCollider>() { collider_TopSide, collider_BottomSide,
+        //                                                        collider_FrontSide, collider_BackSide,
+        //                                                        collider_LeftSide, collider_RightSide})
+        //    {
+        //        Vector3 Normalizer = GetPlayerSideDirectionNormalizer(side);
+        //        PhysicsTools.NormalizedDeclip(this, myCollider, transform.position, transform.rotation,
+        //            side, side.transform.position, transform.rotation * side.transform.rotation, Normalizer);
+
+        //    }
+        //    FramesSinceDeclip = 0;
+        //}
+
+        TakeDamage(Damage.Value);
         if (currentHitPoints < 0)
         {
-            if (currentHitPoints < 20)
-            {
-                string test = "";
-            }
-            PlayerController.me.ChangeMass(-currentHitPoints);
+            ChangeMass(-currentHitPoints);
             currentNutrition += currentHitPoints;
             currentHitPoints = 0;
         }
 
         if (currentNutrition <= 0 && currentHitPoints <= 0)
         {
-            PlayerController.me.BeingEaten.Remove(this);
             Destroy(gameObject);
         }
 
     }
+
+    public void ChangeMass(float mass)
+    {
+        PlayerMassTarget.Value += mass;
+    }
+
+    private void OnDestroy()
+    {
+        
+    }
+
+
+
 
     private void DestroyEatingJoint()
     {
@@ -91,115 +151,37 @@ public class PigController : CreatureController, IAmEdible
         }
     }
 
-    private void CreateEatingJoint()
-    {
-        if (EatingJoint == null)
-        {
-            EatingJoint = gameObject.AddComponent<SpringJoint>();
-            EatingJoint.connectedBody = PlayerController.me.rb;
-            EatingJoint.autoConfigureConnectedAnchor = false;
-            //joint.maxDistance = .01f;
-            //joint.maxDistance = myCollider.bounds.extents.x - playerCollider.bounds.extents.x;
-            EatingJoint.spring = 0.01f;
-            EatingJoint.damper = 5000;
-
-            //joint.transform.position = rb.position;
-            EatingJoint.connectedAnchor = new Vector3(0, 0, 0);
-            //joint.connectedAnchor = rb.centerOfMass;
-            //joint.connectedAnchor = transform.position;
-            //EatingJoint.anchor = new Vector3(0, 0, 0);
-            EatingJoint.transform.parent = PlayerController.me.transform;
-            //joint.anchor = playerBase.transform.position.normalized;
-            
-            EatingJoint.enableCollision = true;
-
-        }
-    }
-
-    private void CheckSuckedIn()
-    {
-        bool CanBeSwallowed = ColliderArea < PlayerController.me.CubeArea * .5;
-        if (Intersects && CanBeSwallowed) //Suck in or eat
-        {
-            transform.parent = PlayerController.me.PlayerEatingObject.transform;
-            currentMass = 0;
-
-            if (Contained)
-            {
-                BeingSuckedIn = false;
-                BeingEaten = true;
-                if (!PlayerController.me.BeingEaten.Contains(this))
-                {
-                    PlayerController.me.BeingEaten.Add(this);
-                }
-                //CreateEatingJoint();
-                rb.useGravity = false;
-                rb.drag = PlayerController.me.currentDragInsideStomach;
-                rb.angularDrag = PlayerController.me.currentAngularDragInsideStomach;
-                //rb.velocity = PlayerController.Player.rb.velocity;
-                //rb.constraints = RigidbodyConstraints.FreezePositionZ | RigidbodyConstraints.FreezePositionX;
-                gameObject.layer = (int)UnityLayers.BeingEaten;
-
-                //If min number of frames between declip exceeded, check again
-                if (FramesSinceDeclip > 15)
-                {
-                    foreach (BoxCollider side in new List<BoxCollider>() { PlayerController.me.collider_TopSide, PlayerController.me.collider_BottomSide,
-                                                                PlayerController.me.collider_FrontSide, PlayerController.me.collider_BackSide,
-                                                                PlayerController.me.collider_LeftSide, PlayerController.me.collider_RightSide})
-                    {
-                        Vector3 Normalizer = PhysicsTools.GetPlayerSideDirectionNormalizer(side);
-                        PhysicsTools.NormalizedDeclip(this, myCollider, transform.position, transform.rotation,
-                            side, side.transform.position, PlayerController.me.transform.rotation * side.transform.rotation, Normalizer);
-
-                    }
-                    FramesSinceDeclip = 0;
-                }
 
 
-
-            }
-            else
-            {
-                BeingSuckedIn = true;
-                BeingEaten = false;
-                DestroyEatingJoint();
-                rb.useGravity = true;
-                rb.drag = PlayerController.me.currentDragInsideStomach / 2;
-                rb.angularDrag = PlayerController.me.currentAngularDragInsideStomach / 2;
-                if (PlayerController.me.BeingEaten.Contains(this))
-                {
-                    PlayerController.me.BeingEaten.Remove(this);
-                }
-                //rb.constraints = RigidbodyConstraints.None;
-                gameObject.layer = (int)UnityLayers.CanBeEaten;
-            }
-        }
-        else //Release
-        {
-            currentMass = StartingMass;
-            BeingSuckedIn = false;
-            BeingEaten = false;
-            transform.parent = null;
-            DestroyEatingJoint();
-            rb.useGravity = true;
-            if (PlayerController.me.BeingEaten.Contains(this))
-            {
-                PlayerController.me.BeingEaten.Remove(this);
-            }
-            rb.constraints = RigidbodyConstraints.None;
-            rb.drag = 0;
-            rb.angularDrag = 0;
-
-            if (CanBeSwallowed)
-            {
-                gameObject.layer = (int)UnityLayers.CanBeEaten;
-            }
-            else
-            {
-                gameObject.layer = (int)UnityLayers.Default;
-            }
-
-        }
-    }
-
+    //public Vector3 GetPlayerSideDirectionNormalizer(BoxCollider side)
+    //{
+    //    if (side == collider_TopSide)
+    //    {
+    //        return side.transform.up;
+    //    }
+    //    else if (side == collider_BottomSide)
+    //    {
+    //        return -side.transform.up;
+    //    }
+    //    else if (side == collider_FrontSide)
+    //    {
+    //        return side.transform.forward;
+    //    }
+    //    else if (side == collider_BackSide)
+    //    {
+    //        return -side.transform.forward;
+    //    }
+    //    else if (side == collider_RightSide)
+    //    {
+    //        return side.transform.right;
+    //    }
+    //    else if (side == collider_LeftSide)
+    //    {
+    //        return -side.transform.right;
+    //    }
+    //    else
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
 }

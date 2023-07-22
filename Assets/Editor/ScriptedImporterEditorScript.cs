@@ -1,5 +1,3 @@
-using UnityEngine;
-using UnityEditor;
 using UnityEditor.AssetImporters;
 
 public class ScriptedImporterEditorScript : ScriptedImporterEditor
