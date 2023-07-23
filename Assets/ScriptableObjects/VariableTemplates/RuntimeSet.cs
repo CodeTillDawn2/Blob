@@ -1,21 +1,43 @@
 using System.Collections.Generic;
-using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 public abstract class RuntimeSet<T> : ScriptableObject
 {
     [SerializeField]
     private List<T> list = new List<T>();
+
     public List<T> Items
     {
         get
         { return list; }
-        set { list = value; }
+        set
+        {
+            list = value;
+            EditorUtility.SetDirty(this);
+        }
     }
 
     public void SetFromArray(T[] values)
     {
-        list = new List<T>(values);
+        if (values != null)
+        {
+            list = new List<T>(values);
+            EditorUtility.SetDirty(this);
+        }
+        else
+        {
+            list = new List<T>();
+            EditorUtility.SetDirty(this);
+        }
+    }
+
+    public void RemoveAll()
+    {
+        while (list.Count > 0)
+        {
+            list.RemoveAt(0);
+        }
     }
 
     public T[] ReturnAsArray()
@@ -25,22 +47,27 @@ public abstract class RuntimeSet<T> : ScriptableObject
 
     public void Add(T t)
     {
-        if (!Items.Contains(t)) Items.Add(t);
+        if (!Items.Contains(t))
+        {
+            Items.Add(t);
+            //EditorUtility.SetDirty(this);
 
+        }
     }
-
     public void Remove(T t)
     {
-        if (Items.Contains(t)) Items.Remove(t);
+        if (t == null || Items == null)
+        {
+            string test = "";
+        }
+        if (Items.Contains(t))
+        {
+            Items.Remove(t);
+            //EditorUtility.SetDirty(this);
+        }
     }
 }
 
 
-[CreateAssetMenu(fileName = "GameObjectRuntimeSet", menuName = "RuntimeSets/GameObjectRuntimeSet")]
-public class GameObjectRuntimeSet : RuntimeSet<GameObject> { }
 
-[CreateAssetMenu(fileName = "RaycastRuntimeSet", menuName = "RuntimeSets/RaycastRuntimeSet")]
-public class RaycastRuntimeSet : RuntimeSet<RaycastHit>
-{
 
-}

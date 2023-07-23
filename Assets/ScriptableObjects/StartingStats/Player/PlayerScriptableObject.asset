@@ -19,7 +19,7 @@ MonoBehaviour:
   massPerCubicFoot: 25
   angularDragInsideStomach: 100
   dragInsideStomach: 40
-  suckSpeedModifier: 2.5
+  suckSpeedModifier: 0.1
   growthSpeedModifier: 0.25
   sightDistance: 30
   tentacleReach: 4.5

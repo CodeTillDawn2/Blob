@@ -776,7 +776,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5450792051317287656}
   m_Layer: 6
-  m_Name: Eating
+  m_Name: Stomach
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1088,13 +1088,14 @@ GameObject:
   - component: {fileID: 8584614487212135895}
   - component: {fileID: 3402187379116071918}
   - component: {fileID: 2235925175652649958}
-  - component: {fileID: 208546815542043595}
+  - component: {fileID: 6316599795495575784}
   - component: {fileID: 2491798945417317561}
   - component: {fileID: 2717519274193024769}
   - component: {fileID: 1937190328061536466}
   - component: {fileID: 8267290150757521937}
   - component: {fileID: 2643434324419813898}
   - component: {fileID: 340933703745060341}
+  - component: {fileID: 977641950313594469}
   m_Layer: 6
   m_Name: Blobv3 With tentacles
   m_TagString: Untagged
@@ -1198,7 +1199,7 @@ MonoBehaviour:
   m_DefaultActionMap: Blob
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &208546815542043595
+--- !u!114 &6316599795495575784
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1207,11 +1208,61 @@ MonoBehaviour:
   m_GameObject: {fileID: 6963635177752257789}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2559bcb4636d19c43b2495f3a4151e68, type: 3}
+  m_Script: {fileID: 11500000, guid: 3db79f5537dfe654fb032cd1021ae3b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnEnemyEnveloped: {fileID: 11400000, guid: 9564730e38baeb44da75f8b21eeba7f0, type: 2}
-  OnEnemyContact: {fileID: 11400000, guid: fa6bfcf5c79bc714cb8d952245e708ec, type: 2}
+  CurrentSightDistance: {fileID: 11400000, guid: 68c4fcbe246024848840663de3e31375, type: 2}
+  CubeWidth: {fileID: 11400000, guid: 8b106adef0f37e247bc9e94d78befe6c, type: 2}
+  PlayerIsAlive: {fileID: 11400000, guid: be91f14f6c7d54640a39e3af85a55f54, type: 2}
+  PlayerGameObject: {fileID: 11400000, guid: 77058696715ad3348bc6e8f7f4082269, type: 2}
+  IntersectsPlayer: {fileID: 11400000, guid: 4b06ac8144799e845abb56c11e6fab30, type: 2}
+  ContainedInStomach: {fileID: 11400000, guid: 983a650bfcdbb62449ac35722fad4a4f, type: 2}
+  AllEnemies: {fileID: 11400000, guid: fa0c60002b04f7e41a425af7034babd9, type: 2}
+  ThingsSeenByPlayer: {fileID: 0}
+  Eyes:
+  - {fileID: 702410044457510277}
+  - {fileID: 1583878970669909147}
+  - {fileID: 3306439276873002293}
+  - {fileID: 4209050674031752920}
+  - {fileID: 6897507904526090389}
+  - {fileID: 3423451310611416258}
+  - {fileID: 3711098635239975110}
+  - {fileID: 1996636632011187886}
+  - {fileID: 4649109377980474716}
+  - {fileID: 3297342084827638492}
+  - {fileID: 2527422111317639205}
+  - {fileID: 1086164132008212699}
+  - {fileID: 3725932721574179635}
+  - {fileID: 1705308157851282884}
+  - {fileID: 5392876826422274717}
+  - {fileID: 6459294775959583834}
+  - {fileID: 7705414374891983384}
+  - {fileID: 849485466819262402}
+  - {fileID: 5945174073357229479}
+  - {fileID: 7755260041175366730}
+  - {fileID: 1734749518374857457}
+  - {fileID: 5552138739525707815}
+  - {fileID: 4680830842006959378}
+  - {fileID: 7700125286030587638}
+  - {fileID: 8736885956171994172}
+  - {fileID: 2453089672240778318}
+  - {fileID: 8971933589366786765}
+  - {fileID: 1201040602442722007}
+  - {fileID: 7770866300966622761}
+  - {fileID: 3387134258675601769}
+  - {fileID: 1731330633764968930}
+  - {fileID: 5721506076056852995}
+  - {fileID: 4714269478238819312}
+  - {fileID: 7151672194728677062}
+  - {fileID: 8378706469735221119}
+  - {fileID: 6090848806652649402}
+  frontSide: {fileID: 7780973396020813736}
+  backSide: {fileID: 5310679584530880617}
+  leftSide: {fileID: 7404380554168512725}
+  rightSide: {fileID: 1579096927330459526}
+  topSide: {fileID: 258531549152555367}
+  bottomSide: {fileID: 8177370783508882467}
+  InsideHits: {fileID: 11400000, guid: d81b2bf02d7b39042b52d88db4c1103c, type: 2}
 --- !u!114 &2491798945417317561
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1225,12 +1276,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 0}
-  Brain: {fileID: 0}
   CubeVolume: {fileID: 11400000, guid: b2a5f27858d56e844abb7708ecfd8d43, type: 2}
+  CubeWidth: {fileID: 11400000, guid: 8b106adef0f37e247bc9e94d78befe6c, type: 2}
   MassTarget: {fileID: 11400000, guid: 52efadcd3f6c20e40a5d10f86b32c8f4, type: 2}
   CurrentMoveSpeed: {fileID: 11400000, guid: 1d35e35c6dfb61b45b5706af0a7bbe89, type: 2}
   CurrentRotationSpeed: {fileID: 11400000, guid: 2c2a45c27d711ec4d94fc7e08ec9c64a, type: 2}
-  CurrentDigestDamage: {fileID: 11400000, guid: b2a5f27858d56e844abb7708ecfd8d43, type: 2}
   CurrentTentacleReach: {fileID: 11400000, guid: 7356289d9de16dd498a46a04165da03e, type: 2}
   CurrentMaxTentacles: {fileID: 11400000, guid: 4c6fe6b83616fed48bf1c08f874cfd92, type: 2}
   TentacleCount: {fileID: 11400000, guid: e0526bfeb6197c245824a8a4f54ee5cf, type: 2}
@@ -1240,6 +1290,7 @@ MonoBehaviour:
   CurrentDragInsideStomach: {fileID: 11400000, guid: 4bcc72ff0165cfc40899738623a15aff, type: 2}
   CurrentGrowthSpeedModifier: {fileID: 11400000, guid: 5d0be6a3716b157408b67cd34be6c7f0, type: 2}
   CurrentSuckSpeedModifier: {fileID: 11400000, guid: 475c2b967b8b2414bbdfacffdf9473a3, type: 2}
+  PlayerIsAlive: {fileID: 11400000, guid: be91f14f6c7d54640a39e3af85a55f54, type: 2}
   StartingStats: {fileID: 11400000, guid: 2f97634487625f645a67fa46463464fd, type: 2}
   frontSide: {fileID: 7780973396020813736}
   backSide: {fileID: 5310679584530880617}
@@ -1247,11 +1298,12 @@ MonoBehaviour:
   rightSide: {fileID: 1579096927330459526}
   topSide: {fileID: 258531549152555367}
   bottomSide: {fileID: 8177370783508882467}
-  PlayerObject: {fileID: 7289718236628751502}
   PlayerEatingObject: {fileID: 5208512108678843547}
   PlayerGameMesh: {fileID: 3575783072986531744}
   BeingEaten: {fileID: 11400000, guid: 5aa29419438464347b1e11fc54ed6110, type: 2}
+  PlayerGameObject: {fileID: 11400000, guid: 77058696715ad3348bc6e8f7f4082269, type: 2}
   collider_TopSide: {fileID: 0}
+  currentDigestDamage: {fileID: 11400000, guid: 2e1142439f32d1d459231acd123e10a4, type: 2}
 --- !u!114 &2717519274193024769
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1339,6 +1391,27 @@ MonoBehaviour:
   EnemiesBeingSuckedIn: {fileID: 11400000, guid: 4b06ac8144799e845abb56c11e6fab30, type: 2}
   EnemiesInsideStomach: {fileID: 11400000, guid: 983a650bfcdbb62449ac35722fad4a4f, type: 2}
   ReleasedEvent: {fileID: 11400000, guid: 7e74e61525a342c47b7ecc84995f48bc, type: 2}
+--- !u!114 &977641950313594469
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6963635177752257789}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2559bcb4636d19c43b2495f3a4151e68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EnemiesBeingSuckedIn: {fileID: 11400000, guid: 4b06ac8144799e845abb56c11e6fab30, type: 2}
+  EnemiesInsideStomach: {fileID: 11400000, guid: 983a650bfcdbb62449ac35722fad4a4f, type: 2}
+  SuckSpeedModifier: {fileID: 11400000, guid: 475c2b967b8b2414bbdfacffdf9473a3, type: 2}
+  CubeVolume: {fileID: 11400000, guid: b2a5f27858d56e844abb7708ecfd8d43, type: 2}
+  CubeWidth: {fileID: 11400000, guid: 8b106adef0f37e247bc9e94d78befe6c, type: 2}
+  PlayerEatingObject: {fileID: 5208512108678843547}
+  CurrentAngularDragInsideStomach: {fileID: 11400000, guid: b17cc75b8f5740141a11e7b877c51bed, type: 2}
+  CurrentDragInsideStomach: {fileID: 11400000, guid: 4bcc72ff0165cfc40899738623a15aff, type: 2}
+  PlayerGameObject: {fileID: 11400000, guid: 77058696715ad3348bc6e8f7f4082269, type: 2}
 --- !u!1 &7151672194728677062
 GameObject:
   m_ObjectHideFlags: 0

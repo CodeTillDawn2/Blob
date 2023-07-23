@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using static HelperClasses;
+using static UnityEngine.RuleTile.TilingRuleOutput;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -118,7 +118,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //if (PlayerController.Player.detection.CanTurnLeft())
             //{
-            transform.Rotate(0, -CurrentRotationSpeed.Value * Time.deltaTime, 0);
+            transform.Rotate(0, -CurrentRotationSpeed.Value * Time.fixedDeltaTime, 0);
             //}
 
 
@@ -127,7 +127,7 @@ public class PlayerMovement : MonoBehaviour
         {
             //if (PlayerController.Player.detection.CanTurnRight())
             //{
-            transform.Rotate(0, CurrentRotationSpeed.Value * Time.deltaTime, 0);
+            transform.Rotate(0, CurrentRotationSpeed.Value * Time.fixedDeltaTime, 0);
             //}
 
         }
@@ -139,29 +139,32 @@ public class PlayerMovement : MonoBehaviour
             if (IsMovingForward)
             {
 
-                moveDir = transform.forward;
+        
 
-                Vector3 MoveVector = new Vector3(moveDir.x, rb.velocity.y, moveDir.z);
+                    Vector3 targetChange = transform.forward * CurrentMoveSpeed.Value;
+                    float TargetChangeMagnitude = targetChange.magnitude;
 
-                float CanMoveDistance = CanMoveInDirection(CurrentMoveSpeed.Value * Time.deltaTime, transform.forward);
-                if (CanMoveDistance > 0)
-                {
-                    transform.position = Vector3.MoveTowards(rb.position, rb.position + MoveVector, CanMoveDistance);
-                }
+                    if (TargetChangeMagnitude > CurrentMoveSpeed.Value)
+                    {
+                        targetChange *= (CurrentMoveSpeed.Value / TargetChangeMagnitude);
+                    }
+
+                rb.AddForce(targetChange - rb.velocity, ForceMode.VelocityChange);
+
 
             }
             else if (IsMovingBackward)
             {
 
-                moveDir = -transform.forward;
+                Vector3 targetChange = -transform.forward * CurrentMoveSpeed.Value;
+                float TargetChangeMagnitude = targetChange.magnitude;
 
-                Vector3 MoveVector = new Vector3(moveDir.x, rb.velocity.y, moveDir.z);
-
-                float CanMoveDistance = CanMoveInDirection(CurrentMoveSpeed.Value * Time.deltaTime, -transform.forward);
-                if (CanMoveDistance > 0)
+                if (TargetChangeMagnitude > CurrentMoveSpeed.Value)
                 {
-                    transform.position = Vector3.MoveTowards(rb.position, rb.position + MoveVector, CanMoveDistance);
+                    targetChange *= (CurrentMoveSpeed.Value / TargetChangeMagnitude);
                 }
+
+                rb.AddForce(targetChange - rb.velocity, ForceMode.VelocityChange);
             }
 
             //PlayerManager.me.Animator.SetBool("Walking", true);

@@ -7,22 +7,18 @@ using UnityEngine;
 
 
 
-public class PlayerBrain : MonoBehaviour
+public class PlayerBrain : MonoBehaviour, IDoDigestDamage
 {
 
     [HideInInspector]
     public Rigidbody rb;
 
-    [HideInInspector]
-    public PlayerVision Brain;
-    public float CubeWidth { get; set; }
-
     [Header("Designer Setup")]
     [Serialize] public FloatVariable CubeVolume;
+    [Serialize] public FloatVariable CubeWidth;
     [Serialize] public FloatVariable MassTarget;
     [Serialize] public FloatVariable CurrentMoveSpeed;
     [Serialize] public FloatVariable CurrentRotationSpeed;
-    [Serialize] public FloatVariable CurrentDigestDamage;
     [Serialize] public FloatVariable CurrentTentacleReach;
     [Serialize] public IntegerVariable CurrentMaxTentacles;
     [Serialize] public IntegerVariable TentacleCount;
@@ -32,6 +28,7 @@ public class PlayerBrain : MonoBehaviour
     [Serialize] public FloatVariable CurrentDragInsideStomach;
     [Serialize] public FloatVariable CurrentGrowthSpeedModifier;
     [Serialize] public FloatVariable CurrentSuckSpeedModifier;
+    [Serialize] public BooleanVariable PlayerIsAlive;
     [Serialize] public PlayerScriptableObject StartingStats;
     [Serialize] public GameObject frontSide;
     [Serialize] public GameObject backSide;
@@ -39,18 +36,28 @@ public class PlayerBrain : MonoBehaviour
     [Serialize] public GameObject rightSide;
     [Serialize] public GameObject topSide;
     [Serialize] public GameObject bottomSide;
-    [Serialize] public GameObject PlayerObject;
     [Serialize] public GameObject PlayerEatingObject;
     [Serialize] public GameObject PlayerGameMesh;
     [Serialize] public GameObjectRuntimeSet BeingEaten;
+    [Serialize] public GameObjectVariable PlayerGameObject;
 
     [HideInInspector]
     public BoxCollider collider_TopSide;
 
+
+    [SerializeField]
+    private FloatVariable currentDigestDamage;
+    public FloatVariable CurrentDigestDamage { 
+        get
+        { return currentDigestDamage; }
+        set { value = currentDigestDamage; } }
+
     //Unity Functions
     protected void Awake()
     {
-
+        //PlayerGameObject = new GameObjectInfoVariable();
+        PlayerGameObject.Value = gameObject;
+        PlayerIsAlive.Value = true;
         rb = GetComponent<Rigidbody>();
         collider_TopSide = topSide.GetComponent<BoxCollider>();
 
@@ -88,39 +95,44 @@ public class PlayerBrain : MonoBehaviour
 
     protected void FixedUpdate()
     {
+        print(rb.velocity);
+        //for (int i = 0; i < BeingEaten.Items.Count; i++)
+        //{
+        //    IAmEdible m = BeingEaten.Items[i].GetComponent<IAmEdible>();
+        //    if (m != null)
+        //    {
+        //        m.BeEaten(CurrentDigestDamage);
+        //    }
+        //}
 
-        for (int i = 0; i < BeingEaten.Items.Count; i++)
-        {
-            IAmEdible m = BeingEaten.Items[i].GetComponent<IAmEdible>();
-            if (m != null)
-            {
-                m.BeEaten(CurrentDigestDamage);
-            }
-        }
+        //for (int i = 0; i < ActorController.Actors.Count; i++)
+        //{
+        //    ActorController a = (ActorController)ActorController.Actors[i];
 
-        for (int i = 0; i < ActorController.Actors.Count; i++)
-        {
-            ActorController a = (ActorController)ActorController.Actors[i];
+        //    if (a.SqDistanceFromPlayer < CubeWidth * CubeWidth * 10)
+        //    {
+        //        IAmEdible m = (IAmEdible)ActorController.Actors[i];
 
-            if (a.SqDistanceFromPlayer < CubeWidth * CubeWidth * 10)
-            {
-                IAmEdible m = (IAmEdible)ActorController.Actors[i];
+        //        if (m.BeingSuckedIn)
+        //        {
+        //            SuckIn(ActorController.Actors[i]);
+        //        }
+        //    }
 
-                if (m.BeingSuckedIn)
-                {
-                    SuckIn(ActorController.Actors[i]);
-                }
-            }
-
-        }
+        //}
 
         if (rb.mass != MassTarget.Value)
         {
             StartCoroutine(ChangeSize());
         }
 
-        CheckIfBelowTerrain();
+        //CheckIfBelowTerrain();
 
+    }
+
+    private void OnDestroy()
+    {
+        PlayerIsAlive.Value = false;
     }
 
     private void CheckIfBelowTerrain()
@@ -140,17 +152,12 @@ public class PlayerBrain : MonoBehaviour
         }
     }
 
-    private void SuckIn(ActorController victim)
-    {
-        victim.transform.position = Vector3.Slerp(victim.transform.position,
-            transform.position + new Vector3(0, CubeWidth * .5f, 0), Time.deltaTime * CurrentSuckSpeedModifier.Value);
-    }
 
     private float ResetCubeWidth()
     {
-        CubeWidth = collider_TopSide.size.x * transform.localScale.x;
-        CubeVolume.Value = CubeWidth * CubeWidth * CubeWidth;
-        return CubeWidth;
+        CubeWidth.Value = collider_TopSide.size.x * transform.localScale.x;
+        CubeVolume.Value = CubeWidth.Value * CubeWidth.Value * CubeWidth.Value;
+        return CubeWidth.Value;
 
     }
 
@@ -165,7 +172,7 @@ public class PlayerBrain : MonoBehaviour
 
         float TargetSideSize = (float)Math.Pow(TargetVolume, 1.0 / 3.0);
 
-        float ratio = TargetSideSize / CubeWidth;
+        float ratio = TargetSideSize / CubeWidth.Value;
 
         if (MassTarget.Value > rb.mass)
         {
@@ -195,7 +202,7 @@ public class PlayerBrain : MonoBehaviour
                 UnparentEdibles();
                 float TargetScale = transform.localScale.x * ratio;
                 transform.localScale += new Vector3(TargetScale - transform.localScale.x,
-                        TargetScale - transform.localScale.y, TargetScale - transform.localScale.z) * Time.deltaTime * CurrentGrowthSpeedModifier.Value;
+                        TargetScale - transform.localScale.y, TargetScale - transform.localScale.z) * Time.fixedDeltaTime * CurrentGrowthSpeedModifier.Value;
                 ParentEdibles();
 
                 float CubeWidth = ResetCubeWidth();
