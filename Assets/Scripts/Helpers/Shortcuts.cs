@@ -59,6 +59,7 @@ public static class Shortcuts
         LayerMask_PlayerAndTentacles = 1 << UnityLayers.Player | 1 << UnityLayers.Player,
         LayerMask_EdibleOnly = 1 << UnityLayers.CanBeEaten,
         LayerMask_NotPlayer = ~(1 << UnityLayers.Player),
+        LayerMask_NotPlayerOrTentacles = ~((1 << UnityLayers.Player) | (1 << UnityLayers.PlayerTentacle)),
         LayerMask_NotGround = ~(1 << UnityLayers.Ground),
         LayerMask_NotPlayerOrTentaclesOrGround = ~((1 << UnityLayers.Player) | (1 << UnityLayers.PlayerTentacle) | (1 << UnityLayers.Ground))
     }

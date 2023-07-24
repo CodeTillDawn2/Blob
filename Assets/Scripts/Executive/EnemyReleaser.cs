@@ -18,7 +18,7 @@ public class EnemyReleaser : MonoBehaviour
     private void OnEnable()
     {
         IsWorking = true;
-        
+
     }
 
     private void OnDisable()
@@ -35,14 +35,14 @@ public class EnemyReleaser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public IEnumerator Release()
     {
         while (IsWorking)
         {
-            
+
             foreach (GameObject enemy in EnemiesInsideStomach.Items.Where(x => x.gameObject != null))
             {
                 Collider enemyCollider = enemy.GetComponent<Collider>();
@@ -94,7 +94,7 @@ public class EnemyReleaser : MonoBehaviour
             yield return new WaitForFixedUpdate();
 
         }
-        
+
 
 
     }

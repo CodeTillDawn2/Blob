@@ -1,0 +1,36 @@
+using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
+using UnityEngine.InputSystem;
+
+public class BlobBody : MonoBehaviour
+{
+    [Header("Stat Block")]
+    [Serialize] public GameObjectVariable BlobBodyObject;
+
+
+
+    private void Awake()
+    {
+
+
+    }
+
+    void Start()
+    {
+        BlobBodyObject.Value = gameObject;
+    }
+
+    void Update()
+    {
+
+    }
+
+    void FixedUpdate()
+    {
+
+
+    }
+
+
+}

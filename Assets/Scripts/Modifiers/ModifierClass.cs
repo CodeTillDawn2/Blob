@@ -1,41 +1,61 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public abstract class ModifierClass : MonoBehaviour
+public abstract class ModifierClass<T> : MonoBehaviour where T : ModifierClass<T>
 {
-    [SerializeField] public bool IsStackable;
-    protected bool StartScript;
+    [SerializeField] public abstract bool IsStackable { get; }
+    [SerializeField] public abstract bool OneTimeEffect { get; }
+    [SerializeField] public abstract bool Inverse { get; set; }
+    [SerializeField] public abstract Func<bool> EvalConditions { get; }
 
+    private bool Redundant = false;
+
+    public IEnumerator Evaluate()
+    {
+        if (!Redundant)
+        {
+            BeforeEffect();
+
+            while (EvalConditions.Invoke() != Inverse)
+            {
+                ExecuteEffect();
+                if (OneTimeEffect) break;
+                yield return null;
+            }
+
+            AfterEffect();
+        }
+        
+    }
+
+    public abstract void BeforeEffect();
+    public abstract void ExecuteEffect();
+    public abstract void AfterEffect();
 
     protected virtual void OnEnable()
     {
-        StartScript = false;
-        if (!IsStackable) RemoveDuplicateEffect();
+        if (!IsStackable)
+        {
+            T[] componentsFound = gameObject.GetComponents<T>();
+            foreach (T component in componentsFound)
+            {
+                if (component != this)
+                {
+                    RefreshEffect();
+                    break;
+                }
+            }
+        }
+
         
 
     }
 
-    public void StartModifier()
+    public virtual void RefreshEffect()
     {
-        StartScript = true;
-    }
-
-    public void RemoveDuplicateEffect()
-    {
-
-        ModifierClass[] existing = GetComponents<ModifierClass>();
-        if (existing.Length > 1)
-        {
-            foreach (ModifierClass existingMod in existing)
-            {
-                if (existingMod != this)
-                {
-                    existingMod.enabled = false;
-                    Destroy(existingMod);
-                }
-            }
-        }
+        Redundant = true;
     }
 
 

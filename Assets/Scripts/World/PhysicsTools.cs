@@ -45,7 +45,10 @@ public static class PhysicsTools
         return origin + direction.normalized * distance;
     }
 
-
+    public static Vector3 MultipledVector(Vector3 vector, float multiplier)
+    {
+        return new Vector3(vector.x * multiplier, vector.y * multiplier, vector.z * multiplier);
+    }
 
     public static float ReturnColliderOverlapAmount(Collider col1, Collider col2)
     {

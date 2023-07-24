@@ -1,8 +1,7 @@
 using Unity.VisualScripting;
-using Unity.XR.OpenVR;
 using UnityEngine;
 
-public class PigController : EnemyController, IAmEdible
+public class PigController : EnemyController, IAmDigestable, IAmDamageable
 {
     [Header("Stat Block")]
     [Serialize] public FloatVariable DragInsideStomach;
@@ -12,13 +11,19 @@ public class PigController : EnemyController, IAmEdible
     [Serialize] public FloatVariable PlayerMassTarget;
     [Serialize] public FloatVariable CubeVolume;
     [Serialize] public GameObjectVariable PlayerGameObject;
-
+    [SerializeField] private bool amAlive;
+    public override bool AmAlive { get { return amAlive; } set { amAlive = value; } }
+    [SerializeField] private float currentHitPoints;
+    public float CurrentHitPoints { get { return currentHitPoints; } set { currentHitPoints = value; } }
     public bool BeingEaten { get; set; }
     public bool BeingSuckedIn { get; set; }
     public bool BeingSpatOut { get; set; }
-    public float currentNutrition { get; set; }
+    [SerializeField]
+    private float currentNutrition;
+    public float CurrentNutrition { get { return currentNutrition; } set { currentNutrition = value; } }
     [HideInInspector]
     public override float SqDistanceFromPlayer { get; set; }
+    
 
     [HideInInspector]
     public MeshRenderer meshRenderer;
@@ -27,10 +32,12 @@ public class PigController : EnemyController, IAmEdible
     protected override void Start()
     {
         base.Start();
+        CurrentHitPoints = enemyStats.HitPoints;
+        AmAlive = true;
         BeingEaten = false;
         BeingSuckedIn = false;
         BeingSpatOut = false;
-        currentNutrition = enemyStats.Nutrition;
+        CurrentNutrition = enemyStats.Nutrition;
         meshRenderer = GetComponentInChildren<MeshRenderer>();
 
     }
@@ -58,83 +65,111 @@ public class PigController : EnemyController, IAmEdible
         //StartCoroutine(SuckIn());
     }
 
-    public void OnPreyReleased()
+    //public void OnPreyReleased()
+    //{
+    //    currentMass = StartingMass;
+    //    transform.parent = null;
+
+    //    rb.useGravity = true;
+    //    rb.constraints = RigidbodyConstraints.None;
+    //    rb.drag = 0;
+    //    rb.angularDrag = 0;
+
+
+    //}
+
+    //public void OnContact()
+    //{
+
+    //    currentMass = 0;
+
+    //    rb.useGravity = true;
+    //    rb.drag = DragInsideStomach.Value / 2;
+    //    rb.angularDrag = AngularDragInsideStomach.Value / 2;
+
+
+    //    Vector3 RelativeVector = Vector3.Slerp(Vector3.zero,
+    //         PlayerGameObject.Value.transform.position - transform.position + new Vector3(0, CubeWidth.Value * .5f, 0), SuckSpeedModifier.Value);
+
+    //    rb.velocity = new Vector3(RelativeVector.x / Time.fixedDeltaTime, RelativeVector.y / Time.fixedDeltaTime, RelativeVector.z / Time.fixedDeltaTime);
+    //}
+    public float Digest(float digestDamage)
     {
-        currentMass = StartingMass;
-        transform.parent = null;
 
-        rb.useGravity = true;
-        rb.constraints = RigidbodyConstraints.None;
-        rb.drag = 0;
-        rb.angularDrag = 0;
+        float NutritionGained = 0;
+        if (!AmAlive)
+        {
+            if (CurrentNutrition > 0)
+            {
+                NutritionGained = digestDamage;
+                if (NutritionGained > CurrentNutrition) NutritionGained = CurrentNutrition;
 
 
+                CurrentNutrition = CurrentNutrition - digestDamage;
+            }
+            if (CurrentNutrition <= 0) Destroy(gameObject);
+        }
+        return NutritionGained;
     }
 
-    public void OnContact()
+    public void TakeDamage(float Damage, DamageTypeEnum DamageType)
     {
 
-        currentMass = 0;
-
-        rb.useGravity = true;
-        rb.drag = DragInsideStomach.Value / 2;
-        rb.angularDrag = AngularDragInsideStomach.Value / 2;
-   
-
-        Vector3 RelativeVector = Vector3.Slerp(Vector3.zero,
-             PlayerGameObject.Value.transform.position - transform.position + new Vector3(0, CubeWidth.Value * .5f, 0), SuckSpeedModifier.Value);
-
-        rb.velocity = new Vector3(RelativeVector.x / Time.fixedDeltaTime, RelativeVector.y / Time.fixedDeltaTime, RelativeVector.z / Time.fixedDeltaTime);
-    }
-
-    public void OnEaten(float digestDamage)
-    {
-
-
-
-        if (!BeingEaten)
+        if (CurrentHitPoints > 0)
         {
-            rb.useGravity = false;
-            rb.drag = DragInsideStomach.Value;
-            rb.angularDrag = AngularDragInsideStomach.Value;
-            gameObject.transform.SetParent(PlayerGameObject.Value.transform);
-            gameObject.layer = (int)Shortcuts.UnityLayers.BeingEaten;
-            
+            CurrentHitPoints = CurrentHitPoints - Damage;
         }
-
-        BeingEaten = true;
-        if (transform.position.y < PlayerGameObject.Value.transform.position.y + (CubeWidth.Value * .4f))
-        {
-            rb.AddForce(new Vector3(0, .01f * Time.fixedDeltaTime, 0), ForceMode.Force);
-        }
+        if (CurrentHitPoints < 0) CurrentHitPoints = 0;
         
-
-
-        TakeDamage(digestDamage * Time.fixedDeltaTime, new DamageTypeEnum());
-        
-
-        if (currentHitPoints < 0)
-        {
-            ChangeMass(-currentHitPoints);
-            currentNutrition += currentHitPoints;
-            currentHitPoints = 0;
-        }
-
-        if (currentNutrition <= 0 && currentHitPoints <= 0)
-        {
-            Destroy(gameObject);
-        }
-
     }
+    //public void OnEaten(float digestDamage)
+    //{
+
+
+
+    //    if (!BeingEaten)
+    //    {
+    //        rb.useGravity = false;
+    //        rb.drag = DragInsideStomach.Value;
+    //        rb.angularDrag = AngularDragInsideStomach.Value;
+    //        gameObject.transform.SetParent(PlayerGameObject.Value.transform);
+    //        gameObject.layer = (int)Shortcuts.UnityLayers.BeingEaten;
+
+    //    }
+
+    //    BeingEaten = true;
+    //    if (transform.position.y < PlayerGameObject.Value.transform.position.y + (CubeWidth.Value * .4f))
+    //    {
+    //        rb.AddForce(new Vector3(0, .01f * Time.fixedDeltaTime, 0), ForceMode.Force);
+    //    }
+
+
+
+    //    TakeDamage(digestDamage * Time.fixedDeltaTime, DamageTypeEnums.AcidDamage);
+
+
+    //    if (CurrentHitPoints < 0)
+    //    {
+    //        ChangeMass(-CurrentHitPoints);
+    //        currentNutrition += CurrentHitPoints;
+    //        CurrentHitPoints = 0;
+    //    }
+
+    //    if (currentNutrition <= 0 && CurrentHitPoints <= 0)
+    //    {
+    //        Destroy(gameObject);
+    //    }
+
+    //}
 
     public void ChangeMass(float mass)
     {
         PlayerMassTarget.Value += mass;
     }
 
-    private void OnDestroy()
+    protected override void Die()
     {
-
+        AmAlive = false;
     }
 
 

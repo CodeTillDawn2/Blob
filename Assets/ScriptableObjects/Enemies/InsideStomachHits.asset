@@ -12,3 +12,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0901cd882d07cfa468bf8962ed288de3, type: 3}
   m_Name: InsideStomachHits
   m_EditorClassIdentifier: 
+  list:
+  - rb: {fileID: 0}
+    collider: {fileID: 0}
+    gameObject: {fileID: 0}
+    distance: 0
+  - rb: {fileID: 0}
+    collider: {fileID: 0}
+    gameObject: {fileID: 0}
+    distance: 0
+  - rb: {fileID: 0}
+    collider: {fileID: 0}
+    gameObject: {fileID: 0}
+    distance: 0
+  - rb: {fileID: 0}
+    collider: {fileID: 0}
+    gameObject: {fileID: 0}
+    distance: 0
+  - rb: {fileID: 0}
+    collider: {fileID: 0}
+    gameObject: {fileID: 0}
+    distance: 0
+  - rb: {fileID: 0}
+    collider: {fileID: 0}
+    gameObject: {fileID: 0}
+    distance: 0
+  - rb: {fileID: 0}
+    collider: {fileID: 0}
+    gameObject: {fileID: 0}
+    distance: 0

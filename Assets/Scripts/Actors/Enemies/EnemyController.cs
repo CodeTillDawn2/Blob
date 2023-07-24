@@ -2,15 +2,17 @@ using Unity.VisualScripting;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
-public abstract class EnemyController : MonoBehaviour, IAmDamageable
+public abstract class EnemyController : MonoBehaviour
 {
 
     [Header("Stat Block")]
     [Serialize] public FloatVariable CubeWidth;
-    protected float currentMass;
-    public float currentMoveSpeed { get; set; }
-    public float currentRotateSpeed { get; set; }
-    public float currentHitPoints { get; set; }
+    [SerializeField] protected float currentMass;
+    [SerializeReference] public float currentMoveSpeed;
+    [SerializeReference] public float currentRotateSpeed;
+
+    public abstract bool AmAlive { get; set; }
+
 
     public EnemyScriptableObject enemyStats;
 
@@ -29,6 +31,8 @@ public abstract class EnemyController : MonoBehaviour, IAmDamageable
 
     }
 
+    protected abstract void Die();
+
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -41,7 +45,7 @@ public abstract class EnemyController : MonoBehaviour, IAmDamageable
         currentMass = enemyStats.Mass;
         currentMoveSpeed = enemyStats.MoveSpeed;
         currentRotateSpeed = enemyStats.RotateSpeed;
-        currentHitPoints = enemyStats.HitPoints;
+        
 
         rb.mass = currentMass;
 
@@ -66,12 +70,17 @@ public abstract class EnemyController : MonoBehaviour, IAmDamageable
 
     protected virtual void FixedUpdate()
     {
+        if (TryGetComponent<IAmDamageable>(out IAmDamageable found))
+        {
+            if (found.CurrentHitPoints <= 0)
+            {
+                Die();
+            }
+        }
+
 
     }
 
-    public void TakeDamage(float Damage, DamageTypeEnum DamageType)
-    {
-        currentHitPoints = currentHitPoints - Damage;
-    }
+
 
 }

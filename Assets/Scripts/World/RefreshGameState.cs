@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,9 +8,12 @@ public class RefreshGameState : MonoBehaviour
     [Serialize] public GameObjectRuntimeSet EnemiesBeingEaten;
     [Serialize] public GameObjectRuntimeSet EnemiesInStomach;
     [Serialize] public GameObjectRuntimeSet EnemiesIntersectingPlayer;
-    [Serialize] public GameObjectRuntimeSet EnemiesSeenByPlayer;
     [Serialize] public RaycastInfoRuntimeSet InsideStomachHits;
+    [Serialize] public GameObjectRuntimeSet ThingsNearby;
     [Serialize] public BooleanVariable SceneReady;
+
+    [Serialize] public Dict_GameObjectToGameObject TentacleTargeting;
+    [Serialize] public Dict_GameObjectToLastSeen EnemiesSeenByPlayer;
 
     private void Awake()
     {
@@ -22,7 +23,10 @@ public class RefreshGameState : MonoBehaviour
         EnemiesInStomach.RemoveAll();
         EnemiesIntersectingPlayer.RemoveAll();
         InsideStomachHits.RemoveAll();
-        EnemiesSeenByPlayer.RemoveAll();
+        ThingsNearby.RemoveAll();
+
+        TentacleTargeting.Value.Clear();
+        EnemiesSeenByPlayer.Value.Clear();
     }
 
     // Start is called before the first frame update
@@ -34,6 +38,6 @@ public class RefreshGameState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

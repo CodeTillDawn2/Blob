@@ -1,0 +1,68 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1887825965799516452
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5851116569461172901}
+  - component: {fileID: 6815304748852121833}
+  - component: {fileID: 4584694647689110939}
+  m_Layer: 0
+  m_Name: Game Manager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5851116569461172901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887825965799516452}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.9359722, y: -10.090233, z: 21.629707}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6815304748852121833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887825965799516452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0779c864dd2e983498c64b004003fecd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AllEnemies: {fileID: 11400000, guid: fa0c60002b04f7e41a425af7034babd9, type: 2}
+  EnemiesBeingEaten: {fileID: 11400000, guid: 5aa29419438464347b1e11fc54ed6110, type: 2}
+  EnemiesInStomach: {fileID: 11400000, guid: 983a650bfcdbb62449ac35722fad4a4f, type: 2}
+  EnemiesIntersectingPlayer: {fileID: 11400000, guid: 4b06ac8144799e845abb56c11e6fab30, type: 2}
+  InsideStomachHits: {fileID: 11400000, guid: d81b2bf02d7b39042b52d88db4c1103c, type: 2}
+  ThingsNearby: {fileID: 11400000, guid: 3c7bad5fc00d8944fb953de0a7fb083c, type: 2}
+  SceneReady: {fileID: 11400000, guid: fd89fcd26764fcb4f988ced3c304ff34, type: 2}
+  TentacleTargeting: {fileID: 11400000, guid: da24446fa717b0a4785ac684bf0dd61b, type: 2}
+  EnemiesSeenByPlayer: {fileID: 11400000, guid: 8678ebe371638bf4db345b4d33a76498, type: 2}
+--- !u!114 &4584694647689110939
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887825965799516452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9aadecaf6a657c14dbeec61a382c95b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

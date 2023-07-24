@@ -151,6 +151,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CubeWidth: {fileID: 11400000, guid: 8b106adef0f37e247bc9e94d78befe6c, type: 2}
+  currentMass: 0
+  currentMoveSpeed: 0
+  currentRotateSpeed: 0
   enemyStats: {fileID: 11400000, guid: 088da23e05495674ab59a174165544a6, type: 2}
   StartingMass: 0
   AllEnemies: {fileID: 11400000, guid: fa0c60002b04f7e41a425af7034babd9, type: 2}
@@ -161,6 +164,9 @@ MonoBehaviour:
   PlayerMassTarget: {fileID: 11400000, guid: 52efadcd3f6c20e40a5d10f86b32c8f4, type: 2}
   CubeVolume: {fileID: 11400000, guid: b2a5f27858d56e844abb7708ecfd8d43, type: 2}
   PlayerGameObject: {fileID: 11400000, guid: 77058696715ad3348bc6e8f7f4082269, type: 2}
+  amAlive: 0
+  currentHitPoints: 0
+  currentNutrition: 0
   meshRenderer: {fileID: 0}
 --- !u!65 &3104750327922658897
 BoxCollider:

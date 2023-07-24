@@ -8,7 +8,9 @@ MonoImporter:
   - EnemiesBeingEaten: {fileID: 11400000, guid: 5aa29419438464347b1e11fc54ed6110, type: 2}
   - EnemiesInStomach: {fileID: 11400000, guid: 983a650bfcdbb62449ac35722fad4a4f, type: 2}
   - EnemiesIntersectingPlayer: {fileID: 11400000, guid: 4b06ac8144799e845abb56c11e6fab30, type: 2}
+  - EnemiesSeenByPlayer: {fileID: 11400000, guid: 8678ebe371638bf4db345b4d33a76498, type: 2}
   - InsideStomachHits: {fileID: 11400000, guid: d81b2bf02d7b39042b52d88db4c1103c, type: 2}
+  - ThingsNearby: {fileID: 11400000, guid: 3c7bad5fc00d8944fb953de0a7fb083c, type: 2}
   - SceneReady: {fileID: 11400000, guid: fd89fcd26764fcb4f988ced3c304ff34, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
