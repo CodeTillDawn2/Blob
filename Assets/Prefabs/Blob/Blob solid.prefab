@@ -152,19 +152,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TentacleCount: {fileID: 11400000, guid: e0526bfeb6197c245824a8a4f54ee5cf, type: 2}
   CurrentMaxTentacles: {fileID: 11400000, guid: 4c6fe6b83616fed48bf1c08f874cfd92, type: 2}
-  RigidBodyObject: {fileID: 11400000, guid: 77058696715ad3348bc6e8f7f4082269, type: 2}
+  parentRB: {fileID: 11400000, guid: 77058696715ad3348bc6e8f7f4082269, type: 2}
   CurrentTentacleReach: {fileID: 11400000, guid: 7356289d9de16dd498a46a04165da03e, type: 2}
   BlobDims: {fileID: 11400000, guid: 8ef06ef29ae67ad42a0c382b3fed5cb5, type: 2}
   StartingStats: {fileID: 11400000, guid: 2f97634487625f645a67fa46463464fd, type: 2}
   ObjectsSeen: {fileID: 11400000, guid: 8678ebe371638bf4db345b4d33a76498, type: 2}
-  TentacleOrientations: {fileID: 11400000, guid: 3b7dcf5900ecfdc4183d0af1ea8d0877, type: 2}
-  TentacleTargeting: {fileID: 11400000, guid: da24446fa717b0a4785ac684bf0dd61b, type: 2}
-  TentacleSideReference: {fileID: 11400000, guid: 1d3b45a3c4673cf44a3a7dce0e2d9abe, type: 2}
-  TestSerializable: {fileID: 11400000, guid: 001bcf3d60f77bc44a0ddd3f54b68846, type: 2}
   TentaclePositionRaycast:
     serializedVersion: 2
     m_Bits: 64
-  Tentacles: []
   TentaclePrefab: {fileID: 8657116136127018626, guid: 851fe92c8c077a44699f534d53dca74a, type: 3}
   FrontSide: {fileID: 7780973396020813736}
   BackSide: {fileID: 5310679584530880617}
@@ -408,7 +403,7 @@ Transform:
   m_Children:
   - {fileID: 4239131273371049242}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2491798945417317561
 MonoBehaviour:

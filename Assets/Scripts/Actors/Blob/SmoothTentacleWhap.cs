@@ -24,7 +24,7 @@ public class SmoothTentacleWhap : MonoBehaviour
             if (other.gameObject.layer == (int)UnityLayers.PlayerTentacle)
             {
                 string test = other.gameObject.name;
-                ModifierLibrary.OneTime.ApplyTentacleWhapModifer(gameObject, other.gameObject, 10f, Vector3.up, 10f);
+                ModifierLibrary.Tentacle.ApplyTentacleWhapModifer(gameObject, other.gameObject, 10f, Vector3.up, 10f);
                 //ModifierLibrary.OneTime.ApplyTentacleWhapModifer(other.gameObject,other.)
             }
         }

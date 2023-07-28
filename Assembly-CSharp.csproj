@@ -61,7 +61,6 @@
     <Compile Include="Assets\Scripts\World\RefreshGameState.cs" />
     <Compile Include="Assets\ScriptableObjects\Events\GameEventListener.cs" />
     <Compile Include="Assets\Scripts\Actors\Blob\BlobMovement.cs" />
-    <Compile Include="Assets\Scripts\Modifiers\Damage\TentacleWhapModifer.cs" />
     <Compile Include="Assets\VariableTemplates\Dictionary\Base\SerializableDictionary.cs" />
     <Compile Include="Assets\Scripts\Actors\Interfaces\IAmDamageable.cs" />
     <Compile Include="Assets\Scripts\Actors\Enemies\EnemyController.cs" />
@@ -76,6 +75,8 @@
     <Compile Include="Assets\Scripts\World\DamageTypeEnums.cs" />
     <Compile Include="Assets\Scripts\Actors\Blob\SmoothTentacle.cs" />
     <Compile Include="Assets\Scripts\Modifiers\Digestion\InBlobsStomachModifier.cs" />
+    <Compile Include="Assets\VariableTemplates\Variables\TransformVariable.cs" />
+    <Compile Include="Assets\Scripts\World\SOLibrary.cs" />
     <Compile Include="Assets\VariableTemplates\RuntimeSets\GameObjectRuntimeSet.cs" />
     <Compile Include="Assets\Scripts\Actors\Interfaces\IDoDigestDamage.cs" />
     <Compile Include="Assets\Scripts\World\PhysicsTools.cs" />
@@ -87,6 +88,7 @@
     <Compile Include="Assets\Scripts\Actors\Enemies\PigController.cs" />
     <Compile Include="Assets\VariableTemplates\OBB.cs" />
     <Compile Include="Assets\VariableTemplates\Variables\GameObjectVariable.cs" />
+    <Compile Include="Assets\Scripts\Modifiers\Tentacle\TargetedByTentacleModifier.cs" />
     <Compile Include="Assets\VariableTemplates\Dictionary\Dict_GameObjectToVector3.cs" />
     <Compile Include="Assets\Scripts\Modifiers\ModifierClass.cs" />
     <Compile Include="Assets\Scripts\Actors\Blob\BlobJiggle.cs" />
@@ -123,6 +125,8 @@
     <Compile Include="Assets\Animation_TentacleForward.cs" />
     <Compile Include="Assets\Animation_TentacleLeft.cs" />
     <Compile Include="Assets\Scripts\Actors\Blob\BlobTentacles.cs" />
+    <Compile Include="Assets\Scripts\Modifiers\GameObjectIsGameObjectCondition.cs" />
+    <Compile Include="Assets\Scripts\Modifiers\Tentacle\TentacleWhapModifer.cs" />
     <Compile Include="Assets\Animation_TentacleRight.cs" />
     <Compile Include="Assets\Scripts\Modifiers\Digestion\InContactWithBlobModifier.cs" />
     <Compile Include="Assets\VariableTemplates\RuntimeSets\RuntimeSet.cs" />

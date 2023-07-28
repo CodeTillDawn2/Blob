@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1e20bf4698f934941b03a20579aac93e, type: 3}
-  m_Name: PlayerTentacleReach
+  m_Script: {fileID: 11500000, guid: 95af9b13a516e114787f730350b4f035, type: 3}
+  m_Name: EmptyGameVariable
   m_EditorClassIdentifier: 
-  Value: 6
+  Value: {fileID: 0}

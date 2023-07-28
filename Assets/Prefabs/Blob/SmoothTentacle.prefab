@@ -195,6 +195,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetBall: {fileID: 3237699869177637277}
+  TentacleFindingMask:
+    serializedVersion: 2
+    m_Bits: 576
+  TentacleBlockingMask:
+    serializedVersion: 2
+    m_Bits: 512
+  currentMaxTentacleReach: {fileID: 11400000, guid: 7356289d9de16dd498a46a04165da03e, type: 2}
+  currentMinTentacleReach: {fileID: 11400000, guid: 3b7e6c9facab0e34fa7f2660640bb840, type: 2}
+  IsAlive: 1
 --- !u!1001 &4263538763494770589
 PrefabInstance:
   m_ObjectHideFlags: 0

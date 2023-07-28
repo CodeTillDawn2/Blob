@@ -24,6 +24,10 @@ public static class ModifierLibrary
 
         }
 
+        
+    }
+
+    public static class Tentacle {
         /// <summary>
         /// Tentale whap modifer occurs when a tentacle hits an enemy. It does damage and applies force.
         /// </summary>
@@ -37,14 +41,31 @@ public static class ModifierLibrary
             if (!target.gameObject.TryGetComponent<TentacleWhapModifer>(out TentacleWhapModifer existingModifier))
             {
                 TentacleWhapModifer TentacleWhap = target.gameObject.AddComponent<TentacleWhapModifer>();
-                TentacleWhap.DamageAmount = DamageAmount;
                 TentacleWhap.direction = direction;
                 TentacleWhap.acceleration = acceleration;
                 TentacleWhap.StartCoroutine(TentacleWhap.Evaluate());
             }
 
         }
+
+        /// <summary>
+        /// Effect is used to mark an enemy as having been targeted by a tentacle to avoid stacking
+        /// </summary>
+        /// <param name="target"></param>
+        /// <param name="tentacle"></param>
+        public static void ApplyTargetedByTentacleModifier(GameObjectVariable targetToApplyTo)
+        {
+            if (!targetToApplyTo.Value.gameObject.TryGetComponent<TentacleWhapModifer>(out TentacleWhapModifer existingModifier))
+            {
+                TargetedByTentacleModifier TargetedByTentacle = targetToApplyTo.Value.gameObject.AddComponent<TargetedByTentacleModifier>();
+                TargetedByTentacle.Comparer1 = targetToApplyTo;
+                TargetedByTentacle.Comparer2 = TargetedByTentacle.gameObject;
+                TargetedByTentacle.StartCoroutine(TargetedByTentacle.Evaluate());
+            }
+
+        }
     }
+
 
     public static class Digestion
     {
