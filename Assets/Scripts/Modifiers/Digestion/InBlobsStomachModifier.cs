@@ -1,4 +1,3 @@
-using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,10 +7,14 @@ public class InBlobsStomachModifier : GameObjectInListModifierCondition<InBlobsS
 
     public override bool Inverse { get; set; }
 
-    [Serialize] public FloatVariable CubeWidth;
+    [Serialize] public GameObject Stomach;
 
 
     private Rigidbody rb;
+
+    bool IsFloatingUp = false;
+
+    private Shortcuts.UnityLayers previousLayer;
 
 
 
@@ -20,21 +23,40 @@ public class InBlobsStomachModifier : GameObjectInListModifierCondition<InBlobsS
         rb = GetComponent<Rigidbody>();
         if (rb == null)
             Destroy(this);
+        previousLayer = (Shortcuts.UnityLayers)gameObject.layer;
     }
 
     public override void ExecuteEffect()
     {
-        if (transform.position.y < Comparer1.transform.position.y + (CubeWidth.Value * .4f))
+
+
+
+        gameObject.layer = (int)Shortcuts.UnityLayers.BeingEaten;
+        gameObject.transform.parent = Stomach.transform;
+        if (transform.position.y < Stomach.transform.position.y)
         {
-            rb.AddForce(new Vector3(0, .01f * Time.fixedDeltaTime, 0), ForceMode.Force);
+            IsFloatingUp = true;
         }
+        else if (transform.position.y > Stomach.transform.position.y)
+        {
+            IsFloatingUp = false;
+        }
+
+        if (IsFloatingUp)
+        {
+            //rb.AddForce(new Vector3(0, .01f * Time.fixedDeltaTime, 0), ForceMode.Force);
+        }
+
     }
 
     public override void AfterEffect()
     {
-        //Destroy(this);
-        //Destroy(Comparer1);
+        gameObject.layer = (int)previousLayer;
+        gameObject.transform.parent = null;
     }
 
-
+    protected override void DebugEffect()
+    {
+        string test = "";
+    }
 }

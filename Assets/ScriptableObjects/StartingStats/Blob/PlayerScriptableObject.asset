@@ -22,5 +22,5 @@ MonoBehaviour:
   suckSpeedModifier: 0.05
   growthSpeedModifier: 0.25
   sightDistance: 30
-  tentacleReach: 4.5
+  tentacleReach: 6
   maxTentacles: 4

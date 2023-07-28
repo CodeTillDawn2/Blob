@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -15,7 +13,7 @@ public class BlobBrain : MonoBehaviour
     [Serialize] public BooleanVariable PlayerIsAlive;
     [Serialize] public GameObjectVariable PlayerGameObject;
 
-    
+
 
 
     //Unity Functions
@@ -25,13 +23,13 @@ public class BlobBrain : MonoBehaviour
         PlayerGameObject.Value = gameObject;
         PlayerIsAlive.Value = true;
 
-        
+
 
     }
 
     protected void Start()
     {
- 
+
 
     }
 
@@ -43,9 +41,9 @@ public class BlobBrain : MonoBehaviour
 
     protected void FixedUpdate()
     {
-        
 
-        
+
+
 
     }
 
@@ -61,7 +59,7 @@ public class BlobBrain : MonoBehaviour
 
 
 
-    
+
 
 
 

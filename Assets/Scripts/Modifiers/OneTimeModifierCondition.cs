@@ -1,6 +1,4 @@
 using System;
-using Unity.VisualScripting;
-using UnityEngine;
 
 public abstract class OneTimeModifierCondition<T> : ModifierClass<T> where T : OneTimeModifierCondition<T>
 {

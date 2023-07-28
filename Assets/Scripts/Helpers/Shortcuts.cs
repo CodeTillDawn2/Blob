@@ -49,7 +49,8 @@ public static class Shortcuts
         Player = 6,
         CanBeEaten = 7,
         BeingEaten = 8,
-        PlayerTentacle = 8
+        PlayerTentacle = 9,
+        Inedible = 10
     }
 
     public enum LayerMasks

@@ -1,14 +1,11 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class DamageTypeEnums : MonoBehaviour
 {
-    protected DamageTypeEnum acidDamage;
-    protected DamageTypeEnum fireDamage;
-    protected DamageTypeEnum piercingDamage;
+    [Serialize] public DamageTypeEnum acidDamage;
+    [Serialize] public DamageTypeEnum fireDamage;
+    [Serialize] public DamageTypeEnum piercingDamage;
 
     public static DamageTypeEnums instance;
 

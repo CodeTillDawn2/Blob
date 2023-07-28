@@ -1,26 +1,20 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
-
-
-
-
 
 public class BlobSenses : MonoBehaviour
 {
 
     [Header("Stat Block")]
     [Tooltip("")]
-    [Serialize] public GameObjectRuntimeSet IntersectsPlayer;
-    [Serialize] public GameObjectRuntimeSet ContainedInStomach;
     [Serialize] public GameObjectRuntimeSet AllEnemies;
     [Serialize] public Dict_GameObjectToLastSeen ThingsSeen;
     [Serialize] public GameObjectRuntimeSet ThingsNearby;
     [Serialize] public FloatVariable CurrentSightDistance;
-    [Serialize] public Vector3Variable BlobDims;
-    [Serialize] public BooleanVariable PlayerIsAlive;
+    [Serialize] public Vector3Variable BodyDims;
+    [Serialize] public QuaternionVariable BodyRotation;
+    [Serialize] public BooleanVariable IsAlive;
 
     [Serialize] public PlayerScriptableObject StartingStats;
 
@@ -30,7 +24,7 @@ public class BlobSenses : MonoBehaviour
     [Serialize] public GameObject rightSide;
     [Serialize] public GameObject topSide;
     [Serialize] public GameObject bottomSide;
-    [Serialize] public RaycastInfoRuntimeSet InsideHits;
+
 
     private BoxCollider collider_TopSide;
     private BoxCollider collider_FrontSide;
@@ -40,9 +34,6 @@ public class BlobSenses : MonoBehaviour
     private BoxCollider collider_BottomSide;
 
     private BoxCollider SightBox;
-
-    protected Rigidbody rb;
-
 
     private float CurrentSightBoxSize;
 
@@ -77,8 +68,7 @@ public class BlobSenses : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InsideHits.RemoveAll();
-        rb = GetComponent<Rigidbody>();
+
         collider_TopSide = topSide.GetComponent<BoxCollider>();
         collider_BottomSide = bottomSide.GetComponent<BoxCollider>();
         collider_LeftSide = leftSide.GetComponent<BoxCollider>();
@@ -88,9 +78,9 @@ public class BlobSenses : MonoBehaviour
         CurrentSightDistance.Value = StartingStats.SightDistance;
         SightBox = GetComponent<BoxCollider>();
         CurrentSightBoxSize = SightBox.size.x;
-        StartCoroutine(CheckCubeBounds());
+        //StartCoroutine(CheckCubeBounds());
     }
-    
+
 
     void Update()
     {
@@ -100,22 +90,23 @@ public class BlobSenses : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //PhysicsTools.DrawBounds(collider_FrontSide.bounds);
         if (CurrentSightBoxSize <= CurrentSightDistance.Value)
         {
             SightBox.size = new Vector3(CurrentSightDistance.Value, CurrentSightDistance.Value, CurrentSightDistance.Value);
         }
     }
 
-    public IEnumerator CheckCubeBounds()
-    {
-        while (PlayerIsAlive.Value)
-        {
-            CheckBounds();
-            yield return new WaitForEndOfFrame();
-        }
+    //public IEnumerator CheckCubeBounds()
+    //{
+    //    while (PlayerIsAlive.Value)
+    //    {
+    //        CheckBounds();
+    //        yield return null; ;
+    //    }
 
 
-    }
+    //}
 
     public bool WithinVisionRange(float SqDistance)
     {
@@ -126,52 +117,37 @@ public class BlobSenses : MonoBehaviour
         return false;
     }
 
-    public Vector3 Vector3_CubeHalfExtents
-    {
-        get { return new Vector3(BlobDims.Value.x * .449f, BlobDims.Value.y * .449f, BlobDims.Value.z * .449f); }
-    }
 
 
     private void SeeThings()
     {
 
-        InsideHits.Items = Physics.BoxCastAll(gameObject.transform.position, Vector3_CubeHalfExtents,
-            transform.up, Quaternion.identity, BlobDims.Value.y / 2f, (int)Shortcuts.LayerMasks.LayerMask_NotGround).ToList().ConvertAll(x => new RaycastHitInfo(x));
 
 
-        //Remove anything which isn't nearby anymore 
-        for (int i = ThingsSeen.Value.Keys.Count-1; i >= 0; i--)
-        {
-            GameObject OldSeen = ThingsSeen.Value.Keys.ToList()[i];
-            if (!ThingsNearby.Items.Contains(OldSeen) || OldSeen == null)
-            {
-                ThingsSeen.Value.Remove(OldSeen);
-            }
-        }
-
+        Dictionary<GameObject, LastSeenData> newThingsSeen = new Dictionary<GameObject, LastSeenData>();
 
         //See things
         foreach (GameObject ThingNearby in ThingsNearby.Items.Where(x => x != null))
         {
             if ((ThingNearby.transform.position - transform.position).sqrMagnitude <= CurrentSightDistance.Value * CurrentSightDistance.Value)
             {
-                Collider ThingCollider= ThingNearby.GetComponent<Collider>();
-                
+                Collider ThingCollider = ThingNearby.GetComponent<Collider>();
+
                 if (ThingCollider == null) ThingCollider = ThingNearby.GetComponentInChildren<Collider>();
 
                 if (ThingCollider == null) continue;
-               
+
 
                 Bounds ThingBounds = ThingCollider.bounds;
 
                 bool Spotted = false;
 
                 Vector3 BottomCenter = gameObject.transform.position;
-                Vector3 MiddleCenter = BottomCenter + gameObject.transform.up * BlobDims.Value.y / 2;
-                Vector3 TopCenter = BottomCenter + gameObject.transform.up * BlobDims.Value.y;
+                Vector3 MiddleCenter = BottomCenter + gameObject.transform.up * BodyDims.Value.y / 2;
+                Vector3 TopCenter = BottomCenter + gameObject.transform.up * BodyDims.Value.y;
 
-                Vector3 GoForward = gameObject.transform.forward * BlobDims.Value.z / 2f;
-                Vector3 GoRight = gameObject.transform.right * BlobDims.Value.x / 2f;
+                Vector3 GoForward = gameObject.transform.forward * BodyDims.Value.z / 2f;
+                Vector3 GoRight = gameObject.transform.right * BodyDims.Value.x / 2f;
 
                 List<Vector3> positionsToLookFrom = new List<Vector3>()
                 {
@@ -200,39 +176,43 @@ public class BlobSenses : MonoBehaviour
                     //BottomCenter //Bottom center
                 };
 
-                foreach (Vector3 LookPosition in  positionsToLookFrom)
+                foreach (Vector3 LookPosition in positionsToLookFrom)
                 {
-                    foreach(Vector3 LookTarget in LookTargets)
+                    foreach (Vector3 LookTarget in LookTargets)
                     {
-                      RaycastHit? rayCast = PhysicsTools.RaycastAt(LookPosition,
-                      LookTarget, CurrentSightDistance.Value,
-                      (int)Shortcuts.LayerMasks.LayerMask_NotPlayerOrTentacles);
+                        RaycastHit? rayCast = PhysicsTools.RaycastAt(LookPosition,
+                        LookTarget, CurrentSightDistance.Value,
+                        (int)Shortcuts.LayerMasks.LayerMask_NotPlayerOrTentacles);
                         if (rayCast != null)
                         {
                             if (rayCast.Value.collider != null && rayCast.Value.collider.gameObject != null)
                             {
                                 if (rayCast.Value.collider.gameObject == ThingNearby)
                                 {
-                                    ThingsSeen.Value.AddUpdate(ThingNearby,
+
+
+
+                                    if (!newThingsSeen.Keys.Contains(ThingNearby))
+                                    {
+                                        newThingsSeen.Add(ThingNearby,
                                         new LastSeenData()
                                         {
                                             WhenSeen = Time.timeAsDouble,
                                             LastSeen = rayCast.Value.collider.gameObject.transform.position,
-                                            Distance = rayCast.Value.distance
+                                            Distance = (rayCast.Value.collider.gameObject.transform.position - gameObject.transform.position).sqrMagnitude,
                                         });
+                                    }
+
+
                                     Spotted = true;
-                                    Debug.DrawLine(LookPosition, LookTarget);
-                                    //break;
+                                    //Debug.DrawLine(LookPosition, LookTarget);
+                                    break; ////TODO
                                 }
                             }
                         }
                     }
-                    //if (Spotted) break;
+                    if (Spotted) break; ////TODO
 
-                }
-                if (!Spotted)
-                {
-                    ThingsSeen.Value.Remove(ThingNearby);
                 }
 
             }
@@ -240,80 +220,99 @@ public class BlobSenses : MonoBehaviour
 
 
         }
+
+        ThingsSeen.Value.MatchDictionary(newThingsSeen);
+
+        newThingsSeen = null;
 
 
     }
 
 
-    public void CheckBounds()
-    {
-        float TopDistance = 0;
-        List<RaycastHitInfo> FoundObjects = new List<RaycastHitInfo>();
-        if (InsideHits != null)
-        {
-            foreach (RaycastHitInfo hit in InsideHits.Items)
-            {
-                if (collider_TopSide != null)
-                {
+    //public void CheckBounds()
+    //{
+    //    float TopDistance = 0;
+    //    List<RaycastHitInfo> FoundObjects = new List<RaycastHitInfo>();
+    //    if (IntersectingHits != null)
+    //    {
+    //        foreach (RaycastHitInfo hit in IntersectingHits.Items)
+    //        {
+    //            if (collider_TopSide != null)
+    //            {
 
-                    if (hit.collider != null)
-                    {
-                        if (hit.collider.gameObject.PathMatches(collider_TopSide.gameObject))
-                        {
-                            TopDistance = hit.distance;
-                        }
-                        else if (hit.collider.gameObject.layer != (int)Shortcuts.UnityLayers.Player)
-                        {
-                            FoundObjects.Add(hit);
-                        }
-                    }
-
-
-                }
+    //                if (hit.collider != null)
+    //                {
+    //                    if (hit.collider.gameObject.PathMatches(collider_TopSide.gameObject))
+    //                    {
+    //                        TopDistance = hit.distance;
+    //                    }
+    //                    else if (hit.collider.gameObject.layer != (int)Shortcuts.UnityLayers.Player)
+    //                    {
+    //                        FoundObjects.Add(hit);
+    //                    }
+    //                }
 
 
-
-            }
-        }
-
-
-        IntersectsPlayer.RemoveAll();
-        ContainedInStomach.RemoveAll();
-
-        foreach (RaycastHitInfo hit in FoundObjects)
-        {
-
-            bool Contained = false;
-
-            IntersectsPlayer.Add(hit.collider.gameObject);
-            if (hit.distance <= TopDistance || TopDistance == 0)
-            {
+    //            }
 
 
 
-                float overlapTolerance = collider_TopSide.size.x * .05f;
-                if (PhysicsTools.ReturnColliderOverlapAmount(hit.collider, collider_FrontSide) < overlapTolerance
-                    && PhysicsTools.ReturnColliderOverlapAmount(hit.collider, collider_BackSide) < overlapTolerance
-                    && PhysicsTools.ReturnColliderOverlapAmount(hit.collider, collider_LeftSide) < overlapTolerance
-                    && PhysicsTools.ReturnColliderOverlapAmount(hit.collider, collider_RightSide) < overlapTolerance
-                    && PhysicsTools.ReturnColliderOverlapAmount(hit.collider, collider_TopSide) < overlapTolerance
-                    && PhysicsTools.ReturnColliderOverlapAmount(hit.collider, collider_BottomSide) < overlapTolerance)
-                {
-                    Contained = true;
-                }
-                else
-                {
-                    string test = "";
-                }
-            }
+    //        }
+    //    }
 
-            if (Contained)
-            {
-                ContainedInStomach.Add(hit.collider.gameObject);
-            }
+    //    List<GameObject> NewIntersects = new List<GameObject>();
+    //    List<GameObject> NewContained = new List<GameObject>();
 
-        }
-    }
+
+    //    foreach (RaycastHitInfo hit in FoundObjects)
+    //    {
+
+    //        //PhysicsTools.DrawBounds(hit.collider.bounds);
+
+
+
+    //        //Bounds bounds = new Bounds(,)
+
+
+    //        bool Contained = false;
+
+    //        NewIntersects.Add(hit.collider.gameObject);
+    //        if (hit.distance <= TopDistance || TopDistance == 0)
+    //        {
+
+
+
+
+    //            float overlapTolerance = collider_TopSide.size.x * .05f;
+    //            if (PhysicsTools.ReturnColliderOverlapAmount(hit.collider, collider_FrontSide) < overlapTolerance
+    //                && PhysicsTools.ReturnColliderOverlapAmount(hit.collider, collider_BackSide) < overlapTolerance
+    //                && PhysicsTools.ReturnColliderOverlapAmount(hit.collider, collider_LeftSide) < overlapTolerance
+    //                && PhysicsTools.ReturnColliderOverlapAmount(hit.collider, collider_RightSide) < overlapTolerance
+    //                && PhysicsTools.ReturnColliderOverlapAmount(hit.collider, collider_TopSide) < overlapTolerance
+    //                && PhysicsTools.ReturnColliderOverlapAmount(hit.collider, collider_BottomSide) < overlapTolerance
+    //                )
+    //            {
+    //                Contained = true;
+    //            }
+    //            else
+    //            {
+    //                string test = "";
+    //            }
+    //        }
+
+    //        if (Contained)
+    //        {
+    //            NewContained.Add(hit.collider.gameObject);
+    //        }
+
+    //    }
+
+    //    IntersectsPlayer.MatchList(NewIntersects);
+    //    ContainedInStomach.MatchList(NewContained);
+
+
+
+    //}
 
 
 }

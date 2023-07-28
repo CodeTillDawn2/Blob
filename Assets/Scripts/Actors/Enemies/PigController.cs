@@ -23,7 +23,7 @@ public class PigController : EnemyController, IAmDigestable, IAmDamageable
     public float CurrentNutrition { get { return currentNutrition; } set { currentNutrition = value; } }
     [HideInInspector]
     public override float SqDistanceFromPlayer { get; set; }
-    
+
 
     [HideInInspector]
     public MeshRenderer meshRenderer;
@@ -120,7 +120,7 @@ public class PigController : EnemyController, IAmDigestable, IAmDamageable
             CurrentHitPoints = CurrentHitPoints - Damage;
         }
         if (CurrentHitPoints < 0) CurrentHitPoints = 0;
-        
+
     }
     //public void OnEaten(float digestDamage)
     //{

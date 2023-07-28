@@ -1,4 +1,3 @@
-using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -19,7 +18,7 @@ public class DigestNutritionModifier : OneTimeModifierCondition<DigestNutritionM
         if (TryGetComponent<IAmDigestable>(out IAmDigestable gameObject))
         {
             float NutritionAmount = gameObject.Digest(DigestAmount);
-            
+
             if (Digester.TryGetComponent<IDoDigestDamage>(out IDoDigestDamage digester))
             {
                 digester.GainNutrition(NutritionAmount);
@@ -30,10 +29,13 @@ public class DigestNutritionModifier : OneTimeModifierCondition<DigestNutritionM
 
     public override void AfterEffect()
     {
-        Destroy(this);
+
     }
 
 
+    protected override void DebugEffect()
+    {
 
+    }
 
 }

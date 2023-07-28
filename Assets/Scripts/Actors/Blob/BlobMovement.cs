@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -9,7 +8,8 @@ public class BlobMovement : MonoBehaviour
     [Serialize] public FloatVariable CurrentRotationSpeed;
     [Serialize] public FloatVariable CurrentMoveSpeed;
     [Serialize] public PlayerScriptableObject StartingStats;
-    [Serialize] [Tooltip("Rigidbody to control")] public GameObjectVariable RigidbodyObject;
+    [Serialize] public QuaternionVariable BodyRotation;
+    [Serialize][Tooltip("Rigidbody to control")] public GameObjectVariable RigidbodyObject;
 
     private Rigidbody rb;
 
@@ -42,6 +42,7 @@ public class BlobMovement : MonoBehaviour
     {
         Move();
         rb.angularVelocity = Vector3.zero;
+        BodyRotation.Value = rb.rotation;
         //rb.AddTorque(-rb.angularVelocity * .8f, ForceMode.VelocityChange);
 
     }
@@ -143,7 +144,7 @@ public class BlobMovement : MonoBehaviour
             //PlayerManager.me.Animator.SetBool("Walking", false);
         }
 
-        Vector3 axis = new Vector3(0f, 1f,0f);
+        Vector3 axis = new Vector3(0f, 1f, 0f);
         float angle = 0;
 
         if (RotateLeft && !RotateRight)
@@ -157,7 +158,7 @@ public class BlobMovement : MonoBehaviour
         rb.AddTorque(axis.normalized * angle * CurrentRotationSpeed.Value, ForceMode.Acceleration);
 
 
-       
+
 
 
 

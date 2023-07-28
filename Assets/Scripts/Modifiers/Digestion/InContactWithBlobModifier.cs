@@ -1,4 +1,3 @@
-using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -32,7 +31,6 @@ public class InContactWithBlobModifier : GameObjectInListModifierCondition<InCon
     }
     public override void ExecuteEffect()
     {
-        Debug.LogWarning("Executing in contact effect");
         rb.mass = 0;
         rb.useGravity = false;
         rb.drag = DragInsideStomach.Value;
@@ -42,7 +40,7 @@ public class InContactWithBlobModifier : GameObjectInListModifierCondition<InCon
 
     public override void AfterEffect()
     {
-        //Destroy(this);
+
     }
 
 
@@ -57,5 +55,8 @@ public class InContactWithBlobModifier : GameObjectInListModifierCondition<InCon
             rb.angularDrag = originalAngularDrag;
         }
     }
+    protected override void DebugEffect()
+    {
 
+    }
 }

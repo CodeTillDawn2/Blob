@@ -1,7 +1,5 @@
-using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class BlobAnimation : MonoBehaviour
 {
@@ -10,12 +8,12 @@ public class BlobAnimation : MonoBehaviour
 
     private void Awake()
     {
- 
+
     }
 
     void Start()
     {
- 
+
     }
 
     void Update()

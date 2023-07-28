@@ -2,10 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
-
-
-
+using static Shortcuts;
 
 public class BlobTentacles : MonoBehaviour
 {
@@ -13,17 +12,18 @@ public class BlobTentacles : MonoBehaviour
     [Header("Stat Block")]
     [Serialize] public IntegerVariable TentacleCount;
     [Serialize] public IntegerVariable CurrentMaxTentacles;
+    [Serialize] public GameObjectVariable RigidBodyObject;
     [Serialize] public FloatVariable CurrentTentacleReach;
     [Serialize] public Vector3Variable BlobDims;
     [Serialize] public PlayerScriptableObject StartingStats;
     [Serialize] public Dict_GameObjectToLastSeen ObjectsSeen;
-    [Serialize] public Dict_GameObjectToGameObject TentacleTargeting;
 
-    [HideInInspector]
-    public List<global::Tentacle> Tentacles = new List<global::Tentacle>();
+    [Serialize] public LayerMask TentaclePositionRaycast;
+
     public GameObject TentaclePrefab;
 
     private int TentacleID = 1;
+
 
 
     public delegate string TentacleCreatedAction(object sender, EventArgs args);
@@ -38,28 +38,54 @@ public class BlobTentacles : MonoBehaviour
 
     }
 
+    private void OnEnable()
+    {
+
+        TentacleCount.Value = 0;
+    }
 
     private void Start()
     {
         CurrentTentacleReach.Value = StartingStats.TentacleReach;
         CurrentMaxTentacles.Value = StartingStats.MaxTentacles;
-        TentacleCount.Value = 0;
+
     }
 
 
     // Update is called once per frame
     void Update()
     {
-       
+        CreateTentacles();
     }
 
     private void FixedUpdate()
     {
-        CreateTentacles();
+
+        MoveTentacleTarget();
     }
 
+    private void MoveTentacleTarget()
+    {
+
+        SmoothTentacle[] tentacles = GetComponentsInChildren<SmoothTentacle>();
+
+        foreach (SmoothTentacle tentacle in tentacles)
+        {
+
+            if (tentacle.target != null)
+            {
+
+                tentacle.targetBall.transform.position = Vector3.Slerp(
+                    tentacle.targetBall.transform.position, GetMidPointOfObject(tentacle.target), Time.fixedDeltaTime * 10f);
 
 
+
+            }
+        }
+
+
+
+    }
 
 
     //public bool WithinTentacleReach(ActorController actor)
@@ -73,59 +99,30 @@ public class BlobTentacles : MonoBehaviour
     public GameObject RightSide;
     public GameObject TopSide;
     public GameObject BottomSide;
-    /// <summary>
-    /// Provide game object and cardinal direction to return whether a game object is a specific cube side. Use Vector3.up etc
-    /// </summary>
-    /// <param name="obj"></param>
-    /// <param name="CardinalDirection"></param>
-    /// <returns></returns>
-    /// <exception cref="NotImplementedException"></exception>
-    public bool IsCubeSide(GameObject obj, Vector3 CardinalDirection)
+
+    private Vector3 FindRotationFromCubeSide(GameObject cubeSide)
     {
-        GameObject sideToCheck;
-        if (CardinalDirection == Vector3.forward)
+        if (cubeSide == FrontSide)
         {
-            sideToCheck = FrontSide;
+            return RigidBodyObject.Value.transform.forward;
         }
-        else if (CardinalDirection == -Vector3.forward)
+        else if (cubeSide == BackSide)
         {
-            sideToCheck = BackSide;
+            return -RigidBodyObject.Value.transform.forward;
         }
-        else if (CardinalDirection == Vector3.up)
+        else if (cubeSide == RightSide)
         {
-            sideToCheck = TopSide;
+            return RigidBodyObject.Value.transform.right;
         }
-        else if (CardinalDirection == -Vector3.up)
+        else //Left side
         {
-            sideToCheck = BottomSide;
+            return -RigidBodyObject.Value.transform.right;
         }
-        else if (CardinalDirection == Vector3.right)
-        {
-            sideToCheck = RightSide;
-        }
-        else if (CardinalDirection == -Vector3.right)
-        {
-            sideToCheck = LeftSide;
-        }
-        else
-        {
-            throw new NotImplementedException();
-        }
-
-
-        if (Shortcuts.PathMatches(obj, sideToCheck))
-        {
-            return true;
-        }
-        return false;
     }
-
-
 
     public GameObject FindClosestCubeSide(GameObject target)
     {
-        bool SideFound = false;
-        string side = "";
+
         Vector3 _direction = (target.transform.position - transform.position).normalized;
 
         float FrontSideDot = Vector3.Dot(_direction, transform.forward);
@@ -133,321 +130,344 @@ public class BlobTentacles : MonoBehaviour
 
         if (Math.Abs(FrontSideDot) > Math.Abs(RightSideDot))
         {
-            if (FrontSideDot > 0)  
+            if (FrontSideDot > 0)
             {
-                side = "front";
+                return FrontSide;
             }
             else
             {
-                side = "back";
+                return BackSide;
             }
         }
         else
         {
             if (RightSideDot > 0)
             {
-                side = "right";
+                return RightSide;
             }
             else
             {
-                side = "left";
+                return LeftSide;
             }
         }
-
-        return this.gameObject;
     }
-
-    public GameObject GetCubeSideObject(GameObject obj)
-    {
-
-        if (Shortcuts.PathMatches(obj, FrontSide))
-        {
-            return FrontSide;
-        }
-        else if (Shortcuts.PathMatches(obj, BackSide))
-        {
-            return BackSide;
-        }
-        else if (Shortcuts.PathMatches(obj, LeftSide))
-        {
-            return LeftSide;
-        }
-        else if (Shortcuts.PathMatches(obj, RightSide))
-        {
-            return RightSide;
-        }
-        else if (Shortcuts.PathMatches(obj, TopSide))
-        {
-            return TopSide;
-        }
-        else if (Shortcuts.PathMatches(obj, BottomSide))
-        {
-            return BottomSide;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    public Vector3 PlayerCenter
-    {
-        get { return base.transform.position + new Vector3(0, BlobDims.Value.y / 2f, 0); }
-    }
-
 
 
     public void CreateTentacles()
     {
-        List<GameObject> potentialvictims = ObjectsSeen.Value.Keys.Where(x => x != null)
-            .OrderBy(x => (x.transform.position - gameObject.transform.position).sqrMagnitude).ToList();
+
+        List<GameObject> potentialvictims = ObjectsSeen.Value.Keys.Where(x => x != null).ToList();
+        for (int i = potentialvictims.Count - 1; i >= 0; i--)
+        {
+            if (potentialvictims[i] != null)
+            {
+                GameObject potential = potentialvictims[i];
+                float targetSq = (potential.transform.position - gameObject.transform.position).sqrMagnitude;
+                float TentacleReach = CurrentTentacleReach.Value * CurrentTentacleReach.Value;
+                float MinReach = CurrentTentacleReach.Value * CurrentTentacleReach.Value * .25f;
+
+                if (targetSq > TentacleReach || targetSq < MinReach)
+                {
+                    potentialvictims.Remove(potential);
+                }
+            }
+
+        }
+
+        List<SmoothTentacle> existingTentacles = GetComponentsInChildren<SmoothTentacle>().ToList();
+
 
         //Existing tentacles
-        for (int tentacleID = TentacleTargeting.Value.Count-1; tentacleID >= 0; tentacleID--)
-        {
-            
-            GameObject tentacle = TentacleTargeting.Value.Keys.ToList()[tentacleID];
-            GameObject existingTarget = TentacleTargeting.Value[tentacle];
+        //for (int tentacleID = existingTentacles.Count() - 1; tentacleID >= 0; tentacleID--)
+        //{
 
-            if (tentacleID > CurrentMaxTentacles.Value - 1 && existingTarget == null)
-            {
-                TentacleTargeting.Value.Remove(tentacle);
-                Destroy(tentacle);
-                continue;
-            }
+        //    SmoothTentacle tentacle = existingTentacles[tentacleID];
+        //    if (tentacle.IsAlive)
+        //    {
+        //        GameObject existingTarget = tentacle.target;
+        //        tentacle.tentacleOrientation = FindRotationFromCubeSide(tentacle.cubeSide);
 
-            foreach (GameObject target in potentialvictims)
-            {
-                if (!TentacleTargeting.Value.Keys.ToList().Contains(target))
-                {
-                    GameObject CubeSide = FindClosestCubeSide(target);
+        //        float dot = Vector3.Dot((existingTarget.transform.position - transform.position).normalized,
+        //            tentacle.tentacleOrientation);
 
-                }
-            }
+        //        if (dot < 0 || (tentacleID > CurrentMaxTentacles.Value - 1 && existingTarget == null))
+        //        {
+        //            DespawnTentacle(existingTentacles, tentacle);
+        //            continue;
+        //        }
+        //        if (!potentialvictims.Contains(existingTarget))
+        //        {
 
-        }
+        //            //if (TryTargetNewVictims(potentialvictims, out GameObject newTentacle))
+        //            //{
+        //            //    SmoothTentacle t = newTentacle.GetComponent<SmoothTentacle>();
+        //            //    existingTentacles.Add(t);
+
+
+        //            //}
+        //            //else
+        //            //{
+        //            DespawnTentacle(existingTentacles, tentacle);
+        //            continue;
+        //            //}
+        //        }
+        //    }
+
+        //}
 
         //Remove excess
-        while (TentacleTargeting.Value.Count > CurrentMaxTentacles.Value)
+        for (int i = CurrentMaxTentacles.Value; i < existingTentacles.Count(); i++)
         {
-            TentacleTargeting.Value.Remove(TentacleTargeting.Value.Keys.ToList()[0]);
+            DespawnTentacle(existingTentacles, existingTentacles[i]);
         }
 
-        //New Tentacles
-        for (int tentacleID = TentacleTargeting.Value.Count; tentacleID < CurrentMaxTentacles.Value; tentacleID++)
-        {
-            foreach (GameObject target in potentialvictims)
-            {
-                if (!TentacleTargeting.Value.Values.ToList().Contains(target))
-                {
-                    GameObject CubeSide = FindClosestCubeSide(target);
 
+        List<GameObject> existingTargets = existingTentacles.Select(x => x.target).ToList();
+        //New Tentacles
+
+        for (int tentacleID = existingTentacles.Count(); tentacleID < CurrentMaxTentacles.Value; tentacleID++)
+        {
+            List<GameObject> ActualPotentialVictims = potentialvictims.Where(x => !existingTargets.Contains(x)).ToList();
+            if (ActualPotentialVictims.Count() > 0)
+            {
+                if (TryTargetNewVictims(ActualPotentialVictims, tentacleID,  out GameObject newTentacle))
+                {
+                    SmoothTentacle tentacle = newTentacle.GetComponent<SmoothTentacle>();
+                    existingTentacles.Add(tentacle);
+                    existingTargets.Add(tentacle.target);
+                    if (existingTentacles.Count() > 1)
+                    {
+                        string test = "";
+                    }
+                }
+                else
+                {
                     break;
                 }
+                tentacleID++;
             }
-                
         }
 
 
-
-        //    while (TentacleCount.Value < 1)
-        //    //while (currentTentacles < currentMaxTentacles)
-        //    {
-
-
-
-
-        //        //ActorController victim = victims.Where(x => x.IsSeenByPlayer && !x.TargetedByTentacle).OrderBy(x => x.SqDistanceFromPlayer).FirstOrDefault();
-        //        //if (victim != null)
-        //        //{
-
-        //            //Victim raycast
-        //            RaycastHit? raycast = PhysicsTools.RaycastAt(victim.transform.position, PlayerCenter, Mathf.Infinity, (int)Shortcuts.LayerMasks.LayerMask_PlayerOnly);
-
-
-        //            GameObject cubeSide = GetCubeSideObject(raycast.Value.collider.gameObject);
-        //            if (cubeSide == null)
-        //            {
-        //                string test = "";
-        //            }
-
-        //            if (cubeSide != null)
-        //            {
-        //                //Make sure no two tentacles end up too close together and rotation is correct
-        //                Vector3 location = raycast.Value.point;
-
-        //                Vector3 NewTentacleOrientation = FindCubeOrientation(cubeSide);
-        //                Transform TopLeftPoint;
-        //                Transform TopRightPoint;
-        //                Transform BottomLeftPoint;
-        //                Transform BottomRightPoint;
-        //                Quaternion rotation;
-        //                Vector3 UpVector;
-        //                Vector3 DownVector;
-        //                Vector3 RightVector;
-        //                Vector3 LeftVector;
-        //                Vector3 OutVector; ;
-
-        //                throw new NotImplementedException();
-
-        //                if (NewTentacleOrientation == Vector3.up) //Oriented looking from the back
-        //                {
-
-        //                    //TopLeftPoint = PlayerManager.me.Brain.Eye_FrontTopLeft.gameObject.transform;//
-        //                    //TopRightPoint = PlayerManager.me.Brain.Eye_FrontTopRight.gameObject.transform;//
-        //                    //BottomLeftPoint = PlayerManager.me.Brain.Eye_BackTopLeft.gameObject.transform;//
-        //                    //BottomRightPoint = PlayerManager.me.Brain.Eye_BackTopRight.gameObject.transform;//
-        //                    rotation = transform.rotation * Quaternion.Euler(-90, 0, 0);
-        //                    UpVector = transform.forward;
-        //                    DownVector = -transform.forward;
-        //                    RightVector = transform.right;
-        //                    LeftVector = -transform.right;
-        //                    OutVector = transform.up;
-
-
-        //                }
-        //                else if (NewTentacleOrientation == Vector3.down) //Oriented looking from the back
-        //                {
-        //                    //TopLeftPoint = PlayerManager.me.Brain.Eye_BackBottomLeft.gameObject.transform;//
-        //                    //TopRightPoint = PlayerManager.me.Brain.Eye_BackBottomRight.gameObject.transform;//
-        //                    //BottomLeftPoint = PlayerManager.me.Brain.Eye_FrontBottomLeft.gameObject.transform;//
-        //                    //BottomRightPoint = PlayerManager.me.Brain.Eye_FrontBottomRight.gameObject.transform;//
-        //                    rotation = transform.rotation * Quaternion.Euler(90, 0, 0);
-        //                    UpVector = -transform.forward;
-        //                    DownVector = transform.forward;
-        //                    RightVector = -transform.right;
-        //                    LeftVector = transform.right;
-        //                    OutVector = -transform.up;
-        //                }
-        //                else if (NewTentacleOrientation == Vector3.right) //Oriented looking from the back
-        //                {
-        //                    //TopLeftPoint = PlayerManager.me.Brain.Eye_RightTopBack.gameObject.transform;//
-        //                    //TopRightPoint = PlayerManager.me.Brain.Eye_RightTopFront.gameObject.transform;//
-        //                    //BottomLeftPoint = PlayerManager.me.Brain.Eye_RightBottomBack.gameObject.transform;//
-        //                    //BottomRightPoint = PlayerManager.me.Brain.Eye_RightBottomFront.gameObject.transform;//
-        //                    rotation = transform.rotation * Quaternion.Euler(0, 90, 0);
-        //                    UpVector = transform.up;
-        //                    DownVector = -transform.up;
-        //                    RightVector = transform.forward;
-        //                    LeftVector = -transform.forward;
-        //                    OutVector = transform.right;
-        //                }
-        //                else if (NewTentacleOrientation == Vector3.left) //Oriented looking from the back
-        //                {
-        //                    //TopLeftPoint = PlayerManager.me.Brain.Eye_LeftTopFront.gameObject.transform;//
-        //                    //TopRightPoint = PlayerManager.me.Brain.Eye_LeftTopBack.gameObject.transform;//
-        //                    //BottomLeftPoint = PlayerManager.me.Brain.Eye_LeftBottomFront.gameObject.transform;//
-        //                    //BottomRightPoint = PlayerManager.me.Brain.Eye_LeftBottomBack.gameObject.transform;//
-        //                    rotation = transform.rotation * Quaternion.Euler(0, -90, 0);
-        //                    UpVector = transform.up;
-        //                    DownVector = -transform.up;
-        //                    RightVector = -transform.forward;
-        //                    LeftVector = transform.forward;
-        //                    OutVector = -transform.right;
-        //                }
-        //                else if (NewTentacleOrientation == Vector3.forward) //Oriented looking from the back
-        //                {
-        //                    //TopLeftPoint = PlayerManager.me.Brain.Eye_FrontTopLeft.gameObject.transform;//
-        //                    //TopRightPoint = PlayerManager.me.Brain.Eye_FrontTopRight.gameObject.transform;//
-        //                    //BottomLeftPoint = PlayerManager.me.Brain.Eye_FrontBottomLeft.gameObject.transform;//
-        //                    //BottomRightPoint = PlayerManager.me.Brain.Eye_FrontBottomRight.gameObject.transform;//
-        //                    rotation = transform.rotation;
-        //                    UpVector = transform.up;
-        //                    DownVector = -transform.up;
-        //                    RightVector = -transform.right;
-        //                    LeftVector = transform.right;
-        //                    OutVector = transform.forward;
-        //                }
-        //                else if (NewTentacleOrientation == Vector3.back) //Oriented looking from the back
-        //                {
-        //                    //TopLeftPoint = PlayerManager.me.Brain.Eye_BackTopLeft.gameObject.transform;//
-        //                    //TopRightPoint = PlayerManager.me.Brain.Eye_BackTopRight.gameObject.transform;//
-        //                    //BottomLeftPoint = PlayerManager.me.Brain.Eye_BackBottomLeft.gameObject.transform;//
-        //                    //BottomRightPoint = PlayerManager.me.Brain.Eye_BackBottomRight.gameObject.transform;//
-        //                    rotation = transform.rotation * Quaternion.Euler(0, 180, 0);
-        //                    UpVector = transform.up;
-        //                    DownVector = -transform.up;
-        //                    RightVector = transform.right;
-        //                    LeftVector = -transform.right;
-        //                    OutVector = -transform.forward;
-        //                }
-        //                else
-        //                {
-        //                    throw new NotImplementedException();
-        //                }
-
-        //                LocRoc locRoc = new LocRoc(location, rotation);
-
-
-        //                List<global::Tentacle> PotentialConflicts = Tentacles.Where(x => x.AttachOrientation == NewTentacleOrientation).ToList();
-        //                bool ConflictExists = false;
-        //                foreach (global::Tentacle conflictingTentacle in PotentialConflicts)
-        //                {
-        //                    if (PhysicsTools.GetSqDistanceBetweenPoints(locRoc.location, conflictingTentacle.AttachPosition) < 10)
-        //                    {
-        //                        ConflictExists = true;
-        //                        int resolutionAttempts = 0;
-
-        //                        while (ConflictExists && resolutionAttempts < 10)
-        //                        {
-        //                            float WidthToWorkWith = (TopRightPoint.position - TopLeftPoint.position).magnitude;
-        //                            float HeightToWorkWith = (TopRightPoint.position - BottomRightPoint.position).magnitude;
-
-        //                            float randomX = UnityEngine.Random.Range(WidthToWorkWith / 10, WidthToWorkWith / 10 * 9);
-        //                            float randomY = UnityEngine.Random.Range(HeightToWorkWith / 10, HeightToWorkWith / 10 * 9);
-
-        //                            locRoc.location = PhysicsTools.PointAlongDirection(TopRightPoint.position, transform.rotation * RightVector, randomX);
-
-        //                            ConflictExists = false;
-        //                            foreach (global::Tentacle tentcl in PotentialConflicts)
-        //                            {
-        //                                if (PhysicsTools.GetSqDistanceBetweenPoints(locRoc.location, tentcl.AttachPosition) < 10)
-        //                                {
-        //                                    ConflictExists = true;
-        //                                    break;
-        //                                }
-        //                            }
-        //                            resolutionAttempts++;
-        //                        }
-        //                    }
-        //                }
-
-
-
-        //                GameObject tentacleobj = Instantiate(TentaclePrefab, locRoc.location, locRoc.rotation, base.transform);
-        //                tentacleobj.name = "Tentacle" + TentacleID;
-        //                TentacleID++;
-        //                global::Tentacle tentacle = new global::Tentacle(tentacleobj, cubeSide, location);
-        //                //FixedJoint joint = PlayerManager.me.PlayerGameObject.AddComponent<FixedJoint>();
-        //                //joint.connectedBody = tentacle.rb;
-        //                victim.TargetedByTentacle = true;
-        //                tentacle.target.transform.position = victim.transform.position;
-        //                tentacleobj.layer = (int)Shortcuts.UnityLayers.PlayerTentacle;
-        //                Tentacles.Add(tentacle);
-        //                TentacleCount.Value++;
-        //                OnTentacleCreatedEvent(EventArgs.Empty);
-        //            }
-        //            else
-        //            {
-        //                throw new NotImplementedException();
-        //            }
-
-        //        //}
-        //        //else
-        //        //{
-        //        //    break;
-        //        //}
-
-
-        //    }
-        //    if (TentacleCount.Value == 0)
-        //    {
-        //        TentacleID = 1;
-        //    }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        string test = "";
+    }
+
+    private bool TryTargetNewVictims(List<GameObject> potentialvictims, int TentacleID, out GameObject tentacle)
+    {
+        Vector3 TentacleOrientation = Vector3.forward;
+        tentacle = null;
+        bool Success = false;
+        int Attempts = 0;
+        foreach (GameObject target in potentialvictims)
+        {
+
+
+            GameObject CubeSide = FindClosestCubeSide(target);
+            TentacleOrientation = FindRotationFromCubeSide(CubeSide);
+            float dot = Vector3.Dot((target.transform.position - transform.position).normalized,
+            TentacleOrientation);
+
+            if (CubeSide != null && dot > 0)
+            {
+
+                BoxCollider cubeSideCollider = CubeSide.GetComponent<BoxCollider>();
+
+
+                float SideMargin = .8f; //Space on side of blob minus space to not spawn tentacle in
+                float Inset = (1 - SideMargin) / 2f; //Space on side of blob minus space to not spawn tentacle in
+
+                while (!Success && Attempts < 15)
+                {
+                    Attempts++;
+                    Vector3 randomPoint = new Vector3(
+                        UnityEngine.Random.Range(0f, cubeSideCollider.size.x * SideMargin) - cubeSideCollider.size.x / 2f + cubeSideCollider.size.x * 1.5f * Inset,
+                       UnityEngine.Random.Range(0f, cubeSideCollider.size.y * SideMargin) - cubeSideCollider.size.y / 2f + cubeSideCollider.size.y * Inset,
+                       UnityEngine.Random.Range(0f, cubeSideCollider.size.z * SideMargin) - cubeSideCollider.size.z / 2f + cubeSideCollider.size.z * Inset);
+
+                    randomPoint = cubeSideCollider.transform.TransformPoint(randomPoint);
+
+                    RaycastHit? hit = PhysicsTools.RaycastAt(GetMidPointOfObject(target), randomPoint, Mathf.Infinity, TentaclePositionRaycast);
+                    if (hit != null && hit.Value.collider.gameObject.layer != (int)UnityLayers.PlayerTentacle)
+                    {
+                        Quaternion rotationToSpawn;
+                        Vector3 locationToSpawn = hit.Value.point;
+                        TentacleOrientation = FindRotationFromCubeSide(CubeSide);
+                        if (CubeSide == FrontSide)
+                        {
+                            rotationToSpawn = Quaternion.LookRotation(RigidBodyObject.Value.transform.forward);
+                        }
+                        else if (CubeSide == BackSide)
+                        {
+                            rotationToSpawn = Quaternion.LookRotation(-RigidBodyObject.Value.transform.forward);
+                        }
+                        else if (CubeSide == RightSide)
+                        {
+                            rotationToSpawn = Quaternion.LookRotation(RigidBodyObject.Value.transform.right);
+                        }
+                        else //Left side
+                        {
+                            rotationToSpawn = Quaternion.LookRotation(-RigidBodyObject.Value.transform.right);
+                        }
+
+                        GameObject tentacleobj = Instantiate(TentaclePrefab, locationToSpawn, Quaternion.identity * rotationToSpawn);
+                        SmoothTentacle smoothTentacle = tentacleobj.GetComponent<SmoothTentacle>();
+                        if (smoothTentacle != null)
+                        {
+                            if (TentacleID > 1)
+                            {
+                                string test = "";
+                            }
+                            tentacleobj.name = "Tentacle" + TentacleID;
+                            smoothTentacle.name = "Tentacle" + TentacleID;
+                            smoothTentacle.target = target;
+                            smoothTentacle.cubeSide = CubeSide;
+                            smoothTentacle.tentacleOrientation = TentacleOrientation;
+                            tentacleobj.transform.SetParent(transform, true);
+                            tentacle = tentacleobj;
+                            Success = true;
+                            break;
+                        }
 
 
 
+
+                    }
+                }
+
+            }
+
+            if (Success) break;
+
+        }
+
+        return Success;
+    }
+
+    private bool TryCreateTentacle(GameObject target, int TentacleID, out GameObject tentacle)
+    {
+        Vector3 TentacleOrientation = Vector3.forward;
+        tentacle = null;
+        bool Success = false;
+        int Attempts = 0;
+
+            GameObject CubeSide = FindClosestCubeSide(target);
+        if (CubeSide != null)
+        {
+            TentacleOrientation = FindRotationFromCubeSide(CubeSide);
+            float dot = Vector3.Dot((target.transform.position - transform.position).normalized,
+            TentacleOrientation);
+
+            if (dot > 0)
+            {
+
+                BoxCollider cubeSideCollider = CubeSide.GetComponent<BoxCollider>();
+
+
+                float SideMargin = .8f; //Space on side of blob minus space to not spawn tentacle in
+                float Inset = (1 - SideMargin) / 2f; //Space on side of blob minus space to not spawn tentacle in
+
+                while (!Success && Attempts < 15)
+                {
+                    Attempts++;
+                    Vector3 randomPoint = new Vector3(
+                        UnityEngine.Random.Range(0f, cubeSideCollider.size.x * SideMargin) - cubeSideCollider.size.x / 2f + cubeSideCollider.size.x * 1.5f * Inset,
+                       UnityEngine.Random.Range(0f, cubeSideCollider.size.y * SideMargin) - cubeSideCollider.size.y / 2f + cubeSideCollider.size.y * Inset,
+                       UnityEngine.Random.Range(0f, cubeSideCollider.size.z * SideMargin) - cubeSideCollider.size.z / 2f + cubeSideCollider.size.z * Inset);
+
+                    randomPoint = cubeSideCollider.transform.TransformPoint(randomPoint);
+
+                    RaycastHit? hit = PhysicsTools.RaycastAt(GetMidPointOfObject(target), randomPoint, Mathf.Infinity, TentaclePositionRaycast);
+                    if (hit != null && hit.Value.collider.gameObject.layer != (int)UnityLayers.PlayerTentacle)
+                    {
+                        Quaternion rotationToSpawn;
+                        Vector3 locationToSpawn = hit.Value.point;
+                        TentacleOrientation = FindRotationFromCubeSide(CubeSide);
+                        if (CubeSide == FrontSide)
+                        {
+                            rotationToSpawn = Quaternion.LookRotation(RigidBodyObject.Value.transform.forward);
+                        }
+                        else if (CubeSide == BackSide)
+                        {
+                            rotationToSpawn = Quaternion.LookRotation(-RigidBodyObject.Value.transform.forward);
+                        }
+                        else if (CubeSide == RightSide)
+                        {
+                            rotationToSpawn = Quaternion.LookRotation(RigidBodyObject.Value.transform.right);
+                        }
+                        else //Left side
+                        {
+                            rotationToSpawn = Quaternion.LookRotation(-RigidBodyObject.Value.transform.right);
+                        }
+
+                        GameObject tentacleobj = Instantiate(TentaclePrefab, locationToSpawn, Quaternion.identity * rotationToSpawn);
+                        SmoothTentacle smoothTentacle = tentacleobj.GetComponent<SmoothTentacle>();
+                        if (smoothTentacle != null)
+                        {
+                            if (TentacleID > 1)
+                            {
+                                string test = "";
+                            }
+                            tentacleobj.name = "Tentacle" + TentacleID;
+                            smoothTentacle.name = "Tentacle" + TentacleID;
+                            smoothTentacle.target = target;
+                            smoothTentacle.cubeSide = CubeSide;
+                            smoothTentacle.tentacleOrientation = TentacleOrientation;
+                            tentacleobj.transform.SetParent(transform, true);
+                            tentacle = tentacleobj;
+                            Success = true;
+                            break;
+                        }
+
+
+
+
+                    }
+                }
+
+            }
+
+
+        }
+            
+
+        
+
+        return Success;
+    }
+
+    private Vector3 GetMidPointOfObject(GameObject target)
+    {
+        Vector3 targetCenter;
+        Renderer renderer = target.GetComponent<Renderer>();
+
+        if (renderer != null)
+        {
+            targetCenter = renderer.bounds.center;
+
+            return targetCenter;
+
+        }
+        Vector3 sumVector = new Vector3(0f, 0f, 0f);
+
+        foreach (Transform child in target.transform)
+        {
+            sumVector += child.position;
+        }
+
+        targetCenter = sumVector / target.transform.childCount;
+        return targetCenter;
+    }
+
+    private void DespawnTentacle(List<SmoothTentacle> tentacles, SmoothTentacle tentacle)
+    {
+
+        tentacle.IsAlive = false;
+        tentacles.Remove(tentacle);
+        Destroy(tentacle.gameObject);
+    }
 
 }

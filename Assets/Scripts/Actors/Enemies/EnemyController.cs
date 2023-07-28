@@ -45,7 +45,7 @@ public abstract class EnemyController : MonoBehaviour
         currentMass = enemyStats.Mass;
         currentMoveSpeed = enemyStats.MoveSpeed;
         currentRotateSpeed = enemyStats.RotateSpeed;
-        
+
 
         rb.mass = currentMass;
 

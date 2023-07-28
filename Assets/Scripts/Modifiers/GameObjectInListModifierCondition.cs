@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class GameObjectInListModifierCondition<T> : ModifierClass<T> where T : GameObjectInListModifierCondition<T>

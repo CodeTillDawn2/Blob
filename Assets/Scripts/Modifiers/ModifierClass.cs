@@ -1,6 +1,5 @@
 using System;
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class ModifierClass<T> : MonoBehaviour where T : ModifierClass<T>
@@ -11,27 +10,60 @@ public abstract class ModifierClass<T> : MonoBehaviour where T : ModifierClass<T
     [SerializeField] public abstract Func<bool> EvalConditions { get; }
 
     private bool Redundant = false;
+    /// <summary>
+    /// Optional action that occurs on the sender object after the effect is done
+    /// </summary>
+    public Action AfterAction { get; set; }
+    protected abstract void DebugEffect();
 
     public IEnumerator Evaluate()
     {
-        if (!Redundant)
+        DebugEffect();
+
+        if (gameObject != null)
         {
-            BeforeEffect();
-
-            while (EvalConditions.Invoke() != Inverse)
+            if (!Redundant)
             {
-                ExecuteEffect();
-                if (OneTimeEffect) break;
-                yield return null;
+                bool RanBeforeEffect = false;
+                if (EvalConditions.Invoke() != Inverse)
+                {
+                    BeforeEffect();
+                    RanBeforeEffect = true;
+                }
+                while (EvalConditions.Invoke() != Inverse)
+                {
+
+                    ExecuteEffect();
+                    if (OneTimeEffect) break;
+                    yield return new WaitForFixedUpdate();
+                }
+                if (RanBeforeEffect)
+                {
+                    AfterEffect();
+                    if (AfterAction != null) AfterAction();
+                }
+
+
+                Destroy(this);
             }
-
-            AfterEffect();
         }
-        
-    }
+        else
+        {
+            Destroy(this);
+        }
 
+    }
+    /// <summary>
+    /// Occurs before the effect, if conditions evaluate true
+    /// </summary>
     public abstract void BeforeEffect();
+    /// <summary>
+    /// The effect, which will repeat until conditions evaluate false
+    /// </summary>
     public abstract void ExecuteEffect();
+    /// <summary>
+    /// Occurs after the effect, if the before effect happened
+    /// </summary>
     public abstract void AfterEffect();
 
     protected virtual void OnEnable()
@@ -49,7 +81,7 @@ public abstract class ModifierClass<T> : MonoBehaviour where T : ModifierClass<T
             }
         }
 
-        
+
 
     }
 

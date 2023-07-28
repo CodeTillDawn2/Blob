@@ -1,4 +1,3 @@
-using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -27,7 +26,8 @@ public class DealDamageModifier : OneTimeModifierCondition<DealDamageModifier>
         Destroy(this);
     }
 
+    protected override void DebugEffect()
+    {
 
-
-
+    }
 }

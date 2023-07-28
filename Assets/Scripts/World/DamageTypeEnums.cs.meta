@@ -4,9 +4,9 @@ MonoImporter:
   externalObjects: {}
   serializedVersion: 2
   defaultReferences:
-  - AcidDamage: {fileID: 11400000, guid: b2fbe50ae51b3c545aecdb15d2a67081, type: 2}
-  - FireDamage: {fileID: 11400000, guid: 67b2818171416504ea6a7dab64bd1756, type: 2}
-  - PiercingDamage: {fileID: 11400000, guid: 1d269cc3cd3cff048a86f86421450982, type: 2}
+  - acidDamage: {fileID: 11400000, guid: b2fbe50ae51b3c545aecdb15d2a67081, type: 2}
+  - fireDamage: {fileID: 11400000, guid: 67b2818171416504ea6a7dab64bd1756, type: 2}
+  - piercingDamage: {fileID: 11400000, guid: 1d269cc3cd3cff048a86f86421450982, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
