@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 5851116569461172901}
   - component: {fileID: 6815304748852121833}
   - component: {fileID: 4584694647689110939}
+  - component: {fileID: 2097902669365670748}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -69,3 +70,18 @@ MonoBehaviour:
   acidDamage: {fileID: 11400000, guid: b2fbe50ae51b3c545aecdb15d2a67081, type: 2}
   fireDamage: {fileID: 11400000, guid: 67b2818171416504ea6a7dab64bd1756, type: 2}
   piercingDamage: {fileID: 11400000, guid: 1d269cc3cd3cff048a86f86421450982, type: 2}
+--- !u!114 &2097902669365670748
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1887825965799516452}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30a05512b78383c4d960036d277a2e6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  EmptyGameObjectVariable: {fileID: 11400000, guid: b72aae80b58196f46ac352c59f580a70, type: 2}
+  EmptyImpulseVariable: {fileID: 11400000, guid: b70d0afa8d433b845918a4bf6f836a7c, type: 2}
+  EmptyBooleanVariable: {fileID: 11400000, guid: f8f95dad59288fa48ad739ccad2e430d, type: 2}

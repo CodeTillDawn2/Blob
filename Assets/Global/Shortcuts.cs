@@ -2,7 +2,10 @@ using UnityEngine;
 
 public static class Shortcuts
 {
-
+    public static bool IsInLayerMask(int layer, LayerMask layermask)
+    { 
+        return layermask == (layermask | (1 << layer)); 
+    }
     public static float GappedRandom(float start, float end, float gapStart, float gapEnd)
     {
 

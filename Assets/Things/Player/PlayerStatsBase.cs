@@ -8,7 +8,8 @@ public class PlayerStatsBase : ScriptableObject
 {
     [Serialize] public float RotateSpeed;
     [Serialize] public float MoveSpeed;
-    [Serialize] public float TentacleReach;
+    [Serialize] public float MinTentacleReach;
+    [Serialize] public float MaxTentacleReach;
     [Serialize] public float SuckSpeedModifier;
     [Serialize] public float SightDistance;
     [Serialize] public float DragInsideStomach;

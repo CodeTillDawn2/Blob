@@ -1,10 +1,12 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Analytics;
 using static Shortcuts;
 
 public class SmoothTentacle : MonoBehaviour
@@ -21,64 +23,183 @@ public class SmoothTentacle : MonoBehaviour
     /// </summary>
     [Tooltip("Tentacles only")]
     [Serialize] public LayerMask TentacleBlockingMask;
+    /// <summary>
+    /// What can tentacles target
+    /// </summary>
+    [Serialize] public LayerMask TentacleTargetsMask;
 
     [Serialize] public FloatVariable currentMaxTentacleReach;
     [Serialize] public FloatVariable currentMinTentacleReach;
 
 
     private GameObjectVariable target;
-    public bool IsAlive = true;
+    public BooleanVariable IsAlive;
     private bool IsReady = false;
     private GameObject parentObject;
+    private TentacleBrain brain;
 
     private List<Bounds> tentacleRegions = new List<Bounds>();
 
-    
+    private Vector3 tentacleVector;
+    private Vector3 TentacleVector {
+        get 
+        {
+            if (tentacleVector == Vector3.forward)
+            {
+                return parentRB.transform.forward;
+            }
+            else if (tentacleVector == -Vector3.forward)
+            {
+                return -parentRB.transform.forward;
+            }
+            else if (tentacleVector == Vector3.right)
+            {
+                return parentRB.transform.right;
+            }
+            else
+            {
+                return -parentRB.transform.right;
+            }
+        }
+        set 
+        {
+            tentacleVector = value;
+        }
+    }
  
     private Rigidbody parentRB;
     private Dict_GameObjectToLastSeen ObjectsSeen;
 
+    private Bounds? ChosenRegion;
 
-    public void GoTime(GameObject parent, Rigidbody parentRB, List<Bounds> tentacleRegions, Dict_GameObjectToLastSeen ObjectsSeen)
+
+    public void Go(GameObject parent, Rigidbody parentRB, List<Bounds> tentacleRegions, Dict_GameObjectToLastSeen ObjectsSeen)
     {
+        
         parentObject = parent;
         this.parentRB = parentRB;
         this.tentacleRegions = tentacleRegions;
         this.ObjectsSeen = ObjectsSeen;
-        if (parentRB != null && tentacleRegions.Count >= 1 && ObjectsSeen != null)
+        if (brain != null && parentRB != null && tentacleRegions.Count >= 1 && ObjectsSeen != null)
         {
             IsReady = true;
         }
     }
 
+
+ 
+
     private void Awake()
     {
-        print("Doing this");
+        brain = GetComponent<TentacleBrain>();
+        IsAlive = Instantiate(SOLibrary.instance.EmptyBooleanVariable);
+        IsAlive.Value = true;
         target = Instantiate(SOLibrary.instance.EmptyGameObjectVariable);
-        string test = "";
+
     }
+
+    private void InitializeBrain()
+    {
+        //Retarget
+        if (brain.gameObject.TryGetComponent<IAttackThings>(out IAttackThings attackBrain))
+        {
+            attackBrain.SetImpulse(attackBrain.AttackThings, new WrappedFunc(ReadyWeapon, 1f), new WrappedFunc(MoveTargetMarker, 1f));
+        }
+        if (brain.gameObject.TryGetComponent<ISpawn>(out ISpawn spawnBrain))
+        {
+            spawnBrain.SetImpulse(spawnBrain.Spawn, new WrappedFunc(GrowToFullSize, 1f));
+        }
+        if (brain.gameObject.TryGetComponent<IDespawn>(out IDespawn desspawnBrain))
+        {
+            desspawnBrain.SetImpulse(desspawnBrain.Despawn, new WrappedFunc(ShrinkToNothing, 1f), new WrappedFunc(Despawn, 0f));
+        }
+        if (brain.gameObject.TryGetComponent<IRetarget>(out IRetarget retargetBrain))
+        {
+            retargetBrain.SetImpulse(retargetBrain.Retarget, new WrappedFunc(Retarget, 0f));
+        }
+        brain.target = target;
+        brain.IsAlive = IsAlive;
+    }
+
+    public List<ImpulseStep> ShrinkToNothing(float percentElapsed)
+    {
+
+        transform.localScale = Vector3.one * (1 - percentElapsed);
+        return null;
+    }
+    public List<ImpulseStep> GrowToFullSize(float percentElapsed)
+    {
+
+        transform.localScale = Vector3.one * percentElapsed;
+        return null;
+    }
+    public List<ImpulseStep> ReadyWeapon(float percentElapsed)
+    {
+        if (target.Value == null) return null;
+        Vector3 TargetChange = ((target.Value.transform.position - gameObject.transform.position) / 2f
+                 + gameObject.transform.up * ChosenRegion.Value.max.y);
+
+        if (target.Value != null)
+        {
+            targetBall.transform.position = gameObject.transform.position + TargetChange;
+        }
+        return null;
+    }
+    public List<ImpulseStep> MoveTargetMarker(float percentElapsed)
+    {
+        if (target.Value == null) { return null; }
+        targetBall.transform.position = GetMidPointOfObject(target.Value);
+        return null;
+    }
+  
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-
+        InitializeBrain();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!CheckTarget()) target.Value = null;
-        if (target.Value == null) Retarget();
-        if (!IsAlive || target.Value == null) Despawn();
+        //if (target.Value == null) Retarget();
+        //if (!IsAlive || target.Value == null) Despawn();
         
     }
+
+    private void FixedUpdate()
+    {
+        if (target.Value != null)
+        {
+            //ReadyTentacleStrike();
+            //targetBall.transform.position = target.Value.transform.position;
+        }
+        
+    }
+
+    
 
     public bool CheckTarget()
     {
         if (target.Value != null)
         {
             float sqDistance = (target.Value.transform.position - parentRB.transform.position).sqrMagnitude;
-            if (sqDistance > currentMaxTentacleReach.Value || sqDistance < currentMinTentacleReach.Value)
+            if (sqDistance > currentMaxTentacleReach.Value * currentMaxTentacleReach.Value 
+                || sqDistance < currentMinTentacleReach.Value * currentMinTentacleReach.Value)
+            {
+                return false;
+            }
+
+            //Debug.DrawLine(target.Value.transform.position, transform.position, Color.red);
+            //Debug.DrawLine(transform.position + TentacleVector * 20, transform.position, Color.black);
+            float dot = Vector3.Dot((target.Value.transform.position - parentObject.transform.position).normalized,
+             TentacleVector);
+            Debug.DrawLine(parentObject.transform.position, parentObject.transform.position + TentacleVector * 50);
+
+            if (dot < 0)
             {
                 return false;
             }
@@ -89,17 +210,20 @@ public class SmoothTentacle : MonoBehaviour
         
     }
 
-    private void Despawn()
+    private List<ImpulseStep> Despawn(float percentElapsed)
     {
         Destroy(gameObject);
+        return null;
     }
 
-    private void Retarget()
+    private List<ImpulseStep> Retarget(float percentElapsed)
     {
         if (IsReady)
         {
             foreach (GameObject possibleTarget in ObjectsSeen.Value.Keys.OrderBy(x => ObjectsSeen.Value[x].Distance).ToList()) 
             {
+                if (!Shortcuts.IsInLayerMask(possibleTarget.layer, TentacleTargetsMask)) continue;
+
                 TargetedByTentacleModifier mod = possibleTarget.GetComponent<TargetedByTentacleModifier>();
                 if (mod == null)
                 {
@@ -109,7 +233,7 @@ public class SmoothTentacle : MonoBehaviour
                         target.Value = possibleTarget;
                         ModifierLibrary.Tentacle.ApplyTargetedByTentacleModifier(target);
                         transform.position = newTransform.position;
-                        print(newTransform.rotation);
+                        TentacleVector = newTransform.vector;
                         transform.rotation = Quaternion.identity;
                         transform.rotation *= newTransform.rotation;
                         transform.localScale = newTransform.scale;
@@ -120,6 +244,8 @@ public class SmoothTentacle : MonoBehaviour
             }
             
         }
+
+        return null;
 
     }
     public bool TryFindTentacleTransform(GameObject possibleTarget, out TransformVariable newTransform)
@@ -133,38 +259,44 @@ public class SmoothTentacle : MonoBehaviour
         float FrontSideDot = Vector3.Dot(_direction, parentObject.transform.forward);
         float RightSideDot = Vector3.Dot(_direction, parentObject.transform.right);
 
+        Vector3 localVector;
+
         if (Math.Abs(FrontSideDot) > Math.Abs(RightSideDot))
         {
             if (FrontSideDot > 0)
             {
-                newTransform.vector = parentRB.transform.forward;
-                
+                newTransform.vector = Vector3.forward;
+                localVector = parentRB.transform.forward;
+
             }
             else
             {
-                newTransform.vector = -parentRB.transform.forward;
-               
+                newTransform.vector = -Vector3.forward;
+                localVector = -parentRB.transform.forward;
+
             }
         }
         else
         {
             if (RightSideDot > 0)
             {
-                newTransform.vector = parentRB.transform.right;
+                newTransform.vector = Vector3.right;
+                localVector = parentRB.transform.right;
             }
             else
             {
-                newTransform.vector = -parentRB.transform.right;
-                
+                newTransform.vector = -Vector3.right;
+                localVector = -parentRB.transform.right;
+
             }
         }
-        newTransform.rotation = Quaternion.LookRotation(newTransform.vector);
-        newTransform.scale = Vector3.one;
+        newTransform.rotation = Quaternion.LookRotation(localVector);
+        newTransform.scale = Vector3.zero;
 
 
         
 
-        Bounds? ChosenRegion = null;
+        ChosenRegion = null;
         float ChosenSqMagnitude = Mathf.Infinity;
         foreach (Bounds region in tentacleRegions)
         {
@@ -192,8 +324,12 @@ public class SmoothTentacle : MonoBehaviour
             
             if (RandomPointInBounds != null)
             {
-                Debug.DrawLine(possibleTarget.transform.position, RandomPointInBounds.Value, Color.red);
                 newTransform.position = RandomPointInBounds.Value;
+                if (newTransform.position.y > ChosenRegion.Value.max.y - ChosenRegion.Value.size.y * .2f)
+                {
+                    return false;
+                }
+
                 Success = true;
             }
         }

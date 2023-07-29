@@ -6,12 +6,16 @@ using UnityEngine;
 public class SOLibrary : MonoBehaviour
 {
     [SerializeField] public GameObjectVariable EmptyGameObjectVariable;
+    [SerializeField] public ImpulseVariable EmptyImpulseVariable;
+    [SerializeField] public BooleanVariable EmptyBooleanVariable;
     public static SOLibrary instance { get; set; }
 
     private void Awake()
     {
         instance = this;
         EmptyGameObjectVariable.Value = null;
+        EmptyImpulseVariable.Value = null;
+        EmptyBooleanVariable.Value = false;
     }
 
 

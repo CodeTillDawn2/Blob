@@ -14,12 +14,11 @@ public class BlobTentacles : MonoBehaviour
     [Serialize] public IntegerVariable TentacleCount;
     [Serialize] public IntegerVariable CurrentMaxTentacles;
     [Serialize] public GameObjectVariable parentRB;
-    [Serialize] public FloatVariable CurrentTentacleReach;
+    [Serialize] public FloatVariable MaxTentacleReach;
+    [Serialize] public FloatVariable MinTentacleReach;
     [Serialize] public Vector3Variable BlobDims;
     [Serialize] public PlayerStatsBase StartingStats;
     [Serialize] public Dict_GameObjectToLastSeen ObjectsSeen;
-
-    [Serialize] public LayerMask TentaclePositionRaycast;
 
     public GameObject TentaclePrefab;
 
@@ -27,6 +26,7 @@ public class BlobTentacles : MonoBehaviour
 
     private List<Bounds> TentacleSpawnRegions;
 
+    private List<SmoothTentacle> existingTentacles;
 
     public delegate string TentacleCreatedAction(object sender, EventArgs args);
     public static event TentacleCreatedAction TentacleCreatedEvent;
@@ -42,13 +42,13 @@ public class BlobTentacles : MonoBehaviour
 
     private void OnEnable()
     {
-
         TentacleCount.Value = 0;
     }
 
     private void Start()
     {
-        CurrentTentacleReach.Value = StartingStats.TentacleReach;
+        MaxTentacleReach.Value = StartingStats.MaxTentacleReach;
+        MinTentacleReach.Value = StartingStats.MinTentacleReach;
         CurrentMaxTentacles.Value = StartingStats.MaxTentacles;
         SetTentacleSpawnRegions();
 
@@ -78,12 +78,12 @@ public class BlobTentacles : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CreateTentacles();
+        
     }
 
     private void FixedUpdate()
     {
-
+        CreateTentacles();
         //MoveTentacleTarget();
     }
 
@@ -165,8 +165,8 @@ public class BlobTentacles : MonoBehaviour
             {
                 GameObject potential = potentialvictims[i];
                 float targetSq = (potential.transform.position - gameObject.transform.position).sqrMagnitude;
-                float TentacleReach = CurrentTentacleReach.Value * CurrentTentacleReach.Value;
-                float MinReach = CurrentTentacleReach.Value * CurrentTentacleReach.Value * .25f;
+                float TentacleReach = MaxTentacleReach.Value * MaxTentacleReach.Value;
+                float MinReach = MinTentacleReach.Value * MinTentacleReach.Value;
 
                 if (targetSq > TentacleReach || targetSq < MinReach)
                 {
@@ -176,7 +176,7 @@ public class BlobTentacles : MonoBehaviour
 
         }
 
-        List<SmoothTentacle> existingTentacles = GetComponentsInChildren<SmoothTentacle>().ToList();
+        existingTentacles = GetComponentsInChildren<SmoothTentacle>().ToList();
 
 
         //Existing tentacles
@@ -233,7 +233,7 @@ public class BlobTentacles : MonoBehaviour
         }
         for (int tentacleID = existingTentacles.Count(); tentacleID < CurrentMaxTentacles.Value && tentacleID < potentialvictims.Count(); tentacleID++)
         {
-
+      
             CreateTentacle(tentacleID);
 
         //    List<GameObject> ActualPotentialVictims = potentialvictims.Where(x => !existingTargets.Contains(x)).ToList();
@@ -269,16 +269,18 @@ public class BlobTentacles : MonoBehaviour
     private void CreateTentacle(int TentacleID)
     {
 
-        GameObject tentacleobj = Instantiate(TentaclePrefab, parentRB.Value.transform.position, Quaternion.identity);
+        GameObject tentacleobj = Instantiate(TentaclePrefab, parentRB.Value.transform.position + new Vector3(0,-1000,0), Quaternion.identity);
         SmoothTentacle smoothTentacle = tentacleobj.GetComponent<SmoothTentacle>();
         if (smoothTentacle != null)
         {
-
-            tentacleobj.name = "Tentacle" + TentacleID;
+            existingTentacles.Add(smoothTentacle);
+            tentacleobj.name = "Tentacle" + UnityEngine.Random.Range(1, 100); // TentacleID;
             Rigidbody rb = parentRB.Value.GetComponent<Rigidbody>();
-            smoothTentacle.GoTime(gameObject, rb, TentacleSpawnRegions, ObjectsSeen);
-            
-
+            smoothTentacle.Go(gameObject, rb, TentacleSpawnRegions, ObjectsSeen);
+        }
+        else
+        {
+            Destroy(tentacleobj);
         }
 
 
@@ -397,7 +399,7 @@ public class BlobTentacles : MonoBehaviour
     private void DespawnTentacle(List<SmoothTentacle> tentacles, SmoothTentacle tentacle)
     {
 
-        tentacle.IsAlive = false;
+        tentacle.IsAlive.Value = false;
         tentacles.Remove(tentacle);
         Destroy(tentacle.gameObject);
     }

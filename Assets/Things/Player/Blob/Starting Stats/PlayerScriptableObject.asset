@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   RotateSpeed: 5
   MoveSpeed: 5
-  TentacleReach: 8
+  MinTentacleReach: 1
+  MaxTentacleReach: 5
   SuckSpeedModifier: 5
   SightDistance: 30
   DragInsideStomach: 5

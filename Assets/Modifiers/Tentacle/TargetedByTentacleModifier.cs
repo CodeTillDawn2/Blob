@@ -8,17 +8,17 @@ public class TargetedByTentacleModifier : GameObjectIsGameObjectCondition<Target
 
     public override void BeforeEffect()
     {
-        print("Before Effect");
+
     }
 
     public override void ExecuteEffect()
     {
-        print("Effect");
+
     }
 
     public override void AfterEffect()
     {
-        print("After effect");
+
         Destroy(this);
     }
 
