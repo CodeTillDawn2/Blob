@@ -16,12 +16,13 @@ MonoBehaviour:
   MoveSpeed: 5
   MinTentacleReach: 1
   MaxTentacleReach: 5
+  TentacleHitSpeed: 30
   SuckSpeedModifier: 5
   SightDistance: 30
   DragInsideStomach: 5
   AngularDragInsideStomach: 5
   MassPerCubicFoot: 25
-  DigestDamage: 1
+  DigestDamage: 5
   GrowthSpeedModifier: 5
   Mass: 200
-  MaxTentacles: 4
+  MaxTentacles: 1

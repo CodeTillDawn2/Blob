@@ -24,10 +24,11 @@ public static class ModifierLibrary
 
         }
 
-        
+
     }
 
-    public static class Tentacle {
+    public static class Tentacle
+    {
         /// <summary>
         /// Tentale whap modifer occurs when a tentacle hits an enemy. It does damage and applies force.
         /// </summary>

@@ -9,6 +9,8 @@ public abstract class ModifierClass<T> : MonoBehaviour where T : ModifierClass<T
     [SerializeField] public abstract bool Inverse { get; set; }
     [SerializeField] public abstract Func<bool> EvalConditions { get; }
 
+
+
     private bool Redundant = false;
     /// <summary>
     /// Optional action that occurs on the sender object after the effect is done
@@ -32,8 +34,8 @@ public abstract class ModifierClass<T> : MonoBehaviour where T : ModifierClass<T
                 }
                 while (EvalConditions.Invoke() != Inverse)
                 {
-
                     ExecuteEffect();
+                    bool condition = EvalConditions.Invoke();
                     if (OneTimeEffect) break;
                     yield return new WaitForFixedUpdate();
                 }
@@ -44,8 +46,8 @@ public abstract class ModifierClass<T> : MonoBehaviour where T : ModifierClass<T
                 }
 
 
-                Destroy(this);
             }
+            Destroy(this);
         }
         else
         {
@@ -53,6 +55,12 @@ public abstract class ModifierClass<T> : MonoBehaviour where T : ModifierClass<T
         }
 
     }
+
+    public bool ReturnFalse()
+    {
+        return false;
+    }
+
     /// <summary>
     /// Occurs before the effect, if conditions evaluate true
     /// </summary>

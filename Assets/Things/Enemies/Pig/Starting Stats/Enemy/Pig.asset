@@ -15,5 +15,5 @@ MonoBehaviour:
   RotateSpeed: 5
   MoveSpeed: 5
   Mass: 20
-  HitPoints: 50
-  Nutrition: 20
+  HitPoints: 10
+  Nutrition: 40

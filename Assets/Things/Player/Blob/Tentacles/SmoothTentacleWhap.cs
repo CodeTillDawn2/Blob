@@ -1,6 +1,7 @@
 using UnityEngine;
 using static Shortcuts;
 
+[RequireComponent(typeof(MomentumSensor))]
 public class SmoothTentacleWhap : MonoBehaviour
 {
 
@@ -21,12 +22,17 @@ public class SmoothTentacleWhap : MonoBehaviour
 
         if (other.gameObject != null)
         {
-            if (other.gameObject.layer == (int)UnityLayers.PlayerTentacle)
+
+            MomentumSensor moSensor = GetComponent<MomentumSensor>();
+            if (moSensor != null)
             {
-                string test = other.gameObject.name;
-                ModifierLibrary.Tentacle.ApplyTentacleWhapModifer(gameObject, other.gameObject, 10f, Vector3.up, 10f);
-                //ModifierLibrary.OneTime.ApplyTentacleWhapModifer(other.gameObject,other.)
+                ModifierLibrary.Tentacle.ApplyTentacleWhapModifer(other.gameObject, gameObject, 5f, moSensor.ReturnVector(), moSensor.ReturnSpeed());
             }
+
+
+
+            //ModifierLibrary.OneTime.ApplyTentacleWhapModifer(other.gameObject,other.)
+
         }
     }
 
@@ -39,6 +45,7 @@ public class SmoothTentacleWhap : MonoBehaviour
             {
                 if (contact.thisCollider.gameObject.name == "TentacleCollider")
                 {
+
 
                     print("Tentacle whap! " + contact.impulse);
                 }

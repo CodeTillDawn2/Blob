@@ -256,12 +256,12 @@ public class BlobStomach_Segmented : BlobStomach
             }
         }
 
-        foreach (BoxCastTemplate box in boxes)
-        {
-            PhysicsTools.DrawBoxCastBox(box.StartLoc + box.LocAdjustment,
-                box.Extents, gameObject.transform.rotation, box.Direction, box.distance, box.color);
-            break;
-        }
+        //foreach (BoxCastTemplate box in boxes)
+        //{
+        //    PhysicsTools.DrawBoxCastBox(box.StartLoc + box.LocAdjustment,
+        //        box.Extents, gameObject.transform.rotation, box.Direction, box.distance, box.color);
+        //    break;
+        //}
 
         List<GameObject> gameObjectsFound = new List<GameObject>();
 

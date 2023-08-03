@@ -76,6 +76,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "RightClickDrag",
+                    "type": "Value",
+                    "id": "ef3d3902-5142-49f5-a2a4-268867b9165a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -164,6 +173,28 @@
                     "processors": "",
                     "groups": "PC Keyboard + Mouse",
                     "action": "TentacleRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "8a893820-dce3-49a6-867d-feda956b8e90",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC Keyboard + Mouse",
+                    "action": "RightClickDrag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "85ab9769-410b-40b9-9238-648ff86c0885",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RightClickDrag",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

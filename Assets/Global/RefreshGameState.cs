@@ -17,6 +17,7 @@ public class RefreshGameState : MonoBehaviour
 
     private void Awake()
     {
+
         SceneReady.Value = false;
         AllEnemies.RemoveAll();
         EnemiesBeingEaten.RemoveAll();

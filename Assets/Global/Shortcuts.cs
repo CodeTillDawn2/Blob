@@ -2,9 +2,32 @@ using UnityEngine;
 
 public static class Shortcuts
 {
+
+    public static Vector3 GetMidPointOfObject(GameObject target)
+    {
+        Vector3 targetCenter;
+        Renderer renderer = target.GetComponent<Renderer>();
+
+        if (renderer != null)
+        {
+            targetCenter = renderer.bounds.center;
+
+            return targetCenter;
+
+        }
+        Vector3 sumVector = new Vector3(0f, 0f, 0f);
+
+        foreach (Transform child in target.transform)
+        {
+            sumVector += child.position;
+        }
+
+        targetCenter = sumVector / target.transform.childCount;
+        return targetCenter;
+    }
     public static bool IsInLayerMask(int layer, LayerMask layermask)
-    { 
-        return layermask == (layermask | (1 << layer)); 
+    {
+        return layermask == (layermask | (1 << layer));
     }
     public static float GappedRandom(float start, float end, float gapStart, float gapEnd)
     {

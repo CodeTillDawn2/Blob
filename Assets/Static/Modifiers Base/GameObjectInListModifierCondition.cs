@@ -12,9 +12,9 @@ public abstract class GameObjectInListModifierCondition<T> : ModifierClass<T> wh
     {
         get
         {
+            if (Comparer1 == null || Comparer2 == null) return () => ReturnFalse();
             return () => Comparer2.Items.Contains(Comparer1);
         }
     }
-
 
 }

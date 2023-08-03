@@ -2,10 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
-using static Shortcuts;
-using static UnityEngine.GraphicsBuffer;
 
 public class BlobTentacles : MonoBehaviour
 {
@@ -59,13 +56,12 @@ public class BlobTentacles : MonoBehaviour
         TentacleSpawnRegions = new List<Bounds>();
         foreach (GameObject side in new List<GameObject>() { FrontSide, BackSide, LeftSide, RightSide })
         {
-            BoxCollider boxcol = side.GetComponent<BoxCollider>(); 
+            BoxCollider boxcol = side.GetComponent<BoxCollider>();
             if (boxcol != null)
             {
 
-                Bounds bound = new Bounds(transform.position + new Vector3(0,BlobDims.Value.y / 2f, 0), boxcol.bounds.size);
-                TentacleSpawnRegions.Add(boxcol.bounds);
-
+                Bounds bound = new Bounds(boxcol.transform.position, boxcol.bounds.size);
+                TentacleSpawnRegions.Add(bound);
 
             }
         }
@@ -73,12 +69,12 @@ public class BlobTentacles : MonoBehaviour
 
 
     }
-    
+
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void FixedUpdate()
@@ -168,9 +164,19 @@ public class BlobTentacles : MonoBehaviour
                 float TentacleReach = MaxTentacleReach.Value * MaxTentacleReach.Value;
                 float MinReach = MinTentacleReach.Value * MinTentacleReach.Value;
 
+
+
                 if (targetSq > TentacleReach || targetSq < MinReach)
                 {
                     potentialvictims.Remove(potential);
+                    continue;
+                }
+
+                IAmImmuneToTargetingByTentacles mod = potential.GetComponent<IAmImmuneToTargetingByTentacles>();
+                if (mod != null)
+                {
+                    potentialvictims.Remove(potential);
+                    continue;
                 }
             }
 
@@ -233,28 +239,28 @@ public class BlobTentacles : MonoBehaviour
         }
         for (int tentacleID = existingTentacles.Count(); tentacleID < CurrentMaxTentacles.Value && tentacleID < potentialvictims.Count(); tentacleID++)
         {
-      
+
             CreateTentacle(tentacleID);
 
-        //    List<GameObject> ActualPotentialVictims = potentialvictims.Where(x => !existingTargets.Contains(x)).ToList();
-        //    if (ActualPotentialVictims.Count() > 0)
-        //    {
-        //        if (TryCreateTentacle(ActualPotentialVictims, tentacleID,  out GameObject newTentacle))
-        //        {
-        //            SmoothTentacle tentacle = newTentacle.GetComponent<SmoothTentacle>();
-        //            existingTentacles.Add(tentacle);
-        //            existingTargets.Add(tentacle.target);
-        //            if (existingTentacles.Count() > 1)
-        //            {
-        //                string test = "";
-        //            }
-        //        }
-        //        else
-        //        {
-        //            break;
-        //        }
-        //        tentacleID++;
-        //    }
+            //    List<GameObject> ActualPotentialVictims = potentialvictims.Where(x => !existingTargets.Contains(x)).ToList();
+            //    if (ActualPotentialVictims.Count() > 0)
+            //    {
+            //        if (TryCreateTentacle(ActualPotentialVictims, tentacleID,  out GameObject newTentacle))
+            //        {
+            //            SmoothTentacle tentacle = newTentacle.GetComponent<SmoothTentacle>();
+            //            existingTentacles.Add(tentacle);
+            //            existingTargets.Add(tentacle.target);
+            //            if (existingTentacles.Count() > 1)
+            //            {
+            //                string test = "";
+            //            }
+            //        }
+            //        else
+            //        {
+            //            break;
+            //        }
+            //        tentacleID++;
+            //    }
         }
 
 
@@ -265,11 +271,11 @@ public class BlobTentacles : MonoBehaviour
         string test = "";
     }
 
-    
+
     private void CreateTentacle(int TentacleID)
     {
-
-        GameObject tentacleobj = Instantiate(TentaclePrefab, parentRB.Value.transform.position + new Vector3(0,-1000,0), Quaternion.identity);
+        //Debug.Break();
+        GameObject tentacleobj = Instantiate(TentaclePrefab, parentRB.Value.transform.position + new Vector3(0, -1000, 0), Quaternion.identity);
         SmoothTentacle smoothTentacle = tentacleobj.GetComponent<SmoothTentacle>();
         if (smoothTentacle != null)
         {
@@ -366,9 +372,9 @@ public class BlobTentacles : MonoBehaviour
 
 
         //}
-            
 
-        
+
+
 
         //return Success;
     }
@@ -401,7 +407,7 @@ public class BlobTentacles : MonoBehaviour
 
         tentacle.IsAlive.Value = false;
         tentacles.Remove(tentacle);
-        Destroy(tentacle.gameObject);
+        //Destroy(tentacle.gameObject);
     }
 
 

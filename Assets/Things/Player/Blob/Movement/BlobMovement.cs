@@ -8,7 +8,12 @@ public class BlobMovement : MonoBehaviour
     [Serialize] public FloatVariable CurrentRotationSpeed;
     [Serialize] public FloatVariable CurrentMoveSpeed;
     [Serialize] public PlayerStatsBase StartingStats;
+    [Serialize] public Vector3Variable BlobDims;
     [Serialize] public QuaternionVariable BodyRotation;
+    /// <summary>
+    /// Ground only, for climbing stairs
+    /// </summary>
+    [Serialize] public LayerMask GroundLayerMask;
     [Serialize][Tooltip("Rigidbody to control")] public GameObjectVariable RigidbodyObject;
 
     private Rigidbody rb;
@@ -22,12 +27,15 @@ public class BlobMovement : MonoBehaviour
 
     private void Awake()
     {
+
         lastMovedVector = new Vector3(1, 0f, 0f);
 
     }
 
     void Start()
     {
+
+
         rb = RigidbodyObject.Value.GetComponent<Rigidbody>();
         CurrentMoveSpeed.Value = StartingStats.MoveSpeed;
         CurrentRotationSpeed.Value = StartingStats.RotateSpeed;
@@ -35,11 +43,42 @@ public class BlobMovement : MonoBehaviour
 
     void Update()
     {
+        DetectSteps();
+    }
+
+    public void DetectSteps()
+    {
+        Vector3 TopRightPoint = transform.TransformPoint(new Vector3(BlobDims.Value.x / 2f, BlobDims.Value.y, BlobDims.Value.z / 2 + BlobDims.Value.z / 20));
+        Vector3 TopLeftPoint = transform.TransformPoint(new Vector3(-BlobDims.Value.x / 2f, BlobDims.Value.y, BlobDims.Value.z / 2 + BlobDims.Value.z / 20));
+        Vector3 BottomRightPoint = transform.TransformPoint(new Vector3(BlobDims.Value.x / 2f, 0, BlobDims.Value.z / 2f + BlobDims.Value.z / 20));
+        Vector3 BottomLeftPoint = transform.TransformPoint(new Vector3(-BlobDims.Value.x / 2f, 0, BlobDims.Value.z / 2f + BlobDims.Value.z / 20));
+
+
+        Debug.DrawLine(TopRightPoint
+                , BottomRightPoint - new Vector3(0, BlobDims.Value.y * .5f, 0), Color.red);
+        Debug.DrawLine(TopLeftPoint, BottomLeftPoint - new Vector3(0, BlobDims.Value.y * .5f, 0), Color.red);
+
+        bool FoundLeft = false;
+        bool FoundRight = false;
+        //Left
+        if (Physics.Raycast(TopLeftPoint, -transform.up, out RaycastHit hit, BlobDims.Value.y * 1.5f, GroundLayerMask, QueryTriggerInteraction.UseGlobal))
+        {
+            FoundLeft = true;
+        }
+        //Right
+        if (Physics.Raycast(TopRightPoint, -transform.up, out RaycastHit hit2, BlobDims.Value.y * 1.5f, GroundLayerMask, QueryTriggerInteraction.UseGlobal))
+        {
+            FoundRight = true;
+        }
+
+
 
     }
 
+
     void FixedUpdate()
     {
+
         Move();
         rb.angularVelocity = Vector3.zero;
         BodyRotation.Value = rb.rotation;
@@ -49,8 +88,11 @@ public class BlobMovement : MonoBehaviour
 
     void OnForward(InputValue value)
     {
+
+
         if (value.isPressed)
         {
+
             IsMovingForward = true;
         }
         else
@@ -112,6 +154,7 @@ public class BlobMovement : MonoBehaviour
 
 
                 Vector3 targetChange = transform.forward * CurrentMoveSpeed.Value;
+
                 float TargetChangeMagnitude = targetChange.magnitude;
 
                 if (TargetChangeMagnitude > CurrentMoveSpeed.Value)

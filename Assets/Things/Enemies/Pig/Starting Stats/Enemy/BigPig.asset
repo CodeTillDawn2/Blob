@@ -16,4 +16,4 @@ MonoBehaviour:
   MoveSpeed: 5
   Mass: 20
   HitPoints: 250
-  Nutrition: 100
+  Nutrition: 800

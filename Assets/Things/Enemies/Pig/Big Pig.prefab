@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 4362649408848154945}
   - component: {fileID: 1656532802002898281}
   - component: {fileID: 2998677985184753309}
-  - component: {fileID: 7060777979632830875}
   - component: {fileID: 3104750327922658897}
+  - component: {fileID: 1685199218714731274}
   m_Layer: 0
   m_Name: Big Pig
   m_TagString: Untagged
@@ -135,31 +135,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 1
---- !u!114 &7060777979632830875
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2486617767586004082}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e81d39f6ee0e784388fce92c761d96a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  StartingMass: 0
-  myCollider: {fileID: 0}
-  rb: {fileID: 0}
-  localBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  worldBounds:
-    m_Center: {x: 0, y: 0, z: 0}
-    m_Extent: {x: 0, y: 0, z: 0}
-  Intersects: 0
-  Contained: 0
-  animalStats: {fileID: 11400000, guid: 4aac7047383cef44aa7bf6ff5e14e024, type: 2}
-  meshRenderer: {fileID: 0}
 --- !u!65 &3104750327922658897
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -181,3 +156,33 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.4093125, y: 0.697812, z: 1.1939198}
   m_Center: {x: 0.000000014901161, y: 0.34174016, z: 0.11479871}
+--- !u!114 &1685199218714731274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2486617767586004082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e81d39f6ee0e784388fce92c761d96a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CubeWidth: {fileID: 11400000, guid: 8b106adef0f37e247bc9e94d78befe6c, type: 2}
+  currentMass: 0
+  currentMoveSpeed: 0
+  currentRotateSpeed: 0
+  enemyStats: {fileID: 11400000, guid: 088da23e05495674ab59a174165544a6, type: 2}
+  StartingMass: 0
+  AllEnemies: {fileID: 11400000, guid: fa0c60002b04f7e41a425af7034babd9, type: 2}
+  DragInsideStomach: {fileID: 11400000, guid: 4bcc72ff0165cfc40899738623a15aff, type: 2}
+  AngularDragInsideStomach: {fileID: 11400000, guid: b17cc75b8f5740141a11e7b877c51bed, type: 2}
+  SuckSpeedModifier: {fileID: 11400000, guid: 475c2b967b8b2414bbdfacffdf9473a3, type: 2}
+  PlayerDigestDamage: {fileID: 11400000, guid: 2e1142439f32d1d459231acd123e10a4, type: 2}
+  PlayerMassTarget: {fileID: 11400000, guid: 52efadcd3f6c20e40a5d10f86b32c8f4, type: 2}
+  CubeVolume: {fileID: 11400000, guid: b2a5f27858d56e844abb7708ecfd8d43, type: 2}
+  PlayerGameObject: {fileID: 11400000, guid: 77058696715ad3348bc6e8f7f4082269, type: 2}
+  amAlive: 0
+  currentHitPoints: 0
+  currentNutrition: 0
+  meshRenderer: {fileID: 0}

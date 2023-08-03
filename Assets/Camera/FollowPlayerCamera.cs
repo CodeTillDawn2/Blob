@@ -14,9 +14,16 @@ public class CameraMovement : MonoBehaviour
     private Camera Camera;
     [Serialize] public Vector3Variable BlobDims;
 
+
+    Vector3 dragStartPosition = Vector3.zero;
+    Vector3 dragCurrentPosition = Vector3.zero;
+    Vector3 newPosition;
+    [SerializeField] private float movementTime = 5f;
+
     private void Start()
     {
         Camera = GetComponent<Camera>();
+        newPosition = transform.position;
     }
 
     void Update()
@@ -44,5 +51,6 @@ public class CameraMovement : MonoBehaviour
         }
 
     }
+
 
 }

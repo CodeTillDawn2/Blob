@@ -176,12 +176,12 @@ public class BlobStomach_Solid : BlobStomach
             }
         }
 
-        foreach (BoxCastTemplate box in boxes)
-        {
-            PhysicsTools.DrawBoxCastBox(box.StartLoc + box.LocAdjustment,
-                box.Extents, gameObject.transform.rotation, box.Direction, box.distance, box.color);
-            break;
-        }
+        //foreach (BoxCastTemplate box in boxes)
+        //{
+        //    PhysicsTools.DrawBoxCastBox(box.StartLoc + box.LocAdjustment,
+        //        box.Extents, gameObject.transform.rotation, box.Direction, box.distance, box.color);
+        //    break;
+        //}
 
         List<GameObject> gameObjectsFound = new List<GameObject>();
 
@@ -219,8 +219,8 @@ public class BlobStomach_Solid : BlobStomach
 
     public override void CalculateIntersections()
     {
-        PhysicsTools.DrawBoxCastBox(gameObject.transform.position + new Vector3(0, bodyDims.Value.y * .5f, 0),
-         Vector3_CubeHalfExtents * .9f, gameObject.transform.rotation, transform.up, 0, UnityEngine.Color.blue);
+        //PhysicsTools.DrawBoxCastBox(gameObject.transform.position + new Vector3(0, bodyDims.Value.y * .5f, 0),
+        // Vector3_CubeHalfExtents * .9f, gameObject.transform.rotation, transform.up, 0, UnityEngine.Color.blue);
 
 
 
@@ -380,7 +380,7 @@ public class BlobStomach_Solid : BlobStomach
                     yield return new WaitForFixedUpdate();
                 }
             }
-            rb.mass = MassTarget.Value;
+            //rb.mass = MassTarget.Value;
             ChangingSize = false;
         }
 

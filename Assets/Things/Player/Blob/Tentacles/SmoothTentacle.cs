@@ -1,13 +1,8 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Security.Cryptography;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Analytics;
-using static Shortcuts;
 
 public class SmoothTentacle : MonoBehaviour
 {
@@ -32,17 +27,66 @@ public class SmoothTentacle : MonoBehaviour
     [Serialize] public FloatVariable currentMinTentacleReach;
 
 
-    private GameObjectVariable target;
+    [Serialize] public FloatVariable TentacleHitSpeed;
+
+    //Animator statuses
+    //private bool IsAttacking
+    //{
+    //    get { return animator.GetBool("IsAttacking"); }
+    //}
+    //private bool IsReadying
+    //{
+    //    get { return animator.GetBool("IsReadied"); }
+    //}
+    //private bool IsGrowing
+    //{
+    //    get { return animator.GetBool("IsGrowing"); }
+    //}
+    //public bool IsShrinking
+    //{
+    //    get { return animator.GetBool("IsShrinking"); }
+    //}
+
+    //private bool ShouldAttack
+    //{
+    //    get { return animator.GetBool("ShouldAttack"); }
+    //    set { animator.SetBool("ShouldAttack", value); }
+    //}
+    //private bool ShouldGrow
+    //{
+    //    get { return animator.GetBool("ShouldGrow"); }
+    //    set { animator.SetBool("ShouldGrow", value); }
+    //}
+    //private bool ShouldShrink
+    //{
+    //    get { return animator.GetBool("ShouldShrink"); }
+    //    set { animator.SetBool("ShouldShrink", value); }
+    //}
+    //private bool ShouldReady
+    //{
+    //    get { return animator.GetBool("ShouldReady"); }
+    //    set { animator.SetBool("ShouldReady", value); }
+    //}
+
+    private bool HasTarget
+    {
+        get { return animator.GetBool("HasTarget"); }
+        set { animator.SetBool("HasTarget", value); }
+    }
+
+    public GameObjectVariable target;
     public BooleanVariable IsAlive;
     private bool IsReady = false;
     private GameObject parentObject;
     private TentacleBrain brain;
+    private Animator animator;
 
     private List<Bounds> tentacleRegions = new List<Bounds>();
 
     private Vector3 tentacleVector;
-    private Vector3 TentacleVector {
-        get 
+    private Vector3 TentacleVector
+    {
+        get
         {
             if (tentacleVector == Vector3.forward)
             {
@@ -61,12 +105,12 @@ public class SmoothTentacle : MonoBehaviour
                 return -parentRB.transform.right;
             }
         }
-        set 
+        set
         {
             tentacleVector = value;
         }
     }
- 
+
     private Rigidbody parentRB;
     private Dict_GameObjectToLastSeen ObjectsSeen;
 
@@ -75,99 +119,289 @@ public class SmoothTentacle : MonoBehaviour
 
     public void Go(GameObject parent, Rigidbody parentRB, List<Bounds> tentacleRegions, Dict_GameObjectToLastSeen ObjectsSeen)
     {
-        
+
         parentObject = parent;
         this.parentRB = parentRB;
         this.tentacleRegions = tentacleRegions;
         this.ObjectsSeen = ObjectsSeen;
+        transform.SetParent(parentObject.transform, true);
         if (brain != null && parentRB != null && tentacleRegions.Count >= 1 && ObjectsSeen != null)
         {
+            //ShouldGrow = true;
             IsReady = true;
         }
     }
 
 
- 
+
 
     private void Awake()
     {
+
+        animator = GetComponent<Animator>();
         brain = GetComponent<TentacleBrain>();
         IsAlive = Instantiate(SOLibrary.instance.EmptyBooleanVariable);
         IsAlive.Value = true;
+
         target = Instantiate(SOLibrary.instance.EmptyGameObjectVariable);
 
+
     }
 
-    private void InitializeBrain()
-    {
-        //Retarget
-        if (brain.gameObject.TryGetComponent<IAttackThings>(out IAttackThings attackBrain))
-        {
-            attackBrain.SetImpulse(attackBrain.AttackThings, new WrappedFunc(ReadyWeapon, 1f), new WrappedFunc(MoveTargetMarker, 1f));
-        }
-        if (brain.gameObject.TryGetComponent<ISpawn>(out ISpawn spawnBrain))
-        {
-            spawnBrain.SetImpulse(spawnBrain.Spawn, new WrappedFunc(GrowToFullSize, 1f));
-        }
-        if (brain.gameObject.TryGetComponent<IDespawn>(out IDespawn desspawnBrain))
-        {
-            desspawnBrain.SetImpulse(desspawnBrain.Despawn, new WrappedFunc(ShrinkToNothing, 1f), new WrappedFunc(Despawn, 0f));
-        }
-        if (brain.gameObject.TryGetComponent<IRetarget>(out IRetarget retargetBrain))
-        {
-            retargetBrain.SetImpulse(retargetBrain.Retarget, new WrappedFunc(Retarget, 0f));
-        }
-        brain.target = target;
-        brain.IsAlive = IsAlive;
-    }
-
-    public List<ImpulseStep> ShrinkToNothing(float percentElapsed)
-    {
-
-        transform.localScale = Vector3.one * (1 - percentElapsed);
-        return null;
-    }
-    public List<ImpulseStep> GrowToFullSize(float percentElapsed)
-    {
-
-        transform.localScale = Vector3.one * percentElapsed;
-        return null;
-    }
-    public List<ImpulseStep> ReadyWeapon(float percentElapsed)
-    {
-        if (target.Value == null) return null;
-        Vector3 TargetChange = ((target.Value.transform.position - gameObject.transform.position) / 2f
-                 + gameObject.transform.up * ChosenRegion.Value.max.y);
-
-        if (target.Value != null)
-        {
-            targetBall.transform.position = gameObject.transform.position + TargetChange;
-        }
-        return null;
-    }
-    public List<ImpulseStep> MoveTargetMarker(float percentElapsed)
-    {
-        if (target.Value == null) { return null; }
-        targetBall.transform.position = GetMidPointOfObject(target.Value);
-        return null;
-    }
-  
-
-
-
-    // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         InitializeBrain();
     }
 
+
+
+    ImpulseStep AttemptTentacleAttackStep;
+    ImpulseStep ShrinkStep;
+    ImpulseStep GrowStep;
+    ImpulseStep RetargetStep;
+    ImpulseStep RelocateStep;
+
+    private void InitializeBrain()
+    {
+        brain.target = target;
+        brain.IsAlive = IsAlive;
+
+        //Retarget
+        //AttemptTentacleAttackStep = new ImpulseStep(StepAction:AttemptTentacleAttack,
+        //                                   OnlyDoIf: null, 
+        //                                   WaitUntilTrue: DoUntilTest);
+        //AttemptTentacleAttackStep.impulseStepNameDebug = "AttemptTentacleAttackStep";
+        //brain.AddImpulse(Impulse.ImpulseType.Attack, CanReachTarget, AttemptTentacleAttackStep);
+
+        ShrinkStep = new ImpulseStep(StepAction: ShrinkToNothing,
+                                           OnlyDoIf: null,
+                                           WaitUntilTrue: null);
+        ShrinkStep.impulseStepNameDebug = "ShrinkStep";
+        brain.AddImpulse(Impulse.ImpulseType.Despawn, null, ShrinkStep);
+
+
+        GrowStep = new ImpulseStep(StepAction: GrowToFullSize,
+                                           OnlyDoIf: null,
+                                           WaitUntilTrue: null);
+        GrowStep.impulseStepNameDebug = "GrowStep";
+        brain.AddImpulse(Impulse.ImpulseType.Spawn, null, GrowStep);
+
+        RetargetStep = new ImpulseStep(StepAction: Retarget,
+                                   OnlyDoIf: null,
+                                   WaitUntilTrue: DoUntilTest);
+        RetargetStep.impulseStepNameDebug = "RetargetStep";
+        brain.AddImpulse(Impulse.ImpulseType.Search, null, RetargetStep);
+
+        RelocateStep = new ImpulseStep(StepAction: Relocate,
+                           OnlyDoIf: null,
+                           WaitUntilTrue: DoUntilTest);
+        RelocateStep.impulseStepNameDebug = "RelocateStep";
+        brain.AddImpulse(Impulse.ImpulseType.Move, null, RelocateStep);
+    }
+
+    //private void InitializeBrain_Old()
+    //{
+    //    brain.target = target;
+    //    brain.IsAlive = IsAlive;
+
+    //    //Retarget
+    //    AttemptTentacleAttackStep = new ImpulseStep(StepAction: AttemptTentacleAttack,
+    //                                       OnlyDoIf: null,
+    //                                       WaitUntilTrue: DoUntilTest);
+    //    AttemptTentacleAttackStep.impulseStepNameDebug = "AttemptTentacleAttackStep";
+    //    brain.AddImpulse(Impulse.ImpulseType.Attack, CanReachTarget, AttemptTentacleAttackStep);
+
+    //    ShrinkStep = new ImpulseStep(StepAction: Shrink,
+    //                                       OnlyDoIf: null,
+    //                                       WaitUntilTrue: DoUntilNotShrinking);
+    //    ShrinkStep.impulseStepNameDebug = "ShrinkStep";
+    //    brain.AddImpulse(Impulse.ImpulseType.Despawn, null, ShrinkStep);
+
+    //    RetargetStep = new ImpulseStep(StepAction: Retarget,
+    //                               OnlyDoIf: null,
+    //                               WaitUntilTrue: DoUntilTest);
+    //    RetargetStep.impulseStepNameDebug = "RetargetStep";
+    //    brain.AddImpulse(Impulse.ImpulseType.Search, null, RetargetStep);
+
+    //    RelocateStep = new ImpulseStep(StepAction: Relocate,
+    //                       OnlyDoIf: null,
+    //                       WaitUntilTrue: DoUntilTest);
+    //    RelocateStep.impulseStepNameDebug = "RelocateStep";
+    //    brain.AddImpulse(Impulse.ImpulseType.Move, null, ShrinkStep, RelocateStep);
+    //}
+
+
+    //private bool DoUntilNotShrinking()
+    //{
+    //    if (!IsShrinking && !ShouldShrink) return true;
+    //    return false;
+    //}
+
+    //private bool DoUntilNotGrowing()
+    //{
+    //    if (!IsGrowing && !ShouldGrow) return true;
+    //    return false;
+    //}
+
+    private bool DoUntilTest()
+    {
+        return true;
+    }
+
+    //public List<ImpulseStep> AttemptTentacleAttack(float percentElapsed)
+    //{
+    //    ShouldReady = true;
+
+    //    //if (transform.localScale.y < .95) //Need to grow
+    //    //{
+    //    //    animator.Play("TentacleSpawn", 0);
+    //    //}
+
+    //    if (!IsGrowing && !IsAttacking)
+    //    {
+    //        ShouldAttack = true;
+    //    }
+
+    //    return null;
+    //}
+
+    //private List<ImpulseStep> Shrink(float percentElapsed)
+    //{
+    //    if (!IsShrinking && !IsGrowing)
+    //    {
+    //        ShouldShrink = true;
+    //    }
+
+    //    return null;
+    //}
+
+
+
+    protected void OnGUI()
+    {
+        //GUI.TextArea(new Rect(10, 10, Screen.width / 10, Screen.height / 10),
+        //    "Possible targets: " + ObjectsSeen.Value.Keys.Count + " Tentacle scale: " + gameObject.transform.localScale
+        //    + " Is Attacking? " + animator.GetBool("IsAttacking"));
+    }
+
+    private List<ImpulseStep> Relocate(float percentElapsed)
+    {
+
+        if (animator.)
+        {
+            List<ImpulseStep> addSteps = new List<ImpulseStep>() { ShrinkStep, RelocateStep, GrowStep };
+            return addSteps;
+        }
+
+        print("Relocating");
+        if (target.Value != null && TryFindTentacleTransform(target.Value, out TransformVariable newTransform))
+        {
+            transform.SetParent(null);
+            transform.position = newTransform.position;
+            TentacleVector = newTransform.vector;
+            transform.rotation = Quaternion.identity;
+            transform.rotation *= newTransform.rotation;
+            transform.localScale = Vector3.one;
+            transform.SetParent(parentObject.transform, true);
+            //ShouldShrink = false;
+            //ShouldGrow = true;
+        }
+
+        return null;
+    }
+
+    private List<ImpulseStep> Retarget(float percentElapsed)
+    {
+
+        bool FoundTarget = false;
+        int Attempts = 0;
+        while (ObjectsSeen.Value.Keys.Count > 0 && !FoundTarget && Attempts < 15)
+        {
+            Attempts++;
+            GameObject possibleTarget = ObjectsSeen.Value.Keys.ToList()[UnityEngine.Random.Range(0, ObjectsSeen.Value.Keys.Count)];
+
+            //foreach (GameObject possibleTarget in ObjectsSeen.Value.Keys.OrderBy(x => ObjectsSeen.Value[x].Distance).ToList())
+            //{
+
+            if (!CanReachTheTarget(possibleTarget.transform))
+            {
+                continue;
+            }
+
+            IAmImmuneToTargetingByTentacles mod = possibleTarget.GetComponent<IAmImmuneToTargetingByTentacles>();
+            if (mod == null)
+            {
+
+                target.Value = possibleTarget;
+                ModifierLibrary.Tentacle.ApplyTargetedByTentacleModifier(target);
+                FoundTarget = true;
+            }
+
+        }
+        //}
+
+
+
+        return null;
+
+    }
+
+
+
+    private void LateUpdate()
+    {
+        UpdateTargetBall();
+        UpdateAnimatorState();
+    }
+
+    private void UpdateAnimatorState()
+    {
+        HasTarget = (target.Value != null);
+    }
+
+    private void UpdateTargetBall()
+    {
+        if (HasTarget && target.Value != null)
+        {
+            Vector3 targetMidpoint = Shortcuts.GetMidPointOfObject(target.Value);
+            Vector3 VDif = (targetMidpoint - targetBall.transform.position);
+            Vector3 dir = VDif.normalized;
+            Vector3 SuggestedChange = dir * TentacleHitSpeed.Value * Time.deltaTime;
+
+            if (SuggestedChange.sqrMagnitude > VDif.sqrMagnitude)
+            {
+                targetBall.transform.position = targetMidpoint;
+                //ShouldAttack = false;
+            }
+            else
+            {
+                targetBall.transform.position += SuggestedChange;
+            }
+
+
+
+        }
+    }
+
+
     // Update is called once per frame
     void Update()
     {
-        if (!CheckTarget()) target.Value = null;
+        if (!CheckTarget())
+        {
+            //ShouldReady = false;
+            target.Value = null;
+        }
+
+        UpdateAnimator();
         //if (target.Value == null) Retarget();
         //if (!IsAlive || target.Value == null) Despawn();
-        
+
+    }
+
+    private void UpdateAnimator()
+    {
+
     }
 
     private void FixedUpdate()
@@ -177,87 +411,54 @@ public class SmoothTentacle : MonoBehaviour
             //ReadyTentacleStrike();
             //targetBall.transform.position = target.Value.transform.position;
         }
-        
+
     }
 
-    
+    public bool CanReachTheTarget(Transform theTarget)
+    {
+
+        float sqDistance = (theTarget.position - parentRB.transform.position).sqrMagnitude;
+        if (sqDistance > currentMaxTentacleReach.Value * currentMaxTentacleReach.Value
+                || sqDistance < currentMinTentacleReach.Value * currentMinTentacleReach.Value)
+        {
+            return false;
+        }
+        return true;
+    }
 
     public bool CheckTarget()
     {
         if (target.Value != null)
         {
-            float sqDistance = (target.Value.transform.position - parentRB.transform.position).sqrMagnitude;
-            if (sqDistance > currentMaxTentacleReach.Value * currentMaxTentacleReach.Value 
-                || sqDistance < currentMinTentacleReach.Value * currentMinTentacleReach.Value)
-            {
-                return false;
-            }
+            if (!CanReachTheTarget(target.Value.transform)) return false;
 
-            //Debug.DrawLine(target.Value.transform.position, transform.position, Color.red);
-            //Debug.DrawLine(transform.position + TentacleVector * 20, transform.position, Color.black);
-            float dot = Vector3.Dot((target.Value.transform.position - parentObject.transform.position).normalized,
-             TentacleVector);
-            Debug.DrawLine(parentObject.transform.position, parentObject.transform.position + TentacleVector * 50);
+            //float dot = Vector3.Dot((target.Value.transform.position - parentObject.transform.position).normalized,
+            // TentacleVector);
 
-            if (dot < 0)
-            {
-                return false;
-            }
+            //if (dot < 0)
+            //{
+            //    return false;
+            //}
 
             return true;
         }
         return false;
-        
-    }
-
-    private List<ImpulseStep> Despawn(float percentElapsed)
-    {
-        Destroy(gameObject);
-        return null;
-    }
-
-    private List<ImpulseStep> Retarget(float percentElapsed)
-    {
-        if (IsReady)
-        {
-            foreach (GameObject possibleTarget in ObjectsSeen.Value.Keys.OrderBy(x => ObjectsSeen.Value[x].Distance).ToList()) 
-            {
-                if (!Shortcuts.IsInLayerMask(possibleTarget.layer, TentacleTargetsMask)) continue;
-
-                TargetedByTentacleModifier mod = possibleTarget.GetComponent<TargetedByTentacleModifier>();
-                if (mod == null)
-                {
-                    if (TryFindTentacleTransform(possibleTarget, out TransformVariable newTransform))
-                    {
-                        transform.SetParent(null);
-                        target.Value = possibleTarget;
-                        ModifierLibrary.Tentacle.ApplyTargetedByTentacleModifier(target);
-                        transform.position = newTransform.position;
-                        TentacleVector = newTransform.vector;
-                        transform.rotation = Quaternion.identity;
-                        transform.rotation *= newTransform.rotation;
-                        transform.localScale = newTransform.scale;
-                        transform.SetParent(parentObject.transform, true);
-                        break;
-                    }
-                }
-            }
-            
-        }
-
-        return null;
 
     }
+
+
     public bool TryFindTentacleTransform(GameObject possibleTarget, out TransformVariable newTransform)
     {
         bool Success = false;
         newTransform = new TransformVariable();
 
 
-        Vector3 _direction = (possibleTarget.transform.position - transform.position).normalized;
+        Vector3 _direction = (possibleTarget.transform.position - parentObject.transform.position).normalized;
 
         float FrontSideDot = Vector3.Dot(_direction, parentObject.transform.forward);
         float RightSideDot = Vector3.Dot(_direction, parentObject.transform.right);
+        float BackSideDot = Vector3.Dot(_direction, -parentObject.transform.forward);
+        float LeftSideDot = Vector3.Dot(_direction, -parentObject.transform.right);
 
         Vector3 localVector;
 
@@ -269,11 +470,17 @@ public class SmoothTentacle : MonoBehaviour
                 localVector = parentRB.transform.forward;
 
             }
-            else
+            else if (BackSideDot > 0)
             {
                 newTransform.vector = -Vector3.forward;
                 localVector = -parentRB.transform.forward;
 
+            }
+            else
+            {
+                newTransform.vector = -Vector3.forward;
+                localVector = -parentRB.transform.forward;
+                Debug.LogError("No vector chosen!");
             }
         }
         else
@@ -282,27 +489,42 @@ public class SmoothTentacle : MonoBehaviour
             {
                 newTransform.vector = Vector3.right;
                 localVector = parentRB.transform.right;
+
+            }
+            else if (LeftSideDot > 0)
+            {
+                newTransform.vector = -Vector3.right;
+                localVector = -parentRB.transform.right;
+
+
             }
             else
             {
                 newTransform.vector = -Vector3.right;
                 localVector = -parentRB.transform.right;
-
+                Debug.LogError("No vector chosen!");
             }
         }
         newTransform.rotation = Quaternion.LookRotation(localVector);
-        newTransform.scale = Vector3.zero;
+        //newTransform.scale = Vector3.zero;
 
 
-        
+
 
         ChosenRegion = null;
         float ChosenSqMagnitude = Mathf.Infinity;
         foreach (Bounds region in tentacleRegions)
         {
 
-            RaycastHit? hit = PhysicsTools.RaycastAt(possibleTarget.transform.position, parentRB.transform.TransformPoint(region.center), 
+            RaycastHit? hit = PhysicsTools.RaycastAt(possibleTarget.transform.position, parentRB.transform.TransformPoint(region.center),
                 Mathf.Infinity, TentacleFindingMask);
+
+            Vector3 OriginalCenter = region.center;
+            Vector3 MyTransform = parentRB.transform.position;
+
+            Vector3 WorldPositionCenter = parentRB.transform.TransformPoint(region.center);
+
+
             if (hit != null)
             {
                 float SqDistanceBetweenRegionAndHit = (hit.Value.point - region.center).sqrMagnitude;
@@ -317,11 +539,12 @@ public class SmoothTentacle : MonoBehaviour
 
         }
 
+
         if (ChosenRegion != null)
         {
-           
+
             Vector3? RandomPointInBounds = PickRandomPointInBounds(possibleTarget, ChosenRegion.Value, TentacleFindingMask, TentacleBlockingMask);
-            
+
             if (RandomPointInBounds != null)
             {
                 newTransform.position = RandomPointInBounds.Value;
@@ -355,7 +578,7 @@ public class SmoothTentacle : MonoBehaviour
 
             randomPoint = parentRB.transform.TransformPoint(randomPoint);
 
-            RaycastHit? hit = PhysicsTools.RaycastAt(GetMidPointOfObject(possibleTarget), randomPoint, Mathf.Infinity, TentacleFindingMask);
+            RaycastHit? hit = PhysicsTools.RaycastAt(Shortcuts.GetMidPointOfObject(possibleTarget), randomPoint, Mathf.Infinity, TentacleFindingMask);
             if (hit != null && hit.Value.collider.gameObject.layer != BlockingMask) //Let other tentacles block
             {
                 return hit.Value.point;
@@ -367,28 +590,38 @@ public class SmoothTentacle : MonoBehaviour
         return null;
 
 
-        }
-
-    private Vector3 GetMidPointOfObject(GameObject target)
-    {
-        Vector3 targetCenter;
-        Renderer renderer = target.GetComponent<Renderer>();
-
-        if (renderer != null)
-        {
-            targetCenter = renderer.bounds.center;
-
-            return targetCenter;
-
-        }
-        Vector3 sumVector = new Vector3(0f, 0f, 0f);
-
-        foreach (Transform child in target.transform)
-        {
-            sumVector += child.position;
-        }
-
-        targetCenter = sumVector / target.transform.childCount;
-        return targetCenter;
     }
+
+    public void Die()
+    {
+        target.Value = null;
+        Destroy(gameObject);
+    }
+
+
+    public List<ImpulseStep> ShrinkToNothing(float percentElapsed)
+    {
+
+        transform.localScale = Vector3.one * (1 - percentElapsed);
+        return null;
+    }
+    public List<ImpulseStep> GrowToFullSize(float percentElapsed)
+    {
+
+        transform.localScale = Vector3.one * percentElapsed;
+        return null;
+    }
+    //public List<ImpulseStep> ReadyWeapon(float percentElapsed)
+    //{
+
+    //    if (target.Value == null) return null;
+    //    Vector3 TargetChange = ((target.Value.transform.position - gameObject.transform.position) / 2f
+    //             + gameObject.transform.up * ChosenRegion.Value.max.y);
+
+    //    if (target.Value != null)
+    //    {
+    //        targetBall.transform.position = gameObject.transform.position + TargetChange;
+    //    }
+    //    return null;
+    //}
 }

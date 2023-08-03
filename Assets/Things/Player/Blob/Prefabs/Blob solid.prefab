@@ -225,6 +225,7 @@ MonoBehaviour:
   CurrentGrowthSpeedModifier: {fileID: 11400000, guid: 5d0be6a3716b157408b67cd34be6c7f0, type: 2}
   CurrentDragInsideStomach: {fileID: 11400000, guid: 4bcc72ff0165cfc40899738623a15aff, type: 2}
   CurrentAngularDragInsideStomach: {fileID: 11400000, guid: b17cc75b8f5740141a11e7b877c51bed, type: 2}
+  TentacleHitSpeed: {fileID: 11400000, guid: bd393b39607285242b4e74095fabb02d, type: 2}
   StartingStats: {fileID: 11400000, guid: 2f97634487625f645a67fa46463464fd, type: 2}
   MassTarget: {fileID: 11400000, guid: 52efadcd3f6c20e40a5d10f86b32c8f4, type: 2}
   CurrentMassPerCubicFoot: {fileID: 11400000, guid: cd9959cbc8e7473488480f014dd1ea70, type: 2}
@@ -336,7 +337,11 @@ MonoBehaviour:
   CurrentRotationSpeed: {fileID: 11400000, guid: 2c2a45c27d711ec4d94fc7e08ec9c64a, type: 2}
   CurrentMoveSpeed: {fileID: 11400000, guid: 1d35e35c6dfb61b45b5706af0a7bbe89, type: 2}
   StartingStats: {fileID: 11400000, guid: 2f97634487625f645a67fa46463464fd, type: 2}
+  BlobDims: {fileID: 11400000, guid: 8ef06ef29ae67ad42a0c382b3fed5cb5, type: 2}
   BodyRotation: {fileID: 11400000, guid: ae0c90919d19d174cb1774d07eb0b02d, type: 2}
+  GroundLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
   RigidbodyObject: {fileID: 11400000, guid: 77058696715ad3348bc6e8f7f4082269, type: 2}
 --- !u!114 &5699709722121794187
 MonoBehaviour:
@@ -379,7 +384,6 @@ GameObject:
   - component: {fileID: 8890584811720592281}
   - component: {fileID: 2491798945417317561}
   - component: {fileID: 5762664518783488426}
-  - component: {fileID: 8414832797183790787}
   m_Layer: 6
   m_Name: Blob solid
   m_TagString: Untagged
@@ -444,18 +448,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
---- !u!114 &8414832797183790787
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6963635177752257789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e04d6fa9040c211428b9512583de015a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &7289718236628751502
 GameObject:
   m_ObjectHideFlags: 0
@@ -1277,9 +1269,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a50458365922f4141847c30b4b7355eb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 3877669650750822155}
-    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: a50458365922f4141847c30b4b7355eb, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 6104976908127627991}
     - targetCorrespondingSourceObject: {fileID: 7036213049465896255, guid: a50458365922f4141847c30b4b7355eb, type: 3}
       insertIndex: -1
       addedObject: {fileID: 9214641512437035140}
@@ -1417,9 +1406,9 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3575783072986531744}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: faf1e6960b10321428e1d726d9811763, type: 2}
+  m_Controller: {fileID: 9100000, guid: 08b2196b3d77f64418f10dc46569be0b, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1451,20 +1440,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 1, z: 0}
---- !u!114 &6104976908127627991
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3575783072986531744}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 347aa9c4633edaa4bbc3399b89d200dc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerIsAlive: {fileID: 11400000, guid: be91f14f6c7d54640a39e3af85a55f54, type: 2}
-  PlayerGameObject: {fileID: 11400000, guid: 77058696715ad3348bc6e8f7f4082269, type: 2}
 --- !u!4 &3579382785645766494 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 932904547627228591, guid: a50458365922f4141847c30b4b7355eb, type: 3}

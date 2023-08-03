@@ -25,12 +25,14 @@ public class PigController : EnemyController, IAmDigestable, IAmDamageable
     public override float SqDistanceFromPlayer { get; set; }
 
 
+
     [HideInInspector]
     public MeshRenderer meshRenderer;
 
     // Start is called before the first frame update
     protected override void Start()
     {
+
         base.Start();
         CurrentHitPoints = enemyStats.HitPoints;
         AmAlive = true;
@@ -44,6 +46,7 @@ public class PigController : EnemyController, IAmDigestable, IAmDamageable
 
     protected override void Awake()
     {
+
         SqDistanceFromPlayer = 0;
     }
 

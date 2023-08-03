@@ -12,6 +12,7 @@ public abstract class GameObjectIsGameObjectCondition<T> : ModifierClass<T> wher
     {
         get
         {
+            if (Comparer1 == null || Comparer2 == null) return () => ReturnFalse();
             return () => Comparer1.Value == Comparer2;
         }
     }

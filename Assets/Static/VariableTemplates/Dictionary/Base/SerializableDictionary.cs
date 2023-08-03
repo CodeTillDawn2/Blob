@@ -22,7 +22,7 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
             keys.Add(pair.Key);
             values.Add(pair.Value);
         }
-        Debug.LogWarning("Before Serialize.. count is now " + keys.Count + ":" + values.Count + "..." + base.Keys.Count + "/" + base.Values.Count);
+
     }
 
     // load dictionary from lists
@@ -35,7 +35,7 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
 
         for (int i = 0; i < keys.Count; i++)
             this.Add(keys[i], values[i]);
-        Debug.LogWarning("After Deserialize.. count is now " + keys.Count + ":" + values.Count + "..." + base.Keys.Count + "/" + base.Values.Count);
+
     }
 
     public Dictionary<TKey, TValue> GetBase()
@@ -51,7 +51,7 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
             return;
         }
         this.Add(key, value);
-        //Debug.LogWarning("AddUpdate.. count is now " + keys.Count + ":" + values.Count + "..." + base.Keys.Count + "/" + base.Values.Count);
+
     }
 
     public void MatchDictionary(Dictionary<TKey, TValue> dictionary)
@@ -77,7 +77,7 @@ public class SerializableDictionary<TKey, TValue> : Dictionary<TKey, TValue>, IS
                 this[key] = dictionary[key];
             }
         }
-        //Debug.LogWarning("Matching.. count is now " + keys.Count + ":" + values.Count + "..." + base.Keys.Count + "/" + base.Values.Count);
+
         dummyKeys = null;
     }
 }

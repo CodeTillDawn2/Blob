@@ -26,6 +26,7 @@ public abstract class BlobStomach : MonoBehaviour, IDoDigestDamage
     [Serialize] public FloatVariable CurrentGrowthSpeedModifier;
     [Serialize] public FloatVariable CurrentDragInsideStomach;
     [Serialize] public FloatVariable CurrentAngularDragInsideStomach;
+    [Serialize] public FloatVariable TentacleHitSpeed;
     [Serialize] public PlayerStatsBase StartingStats;
     [Serialize] public FloatVariable MassTarget;
     [Serialize] public FloatVariable CurrentMassPerCubicFoot;
@@ -69,12 +70,11 @@ public abstract class BlobStomach : MonoBehaviour, IDoDigestDamage
         SuckInEnemies();
         DigestEnemies();
         if (!ChangingSize) StartCoroutine(ChangeSize());
-
-
     }
 
     private void ResetStats()
     {
+        TentacleHitSpeed.Value = StartingStats.TentacleHitSpeed;
         CurrentDigestDamage.Value = StartingStats.DigestDamage;
         MassTarget.Value = StartingStats.Mass;
         CurrentGrowthSpeedModifier.Value = StartingStats.GrowthSpeedModifier;
