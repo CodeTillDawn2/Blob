@@ -59,7 +59,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Animation_TentacleReadied.cs" />
-    <Compile Include="Assets\Things\Player\Blob\Body\BlobShader.cs" />
     <Compile Include="Assets\Executive\EnemyConsumer.cs" />
     <Compile Include="Assets\AI\Impulses\ImpulseInterfaces\ISpawn.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\SerializableDictionary.cs" />
@@ -127,7 +126,6 @@
     <Compile Include="Assets\Global\BuildLogger.cs" />
     <Compile Include="Assets\Static\Enums\DamageTypeEnum.cs" />
     <Compile Include="Assets\Global\DamageTypeLibrary.cs" />
-    <Compile Include="Assets\Global\DebugTools.cs" />
     <Compile Include="Assets\Interfaces\IAmDamageable.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\TransformVariable.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\ImpulseVariable.cs" />

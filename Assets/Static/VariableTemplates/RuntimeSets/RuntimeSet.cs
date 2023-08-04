@@ -3,40 +3,34 @@ using UnityEngine;
 
 public abstract class RuntimeSet<T> : ScriptableObject
 {
-    [SerializeField]
     private List<T> list = new List<T>();
 
     public List<T> Items
     {
-        get
-        { return list; }
-        set
-        {
-            list = value;
-            //EditorUtility.SetDirty(this);
-        }
+        get { return list; }
+        set { list = value; }
     }
 
     public void SetFromArray(T[] values)
     {
         if (values != null)
-        {
             list = new List<T>(values);
-            //EditorUtility.SetDirty(this);
-        }
         else
-        {
             list = new List<T>();
-            //EditorUtility.SetDirty(this);
-        }
     }
 
     public void RemoveAll()
     {
-        while (list != null && list.Count > 0)
+        if (list == null)
         {
-            list.RemoveAt(0);
+            Debug.LogWarning("List is null while attempting to remove all");
         }
+        else
+        {
+            list.Clear();
+        }
+
+        
     }
 
     public T[] ReturnAsArray()
@@ -47,42 +41,36 @@ public abstract class RuntimeSet<T> : ScriptableObject
     public void Add(T t)
     {
         if (!Items.Contains(t))
-        {
             Items.Add(t);
-            //EditorUtility.SetDirty(this);
-
-        }
     }
+
     public void Remove(T t)
     {
         if (Items.Contains(t))
-        {
             Items.Remove(t);
-            //EditorUtility.SetDirty(this);
-        }
     }
 
     public void MatchList(List<T> matchList)
     {
-        for (int i = list.Count - 1; i >= 0; i--)
+        List<T> itemsToRemove = new List<T>();
+        foreach (T obj in list)
         {
-            T obj = list[i];
             if (!matchList.Contains(obj))
-            {
-                list.Remove(obj);
-            }
+                itemsToRemove.Add(obj);
         }
-        for (int i = matchList.Count - 1; i >= 0; i--)
+
+        foreach (T obj in itemsToRemove)
         {
-            T obj = matchList[i];
-            if (!list.Contains(obj))
-            {
-                list.Add(obj);
-            }
+            list.Remove(obj);
         }
+
+        List<T> itemsToAdd = new List<T>();
+        foreach (T obj in matchList)
+        {
+            if (!list.Contains(obj))
+                itemsToAdd.Add(obj);
+        }
+
+        list.AddRange(itemsToAdd);
     }
 }
-
-
-
-

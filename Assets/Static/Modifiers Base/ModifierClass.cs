@@ -4,56 +4,48 @@ using UnityEngine;
 
 public abstract class ModifierClass<T> : MonoBehaviour where T : ModifierClass<T>
 {
-    [SerializeField] public abstract bool IsStackable { get; }
-    [SerializeField] public abstract bool OneTimeEffect { get; }
-    [SerializeField] public abstract bool Inverse { get; set; }
-    [SerializeField] public abstract Func<bool> EvalConditions { get; }
-
-
-
-    private bool Redundant = false;
-    /// <summary>
-    /// Optional action that occurs on the sender object after the effect is done
-    /// </summary>
+    public abstract bool IsStackable { get; }
+    public abstract bool OneTimeEffect { get; }
+    public abstract bool Inverse { get; set; }
+    public abstract Func<bool> EvalConditions { get; }
+    private bool isRedundant = false;
     public Action AfterAction { get; set; }
+
     protected abstract void DebugEffect();
 
     public IEnumerator Evaluate()
     {
         DebugEffect();
 
-        if (gameObject != null)
+        if (gameObject)
         {
-            if (!Redundant)
+            if (!isRedundant)
             {
-                bool RanBeforeEffect = false;
-                if (EvalConditions.Invoke() != Inverse)
+                bool ranBeforeEffect = false;
+                bool condition = EvalConditions.Invoke();
+                if (condition != Inverse)
                 {
                     BeforeEffect();
-                    RanBeforeEffect = true;
+                    ranBeforeEffect = true;
                 }
-                while (EvalConditions.Invoke() != Inverse)
+
+                while (condition != Inverse)
                 {
                     ExecuteEffect();
-                    bool condition = EvalConditions.Invoke();
+                    condition = EvalConditions.Invoke();
                     if (OneTimeEffect) break;
                     yield return new WaitForFixedUpdate();
                 }
-                if (RanBeforeEffect)
+
+                if (ranBeforeEffect)
                 {
                     AfterEffect();
-                    if (AfterAction != null) AfterAction();
+                    AfterAction?.Invoke();
                 }
-
-
             }
-            Destroy(this);
-        }
-        else
-        {
-            Destroy(this);
         }
 
+        Destroy(this);
     }
 
     public bool ReturnFalse()
@@ -61,17 +53,8 @@ public abstract class ModifierClass<T> : MonoBehaviour where T : ModifierClass<T
         return false;
     }
 
-    /// <summary>
-    /// Occurs before the effect, if conditions evaluate true
-    /// </summary>
     public abstract void BeforeEffect();
-    /// <summary>
-    /// The effect, which will repeat until conditions evaluate false
-    /// </summary>
     public abstract void ExecuteEffect();
-    /// <summary>
-    /// Occurs after the effect, if the before effect happened
-    /// </summary>
     public abstract void AfterEffect();
 
     protected virtual void OnEnable()
@@ -88,15 +71,10 @@ public abstract class ModifierClass<T> : MonoBehaviour where T : ModifierClass<T
                 }
             }
         }
-
-
-
     }
 
     public virtual void RefreshEffect()
     {
-        Redundant = true;
+        isRedundant = true;
     }
-
-
 }

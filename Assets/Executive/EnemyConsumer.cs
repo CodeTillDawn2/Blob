@@ -42,12 +42,6 @@ public class EnemyConsumer : MonoBehaviour
         while (IsWorking)
         {
 
-            if (EnemiesInsideStomach == null)
-            {
-                string test = transform.GetPath();
-
-
-            }
             foreach (GameObject enemy in EnemiesInsideStomach.Items.Where(x => x.gameObject != null))
             {
                 Collider enemyCollider = enemy.GetComponent<Collider>();

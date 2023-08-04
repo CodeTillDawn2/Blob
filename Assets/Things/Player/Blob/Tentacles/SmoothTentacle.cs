@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class SmoothTentacle : MonoBehaviour
 {
+
+    #region Public Variables
     [Serialize] public GameObject targetBall;
     /// <summary>
     /// This should be just player and player tentacles.. it is a ray looking for the tentacle region it should be a part of (sides of the cube), but 
@@ -25,25 +27,24 @@ public class SmoothTentacle : MonoBehaviour
 
     [Serialize] public FloatVariable currentMaxTentacleReach;
     [Serialize] public FloatVariable currentMinTentacleReach;
-
-
     [Serialize] public FloatVariable TentacleHitSpeed;
+    public GameObjectVariable target;
+    public BooleanVariable IsAlive;
+    #endregion
 
-    //Animator statuses
-    
+    #region Animator Statuses
     private bool HasTarget
     {
         get { return animator.GetBool("HasTarget"); }
         set { animator.SetBool("HasTarget", value); }
     }
 
-    public GameObjectVariable target;
-    public BooleanVariable IsAlive;
-    private bool IsReady = false;
+    #endregion
+
+    #region Private Variables
     private GameObject parentObject;
     private TentacleBrain brain;
     private Animator animator;
-
     private List<Bounds> tentacleRegions = new List<Bounds>();
 
     private Vector3 tentacleVector;
@@ -76,26 +77,9 @@ public class SmoothTentacle : MonoBehaviour
 
     private Rigidbody parentRB;
     private Dict_GameObjectToLastSeen ObjectsSeen;
+    #endregion
 
-
-    public void Go(GameObject parent, Rigidbody parentRB, List<Bounds> tentacleRegions, Dict_GameObjectToLastSeen ObjectsSeen)
-    {
-
-        parentObject = parent;
-        this.parentRB = parentRB;
-        this.tentacleRegions = tentacleRegions;
-        this.ObjectsSeen = ObjectsSeen;
-        transform.SetParent(parentObject.transform, true);
-        if (brain != null && parentRB != null && tentacleRegions.Count >= 1 && ObjectsSeen != null)
-        {
-            //ShouldGrow = true;
-            IsReady = true;
-        }
-    }
-
-
-
-
+    #region Unity Events
     private void Awake()
     {
 
@@ -108,19 +92,54 @@ public class SmoothTentacle : MonoBehaviour
 
 
     }
-
     protected void Start()
     {
         InitializeBrain();
     }
 
 
+    void Update()
+    {
+        if (!CheckTarget())
+        {
 
-    ImpulseStep AttemptTentacleAttackStep;
-    ImpulseStep ShrinkStep;
-    ImpulseStep GrowStep;
-    ImpulseStep RetargetStep;
-    ImpulseStep RelocateStep;
+            target.Value = null;
+        }
+
+        UpdateAnimator();
+
+
+    }
+
+    private void FixedUpdate()
+    {
+        if (target.Value != null)
+        {
+            //ReadyTentacleStrike();
+            //targetBall.transform.position = target.Value.transform.position;
+        }
+
+    }
+
+    private void LateUpdate()
+    {
+        UpdateTargetBall();
+        UpdateAnimatorState();
+    }
+
+    #endregion
+
+    #region Initial Setup
+    public void Go(GameObject parent, Rigidbody parentRB, List<Bounds> tentacleRegions, Dict_GameObjectToLastSeen ObjectsSeen)
+    {
+
+        parentObject = parent;
+        this.parentRB = parentRB;
+        this.tentacleRegions = tentacleRegions;
+        this.ObjectsSeen = ObjectsSeen;
+        transform.SetParent(parentObject.transform, true);
+
+    }
 
     private void InitializeBrain()
     {
@@ -160,19 +179,31 @@ public class SmoothTentacle : MonoBehaviour
         brain.AddImpulse(Impulse.ImpulseType.Move, null, RelocateStep);
     }
 
+
+    #endregion
+
+
+    #region Impulse Steps
+
+    private ImpulseStep AttemptTentacleAttackStep;
+    private ImpulseStep ShrinkStep;
+    private ImpulseStep GrowStep;
+    private ImpulseStep RetargetStep;
+    private ImpulseStep RelocateStep;
+
+    #endregion
+
+    #region Impulse Conditions
     private bool DoUntilTest()
     {
         return true;
     }
 
 
-    protected void OnGUI()
-    {
-        //GUI.TextArea(new Rect(10, 10, Screen.width / 10, Screen.height / 10),
-        //    "Possible targets: " + ObjectsSeen.Value.Keys.Count + " Tentacle scale: " + gameObject.transform.localScale
-        //    + " Is Attacking? " + animator.GetBool("IsAttacking"));
-    }
+    #endregion
 
+
+    #region Impulse Actions
     private List<ImpulseStep> Relocate(float percentElapsed)
     {
 
@@ -224,9 +255,60 @@ public class SmoothTentacle : MonoBehaviour
         return null;
 
     }
+    #endregion
 
+    #region Animator Functions
+    private void UpdateAnimatorState()
+    {
+        HasTarget = (target.Value != null);
+    }
+
+    private void UpdateTargetBall()
+    {
+        if (HasTarget && target.Value != null)
+        {
+            Vector3 targetMidpoint = Shortcuts.GetMidPointOfObject(target.Value);
+            Vector3 VDif = (targetMidpoint - targetBall.transform.position);
+            Vector3 dir = VDif.normalized;
+            Vector3 SuggestedChange = dir * TentacleHitSpeed.Value * Time.deltaTime;
+
+            if (SuggestedChange.sqrMagnitude > VDif.sqrMagnitude)
+            {
+                targetBall.transform.position = targetMidpoint;
+
+            }
+            else
+            {
+                targetBall.transform.position += SuggestedChange;
+            }
+
+
+
+        }
+
+    }
+    public List<ImpulseStep> ShrinkToNothing(float percentElapsed)
+    {
+
+        transform.localScale = Vector3.one * (1 - percentElapsed);
+        return null;
+    }
+    public List<ImpulseStep> GrowToFullSize(float percentElapsed)
+    {
+
+        transform.localScale = Vector3.one * percentElapsed;
+        return null;
+    }
+
+    private void UpdateAnimator()
+    {
+
+    }
+    #endregion
+
+    #region Supporting Functions
     public TransformVariable FindSpawnLocationAndOrientation(List<Bounds> boundsList, Vector3 targetPoint,
-        Quaternion boxRotation, Vector3 boxPosition)
+       Quaternion boxRotation, Vector3 boxPosition)
     {
         List<Vector3> normals = new List<Vector3>
     {
@@ -282,72 +364,6 @@ public class SmoothTentacle : MonoBehaviour
         return worldRandomPoint;
     }
 
-
-    private void LateUpdate()
-    {
-        UpdateTargetBall();
-        UpdateAnimatorState();
-    }
-
-    private void UpdateAnimatorState()
-    {
-        HasTarget = (target.Value != null);
-    }
-
-    private void UpdateTargetBall()
-    {
-        if (HasTarget && target.Value != null)
-        {
-            Vector3 targetMidpoint = Shortcuts.GetMidPointOfObject(target.Value);
-            Vector3 VDif = (targetMidpoint - targetBall.transform.position);
-            Vector3 dir = VDif.normalized;
-            Vector3 SuggestedChange = dir * TentacleHitSpeed.Value * Time.deltaTime;
-
-            if (SuggestedChange.sqrMagnitude > VDif.sqrMagnitude)
-            {
-                targetBall.transform.position = targetMidpoint;
-
-            }
-            else
-            {
-                targetBall.transform.position += SuggestedChange;
-            }
-
-
-
-        }
-    }
-
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!CheckTarget())
-        {
-
-            target.Value = null;
-        }
-
-        UpdateAnimator();
-
-
-    }
-
-    private void UpdateAnimator()
-    {
-
-    }
-
-    private void FixedUpdate()
-    {
-        if (target.Value != null)
-        {
-            //ReadyTentacleStrike();
-            //targetBall.transform.position = target.Value.transform.position;
-        }
-
-    }
-
     public bool CanReachTheTarget(Transform theTarget)
     {
 
@@ -381,39 +397,13 @@ public class SmoothTentacle : MonoBehaviour
     }
 
 
-    public bool TryFindTentacleTransform(GameObject possibleTarget, out TransformVariable newTransform)
-    {
-        bool Success = false;
-        newTransform = new TransformVariable();
+    #endregion
 
 
-       
-        
-        Success = true;
-     
-
-        return Success;
-    }
 
 
-    public void Die()
-    {
-        target.Value = null;
-        Destroy(gameObject);
-    }
 
 
-    public List<ImpulseStep> ShrinkToNothing(float percentElapsed)
-    {
 
-        transform.localScale = Vector3.one * (1 - percentElapsed);
-        return null;
-    }
-    public List<ImpulseStep> GrowToFullSize(float percentElapsed)
-    {
-
-        transform.localScale = Vector3.one * percentElapsed;
-        return null;
-    }
  
 }

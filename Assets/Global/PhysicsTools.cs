@@ -8,87 +8,97 @@ public static class PhysicsTools
     /// </summary>
     public static readonly float ForwardMovement_StopDistance = .1f;
 
-    public static RaycastHit[] ConeCastAll(this Physics physics, Vector3 origin, float maxRadius, Vector3 direction, float maxDistance, float coneAngle)
+    /// <summary>
+    /// Performs a cone-shaped raycast from 'origin' with 'maxRadius' and 'maxDistance',
+    /// constrained by a 'coneAngle'. Returns an array of RaycastHit containing hits within the cone.
+    /// </summary>
+    /// <param name="origin">Starting point of the cone cast.</param>
+    /// <param name="maxRadius">Maximum radius of the cone at its starting point.</param>
+    /// <param name="direction">Normalized direction of the cone.</param>
+    /// <param name="maxDistance">Maximum distance the cone will travel.</param>
+    /// <param name="coneAngle">Angle (in degrees) constraining the cone's aperture.</param>
+    /// <returns>An array of RaycastHit with hits within the cone's area.</returns>
+    public static RaycastHit[] ConeCastAll(Vector3 origin, float maxRadius, Vector3 direction, float maxDistance, float coneAngle)
     {
-        RaycastHit[] sphereCastHits = Physics.SphereCastAll(origin - new Vector3(0, 0, maxRadius), maxRadius, direction, maxDistance);
+        direction = direction.normalized;
+        RaycastHit[] sphereCastHits = Physics.SphereCastAll(origin - direction * maxRadius, maxRadius, direction, maxDistance);
         List<RaycastHit> coneCastHitList = new List<RaycastHit>();
 
-        if (sphereCastHits.Length > 0)
+        foreach (var hit in sphereCastHits)
         {
-            for (int i = 0; i < sphereCastHits.Length; i++)
-            {
-                sphereCastHits[i].collider.gameObject.GetComponent<Renderer>().material.color = new Color(1f, 1f, 1f);
-                Vector3 hitPoint = sphereCastHits[i].point;
-                Vector3 directionToHit = hitPoint - origin;
-                float angleToHit = Vector3.Angle(direction, directionToHit);
+            Vector3 directionToHit = (hit.point - origin).normalized;
+            float angleToHit = Vector3.Angle(direction, directionToHit);
 
-                if (angleToHit < coneAngle)
-                {
-                    coneCastHitList.Add(sphereCastHits[i]);
-                }
+            if (angleToHit < coneAngle)
+            {
+                coneCastHitList.Add(hit);
             }
         }
 
-        RaycastHit[] coneCastHits = new RaycastHit[coneCastHitList.Count];
-        coneCastHits = coneCastHitList.ToArray();
-
-        return coneCastHits;
-    }
-
-    public static float GetSqDistanceBetweenPoints(Vector3 postion1, Vector3 position2)
-    {
-        return (postion1 - position2).sqrMagnitude;
-    }
-    public static Vector3 PointAlongDirection(Vector3 origin, Vector3 direction,
-     float distance)
-    {
-        return origin + direction.normalized * distance;
+        return coneCastHitList.ToArray();
     }
 
 
-    /// <summary> Returns a vector which is relative to the facing and position of 'c'. </summary>
+
+    /// <summary>
+    /// Converts a point from a custom local coordinate system to world coordinates.
+    /// </summary>
+    /// <param name="position">The origin of the custom local system.</param>
+    /// <param name="forward">The forward direction vector of the custom local system.</param>
+    /// <param name="up">The up direction vector of the custom local system.</param>
+    /// <param name="right">The right direction vector of the custom local system.</param>
+    /// <param name="target">The target point in local coordinates to convert.</param>
+    /// <returns>The world position of the 'target' point.</returns>
     public static Vector3 RelativePosition(Transform c, Vector3 target)
     {
         return c.right * target.x + c.up * target.y + c.forward * target.z + c.position;
     }
 
-    /// <summary> Returns a vector which is relative. </summary>
+    /// <summary>
+    /// Converts a point in the local coordinate system of 'c' to world coordinates.
+    /// </summary>
+    /// <param name="c">The Transform representing the local coordinate system.</param>
+    /// <param name="target">The point in local coordinates to convert.</param>
+    /// <returns>The world position of the 'target' point.</returns>
     public static Vector3 RelativePosition(Vector3 position, Vector3 forward, Vector3 up, Vector3 right, Vector3 target)
     {
         return right * target.x + up * target.y + forward * target.z + position;
     }
 
-    /// <summary> Returns a vector which is relative to the facing of 'c'. </summary>
+    /// <summary>
+    /// Converts a point in the local coordinate system of 'c' to relative coordinates with respect to 'c'.
+    /// The method assumes that the origin of the local coordinate system is at 'c.position'.
+    /// </summary>
+    /// <param name="c">The Transform representing the local coordinate system.</param>
+    /// <param name="target">The point in local coordinates to convert.</param>
+    /// <returns>The relative position of the 'target' point with respect to 'c'.</returns>
     public static Vector3 RelativePositionZero(Transform c, Vector3 target)
     {
         return c.right * target.x + c.up * target.y + c.forward * target.z;
     }
 
-    /// <summary> Returns a vector which is relative. </summary>
+    /// <summary>
+    /// Converts a point in a custom local coordinate system to relative coordinates with respect to the origin (0,0,0).
+    /// </summary>
+    /// <param name="forward">The forward direction vector of the custom local system.</param>
+    /// <param name="up">The up direction vector of the custom local system.</param>
+    /// <param name="right">The right direction vector of the custom local system.</param>
+    /// <param name="target">The point in local coordinates to convert.</param>
+    /// <returns>The relative position of the 'target' point with respect to the origin.</returns>
     public static Vector3 RelativePositionZero(Vector3 forward, Vector3 up, Vector3 right, Vector3 target)
     {
         return right * target.x + up * target.y + forward * target.z;
     }
 
-
-
-    public static Vector3 MultipledVector(Vector3 vector, float multiplier)
-    {
-        return new Vector3(vector.x * multiplier, vector.y * multiplier, vector.z * multiplier);
-    }
-
-    public static float ReturnColliderOverlapAmount(Collider col1, Collider col2)
-    {
-        if (Physics.ComputePenetration(col1, col1.gameObject.transform.position, col1.gameObject.transform.rotation,
-                                    col2, col2.gameObject.transform.position, col2.gameObject.transform.rotation,
-                                    out Vector3 dir, out float distance))
-        {
-
-            return distance;
-        }
-        return -1;
-    }
-
+    /// <summary>
+    /// Performs a raycast from 'startingPosition' to 'endingPosition', looking for collisions with objects.
+    /// Returns the first RaycastHit that intersects with any object along the ray's path, or null if no intersection.
+    /// </summary>
+    /// <param name="startingPosition">The starting point of the raycast.</param>
+    /// <param name="endingPosition">The ending point of the raycast.</param>
+    /// <param name="distance">The maximum distance the raycast can travel. (Default: Mathf.Infinity)</param>
+    /// <param name="layerMask">A bitmask specifying which layers should be tested for collisions. (Default: ~0, all layers)</param>
+    /// <returns>The first RaycastHit hit by the raycast or null if no intersection.</returns>
     public static RaycastHit? RaycastAt(Vector3 startingPosition, Vector3 endingPosition, float distance = Mathf.Infinity, int layerMask = ~0)
     {
         Ray ray = new Ray(startingPosition, (endingPosition - startingPosition));
@@ -100,112 +110,69 @@ public static class PhysicsTools
         return null;
     }
 
-    public static void DrawBounds(Bounds b, Color color, float delay = 0)
+    /// <summary>
+    /// Draws the wireframe of the given Bounds object using Debug.DrawLine for visual debugging.
+    /// </summary>
+    /// <param name="bounds">The Bounds object to draw the wireframe for.</param>
+    /// <param name="color">The color of the wireframe.</param>
+    /// <param name="delay">Optional delay for the Debug.DrawLine calls. (Default: 0)</param>
+    public static void DrawBounds(Bounds bounds, Color color, float delay = 0)
     {
-        // bottom
-        var p1 = new Vector3(b.min.x, b.min.y, b.min.z);
-        var p2 = new Vector3(b.max.x, b.min.y, b.min.z);
-        var p3 = new Vector3(b.max.x, b.min.y, b.max.z);
-        var p4 = new Vector3(b.min.x, b.min.y, b.max.z);
-
-        Debug.DrawLine(p1, p2, color, delay);
-        Debug.DrawLine(p2, p3, color, delay);
-        Debug.DrawLine(p3, p4, color, delay);
-        Debug.DrawLine(p4, p1, color, delay);
-
-        // top
-        var p5 = new Vector3(b.min.x, b.max.y, b.min.z);
-        var p6 = new Vector3(b.max.x, b.max.y, b.min.z);
-        var p7 = new Vector3(b.max.x, b.max.y, b.max.z);
-        var p8 = new Vector3(b.min.x, b.max.y, b.max.z);
-
-        Debug.DrawLine(p5, p6, color, delay);
-        Debug.DrawLine(p6, p7, color, delay);
-        Debug.DrawLine(p7, p8, color, delay);
-        Debug.DrawLine(p8, p5, color, delay);
-
-        // sides
-        Debug.DrawLine(p1, p5, color, delay);
-        Debug.DrawLine(p2, p6, color, delay);
-        Debug.DrawLine(p3, p7, color, delay);
-        Debug.DrawLine(p4, p8, color, delay);
-    }
-
-    public class OBB
-    {
-
-        readonly public Vector3 pos;
-        readonly public Vector3 forward, right, up;
-        readonly public Vector3 size;
-        readonly public float len;
-
-        public OBB(Transform ts, Vector3 sizeValue)
+        if (bounds.size == Vector3.zero)
         {
-            pos = ts.position;
-            forward = ts.forward; right = ts.right; up = ts.up;
-            size = sizeValue;
-            len = sizeValue.magnitude;
+            Debug.LogError("Bounds are not valid!");
+            return;
         }
 
-        public OBB(Vector3 pos, Vector3 forward, Vector3 right, Vector3 up, Vector3 sizeValue)
-        {
-            this.pos = pos;
-            this.forward = forward; this.right = right; this.up = up;
-            size = sizeValue;
-            len = sizeValue.magnitude;
-        }
+        Vector3[] points = {
+        new Vector3(bounds.min.x, bounds.min.y, bounds.min.z),
+        new Vector3(bounds.max.x, bounds.min.y, bounds.min.z),
+        new Vector3(bounds.max.x, bounds.min.y, bounds.max.z),
+        new Vector3(bounds.min.x, bounds.min.y, bounds.max.z),
+        new Vector3(bounds.min.x, bounds.max.y, bounds.min.z),
+        new Vector3(bounds.max.x, bounds.max.y, bounds.min.z),
+        new Vector3(bounds.max.x, bounds.max.y, bounds.max.z),
+        new Vector3(bounds.min.x, bounds.max.y, bounds.max.z)
+    };
+
+        // Draw bottom
+        for (int i = 0; i < 4; i++)
+            Debug.DrawLine(points[i], points[(i + 1) % 4], color, delay);
+
+        // Draw top
+        for (int i = 4; i < 8; i++)
+            Debug.DrawLine(points[i], points[((i - 4) + 1) % 4 + 4], color, delay);
+
+        // Draw sides
+        for (int i = 0; i < 4; i++)
+            Debug.DrawLine(points[i], points[i + 4], color, delay);
     }
 
-    public static bool TestIntersection(OBB obb1, OBB obb2)
-    {
-        Vector3[] SeparateAxis = new Vector3[15] {
-            obb1.forward, obb1.right, obb1.up,
-            obb2.forward, obb2.right, obb2.up,
-            Vector3.Cross(obb1.forward, obb2.forward).normalized,
-            Vector3.Cross(obb1.forward, obb2.right).normalized,
-            Vector3.Cross(obb1.forward, obb2.up).normalized,
-            Vector3.Cross(obb1.right, obb2.forward).normalized,
-            Vector3.Cross(obb1.right, obb2.right).normalized,
-            Vector3.Cross(obb1.right, obb2.up).normalized,
-            Vector3.Cross(obb1.up, obb2.forward).normalized,
-            Vector3.Cross(obb1.up, obb2.right).normalized,
-            Vector3.Cross(obb1.up, obb2.up).normalized
-        };
 
-        Vector3 dist1to2 = obb1.pos - obb2.pos;
-        Vector3 obb1half1 = 0.5f * (obb1.right * obb1.size.x + obb1.up * obb1.size.y + obb1.forward * obb1.size.z);
-        Vector3 obb1half2 = 0.5f * (obb1.right * obb1.size.x + obb1.up * obb1.size.y - obb1.forward * obb1.size.z);
-        Vector3 obb2half1 = 0.5f * (obb2.right * obb2.size.x + obb2.up * obb2.size.y + obb2.forward * obb2.size.z);
-        Vector3 obb2half2 = 0.5f * (obb2.right * obb2.size.x + obb2.up * obb2.size.y - obb2.forward * obb2.size.z);
-
-        float R;
-        float[] R1 = new float[2];
-        float[] R2 = new float[2];
-        for (uint n = 0; n < 15; ++n)
-        {
-            if (SeparateAxis[n] == Vector3.zero) continue;
-            R = Vector3.Dot(dist1to2, SeparateAxis[n]);
-            R1[0] = Vector3.Dot(obb1half1, SeparateAxis[n]);
-            R1[1] = Vector3.Dot(obb1half2, SeparateAxis[n]);
-            R2[0] = Vector3.Dot(obb2half1, SeparateAxis[n]);
-            R2[1] = Vector3.Dot(obb2half2, SeparateAxis[n]);
-
-            if (Mathf.Abs(R) > Mathf.Abs(R1[0]) + Mathf.Abs(R2[0]) || Mathf.Abs(R) > Mathf.Abs(R1[1]) + Mathf.Abs(R2[1]))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    //Draws just the box at where it is currently hitting.
+    /// <summary>
+    /// Draws a box at the collision point of a BoxCast, given the origin, halfExtents, orientation, direction, and hitInfoDistance.
+    /// </summary>
+    /// <param name="origin">The starting point of the BoxCast.</param>
+    /// <param name="halfExtents">The half size of the box being cast.</param>
+    /// <param name="orientation">The orientation (rotation) of the box being cast.</param>
+    /// <param name="direction">The direction of the BoxCast.</param>
+    /// <param name="hitInfoDistance">The distance of the hit point from the origin, obtained from a BoxCast.</param>
+    /// <param name="color">The color of the drawn box.</param>
     public static void DrawBoxCastOnHit(Vector3 origin, Vector3 halfExtents, Quaternion orientation, Vector3 direction, float hitInfoDistance, Color color)
     {
         origin = CastCenterOnCollision(origin, direction, hitInfoDistance);
         DrawBox(origin, halfExtents, orientation, color);
     }
 
-    //Draws the full box from start of cast to its end distance. Can also pass in hitInfoDistance instead of full distance
+    /// <summary>
+    /// Draws a pair of boxes representing the starting and ending positions of a BoxCast.
+    /// </summary>
+    /// <param name="origin">Starting point of the BoxCast.</param>
+    /// <param name="halfExtents">Half size of the box being cast.</param>
+    /// <param name="orientation">Orientation (rotation) of the box being cast.</param>
+    /// <param name="direction">Direction of the BoxCast.</param>
+    /// <param name="distance">Distance of the BoxCast.</param>
+    /// <param name="color">Color of the drawn boxes and lines.</param>
     public static void DrawBoxCastBox(Vector3 origin, Vector3 halfExtents, Quaternion orientation, Vector3 direction, float distance, Color color)
     {
         direction.Normalize();
@@ -225,10 +192,23 @@ public static class PhysicsTools
         DrawBox(topBox, color);
     }
 
+    /// <summary>
+    /// Draws a box at the specified origin with the given half extents and orientation.
+    /// </summary>
+    /// <param name="origin">The center point of the box.</param>
+    /// <param name="halfExtents">The half size of the box (extent from the center to the edge in each axis).</param>
+    /// <param name="orientation">The rotation of the box.</param>
+    /// <param name="color">The color of the drawn box.</param>
+
     public static void DrawBox(Vector3 origin, Vector3 halfExtents, Quaternion orientation, Color color)
     {
         DrawBox(new Box(origin, halfExtents, orientation), color);
     }
+    /// <summary>
+    /// Draws the edges of a box using Debug.DrawLine based on the provided Box object.
+    /// </summary>
+    /// <param name="box">The Box object representing the box to draw.</param>
+    /// <param name="color">The color of the drawn box edges.</param>
     public static void DrawBox(Box box, Color color)
     {
         Debug.DrawLine(box.frontTopLeft, box.frontTopRight, color);
@@ -293,11 +273,26 @@ public static class PhysicsTools
         }
     }
 
-    //This should work for all cast types
+    /// <summary>
+    /// Calculates the center point of a collision based on the given origin, direction, and hitInfoDistance.
+    /// </summary>
+    /// <param name="origin">The starting point of the cast.</param>
+    /// <param name="direction">The direction of the cast.</param>
+    /// <param name="hitInfoDistance">The distance of the collision point from the origin, obtained from a cast hit info.</param>
+    /// <returns>The center point of the collision.</returns>
+
     static Vector3 CastCenterOnCollision(Vector3 origin, Vector3 direction, float hitInfoDistance)
     {
         return origin + (direction.normalized * hitInfoDistance);
     }
+
+    /// <summary>
+    /// Rotates a point around a pivot using the provided rotation.
+    /// </summary>
+    /// <param name="point">The point to be rotated.</param>
+    /// <param name="pivot">The pivot point around which the rotation will occur.</param>
+    /// <param name="rotation">The quaternion representing the rotation to apply.</param>
+    /// <returns>The rotated point.</returns>
 
     static Vector3 RotatePointAroundPivot(Vector3 point, Vector3 pivot, Quaternion rotation)
     {

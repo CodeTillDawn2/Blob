@@ -67,8 +67,7 @@ public abstract class EnemyController : MonoBehaviour
 
     protected virtual void Update()
     {
-        //rb.mass = currentMass;
-        SqDistanceFromPlayer = PhysicsTools.GetSqDistanceBetweenPoints(transform.position, transform.position);
+
     }
 
     protected virtual void FixedUpdate()

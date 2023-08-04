@@ -1205,10 +1205,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 11400000, guid: 77058696715ad3348bc6e8f7f4082269, type: 2}
-  CameraDistance: 6
-  CameraAngle: 0.6
+  CameraDistance: 8
+  CameraAngle: -10
   BlobDims: {fileID: 11400000, guid: 8ef06ef29ae67ad42a0c382b3fed5cb5, type: 2}
   movementTime: 5
+  followSpeed: 10
+  rotationSpeed: 5
 --- !u!1001 &767997712
 PrefabInstance:
   m_ObjectHideFlags: 0
