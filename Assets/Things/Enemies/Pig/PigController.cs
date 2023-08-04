@@ -46,7 +46,7 @@ public class PigController : EnemyController, IAmDigestable, IAmDamageable
 
     protected override void Awake()
     {
-
+        base.Awake();
         SqDistanceFromPlayer = 0;
     }
 

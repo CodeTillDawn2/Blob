@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using static Shortcuts;
 
 [RequireComponent(typeof(MomentumSensor))]
@@ -20,20 +21,50 @@ public class SmoothTentacleWhap : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
 
-        if (other.gameObject != null)
+        Rigidbody body = other.attachedRigidbody;
+        MomentumSensor momentumSensor = GetComponent<MomentumSensor>();
+        MomentumSensor otherMomentumSensor = other.GetComponent<MomentumSensor>();
+
+        if (body != null && !body.isKinematic && momentumSensor != null && otherMomentumSensor != null)
         {
+            float averageAcceleration = momentumSensor.ReturnAverageAccelerationSq();
 
-            MomentumSensor moSensor = GetComponent<MomentumSensor>();
-            if (moSensor != null)
-            {
-                ModifierLibrary.Tentacle.ApplyTentacleWhapModifer(other.gameObject, gameObject, 5f, moSensor.ReturnVector(), moSensor.ReturnSpeed());
-            }
+            Vector3 relativeVelocity = otherMomentumSensor.ReturnVector() - momentumSensor.ReturnVector();
+            Vector3 contactNormal = relativeVelocity.normalized;
 
+            Rigidbody thisBody = GetComponentInParent<Rigidbody>();
+            float relativeMass = (thisBody.mass * body.mass) / (thisBody.mass + body.mass);
 
+            // Convert acceleration to force
+            Vector3 force = averageAcceleration * relativeMass * contactNormal * .01f;
 
-            //ModifierLibrary.OneTime.ApplyTentacleWhapModifer(other.gameObject,other.)
+            // Approximate the point of contact
+            Vector3 estimatedPointOfContact = (other.bounds.center + GetComponent<Collider>().bounds.center) / 2;
 
+            ModifierLibrary.Tentacle.ApplyTentacleWhapModifer(other.gameObject, estimatedPointOfContact,
+            force);
         }
+
+
+
+        //    if (other.gameObject != null)
+        //{
+
+        //    MomentumSensor moSensor = GetComponent<MomentumSensor>();
+        //    if (moSensor != null)
+        //    {
+        //        Vector3 estimatedPointOfContact = (other.bounds.center + GetComponent<Collider>().bounds.center) / 2;
+
+        //        ModifierLibrary.Tentacle.ApplyTentacleWhapModifer(other.gameObject, estimatedPointOfContact, 
+        //            moSensor.ReturnVector(), moSensor.ReturnAverageAcceleration());
+        //        print(moSensor.ReturnAverageAcceleration());
+        //    }
+
+
+
+        //    //ModifierLibrary.OneTime.ApplyTentacleWhapModifer(other.gameObject,other.)
+
+        //}
     }
 
     protected void OnCollisionEnter(Collision collision)

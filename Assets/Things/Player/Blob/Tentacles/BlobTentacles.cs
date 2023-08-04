@@ -54,7 +54,7 @@ public class BlobTentacles : MonoBehaviour
     private void SetTentacleSpawnRegions()
     {
         TentacleSpawnRegions = new List<Bounds>();
-        foreach (GameObject side in new List<GameObject>() { FrontSide, BackSide, LeftSide, RightSide })
+        foreach (GameObject side in new List<GameObject>() { FrontSide, BackSide, LeftSide, RightSide }) 
         {
             BoxCollider boxcol = side.GetComponent<BoxCollider>();
             if (boxcol != null)

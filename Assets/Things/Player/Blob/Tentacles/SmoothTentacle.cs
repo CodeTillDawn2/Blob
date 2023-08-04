@@ -30,44 +30,7 @@ public class SmoothTentacle : MonoBehaviour
     [Serialize] public FloatVariable TentacleHitSpeed;
 
     //Animator statuses
-    //private bool IsAttacking
-    //{
-    //    get { return animator.GetBool("IsAttacking"); }
-    //}
-    //private bool IsReadying
-    //{
-    //    get { return animator.GetBool("IsReadied"); }
-    //}
-    //private bool IsGrowing
-    //{
-    //    get { return animator.GetBool("IsGrowing"); }
-    //}
-    //public bool IsShrinking
-    //{
-    //    get { return animator.GetBool("IsShrinking"); }
-    //}
-
-    //private bool ShouldAttack
-    //{
-    //    get { return animator.GetBool("ShouldAttack"); }
-    //    set { animator.SetBool("ShouldAttack", value); }
-    //}
-    //private bool ShouldGrow
-    //{
-    //    get { return animator.GetBool("ShouldGrow"); }
-    //    set { animator.SetBool("ShouldGrow", value); }
-    //}
-    //private bool ShouldShrink
-    //{
-    //    get { return animator.GetBool("ShouldShrink"); }
-    //    set { animator.SetBool("ShouldShrink", value); }
-    //}
-    //private bool ShouldReady
-    //{
-    //    get { return animator.GetBool("ShouldReady"); }
-    //    set { animator.SetBool("ShouldReady", value); }
-    //}
-
+    
     private bool HasTarget
     {
         get { return animator.GetBool("HasTarget"); }
@@ -113,8 +76,6 @@ public class SmoothTentacle : MonoBehaviour
 
     private Rigidbody parentRB;
     private Dict_GameObjectToLastSeen ObjectsSeen;
-
-    private Bounds? ChosenRegion;
 
 
     public void Go(GameObject parent, Rigidbody parentRB, List<Bounds> tentacleRegions, Dict_GameObjectToLastSeen ObjectsSeen)
@@ -199,82 +160,10 @@ public class SmoothTentacle : MonoBehaviour
         brain.AddImpulse(Impulse.ImpulseType.Move, null, RelocateStep);
     }
 
-    //private void InitializeBrain_Old()
-    //{
-    //    brain.target = target;
-    //    brain.IsAlive = IsAlive;
-
-    //    //Retarget
-    //    AttemptTentacleAttackStep = new ImpulseStep(StepAction: AttemptTentacleAttack,
-    //                                       OnlyDoIf: null,
-    //                                       WaitUntilTrue: DoUntilTest);
-    //    AttemptTentacleAttackStep.impulseStepNameDebug = "AttemptTentacleAttackStep";
-    //    brain.AddImpulse(Impulse.ImpulseType.Attack, CanReachTarget, AttemptTentacleAttackStep);
-
-    //    ShrinkStep = new ImpulseStep(StepAction: Shrink,
-    //                                       OnlyDoIf: null,
-    //                                       WaitUntilTrue: DoUntilNotShrinking);
-    //    ShrinkStep.impulseStepNameDebug = "ShrinkStep";
-    //    brain.AddImpulse(Impulse.ImpulseType.Despawn, null, ShrinkStep);
-
-    //    RetargetStep = new ImpulseStep(StepAction: Retarget,
-    //                               OnlyDoIf: null,
-    //                               WaitUntilTrue: DoUntilTest);
-    //    RetargetStep.impulseStepNameDebug = "RetargetStep";
-    //    brain.AddImpulse(Impulse.ImpulseType.Search, null, RetargetStep);
-
-    //    RelocateStep = new ImpulseStep(StepAction: Relocate,
-    //                       OnlyDoIf: null,
-    //                       WaitUntilTrue: DoUntilTest);
-    //    RelocateStep.impulseStepNameDebug = "RelocateStep";
-    //    brain.AddImpulse(Impulse.ImpulseType.Move, null, ShrinkStep, RelocateStep);
-    //}
-
-
-    //private bool DoUntilNotShrinking()
-    //{
-    //    if (!IsShrinking && !ShouldShrink) return true;
-    //    return false;
-    //}
-
-    //private bool DoUntilNotGrowing()
-    //{
-    //    if (!IsGrowing && !ShouldGrow) return true;
-    //    return false;
-    //}
-
     private bool DoUntilTest()
     {
         return true;
     }
-
-    //public List<ImpulseStep> AttemptTentacleAttack(float percentElapsed)
-    //{
-    //    ShouldReady = true;
-
-    //    //if (transform.localScale.y < .95) //Need to grow
-    //    //{
-    //    //    animator.Play("TentacleSpawn", 0);
-    //    //}
-
-    //    if (!IsGrowing && !IsAttacking)
-    //    {
-    //        ShouldAttack = true;
-    //    }
-
-    //    return null;
-    //}
-
-    //private List<ImpulseStep> Shrink(float percentElapsed)
-    //{
-    //    if (!IsShrinking && !IsGrowing)
-    //    {
-    //        ShouldShrink = true;
-    //    }
-
-    //    return null;
-    //}
-
 
 
     protected void OnGUI()
@@ -287,15 +176,10 @@ public class SmoothTentacle : MonoBehaviour
     private List<ImpulseStep> Relocate(float percentElapsed)
     {
 
-        if (animator.)
+        if (target.Value != null)
         {
-            List<ImpulseStep> addSteps = new List<ImpulseStep>() { ShrinkStep, RelocateStep, GrowStep };
-            return addSteps;
-        }
-
-        print("Relocating");
-        if (target.Value != null && TryFindTentacleTransform(target.Value, out TransformVariable newTransform))
-        {
+            TransformVariable newTransform = FindSpawnLocationAndOrientation(tentacleRegions, target.Value.transform.position,
+                        parentRB.transform.rotation, parentRB.transform.position);
             transform.SetParent(null);
             transform.position = newTransform.position;
             TentacleVector = newTransform.vector;
@@ -303,8 +187,7 @@ public class SmoothTentacle : MonoBehaviour
             transform.rotation *= newTransform.rotation;
             transform.localScale = Vector3.one;
             transform.SetParent(parentObject.transform, true);
-            //ShouldShrink = false;
-            //ShouldGrow = true;
+
         }
 
         return null;
@@ -320,8 +203,6 @@ public class SmoothTentacle : MonoBehaviour
             Attempts++;
             GameObject possibleTarget = ObjectsSeen.Value.Keys.ToList()[UnityEngine.Random.Range(0, ObjectsSeen.Value.Keys.Count)];
 
-            //foreach (GameObject possibleTarget in ObjectsSeen.Value.Keys.OrderBy(x => ObjectsSeen.Value[x].Distance).ToList())
-            //{
 
             if (!CanReachTheTarget(possibleTarget.transform))
             {
@@ -338,14 +219,68 @@ public class SmoothTentacle : MonoBehaviour
             }
 
         }
-        //}
-
 
 
         return null;
 
     }
 
+    public TransformVariable FindSpawnLocationAndOrientation(List<Bounds> boundsList, Vector3 targetPoint,
+        Quaternion boxRotation, Vector3 boxPosition)
+    {
+        List<Vector3> normals = new List<Vector3>
+    {
+        boxRotation * new Vector3(0, 0, 1),  // Front face
+        boxRotation * new Vector3(0, 0, -1), // Back face
+        boxRotation * new Vector3(-1, 0, 0), // Left face
+        boxRotation * new Vector3(1, 0, 0)  // Right face
+    };
+
+        Vector3 normalFromBounds = Vector3.zero;
+        Bounds closestBounds = boundsList[0];
+        float highestDotProduct = float.MinValue;
+
+        for (int i = 0; i < boundsList.Count; i++)
+        {
+            Bounds bounds = boundsList[i];
+            Vector3 centerOfBounds = bounds.center;
+            Vector3 vectorToTarget = (targetPoint - centerOfBounds).normalized;
+            float dotProduct = Vector3.Dot(vectorToTarget, normals[i]);
+
+            if (dotProduct > highestDotProduct)
+            {
+                highestDotProduct = dotProduct;
+                closestBounds = bounds;
+                normalFromBounds = normals[i]; // Use the normal vector that corresponds to the bounds
+            }
+        }
+
+        TransformVariable newtransform = new TransformVariable();
+        newtransform.position = RandomPointOnBounds(closestBounds, boxRotation, boxPosition,
+            closestBounds.size.x * .2f, closestBounds.size.y * .2f);
+        newtransform.rotation = Quaternion.LookRotation(normalFromBounds, Vector3.up); // Use the normal vector for the rotation and force the up direction to be the same as world's up direction.
+        Debug.DrawLine(newtransform.position, target.Value.transform.position);
+        return newtransform;
+    }
+
+
+    public Vector3 RandomPointOnBounds(Bounds bounds, Quaternion boxRotation, Vector3 boxPosition, float Xmargin, float Ymargin)
+    {
+        // Generate two random values for x and y
+        float x = UnityEngine.Random.Range(bounds.min.x + Xmargin, bounds.max.x - Xmargin);
+        float y = UnityEngine.Random.Range(bounds.min.y + Ymargin, bounds.max.y - Ymargin);
+
+        // Use z = bounds.center.z because the point should lie on the face of the bounds
+        float z = bounds.center.z;
+
+        // Create a point from the random values in the local coordinate system of the bounds
+        Vector3 localRandomPoint = new Vector3(x, y, z);
+
+        // Convert the random point into the world coordinate system
+        Vector3 worldRandomPoint = boxRotation * localRandomPoint + boxPosition;
+
+        return worldRandomPoint;
+    }
 
 
     private void LateUpdate()
@@ -371,7 +306,7 @@ public class SmoothTentacle : MonoBehaviour
             if (SuggestedChange.sqrMagnitude > VDif.sqrMagnitude)
             {
                 targetBall.transform.position = targetMidpoint;
-                //ShouldAttack = false;
+
             }
             else
             {
@@ -389,13 +324,12 @@ public class SmoothTentacle : MonoBehaviour
     {
         if (!CheckTarget())
         {
-            //ShouldReady = false;
+
             target.Value = null;
         }
 
         UpdateAnimator();
-        //if (target.Value == null) Retarget();
-        //if (!IsAlive || target.Value == null) Despawn();
+
 
     }
 
@@ -453,144 +387,14 @@ public class SmoothTentacle : MonoBehaviour
         newTransform = new TransformVariable();
 
 
-        Vector3 _direction = (possibleTarget.transform.position - parentObject.transform.position).normalized;
-
-        float FrontSideDot = Vector3.Dot(_direction, parentObject.transform.forward);
-        float RightSideDot = Vector3.Dot(_direction, parentObject.transform.right);
-        float BackSideDot = Vector3.Dot(_direction, -parentObject.transform.forward);
-        float LeftSideDot = Vector3.Dot(_direction, -parentObject.transform.right);
-
-        Vector3 localVector;
-
-        if (Math.Abs(FrontSideDot) > Math.Abs(RightSideDot))
-        {
-            if (FrontSideDot > 0)
-            {
-                newTransform.vector = Vector3.forward;
-                localVector = parentRB.transform.forward;
-
-            }
-            else if (BackSideDot > 0)
-            {
-                newTransform.vector = -Vector3.forward;
-                localVector = -parentRB.transform.forward;
-
-            }
-            else
-            {
-                newTransform.vector = -Vector3.forward;
-                localVector = -parentRB.transform.forward;
-                Debug.LogError("No vector chosen!");
-            }
-        }
-        else
-        {
-            if (RightSideDot > 0)
-            {
-                newTransform.vector = Vector3.right;
-                localVector = parentRB.transform.right;
-
-            }
-            else if (LeftSideDot > 0)
-            {
-                newTransform.vector = -Vector3.right;
-                localVector = -parentRB.transform.right;
-
-
-            }
-            else
-            {
-                newTransform.vector = -Vector3.right;
-                localVector = -parentRB.transform.right;
-                Debug.LogError("No vector chosen!");
-            }
-        }
-        newTransform.rotation = Quaternion.LookRotation(localVector);
-        //newTransform.scale = Vector3.zero;
-
-
-
-
-        ChosenRegion = null;
-        float ChosenSqMagnitude = Mathf.Infinity;
-        foreach (Bounds region in tentacleRegions)
-        {
-
-            RaycastHit? hit = PhysicsTools.RaycastAt(possibleTarget.transform.position, parentRB.transform.TransformPoint(region.center),
-                Mathf.Infinity, TentacleFindingMask);
-
-            Vector3 OriginalCenter = region.center;
-            Vector3 MyTransform = parentRB.transform.position;
-
-            Vector3 WorldPositionCenter = parentRB.transform.TransformPoint(region.center);
-
-
-            if (hit != null)
-            {
-                float SqDistanceBetweenRegionAndHit = (hit.Value.point - region.center).sqrMagnitude;
-                if (SqDistanceBetweenRegionAndHit < ChosenSqMagnitude)
-                {
-                    ChosenRegion = region;
-                    ChosenSqMagnitude = SqDistanceBetweenRegionAndHit;
-                }
-
-            }
-
-
-        }
-
-
-        if (ChosenRegion != null)
-        {
-
-            Vector3? RandomPointInBounds = PickRandomPointInBounds(possibleTarget, ChosenRegion.Value, TentacleFindingMask, TentacleBlockingMask);
-
-            if (RandomPointInBounds != null)
-            {
-                newTransform.position = RandomPointInBounds.Value;
-                if (newTransform.position.y > ChosenRegion.Value.max.y - ChosenRegion.Value.size.y * .2f)
-                {
-                    return false;
-                }
-
-                Success = true;
-            }
-        }
-
-
+       
+        
+        Success = true;
+     
 
         return Success;
     }
 
-    public Vector3? PickRandomPointInBounds(GameObject possibleTarget, Bounds bounds, LayerMask? FindingLayerMask = null, LayerMask? BlockingMask = null, int NumberOfAttempts = 15)
-    {
-        int Attempts = 0;
-        float SideMargin = .8f; //Space on side of blob minus space to not spawn tentacle in
-        float Inset = (1 - SideMargin) / 2f; //Space on side of blob minus space to not spawn tentacle in
-
-        while (Attempts < NumberOfAttempts)
-        {
-            Attempts++;
-            Vector3 randomPoint = new Vector3(
-                UnityEngine.Random.Range(0f, bounds.size.x * SideMargin) - bounds.size.x / 2f + bounds.size.x * 1.5f * Inset,
-               UnityEngine.Random.Range(0f, bounds.size.y * SideMargin) - bounds.size.y / 2f + bounds.size.y * Inset,
-               UnityEngine.Random.Range(0f, bounds.size.z * SideMargin) - bounds.size.z / 2f + bounds.size.z * Inset);
-
-            randomPoint = parentRB.transform.TransformPoint(randomPoint);
-
-            RaycastHit? hit = PhysicsTools.RaycastAt(Shortcuts.GetMidPointOfObject(possibleTarget), randomPoint, Mathf.Infinity, TentacleFindingMask);
-            if (hit != null && hit.Value.collider.gameObject.layer != BlockingMask) //Let other tentacles block
-            {
-                return hit.Value.point;
-
-            }
-
-        }
-
-        return null;
-
-
-    }
 
     public void Die()
     {
@@ -611,17 +415,5 @@ public class SmoothTentacle : MonoBehaviour
         transform.localScale = Vector3.one * percentElapsed;
         return null;
     }
-    //public List<ImpulseStep> ReadyWeapon(float percentElapsed)
-    //{
-
-    //    if (target.Value == null) return null;
-    //    Vector3 TargetChange = ((target.Value.transform.position - gameObject.transform.position) / 2f
-    //             + gameObject.transform.up * ChosenRegion.Value.max.y);
-
-    //    if (target.Value != null)
-    //    {
-    //        targetBall.transform.position = gameObject.transform.position + TargetChange;
-    //    }
-    //    return null;
-    //}
+ 
 }

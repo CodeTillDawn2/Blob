@@ -348,10 +348,11 @@ public class BlobStomach_Solid : BlobStomach
 
     protected override IEnumerator ChangeSize()
     {
-
         if (meshRenderer != null && rb != null)
         {
             ChangingSize = true;
+
+            Vector3 startScale = RigidBodyObject.transform.localScale;
 
             while (Math.Abs(rb.mass - MassTarget.Value) > MassTarget.Value / 100
                 || TargetSideLengths.normalized != RigidBodyObject.transform.localScale.normalized)
@@ -364,28 +365,28 @@ public class BlobStomach_Solid : BlobStomach
                     float targetXScale = TargetSideLengths.x / OriginalSize.x;
                     float targetYScale = TargetSideLengths.y / OriginalSize.y;
                     float targetZScale = TargetSideLengths.z / OriginalSize.z;
+                    Vector3 targetScale = new Vector3(targetXScale, targetYScale, targetZScale);
                     UnparentEdibles();
-                    RigidBodyObject.transform.localScale += new Vector3(targetXScale - RigidBodyObject.transform.localScale.x,
-                                    targetYScale - RigidBodyObject.transform.localScale.y,
-                                    targetZScale - RigidBodyObject.transform.localScale.z) *
-                                    Time.fixedDeltaTime * CurrentGrowthSpeedModifier.Value;
+                    float lerpValue = Time.fixedDeltaTime * CurrentGrowthSpeedModifier.Value;
+                    RigidBodyObject.transform.localScale = Vector3.Lerp(startScale, targetScale, lerpValue);
                     ParentEdibles();
 
                     ResetCubeDims();
                     float CurrentVolume = BodyDims.Value.x * BodyDims.Value.y * BodyDims.Value.z;
 
-
                     rb.mass = CurrentVolume * CurrentMassPerCubicFoot.Value;
+
+                    // update start scale for next frame
+                    startScale = RigidBodyObject.transform.localScale;
 
                     yield return new WaitForFixedUpdate();
                 }
             }
-            //rb.mass = MassTarget.Value;
+
             ChangingSize = false;
         }
-
-
     }
+
 
     protected override void ResetCubeDims()
     {

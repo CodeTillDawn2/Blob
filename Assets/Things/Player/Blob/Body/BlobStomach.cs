@@ -101,7 +101,11 @@ public abstract class BlobStomach : MonoBehaviour, IDoDigestDamage
     {
         foreach (GameObject edible in ContainedInStomach.Items)
         {
-            edible.transform.parent = null;
+            if (edible != null)
+            {
+                edible.transform.parent = null;
+            }
+            
         }
     }
 
@@ -109,7 +113,11 @@ public abstract class BlobStomach : MonoBehaviour, IDoDigestDamage
     {
         foreach (GameObject edible in ContainedInStomach.Items)
         {
-            edible.transform.parent = gameObject.transform;
+            if (edible != null)
+            {
+                edible.transform.parent = gameObject.transform;
+            }
+            
         }
     }
 

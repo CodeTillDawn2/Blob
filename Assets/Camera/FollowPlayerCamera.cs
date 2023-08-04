@@ -24,6 +24,7 @@ public class CameraMovement : MonoBehaviour
     {
         Camera = GetComponent<Camera>();
         newPosition = transform.position;
+        Camera.main.depthTextureMode = DepthTextureMode.DepthNormals;
     }
 
     void Update()

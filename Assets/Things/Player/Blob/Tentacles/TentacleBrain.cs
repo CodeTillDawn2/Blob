@@ -77,18 +77,16 @@ public class TentacleBrain : MonoBehaviour//, IAttack, ISpawn, IDespawn, ISearch
 
     private IEnumerator DoActions()
     {
-        print("Brain loop start");
-
 
         if (IsAlive.Value)
         {
             if (target.Value == null)
             {
-                print("Brain: I have no target. Searching.");
+
                 yield return StartCoroutine(SearchImpulses[0].Value.Go());
                 if (target.Value != null)
                 {
-                    print("Brain: Found target. Moving.");
+   
                     yield return StartCoroutine(MoveImpulses[0].Value.Go());
                 }
                 //else
@@ -105,7 +103,7 @@ public class TentacleBrain : MonoBehaviour//, IAttack, ISpawn, IDespawn, ISearch
         }
         else
         {
-            print("Brain: I am not alive.");
+
         }
 
         //if (!IsAlive.Value)
@@ -114,7 +112,7 @@ public class TentacleBrain : MonoBehaviour//, IAttack, ISpawn, IDespawn, ISearch
         //    yield return StartCoroutine(DespawnImpulses[0].Value.Go());
         //}
         DoingActions = false;
-        print("Brain loop end");
+
     }
 
 

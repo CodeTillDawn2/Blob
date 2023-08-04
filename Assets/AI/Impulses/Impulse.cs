@@ -37,7 +37,7 @@ public class Impulse
             ImpulseStep step = ImpulseSteps[i];
 
             StartStepTime = Time.timeSinceLevelLoad;
-            Debug.Log("Starting impulse step: " + step.impulseStepNameDebug);
+            //Debug.Log("Starting impulse step: " + step.impulseStepNameDebug);
             bool FirstRun = true;
 
 
@@ -46,7 +46,7 @@ public class Impulse
             {
 
 
-                Debug.Log("Impulse step while loop");
+                //Debug.Log("Impulse step while loop");
 
 
 
@@ -69,20 +69,20 @@ public class Impulse
                     PercentToDo = (Time.timeSinceLevelLoad - StartStepTime) / step.ExecutionTime;
                 }
 
-                Debug.Log("Percent to do: " + PercentToDo);
+                //Debug.Log("Percent to do: " + PercentToDo);
 
                 if (step.impulseStepNameDebug == "ShrinkStep")
                 {
                     string test = "";
                 }
                 List<ImpulseStep> insertSteps = step.StepAction(PercentToDo); //Run action
-                Debug.Log("Action complete");
+                //Debug.Log("Action complete");
                 //bool IsShrinking = smoothTentacle.IsShrinking;
                 if (insertSteps != null)
                 {
                     foreach (ImpulseStep extraStep in insertSteps)
                     {
-                        Debug.Log("Inserting extra step: " + extraStep.impulseStepNameDebug);
+                        //Debug.Log("Inserting extra step: " + extraStep.impulseStepNameDebug);
                         ImpulseSteps.Insert(i + 1, extraStep);
                     }
                     continue;
@@ -93,21 +93,21 @@ public class Impulse
                     bool WaitUntilElapsed2 = WaitUntilTimeElapsed(StartStepTime, step.ExecutionTime);
                     bool WaitUntilTrue2 = step.WaitUntilTrue();
 
-                    Debug.Log("Wait until elapsed: " + WaitUntilElapsed2);
-                    Debug.Log("Wait until true: " + WaitUntilTrue2);
+                    //Debug.Log("Wait until elapsed: " + WaitUntilElapsed2);
+                    //Debug.Log("Wait until true: " + WaitUntilTrue2);
                 }
                 catch
                 {
 
                 }
 
-                if (step.impulseStepNameDebug == "ShrinkStep")
+                //if (step.impulseStepNameDebug == "ShrinkStep")
                 {
                     string test = "";
                 }
                 if (step.ExecutionTime == 0 && (step.WaitUntilTrue == null || step.WaitUntilTrue()))
                 {
-                    Debug.Log("Special Break");
+                    //Debug.Log("Special Break");
                     break;
                 }
 
@@ -115,7 +115,7 @@ public class Impulse
                 yield return new WaitForFixedUpdate();
             }
 
-            Debug.Log("Ending impulse step: " + step.impulseStepNameDebug);
+            //Debug.Log("Ending impulse step: " + step.impulseStepNameDebug);
             yield return null;
         }
 

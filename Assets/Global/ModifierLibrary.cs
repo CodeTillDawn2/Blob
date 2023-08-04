@@ -37,13 +37,13 @@ public static class ModifierLibrary
         /// <param name="DamageAmount"></param>
         /// <param name="direction"></param>
         /// <param name="acceleration"></param>
-        public static void ApplyTentacleWhapModifer(GameObject target, GameObject tentacle, float DamageAmount, Vector3 direction, float acceleration)
+        public static void ApplyTentacleWhapModifer(GameObject target, Vector3 contactPoint,  Vector3 force)
         {
             if (!target.gameObject.TryGetComponent<TentacleWhapModifer>(out TentacleWhapModifer existingModifier))
             {
                 TentacleWhapModifer TentacleWhap = target.gameObject.AddComponent<TentacleWhapModifer>();
-                TentacleWhap.direction = direction;
-                TentacleWhap.acceleration = acceleration;
+                TentacleWhap.force = force;
+                TentacleWhap.contactPoint = contactPoint;
                 TentacleWhap.StartCoroutine(TentacleWhap.Evaluate());
             }
 

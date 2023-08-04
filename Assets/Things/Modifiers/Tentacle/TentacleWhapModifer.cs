@@ -4,19 +4,21 @@ public class TentacleWhapModifer : OneTimeModifierCondition<DealDamageModifier>
 {
     [SerializeField] public override bool IsStackable { get { return false; } }
 
-    public Vector3 direction;
-    public float acceleration;
+    public Vector3 force;
+    public Vector3 contactPoint;
 
     public override void BeforeEffect()
     {
-        print("Tentacle whap added");
+        //print("Tentacle whap added");
     }
 
     public override void ExecuteEffect()
     {
         if (TryGetComponent<Rigidbody>(out Rigidbody rb))
         {
-            rb.AddForce(rb.mass * direction.x * acceleration, rb.mass * direction.y * acceleration, rb.mass * direction.z * acceleration, ForceMode.Impulse);
+            Debug.Log("Whapped");
+            rb.AddForceAtPosition(force, contactPoint);
+            //rb.AddForce(rb.mass * direction.x * acceleration, rb.mass * direction.y * acceleration, rb.mass * direction.z * acceleration, ForceMode.Impulse);
         }
     }
 

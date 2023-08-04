@@ -27,8 +27,7 @@ public abstract class EnemyController : MonoBehaviour
 
     protected virtual void Awake()
     {
-        MomentumSensor moSensor = GetComponent<MomentumSensor>();
-        if (moSensor == null)
+        if (!TryGetComponent<MomentumSensor>(out MomentumSensor sensor))
         {
             gameObject.AddComponent<MomentumSensor>();
         }

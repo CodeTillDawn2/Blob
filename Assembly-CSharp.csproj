@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Animation_TentacleReadied.cs" />
+    <Compile Include="Assets\Things\Player\Blob\Body\BlobShader.cs" />
     <Compile Include="Assets\Executive\EnemyConsumer.cs" />
     <Compile Include="Assets\AI\Impulses\ImpulseInterfaces\ISpawn.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\SerializableDictionary.cs" />
@@ -67,8 +68,14 @@
     <Compile Include="Assets\Things\Modifiers\Digestion\InContactWithBlobModifier.cs" />
     <Compile Include="Assets\Static\Modifiers Base\GameObjectIsGameObjectCondition.cs" />
     <Compile Include="Assets\Global\Shortcuts.cs" />
+    <Compile Include="Assets\GPT AI Integration\Demo Scripts\OpenAIDemo.cs" />
     <Compile Include="Assets\Static\Modifiers Base\GameObjectInListModifierCondition.cs" />
+    <Compile Include="Assets\GPT AI Integration\ElevenLabs\ELSpeaker.cs" />
+    <Compile Include="Assets\GPT AI Integration\VoiceRecorder\VoiceRecorder.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\GameObjectVariable.cs" />
+    <Compile Include="Assets\GPT AI Integration\ElevenLabs\Configuration\ELAuthArgsV1.cs" />
+    <Compile Include="Assets\GPT AI Integration\VoiceRecorder\WavUtility.cs" />
+    <Compile Include="Assets\GPT AI Integration\Demo Scripts\ImageGenerator\OpenAiImageGenerator.cs" />
     <Compile Include="Assets\Things\Sensors\MomentumSensor.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGameObjectAndLastSeenData.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\DigestNutritionModifier.cs" />
@@ -91,6 +98,7 @@
     <Compile Include="Assets\Events\GameEventListener.cs" />
     <Compile Include="Assets\Global\PhysicsTools.cs" />
     <Compile Include="Assets\AI\Impulses\ImpulseInterfaces\IDespawn.cs" />
+    <Compile Include="Assets\GPT AI Integration\VoiceRecorder\MicInput.cs" />
     <Compile Include="Assets\Things\Player\Blob\Tentacles\BlobTentacles.cs" />
     <Compile Include="Assets\Things\Player\Blob\Movement\BlobMovement.cs" />
     <Compile Include="Assets\AI\Impulses\ImpulseInterfaces\IAttack.cs" />
@@ -104,6 +112,7 @@
     <Compile Include="Assets\AI\Impulses\ImpulseInterfaces\IImpulse.cs" />
     <Compile Include="Assets\Things\Enemies\EnemyController.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\LastSeenData.cs" />
+    <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ProducerConsumerStream.cs" />
     <Compile Include="Assets\Executive\EnemySucker.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\InBlobsStomachModifier.cs" />
     <Compile Include="Assets\Things\Enemies\Pig\PigController.cs" />
@@ -125,6 +134,7 @@
     <Compile Include="Assets\Global\RefreshGameState.cs" />
     <Compile Include="Assets\AI\Neurons\Neuron.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_GameObjectToVector3.cs" />
+    <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ELStreamingEngine.cs" />
     <Compile Include="Assets\Static\VariableTemplates\RuntimeSets\RaycastInfoRuntimeSet.cs" />
     <Compile Include="Assets\Camera\FollowPlayerCamera.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\BooleanVariable.cs" />
@@ -132,6 +142,7 @@
     <Compile Include="Assets\Static\VariableTemplates\Variables\IntegerVariable.cs" />
     <Compile Include="Assets\Animation_TentacleSpawn.cs" />
     <Compile Include="Assets\Executive\EnemyReleaser.cs" />
+    <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ReadFullyStream.cs" />
     <Compile Include="Assets\Static\VariableTemplates\OBB.cs" />
     <Compile Include="Assets\Things\Modifiers\Tentacle\TargetedByTentacleModifier.cs" />
     <Compile Include="Assets\AI\Impulses\Impulse.cs" />
@@ -140,13 +151,21 @@
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGOAndGO.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\QuaternionVariable.cs" />
     <Compile Include="Assets\Things\Player\Blob\Brain\BlobBrain.cs" />
+    <Compile Include="Assets\GPT AI Integration\Demo Scripts\Visual Scripting\OpenAiVS.cs" />
     <Compile Include="Assets\Global\ModifierLibrary.cs" />
     <Compile Include="Assets\Static\Modifiers Base\ModifierClass.cs" />
     <Compile Include="Assets\Things\Player\Blob\Tentacles\SmoothTentacleWhap.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Shaders\NewSurfaceShader.shader" />
-    <None Include="Assets\Shaders\ColorMask0.shader" />
+    <None Include="Assets\GPT AI Integration\ElevenLabs\libs\NAudio.WinMM.dll" />
+    <None Include="Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Wasapi.dll" />
+    <None Include="Assets\Art\Shaders\NewSurfaceShader.shader" />
+    <None Include="Assets\Art\Shaders\TransparentWithDepthMask.shader" />
+    <None Include="Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Asio.dll" />
+    <None Include="Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Core.dll" />
+    <None Include="Assets\GPT AI Integration\ElevenLabs\libs\NAudio.dll" />
+    <None Include="Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Midi.dll" />
+    <None Include="Assets\Art\Shaders\ColorMask0.shader" />
     <None Include="Assets\Imported\VertexColorFarmAnimals\Shaders\VertexColorUnlit.shader" />
   </ItemGroup>
   <ItemGroup>
@@ -402,8 +421,26 @@
     <Reference Include="Unity.Collections.LowLevel.ILSupport">
       <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
     </Reference>
+    <Reference Include="NAudio.WinMM">
+      <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.WinMM.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Wasapi">
+      <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Wasapi.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Asio">
+      <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Asio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Core">
+      <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio">
+      <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.dll</HintPath>
+    </Reference>
+    <Reference Include="NAudio.Midi">
+      <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Midi.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.4f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -789,14 +826,14 @@
     <Reference Include="Unity.2D.Common.Path.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Path.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Animation.Rigging.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Shared.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Animation.Rigging.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
@@ -920,6 +957,14 @@
     <ProjectReference Include="AdjustPivot.Editor.csproj">
       <Project>{942EE966-DED0-F8B3-92D7-B2E88412F9A7}</Project>
       <Name>AdjustPivot.Editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="openai.api.unity.editor.csproj">
+      <Project>{89132D93-795D-0F2E-9738-0AB22EE6C303}</Project>
+      <Name>openai.api.unity.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="openai.api.unity.csproj">
+      <Project>{515B55D5-0355-7122-C48F-BF86C363DCE9}</Project>
+      <Name>openai.api.unity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
