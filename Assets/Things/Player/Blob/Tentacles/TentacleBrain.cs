@@ -86,7 +86,7 @@ public class TentacleBrain : MonoBehaviour//, IAttack, ISpawn, IDespawn, ISearch
                 yield return StartCoroutine(SearchImpulses[0].Value.Go());
                 if (target.Value != null)
                 {
-   
+
                     yield return StartCoroutine(MoveImpulses[0].Value.Go());
                 }
                 //else

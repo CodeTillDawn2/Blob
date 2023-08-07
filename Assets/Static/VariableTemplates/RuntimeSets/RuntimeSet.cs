@@ -30,7 +30,7 @@ public abstract class RuntimeSet<T> : ScriptableObject
             list.Clear();
         }
 
-        
+
     }
 
     public T[] ReturnAsArray()
@@ -42,6 +42,21 @@ public abstract class RuntimeSet<T> : ScriptableObject
     {
         if (!Items.Contains(t))
             Items.Add(t);
+    }
+
+    public void AddUpdate(T t)
+    {
+        if (!Items.Contains(t))
+        {
+            Items.Add(t);
+        }
+        else
+        {
+            int tIndex = Items.IndexOf(t);
+            Items.Remove(t);
+            Items.Insert(tIndex, t);
+        }
+
     }
 
     public void Remove(T t)

@@ -105,7 +105,7 @@ public abstract class BlobStomach : MonoBehaviour, IDoDigestDamage
             {
                 edible.transform.parent = null;
             }
-            
+
         }
     }
 
@@ -117,7 +117,7 @@ public abstract class BlobStomach : MonoBehaviour, IDoDigestDamage
             {
                 edible.transform.parent = gameObject.transform;
             }
-            
+
         }
     }
 
@@ -136,7 +136,8 @@ public abstract class BlobStomach : MonoBehaviour, IDoDigestDamage
                 float y = enemyCollider.bounds.size.y;
                 float z = enemyCollider.bounds.size.z;
 
-                BoxCollider box = (BoxCollider)enemyCollider;
+
+                BoxCollider box = enemyCollider as BoxCollider;
                 if (box != null)
                 {
                     x = box.size.x;
@@ -153,7 +154,7 @@ public abstract class BlobStomach : MonoBehaviour, IDoDigestDamage
 
 
                 ModifierLibrary.Digestion.ApplyInBlobsStomachModifier(enemy, enemy,
-                    ContainedInStomach, gameObject);
+                    ContainedInStomach, gameObject, BodyDims);
 
                 ModifierLibrary.Digestion.ApplyDigestionModifier(enemy, CurrentDigestDamage.Value * Time.deltaTime, gameObject);
                 ModifierLibrary.OneTime.ApplyDamageModifier(enemy, CurrentDigestDamage.Value * Time.deltaTime, DamageTypeLibrary.AcidDamage);
@@ -175,45 +176,48 @@ public abstract class BlobStomach : MonoBehaviour, IDoDigestDamage
     {
         foreach (GameObject enemy in IntersectsPlayer.Items.Where(x => !ContainedInStomach.Items.Contains(x)))
         {
-            Collider enemyCollider = enemy.GetComponent<Collider>();
-            Rigidbody enemyRB = enemy.GetComponent<Rigidbody>();
-            if (enemyCollider != null && enemyRB != null)
+            if (enemy != null)
             {
-                float x = enemyCollider.bounds.size.x;
-                float y = enemyCollider.bounds.size.y;
-                float z = enemyCollider.bounds.size.z;
-
-                BoxCollider box = (BoxCollider)enemyCollider;
-                if (box != null)
+                Collider enemyCollider = enemy.GetComponent<Collider>();
+                Rigidbody enemyRB = enemy.GetComponent<Rigidbody>();
+                if (enemyCollider != null && enemyRB != null)
                 {
-                    x = box.size.x;
-                    y = box.size.y;
-                    z = box.size.z;
+                    float x = enemyCollider.bounds.size.x;
+                    float y = enemyCollider.bounds.size.y;
+                    float z = enemyCollider.bounds.size.z;
+
+                    BoxCollider box = (BoxCollider)enemyCollider;
+                    if (box != null)
+                    {
+                        x = box.size.x;
+                        y = box.size.y;
+                        z = box.size.z;
+                    }
+
+                    float ColliderArea = x * y * z;
+
+                    ModifierLibrary.Digestion.ApplyInContactWithBlobModifier(enemy, enemy, gameObject,
+                        IntersectsPlayer, CurrentDragInsideStomach, CurrentAngularDragInsideStomach);
+
+                    //Vector3 RelativeVector = Vector3.Slerp(Vector3.zero,
+                    //     gameObject.transform.position - enemy.transform.position + new Vector3(0, BodyDims.Value.y / 4f, 0), CurrentSuckSpeedModifier.Value);
+
+
+                    //enemyRB.velocity = new Vector3(RelativeVector.x / Time.fixedDeltaTime, RelativeVector.y / Time.fixedDeltaTime, RelativeVector.z / Time.fixedDeltaTime);
+                    float bobbingForce = 0.00001f;
+
+                    // Check if the Rigidbody's vertical velocity is nearly zero or moving downwards
+                    //if (Mathf.Approximately(Mathf.Abs(enemyRB.velocity.y), 0f) || Mathf.Abs(enemyRB.velocity.y) < 0f)
+                    //{
+                    // Calculate the direction towards the center of the current game object
+                    Vector3 directionToCenter = (this.transform.position - enemyRB.position).normalized;
+
+                    enemyRB.AddForce(directionToCenter * bobbingForce, ForceMode.Force);
+                    //}
+
                 }
-
-                float ColliderArea = x * y * z;
-
-                //bool CanBeSwallowed = ColliderArea < CubeVolume.Value * .5;
-                //if (CanBeSwallowed) //Suck in
-                //{
-
-                //enemy.transform.parent = gameObject.transform;
-
-                enemy.gameObject.layer = (int)Shortcuts.UnityLayers.CanBeEaten;
-
-                ModifierLibrary.Digestion.ApplyInContactWithBlobModifier(enemy, enemy,
-                    IntersectsPlayer, CurrentDragInsideStomach, CurrentAngularDragInsideStomach);
-
-                Vector3 RelativeVector = Vector3.Slerp(Vector3.zero,
-                     gameObject.transform.position - enemy.transform.position + new Vector3(0, BodyDims.Value.y / 4f, 0), CurrentSuckSpeedModifier.Value);
-
-                enemyRB.velocity = new Vector3(RelativeVector.x / Time.fixedDeltaTime, RelativeVector.y / Time.fixedDeltaTime, RelativeVector.z / Time.fixedDeltaTime);
-
-                //}
-
-
-
             }
+
 
 
 

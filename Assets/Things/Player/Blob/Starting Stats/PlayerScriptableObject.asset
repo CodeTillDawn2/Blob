@@ -17,7 +17,7 @@ MonoBehaviour:
   MinTentacleReach: 1
   MaxTentacleReach: 5
   TentacleHitSpeed: 30
-  SuckSpeedModifier: 5
+  SuckSpeedModifier: 1
   SightDistance: 30
   DragInsideStomach: 5
   AngularDragInsideStomach: 5

@@ -8,4 +8,5 @@ public class EnemyStatsBase : ScriptableObject
     [Serialize] public float Mass;
     [Serialize] public float HitPoints;
     [Serialize] public float Nutrition;
+    [Serialize] public float SightDistance;
 }

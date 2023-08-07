@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
-using static Shortcuts;
+using Color = UnityEngine.Color;
 
 public class BlobStomach_Solid : BlobStomach
 {
@@ -20,6 +20,9 @@ public class BlobStomach_Solid : BlobStomach
 
     private SkinnedMeshRenderer meshRenderer;
 
+    private BoxCollider cuboidCollider;
+    private LayerMask canBeEatenAndBeingEatenMask;
+
     protected Vector3 TargetSideLengths;
     protected void Awake()
     {
@@ -28,7 +31,9 @@ public class BlobStomach_Solid : BlobStomach
 
     protected override void Start()
     {
+        cuboidCollider = GetComponent<BoxCollider>();
         meshRenderer = MeshObject.GetComponent<SkinnedMeshRenderer>();
+        canBeEatenAndBeingEatenMask = LayerMask.GetMask("CanBeEaten", "BeingEaten");
         base.Start();
     }
 
@@ -44,224 +49,117 @@ public class BlobStomach_Solid : BlobStomach
         base.FixedUpdate();
         CalculateIntersections();
 
-        if (ContainedInStomach.Items.Count > 0)
-        {
-            string test = "";
-        }
-        if (ContainedInStomach.Items.Count == 0)
-        {
-            string test = "";
-        }
     }
 
-    public Vector3 Vector3_CubeHalfExtents
+    public void FindObjectsContainedAndTouching(out List<GameObject> fullyContainedObjects, out List<GameObject> touchingObjects)
     {
-        get { return new Vector3(BodyDims.Value.x * .5f, BodyDims.Value.y * .5f, BodyDims.Value.z * .5f); }
-    }
+        fullyContainedObjects = new List<GameObject>();
+        touchingObjects = new List<GameObject>();
 
-
-    public List<GameObject> FindObjectsTouchingEdge()
-    {
-        List<BoxCastTemplate> boxes = new List<BoxCastTemplate>();
-
-        float xAdj = .475f;
-        float yAdj = .975f;
-        float zAdj = .475f;
-        float xOffset = .05f;
-        float yOffset = .05f;
-        float zOffset = .05f;
-        float distanceMult = .9f;
-        int targetCount = 20;
-        float ActualDistance = BodyDims.Value.x * distanceMult;
-        Vector3 dir = Vector3.zero;
-        UnityEngine.Color color = UnityEngine.Color.red;
-
-        List<Vector3> cubeFaces = new List<Vector3>() { transform.up, -transform.up,
-                                                        transform.right, -transform.right,
-                                                         transform.forward, -transform.forward};
-
-        foreach (Vector3 cubeFace in cubeFaces)
+        if (cuboidCollider != null)
         {
-            if (cubeFace == -transform.right)
-            { //left
-                xAdj = -.475f;
-                yAdj = .025f;
-                zAdj = .475f;
-                xOffset = 0;
-                yOffset = 0;
-                zOffset = .05f;
-                color = UnityEngine.Color.green;
-                dir = transform.up;
-                ActualDistance = BodyDims.Value.y * distanceMult;
-            }
-            else if (cubeFace == -transform.up) //bottom
-            {
-                xAdj = -.425f;
-                yAdj = .025f;
-                zAdj = .475f;
-                xOffset = 0;
-                yOffset = 0;
-                zOffset = .05f;
-                color = UnityEngine.Color.white;
-                dir = transform.right;
-                ActualDistance = BodyDims.Value.x * distanceMult;
-            }
-            else if (cubeFace == transform.right) //right
-            {
-                xAdj = .475f;
-                yAdj = .975f;
-                zAdj = .475f;
-                xOffset = 0;
-                yOffset = 0;
-                zOffset = .05f;
-                color = UnityEngine.Color.white;
-                dir = -transform.up;
-                ActualDistance = BodyDims.Value.y * distanceMult;
-            }
-            else if (cubeFace == transform.up) // up
-            {
-                xAdj = -.475f;
-                yAdj = .975f;
-                zAdj = .475f;
-                xOffset = 0;
-                yOffset = 0;
-                zOffset = .05f;
-                color = UnityEngine.Color.red;
-                dir = transform.right;
-                ActualDistance = BodyDims.Value.x * distanceMult;
-            }
-            else if (cubeFace == transform.forward)
-            {
-                xAdj = .425f;
-                yAdj = .925f;
-                zAdj = -.475f;
-                xOffset = .05f;
-                yOffset = 0;
-                zOffset = 0;
-                color = UnityEngine.Color.white;
-                dir = -transform.up;
-                distanceMult = .85f;
-                targetCount = 18;
-                ActualDistance = BodyDims.Value.y * distanceMult;
-            }
-            else if (cubeFace == -transform.forward)
-            {
-                xAdj = .425f;
-                yAdj = .925f;
-                zAdj = .475f;
-                xOffset = .05f;
-                yOffset = 0;
-                zOffset = 0;
-                color = UnityEngine.Color.white;
-                dir = -transform.up;
-                distanceMult = .85f;
-                targetCount = 18;
-                ActualDistance = BodyDims.Value.y * distanceMult;
-            }
+            // Get the oriented center of the cuboid in world space
+            Vector3 orientedCenter = transform.TransformPoint(cuboidCollider.center);
 
-            for (int a = 0; a < targetCount; a++)
+            Collider[] colliders = Physics.OverlapBox(orientedCenter, BodyDims.Value * 0.5f, transform.rotation, canBeEatenAndBeingEatenMask);
+
+            foreach (Collider collider in colliders)
             {
-
-
-
-                boxes.Add(new BoxCastTemplate()
+                if (collider != cuboidCollider)
                 {
-                    StartLoc = gameObject.transform.position,
-                    LocAdjustment = BodyRotation.Value * new Vector3(BodyDims.Value.x * (xAdj - a * xOffset), BodyDims.Value.y * (yAdj - a * yOffset), BodyDims.Value.z * (zAdj - a * zOffset)),
-                    distance = ActualDistance,
-                    Extents = bodyDims.Value * .025f,
-                    Direction = dir,
-                    color = color
-                });
-            }
-        }
+                    List<Vector3> pointsToCheck = new List<Vector3>();
 
-        //foreach (BoxCastTemplate box in boxes)
-        //{
-        //    PhysicsTools.DrawBoxCastBox(box.StartLoc + box.LocAdjustment,
-        //        box.Extents, gameObject.transform.rotation, box.Direction, box.distance, box.color);
-        //    break;
-        //}
-
-        List<GameObject> gameObjectsFound = new List<GameObject>();
-
-        foreach (BoxCastTemplate box in boxes)
-        {
-            RaycastHit[] hits = Physics.BoxCastAll(box.StartLoc + box.LocAdjustment, box.Extents, box.Direction, gameObject.transform.rotation,
-                box.distance, StomachSees);
-            foreach (RaycastHit hit in hits)
-            {
-                if (hit.collider != null && hit.collider.gameObject != null)
-                {
-                    if (!gameObjectsFound.Contains(hit.collider.gameObject))
+                    if (collider is BoxCollider box)
                     {
-                        gameObjectsFound.Add(hit.collider.gameObject);
+                        Vector3[] boxVertices = {
+                        box.center + new Vector3(box.size.x, box.size.y, box.size.z) * 0.5f,
+                        box.center + new Vector3(-box.size.x, box.size.y, box.size.z) * 0.5f,
+                        box.center + new Vector3(box.size.x, -box.size.y, box.size.z) * 0.5f,
+                        box.center + new Vector3(box.size.x, box.size.y, -box.size.z) * 0.5f,
+                        box.center + new Vector3(-box.size.x, -box.size.y, box.size.z) * 0.5f,
+                        box.center + new Vector3(-box.size.x, box.size.y, -box.size.z) * 0.5f,
+                        box.center + new Vector3(box.size.x, -box.size.y, -box.size.z) * 0.5f,
+                        box.center - new Vector3(box.size.x, box.size.y, box.size.z) * 0.5f
+                    };
+                        pointsToCheck.AddRange(boxVertices);
                     }
+                    else if (collider is SphereCollider sphere)
+                    {
+                        // This is a simple sampling approach; in reality, you might want more points
+                        pointsToCheck.Add(sphere.center + Vector3.up * sphere.radius);
+                        pointsToCheck.Add(sphere.center - Vector3.up * sphere.radius);
+                        pointsToCheck.Add(sphere.center + Vector3.right * sphere.radius);
+                        pointsToCheck.Add(sphere.center - Vector3.right * sphere.radius);
+                        pointsToCheck.Add(sphere.center + Vector3.forward * sphere.radius);
+                        pointsToCheck.Add(sphere.center - Vector3.forward * sphere.radius);
+                    }
+                    // Extend similarly for CapsuleCollider
+                    else if (collider is MeshCollider meshCollider)
+                    {
+                        MeshFilter meshFilter = collider.gameObject.GetComponent<MeshFilter>();
+                        if (meshFilter != null)
+                        {
+                            pointsToCheck.AddRange(meshFilter.mesh.vertices);
+                        }
+                    }
+
+
+                    // Find the vertex furthest from the oriented center
+                    float maxDistanceSquared = 0;
+                    Vector3 furthestPoint = Vector3.zero;
+                    foreach (var point in pointsToCheck)
+                    {
+                        Vector3 worldPoint = collider.transform.TransformPoint(point);
+                        float distanceSquared = (worldPoint - orientedCenter).sqrMagnitude;
+                        if (distanceSquared > maxDistanceSquared)
+                        {
+                            maxDistanceSquared = distanceSquared;
+                            furthestPoint = worldPoint;
+                        }
+                    }
+
+                    Debug.DrawLine(orientedCenter, furthestPoint, Color.cyan);
+
+                    // Transform furthestPoint from world space to the local space of the cuboid
+                    Vector3 localPoint = cuboidCollider.transform.InverseTransformPoint(furthestPoint);
+
+                    // Get half the size of the cuboid for comparison
+                    Vector3 halfSize = cuboidCollider.size * 0.5f;
+
+                    // Check if the point is inside the cuboid in its local space
+                    if (Mathf.Abs(localPoint.x) <= halfSize.x &&
+                        Mathf.Abs(localPoint.y) <= halfSize.y &&
+                        Mathf.Abs(localPoint.z) <= halfSize.z)
+                    {
+
+                        fullyContainedObjects.Add(collider.gameObject);
+                        touchingObjects.Add(collider.gameObject);
+                    }
+                    else
+                    {
+
+                        touchingObjects.Add(collider.gameObject);
+                    }
+
+
+
                 }
-
             }
-
-
         }
-
-        return gameObjectsFound;
     }
 
-    public class BoxCastTemplate
-    {
-        public Vector3 StartLoc;
-        public Vector3 Extents;
-        public Vector3 LocAdjustment;
-        public Vector3 Direction;
-        public float distance;
-        public UnityEngine.Color color = UnityEngine.Color.red;
-    }
+
+
+
+
 
     public override void CalculateIntersections()
     {
-        //PhysicsTools.DrawBoxCastBox(gameObject.transform.position + new Vector3(0, bodyDims.Value.y * .5f, 0),
-        // Vector3_CubeHalfExtents * .9f, gameObject.transform.rotation, transform.up, 0, UnityEngine.Color.blue);
+        FindObjectsContainedAndTouching(out List<GameObject> fullyContained, out List<GameObject> touching);
 
+        ContainedInStomach.MatchList(fullyContained);
+        IntersectsPlayer.MatchList(touching);
 
-
-        List<GameObject> touchingEdge = FindObjectsTouchingEdge();
-
-
-
-        RaycastHit[] insideStomach = Physics.BoxCastAll(gameObject.transform.position + new Vector3(0, bodyDims.Value.y * .5f, 0),
-            Vector3_CubeHalfExtents * .9f,
-            transform.up, gameObject.transform.rotation, 0, StomachSees);
-        List<GameObject> NewIntersects = new List<GameObject>();
-        List<GameObject> NewInStomach = new List<GameObject>();
-
-
-        foreach (GameObject hitinfo in touchingEdge)
-        {
-            if (hitinfo.GetComponent<Collider>().gameObject.layer != (int)UnityLayers.Player
-                && hitinfo.GetComponent<Collider>().gameObject.layer != (int)UnityLayers.PlayerTentacle
-                && hitinfo.GetComponent<Collider>().gameObject.layer != (int)UnityLayers.Ground)
-            {
-                NewIntersects.Add(hitinfo.GetComponent<Collider>().gameObject);
-            }
-        }
-        foreach (RaycastHit hitinfo in insideStomach)
-        {
-            if (hitinfo.collider.gameObject.layer != (int)UnityLayers.Player
-                && hitinfo.collider.gameObject.layer != (int)UnityLayers.PlayerTentacle
-                && hitinfo.collider.gameObject.layer != (int)UnityLayers.Ground
-                && !NewIntersects.Contains(hitinfo.collider.gameObject))
-            {
-                NewInStomach.Add(hitinfo.collider.gameObject);
-            }
-        }
-
-
-        IntersectsPlayer.MatchList(NewIntersects);
-        ContainedInStomach.MatchList(NewInStomach);
-
-
-        NewIntersects = null;
-        NewInStomach = null;
     }
 
     protected Vector3 GetBoxSideSizes(Vector3 constraints, float TargetVolume)
@@ -315,25 +213,6 @@ public class BlobStomach_Solid : BlobStomach
                 sideLengths = new Vector3(constraints.x, constraints.y, TargetVolume / constraints.x / constraints.y);
             }
         }
-
-        //Vector3 BuildingBlock;
-        //float Multiplier;
-        //if (sideLengths.x <= sideLengths.y && sideLengths.x <= sideLengths.z)
-        //{
-        //    Multiplier = sideLengths.x;
-        //    BuildingBlock = new Vector3(1f, sideLengths.y / sideLengths.x, sideLengths.z / sideLengths.x);
-        //}
-        //else if (sideLengths.y <= sideLengths.z && sideLengths.y <= sideLengths.z)
-        //{
-        //    Multiplier = sideLengths.y;
-        //    BuildingBlock = new Vector3(sideLengths.x / sideLengths.y, 1f, sideLengths.z / sideLengths.y);
-        //} 
-        //else //z
-        //{
-        //    Multiplier = sideLengths.z;
-        //    BuildingBlock = new Vector3(sideLengths.x / sideLengths.z, sideLengths.y / sideLengths.z, 1f);
-        //}
-
 
 
         if (NumberOfConstraints == 0 || NumberOfConstraints == 3)

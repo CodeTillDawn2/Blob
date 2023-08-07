@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 using static Shortcuts;
 
 [RequireComponent(typeof(MomentumSensor))]

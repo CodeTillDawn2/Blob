@@ -4,55 +4,70 @@ using UnityEngine;
 public class InBlobsStomachModifier : GameObjectInListModifierCondition<InBlobsStomachModifier>, IAmImmuneToTargetingByTentacles
 {
     [SerializeField] public override bool IsStackable { get { return false; } }
-
     public override bool Inverse { get; set; }
-
     [Serialize] public GameObject Stomach;
 
-
     private Rigidbody rb;
+    private bool isInsideStomach = false;
+    private Vector3 stomachCenter;
+    public Vector3Variable BlobDims;
 
-    bool IsFloatingUp = false;
+    public float stayInsideThreshold = 0.5f;
+    public float floatingForce = 1.0f;
+    public float buoyancyForce = 1.0f;
 
     private Shortcuts.UnityLayers previousLayer;
 
+    private void Start()
+    {
+        UpdateStomachCenter();
+    }
 
+    private void UpdateStomachCenter()
+    {
+        Vector3 halfBlobDims = BlobDims.Value * 0.5f;
+        stomachCenter = Stomach.transform.position + Stomach.transform.TransformDirection(halfBlobDims);
+    }
 
     public override void BeforeEffect()
     {
-        rb = GetComponent<Rigidbody>();
-        if (rb == null)
-            Destroy(this);
+
         previousLayer = (Shortcuts.UnityLayers)gameObject.layer;
+
     }
 
     public override void ExecuteEffect()
     {
-
-
-
         gameObject.layer = (int)Shortcuts.UnityLayers.BeingEaten;
-        gameObject.transform.parent = Stomach.transform;
-        if (transform.position.y < Stomach.transform.position.y)
-        {
-            IsFloatingUp = true;
-        }
-        else if (transform.position.y > Stomach.transform.position.y)
-        {
-            IsFloatingUp = false;
-        }
 
-        if (IsFloatingUp)
-        {
-            //rb.AddForce(new Vector3(0, .01f * Time.fixedDeltaTime, 0), ForceMode.Force);
-        }
+        UpdateStomachCenter();
 
+        //if (!isInsideStomach)
+        //{
+        //    // Check if the object is inside the stomach
+        //    float distanceToStomach = Vector3.Distance(transform.position, stomachCenter);
+        //    if (distanceToStomach <= stayInsideThreshold)
+        //    {
+        //        isInsideStomach = true;
+        //    }
+        //}
+
+        //if (isInsideStomach)
+        //{
+        //    // Apply a force to the pig to simulate buoyancy
+        //    rb.AddForce(Vector3.up * buoyancyForce, ForceMode.Force);
+
+        //    // Apply a force to the pig to keep it floating inside the stomach
+        //    Vector3 targetPosition = stomachCenter + (Random.insideUnitSphere * stayInsideThreshold);
+        //    Vector3 forceDirection = (targetPosition - transform.position).normalized;
+        //    rb.AddForce(forceDirection * floatingForce, ForceMode.Force);
+        //}
     }
 
     public override void AfterEffect()
     {
+        // No need to do anything after the effect
         gameObject.layer = (int)previousLayer;
-        gameObject.transform.parent = null;
     }
 
     protected override void DebugEffect()

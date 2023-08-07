@@ -10,6 +10,7 @@ public class InContactWithBlobModifier : GameObjectInListModifierCondition<InCon
 
     [Serialize] public FloatVariable DragInsideStomach;
     [Serialize] public FloatVariable AngularDragInsideStomach;
+    [Serialize] public GameObject Stomach;
 
     private float originalMass;
     private bool originalGravity;
@@ -28,32 +29,33 @@ public class InContactWithBlobModifier : GameObjectInListModifierCondition<InCon
         originalGravity = rb.useGravity;
         originalDrag = rb.drag;
         originalAngularDrag = rb.angularDrag;
-    }
-    public override void ExecuteEffect()
-    {
         rb.mass = 0;
         rb.useGravity = false;
         rb.drag = DragInsideStomach.Value;
         rb.angularDrag = AngularDragInsideStomach.Value;
         MassChanged = true;
+        transform.parent = Stomach.transform;
+    }
+    public override void ExecuteEffect()
+    {
+
     }
 
     public override void AfterEffect()
     {
 
+        rb.mass = originalMass;
+        rb.useGravity = originalGravity;
+        rb.drag = originalDrag;
+        rb.angularDrag = originalAngularDrag;
+        transform.parent = null;
     }
 
 
 
     private void OnDisable()
     {
-        if (MassChanged)
-        {
-            rb.mass = originalMass;
-            rb.useGravity = originalGravity;
-            rb.drag = originalDrag;
-            rb.angularDrag = originalAngularDrag;
-        }
+
     }
     protected override void DebugEffect()
     {

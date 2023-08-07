@@ -4,20 +4,12 @@ using UnityEngine;
 public class PigController : EnemyController, IAmDigestable, IAmDamageable
 {
     [Header("Stat Block")]
-    [Serialize] public FloatVariable DragInsideStomach;
-    [Serialize] public FloatVariable AngularDragInsideStomach;
-    [Serialize] public FloatVariable SuckSpeedModifier;
-    [Serialize] public FloatVariable PlayerDigestDamage;
-    [Serialize] public FloatVariable PlayerMassTarget;
-    [Serialize] public FloatVariable CubeVolume;
-    [Serialize] public GameObjectVariable PlayerGameObject;
     [SerializeField] private bool amAlive;
     public override bool AmAlive { get { return amAlive; } set { amAlive = value; } }
     [SerializeField] private float currentHitPoints;
     public float CurrentHitPoints { get { return currentHitPoints; } set { currentHitPoints = value; } }
     public bool BeingEaten { get; set; }
     public bool BeingSuckedIn { get; set; }
-    public bool BeingSpatOut { get; set; }
     [SerializeField]
     private float currentNutrition;
     public float CurrentNutrition { get { return currentNutrition; } set { currentNutrition = value; } }
@@ -38,7 +30,6 @@ public class PigController : EnemyController, IAmDigestable, IAmDamageable
         AmAlive = true;
         BeingEaten = false;
         BeingSuckedIn = false;
-        BeingSpatOut = false;
         CurrentNutrition = enemyStats.Nutrition;
         meshRenderer = GetComponentInChildren<MeshRenderer>();
 

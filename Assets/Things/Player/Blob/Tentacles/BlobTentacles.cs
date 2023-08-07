@@ -1,8 +1,6 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using Unity.VisualScripting;
-using UnityEditor.SearchService;
 using UnityEngine;
 
 public class BlobTentacles : MonoBehaviour
@@ -34,7 +32,7 @@ public class BlobTentacles : MonoBehaviour
 
     private List<SmoothTentacle> existingTentacles;
 
- 
+
     private void OnEnable()
     {
         TentacleCount.Value = 0;
@@ -52,7 +50,7 @@ public class BlobTentacles : MonoBehaviour
     private void SetTentacleSpawnRegions()
     {
         TentacleSpawnRegions = new List<Bounds>();
-        foreach (GameObject side in new List<GameObject>() { FrontSide, BackSide, LeftSide, RightSide }) 
+        foreach (GameObject side in new List<GameObject>() { FrontSide, BackSide, LeftSide, RightSide })
         {
             BoxCollider boxcol = side.GetComponent<BoxCollider>();
             if (boxcol != null)
@@ -120,7 +118,7 @@ public class BlobTentacles : MonoBehaviour
 
     }
 
-   
+
     private void DespawnTentacle(List<SmoothTentacle> tentacles, SmoothTentacle tentacle)
     {
 

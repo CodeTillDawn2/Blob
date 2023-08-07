@@ -74,6 +74,7 @@
     <Compile Include="Assets\Static\VariableTemplates\Variables\GameObjectVariable.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Configuration\ELAuthArgsV1.cs" />
     <Compile Include="Assets\GPT AI Integration\VoiceRecorder\WavUtility.cs" />
+    <Compile Include="Assets\Things\Base\Senses.cs" />
     <Compile Include="Assets\GPT AI Integration\Demo Scripts\ImageGenerator\OpenAiImageGenerator.cs" />
     <Compile Include="Assets\Things\Sensors\MomentumSensor.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGameObjectAndLastSeenData.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Assets\Things\Player\Blob\Tentacles\BlobTentacles.cs" />
     <Compile Include="Assets\Things\Player\Blob\Movement\BlobMovement.cs" />
     <Compile Include="Assets\AI\Impulses\ImpulseInterfaces\IAttack.cs" />
+    <Compile Include="Assets\Things\Enemies\Pig\PigSenses.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Test\BlobStomach_Segmented.cs" />
     <Compile Include="Assets\Static\VariableTemplates\RaycastHitInfo.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\BlobStomach_Solid.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="Assets\Camera\FollowPlayerCamera.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\BooleanVariable.cs" />
     <Compile Include="Assets\Things\Modifiers\Damage\DealDamageModifier.cs" />
+    <Compile Include="Assets\Things\Base\Eye.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\IntegerVariable.cs" />
     <Compile Include="Assets\Animation_TentacleSpawn.cs" />
     <Compile Include="Assets\Executive\EnemyReleaser.cs" />

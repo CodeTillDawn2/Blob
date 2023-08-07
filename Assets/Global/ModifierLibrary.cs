@@ -37,7 +37,7 @@ public static class ModifierLibrary
         /// <param name="DamageAmount"></param>
         /// <param name="direction"></param>
         /// <param name="acceleration"></param>
-        public static void ApplyTentacleWhapModifer(GameObject target, Vector3 contactPoint,  Vector3 force)
+        public static void ApplyTentacleWhapModifer(GameObject target, Vector3 contactPoint, Vector3 force)
         {
             if (!target.gameObject.TryGetComponent<TentacleWhapModifer>(out TentacleWhapModifer existingModifier))
             {
@@ -99,13 +99,14 @@ public static class ModifierLibrary
         /// <param name="DragInsideStomach"></param>
         /// <param name="AngularDragInsideStomach"></param>
         /// <param name="Inverse">Whether to invert the conditional logic</param>
-        public static void ApplyInContactWithBlobModifier(GameObject target, GameObject comparer1,
+        public static void ApplyInContactWithBlobModifier(GameObject target, GameObject comparer1, GameObject Stomach,
             GameObjectRuntimeSet comparer2, FloatVariable DragInsideStomach, FloatVariable AngularDragInsideStomach, bool Inverse = false)
         {
             InContactWithBlobModifier existingModifier = target.gameObject.GetComponent<InContactWithBlobModifier>();
             if (existingModifier == null)
             {
                 InContactWithBlobModifier InContactEffect = target.gameObject.AddComponent<InContactWithBlobModifier>();
+                InContactEffect.Stomach = Stomach;
                 InContactEffect.DragInsideStomach = DragInsideStomach;
                 InContactEffect.AngularDragInsideStomach = AngularDragInsideStomach;
                 InContactEffect.Comparer1 = comparer1;
@@ -132,7 +133,7 @@ public static class ModifierLibrary
         /// <param name="CubeWidth">The CubeWidth scriptable object</param>
         /// <param name="Inverse">Whether to invert the conditional logic</param>
         public static void ApplyInBlobsStomachModifier(GameObject target, GameObject comparer1,
-            GameObjectRuntimeSet comparer2, GameObject Stomach, bool Inverse = false)
+            GameObjectRuntimeSet comparer2, GameObject Stomach, Vector3Variable BlobDims, bool Inverse = false)
         {
             InBlobsStomachModifier existingModifier = target.gameObject.GetComponent<InBlobsStomachModifier>();
             if (existingModifier == null)
@@ -141,6 +142,7 @@ public static class ModifierLibrary
                 InStomachEffect.Comparer1 = comparer1;
                 InStomachEffect.Comparer2 = comparer2;
                 InStomachEffect.Stomach = Stomach;
+                InStomachEffect.BlobDims = BlobDims;
                 InStomachEffect.Inverse = Inverse;
                 InStomachEffect.StartCoroutine(InStomachEffect.Evaluate());
             }

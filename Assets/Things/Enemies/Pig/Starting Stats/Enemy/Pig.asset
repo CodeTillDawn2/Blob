@@ -17,3 +17,4 @@ MonoBehaviour:
   Mass: 20
   HitPoints: 10
   Nutrition: 40
+  SightDistance: 30

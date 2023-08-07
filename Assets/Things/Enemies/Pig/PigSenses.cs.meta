@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 1ebd6cb549dac4141ac75cab24b001db
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - ThingsSeen: {instanceID: 0}
+  - ThingsNearby: {instanceID: 0}
+  - CurrentSightDistance: {instanceID: 0}
+  - enemyStats: {fileID: 11400000, guid: 088da23e05495674ab59a174165544a6, type: 2}
+  - leftEye: {instanceID: 0}
+  - rightEye: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
