@@ -1,17 +1,24 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class DamageTypeLibrary : MonoBehaviour
 {
-    [Serialize] public DamageTypeEnum acidDamage;
-    [Serialize] public DamageTypeEnum fireDamage;
-    [Serialize] public DamageTypeEnum piercingDamage;
+    [SerializeField] public DamageTypeEnum acidDamage;
+    [SerializeField] public DamageTypeEnum fireDamage;
+    [SerializeField] public DamageTypeEnum piercingDamage;
 
     public static DamageTypeLibrary instance;
 
-    private void Start()
+    private void Awake()
     {
+        // Singleton pattern check
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
         instance = this;
+        DontDestroyOnLoad(this.gameObject); // Ensure this object persists between scenes
     }
 
     public static DamageTypeEnum AcidDamage
@@ -27,5 +34,3 @@ public class DamageTypeLibrary : MonoBehaviour
         get { return instance.piercingDamage; }
     }
 }
-
-

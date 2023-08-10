@@ -5,10 +5,8 @@ public class RefreshGameState : MonoBehaviour
 {
 
     [Serialize] public GameObjectRuntimeSet AllEnemies;
-    [Serialize] public GameObjectRuntimeSet EnemiesBeingEaten;
     [Serialize] public GameObjectRuntimeSet EnemiesInStomach;
     [Serialize] public GameObjectRuntimeSet EnemiesIntersectingPlayer;
-    [Serialize] public RaycastInfoRuntimeSet InsideStomachHits;
     [Serialize] public GameObjectRuntimeSet ThingsNearby;
     [Serialize] public BooleanVariable SceneReady;
 
@@ -20,10 +18,8 @@ public class RefreshGameState : MonoBehaviour
 
         SceneReady.Value = false;
         AllEnemies.RemoveAll();
-        EnemiesBeingEaten.RemoveAll();
         EnemiesInStomach.RemoveAll();
         EnemiesIntersectingPlayer.RemoveAll();
-        InsideStomachHits.RemoveAll();
         ThingsNearby.RemoveAll();
 
         TentacleTargeting.Value.Clear();

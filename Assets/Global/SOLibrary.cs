@@ -2,35 +2,23 @@ using UnityEngine;
 
 public class SOLibrary : MonoBehaviour
 {
-    [SerializeField] public GameObjectVariable EmptyGameObjectVariable;
-    [SerializeField] public ImpulseVariable EmptyImpulseVariable;
-    [SerializeField] public BooleanVariable EmptyBooleanVariable;
-    [SerializeField] public FloatVariable EmptyFloatVariable;
-    [SerializeField] public GameObjectRuntimeSet EmptyGameObjectRuntimeSet;
-    [SerializeField] public Dict_GameObjectToLastSeen EmptyGameObjectToLastSeenDict;
-    public static SOLibrary instance { get; set; }
+    public static SOLibrary instance { get; private set; }
 
     private void Awake()
     {
+        // Singleton pattern check
+        if (instance != null && instance != this)
+        {
+            Destroy(this.gameObject);
+            return;
+        }
+
         instance = this;
-        EmptyGameObjectVariable.Value = null;
-        EmptyImpulseVariable.Value = null;
-        EmptyFloatVariable.Value = 0;
-        EmptyBooleanVariable.Value = false;
-        EmptyGameObjectRuntimeSet.RemoveAll();
-        EmptyGameObjectToLastSeenDict.Value.Clear();
+        DontDestroyOnLoad(this.gameObject); // Ensure this object persists between scenes
     }
 
-
-    // Start is called before the first frame update
-    void Start()
+    public T Create<T>() where T : ScriptableObject
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        return ScriptableObject.CreateInstance<T>();
     }
 }

@@ -5,16 +5,9 @@ using UnityEngine;
 public abstract class EnemyController : MonoBehaviour
 {
 
-    [Header("Stat Block")]
-    [Serialize] public FloatVariable CubeWidth;
-    [SerializeField] protected float currentMass;
-    [SerializeReference] public float currentMoveSpeed;
-    [SerializeReference] public float currentRotateSpeed;
-
-    public abstract bool AmAlive { get; set; }
 
 
-    public EnemyStatsBase enemyStats;
+    public PigConfiguration enemyStats;
 
     [HideInInspector]
     public float StartingMass;
@@ -34,7 +27,6 @@ public abstract class EnemyController : MonoBehaviour
 
     }
 
-    protected abstract void Die();
 
     protected virtual void Start()
     {
@@ -45,12 +37,11 @@ public abstract class EnemyController : MonoBehaviour
         }
 
 
-        currentMass = enemyStats.Mass;
-        currentMoveSpeed = enemyStats.MoveSpeed;
-        currentRotateSpeed = enemyStats.RotateSpeed;
 
 
-        rb.mass = currentMass;
+
+
+
 
     }
 
@@ -72,11 +63,11 @@ public abstract class EnemyController : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        if (TryGetComponent<IAmDamageable>(out IAmDamageable found))
+        if (TryGetComponent<IHaveHitPoints>(out IHaveHitPoints found))
         {
-            if (found.CurrentHitPoints <= 0)
+            if (found.HitPoints.Value <= 0)
             {
-                Die();
+                (this as ICanDie)?.Die();
             }
         }
 

@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: d6443f5ac4afa264092b341994495166
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - _nervePlan: {fileID: 11400000, guid: 0ec048608aa5f3045a1c0b09a05216ca, type: 2}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

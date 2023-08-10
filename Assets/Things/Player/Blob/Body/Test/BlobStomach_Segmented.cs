@@ -6,8 +6,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using static Shortcuts;
 
-public class BlobStomach_Segmented : BlobStomach
+public class BlobStomach_Segmented : BlobBody
 {
+
+    public static Type[] _expectedStatsInterfaces = { typeof(IHaveMoveSpeed) };
+    public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
+
     [SerializeField] LayerMask StomachSees;
 
     [SerializeField] protected Vector3Variable bodyDims;

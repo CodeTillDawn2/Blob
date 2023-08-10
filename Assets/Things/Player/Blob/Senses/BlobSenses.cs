@@ -1,29 +1,24 @@
+using System;
 using Unity.VisualScripting;
 using UnityEngine;
 
 public class BlobSenses : Senses
 {
 
+    public static Type[] _expectedStatsInterfaces = { typeof(IHaveMoveSpeed) };
+    public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
 
+    [Serialize] public BlobConfiguration StartingStats;
 
-    [Serialize] public PlayerStatsBase StartingStats;
+    public Shortcuts.LayerMasks OnlySeeMask { get; set; }
 
-    protected override Shortcuts.LayerMasks OnlySeeMask => Shortcuts.LayerMasks.LayerMask_NotPlayerOrTentacles;
-
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
     }
 
-
-
-
-
     // Start is called before the first frame update
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
-        CurrentSightDistance.Value = StartingStats.SightDistance;
 
     }
 
@@ -39,14 +34,5 @@ public class BlobSenses : Senses
         base.FixedUpdate();
     }
 
-    protected override bool FilterThingNearby(Collider col)
-    {
-        if (col.gameObject.layer != (int)Shortcuts.UnityLayers.Player &&
-            col.gameObject.layer != (int)Shortcuts.UnityLayers.PlayerTentacle &&
-            col.gameObject.layer != (int)Shortcuts.UnityLayers.Ground)
-        {
-            return true;
-        }
-        return false;
-    }
+
 }

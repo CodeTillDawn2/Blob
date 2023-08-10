@@ -15,9 +15,9 @@ public class DealDamageModifier : OneTimeModifierCondition<DealDamageModifier>
 
     public override void ExecuteEffect()
     {
-        if (TryGetComponent<IAmDamageable>(out IAmDamageable gameObject))
+        if (TryGetComponent<ICanBeDamaged>(out ICanBeDamaged gameObject))
         {
-            gameObject.TakeDamage(DamageAmount, DamageType);
+            gameObject.BeDamaged(DamageAmount, DamageType);
         }
     }
 

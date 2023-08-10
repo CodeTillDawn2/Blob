@@ -123,8 +123,8 @@
     <Compile Include="Assets\GPT AI Integration\OpenAi\Runtime\Scripts\Api\V1\Api\Engines\Engine\Completions\ChatCompletionsResourceV1.cs" />
     <Compile Include="Assets\GPT AI Integration\OpenAi\Runtime\Scripts\Unity\Util\AMonoSingleton.cs" />
     <Compile Include="Assets\GPT AI Integration\OpenAi\Runtime\Scripts\Json\Deserialization\SyntacticAnalysis\JsonSyntaxAnalyzer.cs" />
-    <Compile Include="Assets\GPT AI Integration\OpenAi\Runtime\Scripts\Api\Base\EventStreamDownloadHandler.cs" />
     <Compile Include="Assets\GPT AI Integration\OpenAi\Runtime\Scripts\Json\Deserialization\SyntacticAnalysis\EJsonType.cs" />
+    <Compile Include="Assets\GPT AI Integration\OpenAi\Runtime\Scripts\Api\Base\EventStreamDownloadHandler.cs" />
     <Compile Include="Assets\GPT AI Integration\OpenAi\Runtime\Scripts\Api\V1\_abstract\AUploadFileV1.cs" />
     <Compile Include="Assets\GPT AI Integration\OpenAi\Runtime\Scripts\Api\Base\AApiResource.cs" />
     <Compile Include="Assets\GPT AI Integration\OpenAi\Runtime\Scripts\Api\V1\Models\FilesListV1.cs" />
@@ -439,6 +439,9 @@
     </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.0.5\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
+    </Reference>
+    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
+      <HintPath>Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.4f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>

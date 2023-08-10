@@ -1,18 +1,11 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PigSenses : Senses
+public class PigSenses : Senses, ICanSee, IHaveEyes, IHaveSightDistance, IUseSightBox
 {
-    public float visionDistance = 20f;
-    public float visionAngle = 160f; // Wide FoV
-    public int numberOfRays = 20;
-    public EnemyStatsBase enemyStats;
-    public Transform leftEye;
-    public Transform rightEye;
 
-
-    protected override Shortcuts.LayerMasks OnlySeeMask => Shortcuts.LayerMasks.LayerMask_NotGround;
-
-
+    #region Unity Methods
     protected override void Awake()
     {
         base.Awake();
@@ -20,8 +13,7 @@ public class PigSenses : Senses
     protected override void Start()
     {
         base.Start();
-        CurrentSightDistance.Value = enemyStats.SightDistance;
-        ThingsNearby = Instantiate(SOLibrary.instance.EmptyGameObjectRuntimeSet);
+        
     }
 
     protected override void Update()
@@ -33,12 +25,36 @@ public class PigSenses : Senses
     {
         base.FixedUpdate();
     }
-    protected override bool FilterThingNearby(Collider col)
-    {
-        if (col.gameObject.layer != (int)Shortcuts.UnityLayers.Ground)
-        {
-            return true;
-        }
-        return false;
-    }
+
+    #endregion
+
+    #region Interface Fields
+    public static Type[] _expectedStatsInterfaces = { typeof(IHaveMoveSpeed) };
+    public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
+    public FloatVariable SightDistance { get; set; }
+    public Shortcuts.LayerMasks OnlySeeMask { get; set; }
+    public GameObjectRuntimeSet Eyes { get; set; }
+    public Dict_GameObjectToLastSeen ThingsSeen { get; set; }
+    public BoxCollider sightBox { get; set; }
+    public FloatVariable CurrentSightBoxSize { get; set; }
+    public List<GameObject> ThingsNearby { get; set; }
+    public Shortcuts.UnityLayers ThingNearbyFilter { get; set; }
+
+    #endregion
+
+    #region Interface Methods
+
+    #endregion
+
+    #region Private methods
+
+
+    #endregion
+
+
+
+
+
+    
+
 }

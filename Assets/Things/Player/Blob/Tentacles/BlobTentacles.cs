@@ -13,7 +13,7 @@ public class BlobTentacles : MonoBehaviour
     [Serialize] public FloatVariable MaxTentacleReach;
     [Serialize] public FloatVariable MinTentacleReach;
     [Serialize] public Vector3Variable BlobDims;
-    [Serialize] public PlayerStatsBase StartingStats;
+    [Serialize] public BlobConfiguration StartingStats;
     [Serialize] public Dict_GameObjectToLastSeen ObjectsSeen;
 
 
@@ -30,7 +30,7 @@ public class BlobTentacles : MonoBehaviour
 
     private List<Bounds> TentacleSpawnRegions;
 
-    private List<SmoothTentacle> existingTentacles;
+    private List<TentacleController> existingTentacles;
 
 
     private void OnEnable()
@@ -40,9 +40,9 @@ public class BlobTentacles : MonoBehaviour
 
     private void Start()
     {
-        MaxTentacleReach.Value = StartingStats.MaxTentacleReach;
-        MinTentacleReach.Value = StartingStats.MinTentacleReach;
-        CurrentMaxTentacles.Value = StartingStats.MaxTentacles;
+        MaxTentacleReach.Value = StartingStats.MaxTentacleReach.Value;
+        MinTentacleReach.Value = StartingStats.MinTentacleReach.Value;
+        CurrentMaxTentacles.Value = StartingStats.MaxTentacles.Value;
         SetTentacleSpawnRegions();
 
     }
@@ -87,7 +87,7 @@ public class BlobTentacles : MonoBehaviour
             (x.transform.position - gameObject.transform.position).sqrMagnitude >= MinTentacleReach.Value * MinTentacleReach.Value &&
             x.GetComponent<IAmImmuneToTargetingByTentacles>() == null).ToList();
 
-        existingTentacles = GetComponentsInChildren<SmoothTentacle>().ToList();
+        existingTentacles = GetComponentsInChildren<TentacleController>().ToList();
 
         for (int i = CurrentMaxTentacles.Value; i < existingTentacles.Count; i++)
         {
@@ -103,7 +103,7 @@ public class BlobTentacles : MonoBehaviour
     private void CreateTentacle(int TentacleID)
     {
         GameObject tentacleobj = Instantiate(TentaclePrefab, parentRB.Value.transform.position + new Vector3(0, -1000, 0), Quaternion.identity);
-        SmoothTentacle smoothTentacle = tentacleobj.GetComponent<SmoothTentacle>();
+        TentacleController smoothTentacle = tentacleobj.GetComponent<TentacleController>();
         if (smoothTentacle != null)
         {
             existingTentacles.Add(smoothTentacle);
@@ -119,7 +119,7 @@ public class BlobTentacles : MonoBehaviour
     }
 
 
-    private void DespawnTentacle(List<SmoothTentacle> tentacles, SmoothTentacle tentacle)
+    private void DespawnTentacle(List<TentacleController> tentacles, TentacleController tentacle)
     {
 
         tentacle.IsAlive.Value = false;

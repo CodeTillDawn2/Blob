@@ -1,0 +1,96 @@
+
+
+
+Starting BakeMappings.
+Processed type PigBody implementing IUseMeshRenderer. Mappings created: 1
+Processed type PigSenses implementing IUseSightBox. Mappings created: 4
+Processed type PigConfiguration implementing IAmAlive. Mappings created: 1
+Processed type PigBody implementing IAmAlive. Mappings created: 1
+Processed type TentacleController implementing IAmAlive. Mappings created: 1
+Processed type DigestNutritionModifier implementing IAmImmuneToTargetingByTentacles. Mappings created: 0
+Processed type InBlobsStomachModifier implementing IAmImmuneToTargetingByTentacles. Mappings created: 0
+Processed type InContactWithBlobModifier implementing IAmImmuneToTargetingByTentacles. Mappings created: 0
+Processed type TargetedByTentacleModifier implementing IAmImmuneToTargetingByTentacles. Mappings created: 0
+Processed type PigBody implementing ICanBeDamaged. Mappings created: 0
+Processed type PigBody implementing ICanBeDigested. Mappings created: 0
+Processed type PigBody implementing ICanDie. Mappings created: 0
+Processed type BlobConfiguration implementing ICanSee. Mappings created: 3
+Processed type PigConfiguration implementing ICanSee. Mappings created: 3
+Processed type PigSenses implementing ICanSee. Mappings created: 3
+Processed type BlobConfiguration implementing IHaveDigestDamageDealt. Mappings created: 1
+Processed type BlobBody implementing IHaveDigestDamageDealt. Mappings created: 1
+Processed type BlobBody_Solid implementing IHaveDigestDamageDealt. Mappings created: 1
+Processed type BlobStomach_Segmented implementing IHaveDigestDamageDealt. Mappings created: 1
+Processed type PigSenses implementing IHaveEyes. Mappings created: 1
+Processed type BlobConfiguration implementing IHaveGrowthSpeed. Mappings created: 1
+Processed type PigConfiguration implementing IHaveHitPoints. Mappings created: 1
+Processed type PigBody implementing IHaveHitPoints. Mappings created: 1
+Processed type BlobConfiguration implementing IHaveMass. Mappings created: 1
+Processed type PigConfiguration implementing IHaveMass. Mappings created: 1
+Processed type PigBody implementing IHaveMass. Mappings created: 1
+Processed type BlobConfiguration implementing IHaveMassPerCubicFoot. Mappings created: 1
+Processed type BlobConfiguration implementing IHaveMoveSpeed. Mappings created: 1
+Processed type PigConfiguration implementing IHaveMoveSpeed. Mappings created: 1
+Processed type PigLocomotion implementing IHaveMoveSpeed. Mappings created: 1
+Processed type PigConfiguration implementing IHaveNutrition. Mappings created: 1
+Processed type PigBody implementing IHaveNutrition. Mappings created: 1
+Processed type BlobConfiguration implementing IHaveRotateSpeed. Mappings created: 1
+Processed type PigConfiguration implementing IHaveRotateSpeed. Mappings created: 1
+Processed type PigLocomotion implementing IHaveRotateSpeed. Mappings created: 1
+Processed type BlobConfiguration implementing IHaveSightDistance. Mappings created: 1
+Processed type PigConfiguration implementing IHaveSightDistance. Mappings created: 1
+Processed type PigSenses implementing IHaveSightDistance. Mappings created: 1
+Processed type BlobConfiguration implementing IHaveSuckSpeed. Mappings created: 1
+Processed type BlobConfiguration implementing IHaveTentacleHitSpeed. Mappings created: 1
+Processed type TentacleController implementing IHaveTentacleHitSpeed. Mappings created: 1
+Processed type BlobConfiguration implementing IHaveTentacleReach. Mappings created: 2
+Processed type TentacleController implementing IHaveTentacleReach. Mappings created: 2
+Processed type BlobConfiguration implementing IHaveThingsInMyStomach. Mappings created: 2
+Processed 44 types and created 49 mappings. Total time taken: 0.0194038 seconds.
+
+
+
+Starting DetectClassesImplementingConfigurationBase.
+Processing configuration: BlobConfiguration
+Processing configuration: PigConfiguration
+Total number of configurations processed: 2
+Total time taken: 0.0631774 seconds.
+
+
+
+Starting DetectAttributesInCharacterSystems.
+Processing class: Body
+Processing class: Brain
+Processing class: Locomotion
+Processing class: Nerves
+Processing class: Senses
+Processing class: PigBody
+Attribute AIInvoluntaryAttribute detected for method BeDigested in class PigBody.
+Attribute AIRequiredFieldFalseAttribute detected for method BeDigested in class PigBody.
+Attribute AIRequiredFieldTrueAttribute detected for method BeDigested in class PigBody.
+Attribute AIRequiredRiskAttribute detected for method BeDigested in class PigBody.
+Attribute AIInvoluntaryAttribute detected for method BeDamaged in class PigBody.
+Attribute AIRequiredRiskAttribute detected for method BeDamaged in class PigBody.
+Attribute AIRequiredRiskAttribute detected for method BeDamaged in class PigBody.
+Attribute AIRequiredInputOrAttribute detected for method BeDamaged in class PigBody.
+Attribute AIInvoluntaryAttribute detected for method Die in class PigBody.
+Attribute AIRequiredRiskAttribute detected for method Die in class PigBody.
+Attribute AIOptionalInfluencerAttribute detected for method Die in class PigBody.
+Processing class: PigBrain
+Processing class: PigLocomotion
+Attribute AIMovementAttribute detected for method Move in class PigLocomotion.
+Attribute AIRequiredInfluencerAttribute detected for method Move in class PigLocomotion.
+Attribute AIRequiredInfluencerAttribute detected for method Move in class PigLocomotion.
+Processing class: PigNerves
+Processing class: PigSenses
+Processing class: BlobBody
+Processing class: BlobBody_Solid
+Processing class: BlobStomach_Segmented
+Processing class: BlobBrain
+Processing class: BlobLocomotion
+Processing class: BlobSenses
+Processing class: TentacleBrain
+Total number of classes processed: 2
+Total number of methods with custom attributes: 4
+Total number of custom attributes detected: 14
+Total time taken: 0.0181889 seconds.

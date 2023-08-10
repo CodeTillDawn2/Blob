@@ -15,11 +15,11 @@ public class DigestNutritionModifier : OneTimeModifierCondition<DigestNutritionM
 
     public override void ExecuteEffect()
     {
-        if (TryGetComponent<IAmDigestable>(out IAmDigestable gameObject))
+        if (TryGetComponent<ICanBeDigested>(out ICanBeDigested gameObject))
         {
-            float NutritionAmount = gameObject.Digest(DigestAmount);
+            float NutritionAmount = gameObject.BeDigested(DigestAmount);
 
-            if (Digester.TryGetComponent<IDoDigestDamage>(out IDoDigestDamage digester))
+            if (Digester.TryGetComponent<ICanGainNutrition>(out ICanGainNutrition digester))
             {
                 digester.GainNutrition(NutritionAmount);
             }

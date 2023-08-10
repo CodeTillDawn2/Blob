@@ -59,103 +59,163 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Animation_TentacleReadied.cs" />
+    <Compile Include="Assets\Static\Reflection\PropertyMapping.cs" />
+    <Compile Include="Assets\AI\Configurations\NervePlan.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveSuckSpeed.cs" />
     <Compile Include="Assets\Executive\EnemyConsumer.cs" />
     <Compile Include="Assets\AI\Impulses\ImpulseInterfaces\ISpawn.cs" />
+    <Compile Include="Assets\AI\AI Attributes\AIAttackAttribute.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\SerializableDictionary.cs" />
+    <Compile Include="Assets\AI\Configurations\BlobConfiguration.cs" />
     <Compile Include="Assets\Animation_TentacleDespawn.cs" />
-    <Compile Include="Assets\Things\Player\Blob\Tentacles\SmoothTentacle.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\InContactWithBlobModifier.cs" />
+    <Compile Include="Assets\AI\AI Attributes\AIRequiredInputAttributeOr.cs" />
     <Compile Include="Assets\Static\Modifiers Base\GameObjectIsGameObjectCondition.cs" />
     <Compile Include="Assets\Global\Shortcuts.cs" />
     <Compile Include="Assets\GPT AI Integration\Demo Scripts\OpenAIDemo.cs" />
+    <Compile Include="Assets\Interfaces\ComponentProperties\IUseRigidBody.cs" />
     <Compile Include="Assets\Static\Modifiers Base\GameObjectInListModifierCondition.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\ELSpeaker.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveMoveSpeed.cs" />
+    <Compile Include="Assets\Static\Reflection\AttributesCache.cs" />
+    <Compile Include="Assets\AI\AI Attributes\AIRequiredRisk.cs" />
+    <Compile Include="Assets\AI\AI Attributes\AIRequiredFieldExists.cs" />
     <Compile Include="Assets\GPT AI Integration\VoiceRecorder\VoiceRecorder.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\GameObjectVariable.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Configuration\ELAuthArgsV1.cs" />
+    <Compile Include="Assets\Static\Things Base\Eye.cs" />
     <Compile Include="Assets\GPT AI Integration\VoiceRecorder\WavUtility.cs" />
-    <Compile Include="Assets\Things\Base\Senses.cs" />
+    <Compile Include="Assets\Things\Player\Blob\Locomotion\BlobLocomotion.cs" />
+    <Compile Include="Assets\Things\Enemies\Pig\PigNerves.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveHitPoints.cs" />
     <Compile Include="Assets\GPT AI Integration\Demo Scripts\ImageGenerator\OpenAiImageGenerator.cs" />
     <Compile Include="Assets\Things\Sensors\MomentumSensor.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGameObjectAndLastSeenData.cs" />
+    <Compile Include="Assets\Static\Things Base\Nerves.cs" />
+    <Compile Include="Assets\AI\AI Attributes\AIInvoluntaryAttribute.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\DigestNutritionModifier.cs" />
-    <Compile Include="Assets\Things\Player\Blob\Tentacles\TentacleBrain.cs" />
-    <Compile Include="Assets\Things\Player\PlayerStatsBase.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveEyes.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGameObjectAndVector3.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveMassPerCubicFoot.cs" />
     <Compile Include="Assets\Things\Player\Blob\BlobAnimation.cs" />
+    <Compile Include="Assets\Things\Enemies\Pig\PigLocomotion.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Test\BlobJiggle.cs" />
     <Compile Include="Assets\Things\Modifiers\Tentacle\TentacleWhapModifer.cs" />
+    <Compile Include="Assets\Static\Configuration Base\ConfigurationBase.cs" />
     <Compile Include="Assets\Animation_TentacleSmack.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\FloatVariable.cs" />
     <Compile Include="Assets\AI\Impulses\ImpulseStep.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_GameObjectToLastSeen.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_StringIntVariable.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveTentacleReach.cs" />
+    <Compile Include="Assets\Things\Player\Blob\Tentacles\Tentacle\TentacleController.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Test\BlobJiggleNew.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveSightDistance.cs" />
+    <Compile Include="Assets\Static\Reflection\MethodData.cs" />
     <Compile Include="Assets\Static\Modifiers Base\OneTimeModifierCondition.cs" />
-    <Compile Include="Assets\Interfaces\IDoDigestDamage.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Vector3Variable.cs" />
-    <Compile Include="Assets\Things\Player\Blob\Body\BlobStomach.cs" />
     <Compile Include="Assets\Events\GameEventListener.cs" />
     <Compile Include="Assets\Global\PhysicsTools.cs" />
+    <Compile Include="Assets\Things\Enemies\Pig\PigBody.cs" />
     <Compile Include="Assets\AI\Impulses\ImpulseInterfaces\IDespawn.cs" />
     <Compile Include="Assets\GPT AI Integration\VoiceRecorder\MicInput.cs" />
     <Compile Include="Assets\Things\Player\Blob\Tentacles\BlobTentacles.cs" />
-    <Compile Include="Assets\Things\Player\Blob\Movement\BlobMovement.cs" />
     <Compile Include="Assets\AI\Impulses\ImpulseInterfaces\IAttack.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveThingsSeen.cs" />
+    <Compile Include="Assets\Things\Player\Blob\Tentacles\Tentacle\SmoothTentacleWhap.cs" />
     <Compile Include="Assets\Things\Enemies\Pig\PigSenses.cs" />
+    <Compile Include="Assets\Static\Reflection\ConfigurationData.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Test\BlobStomach_Segmented.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveMass.cs" />
+    <Compile Include="Assets\AI\AI Attributes\AIOptionalRisk.cs" />
     <Compile Include="Assets\Static\VariableTemplates\RaycastHitInfo.cs" />
-    <Compile Include="Assets\Things\Player\Blob\Body\BlobStomach_Solid.cs" />
+    <Compile Include="Assets\Static\Reflection\ConfigurationsCache.cs" />
     <Compile Include="Assets\Static\VariableTemplates\WrappedFunc.cs" />
     <Compile Include="Assets\Events\GameEvent.cs" />
+    <Compile Include="Assets\Static\Things Base\Locomotion.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGameObjectAndString.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_GameObjectToString.cs" />
     <Compile Include="Assets\AI\Impulses\ImpulseInterfaces\IImpulse.cs" />
+    <Compile Include="Assets\Global\AILibrary.cs" />
     <Compile Include="Assets\Things\Enemies\EnemyController.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\LastSeenData.cs" />
+    <Compile Include="Assets\Global\AIBaker.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ProducerConsumerStream.cs" />
     <Compile Include="Assets\Executive\EnemySucker.cs" />
+    <Compile Include="Assets\Static\Things Base\Body.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\InBlobsStomachModifier.cs" />
     <Compile Include="Assets\Things\Enemies\Pig\PigController.cs" />
+    <Compile Include="Assets\Interfaces\Methods\ICanDie.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveNutrition.cs" />
     <Compile Include="Assets\AI\Impulses\ImpulseInterfaces\ISearch.cs" />
     <Compile Include="Assets\Static\VariableTemplates\RuntimeSets\RuntimeSet.cs" />
     <Compile Include="Assets\Global\SOLibrary.cs" />
+    <Compile Include="Assets\Interfaces\Methods\ICanGainNutrition.cs" />
+    <Compile Include="Assets\Things\Player\Blob\Body\BlobBody_Solid.cs" />
+    <Compile Include="Assets\AI\AI Attributes\AIRequiredInputAttributeAnd.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfStringAndInt.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_GOGOVariable.cs" />
-    <Compile Include="Assets\Interfaces\IAmDigestable.cs" />
+    <Compile Include="Assets\Things\Player\Blob\Body\BlobBody.cs" />
     <Compile Include="Assets\Things\Player\Blob\Senses\BlobSenses.cs" />
-    <Compile Include="Assets\Interfaces\IAmImmuneToTargetingByTentacles.cs" />
+    <Compile Include="Assets\AI\AI Attributes\AIRequiredInfluencerAttribute.cs" />
+    <Compile Include="Assets\Things\Player\Blob\Tentacles\Tentacle\TentacleBrain.cs" />
     <Compile Include="Assets\Global\BuildLogger.cs" />
     <Compile Include="Assets\Static\Enums\DamageTypeEnum.cs" />
     <Compile Include="Assets\Global\DamageTypeLibrary.cs" />
-    <Compile Include="Assets\Interfaces\IAmDamageable.cs" />
+    <Compile Include="Assets\AI\AI Attributes\Base\CustomAIAttributeBase.cs" />
+    <Compile Include="Assets\Static\Reflection\ClassData.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveDigestDamageDealt.cs" />
+    <Compile Include="Assets\AI\AI Attributes\AIRequiredFieldFalse.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\TransformVariable.cs" />
+    <Compile Include="Assets\AI\AI Attributes\AIMovementAttribute.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveGrowthSpeed.cs" />
+    <Compile Include="Assets\Global\GOLibrary.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\ImpulseVariable.cs" />
+    <Compile Include="Assets\Static\Things Base\Senses.cs" />
     <Compile Include="Assets\Global\RefreshGameState.cs" />
     <Compile Include="Assets\AI\Neurons\Neuron.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_GameObjectToVector3.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ELStreamingEngine.cs" />
+    <Compile Include="Assets\AI\AI Attributes\AIOptionalInfluencerAttribute.cs" />
     <Compile Include="Assets\Static\VariableTemplates\RuntimeSets\RaycastInfoRuntimeSet.cs" />
+    <Compile Include="Assets\Baking\AIBakerSO.cs" />
     <Compile Include="Assets\Camera\FollowPlayerCamera.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\BooleanVariable.cs" />
+    <Compile Include="Assets\Interfaces\ComponentProperties\IUseMeshRenderer.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveTentacleHitSpeed.cs" />
+    <Compile Include="Assets\Interfaces\ComponentProperties\IUseSightBox.cs" />
+    <Compile Include="Assets\Interfaces\Methods\ICanBeDigested.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveMaxTentacles.cs" />
+    <Compile Include="Assets\Static\Attributes\UI\BaseClassRequiredAttribute.cs" />
+    <Compile Include="Assets\Interfaces\Markers\IAmImmuneToTargetingByTentacles.cs" />
     <Compile Include="Assets\Things\Modifiers\Damage\DealDamageModifier.cs" />
-    <Compile Include="Assets\Things\Base\Eye.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\IntegerVariable.cs" />
     <Compile Include="Assets\Animation_TentacleSpawn.cs" />
+    <Compile Include="Assets\Static\Things Base\CharacterSystem.cs" />
     <Compile Include="Assets\Executive\EnemyReleaser.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ReadFullyStream.cs" />
+    <Compile Include="Assets\AI\AI Attributes\AIRequiredReward.cs" />
     <Compile Include="Assets\Static\VariableTemplates\OBB.cs" />
     <Compile Include="Assets\Things\Modifiers\Tentacle\TargetedByTentacleModifier.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveRotateSpeed.cs" />
+    <Compile Include="Assets\Static\Things Base\Brain.cs" />
     <Compile Include="Assets\AI\Impulses\Impulse.cs" />
     <Compile Include="Assets\Static\VariableTemplates\RuntimeSets\GameObjectRuntimeSet.cs" />
-    <Compile Include="Assets\Things\Enemies\EnemyStatsBase.cs" />
+    <Compile Include="Assets\Interfaces\Methods\ICanSee.cs" />
+    <Compile Include="Assets\Interfaces\Conditional\IAmAlive.cs" />
+    <Compile Include="Assets\AI\AI Attributes\AIOptionalReward.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGOAndGO.cs" />
+    <Compile Include="Assets\Interfaces\Properties\IHaveThingsInMyStomach.cs" />
+    <Compile Include="Assets\AI\Configurations\PigConfiguration.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\QuaternionVariable.cs" />
     <Compile Include="Assets\Things\Player\Blob\Brain\BlobBrain.cs" />
+    <Compile Include="Assets\Static\Attributes\UI\BaseClassRequiredImplementingInterfacesAttribute.cs" />
     <Compile Include="Assets\GPT AI Integration\Demo Scripts\Visual Scripting\OpenAiVS.cs" />
+    <Compile Include="Assets\AI\AI Attributes\AIRequiredFieldTrue.cs" />
     <Compile Include="Assets\Global\ModifierLibrary.cs" />
+    <Compile Include="Assets\Interfaces\Methods\ICanBeDamaged.cs" />
     <Compile Include="Assets\Static\Modifiers Base\ModifierClass.cs" />
-    <Compile Include="Assets\Things\Player\Blob\Tentacles\SmoothTentacleWhap.cs" />
+    <Compile Include="Assets\Things\Enemies\Pig\PigBrain.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GPT AI Integration\ElevenLabs\libs\NAudio.WinMM.dll" />
@@ -442,6 +502,9 @@
     </Reference>
     <Reference Include="NAudio.Midi">
       <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Midi.dll</HintPath>
+    </Reference>
+    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
+      <HintPath>Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.4f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -872,20 +935,17 @@
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.001">
       <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.001.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.2D.Common.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Extras.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
@@ -898,6 +958,9 @@
     </Reference>
     <Reference Include="Unity.InputSystem.ForUI">
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
@@ -962,6 +1025,18 @@
     <ProjectReference Include="openai.api.unity.editor.csproj">
       <Project>{89132D93-795D-0F2E-9738-0AB22EE6C303}</Project>
       <Name>openai.api.unity.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="PackageToolsEditor.csproj">
+      <Project>{726AFA8A-6532-E894-4BEC-E255CB223930}</Project>
+      <Name>PackageToolsEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="AstarPathfindingProjectEditor.csproj">
+      <Project>{C9C1FD00-F4F5-8BB0-2CFF-F382AFC1746E}</Project>
+      <Name>AstarPathfindingProjectEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="AstarPathfindingProject.csproj">
+      <Project>{21C372D8-A9E7-A610-234D-CE70891A07FD}</Project>
+      <Name>AstarPathfindingProject</Name>
     </ProjectReference>
     <ProjectReference Include="openai.api.unity.csproj">
       <Project>{515B55D5-0355-7122-C48F-BF86C363DCE9}</Project>

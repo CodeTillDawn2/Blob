@@ -1,14 +1,16 @@
+using System;
+using System.Collections;
 using Unity.VisualScripting;
-using UnityEngine;
 
 
 
 
 
-public class BlobBrain : MonoBehaviour
+public class BlobBrain : Brain
 {
 
-
+    public static Type[] _expectedStatsInterfaces = { typeof(IHaveMoveSpeed) };
+    public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
 
     [Serialize] public BooleanVariable PlayerIsAlive;
     [Serialize] public GameObjectVariable PlayerGameObject;
@@ -35,6 +37,10 @@ public class BlobBrain : MonoBehaviour
     }
 
 
+    protected override IEnumerator DoActions()
+    {
+        yield return 0;
+    }
 
     //private void OnGUI()
     //{
@@ -65,16 +71,5 @@ public class BlobBrain : MonoBehaviour
     {
 
     }
-
-
-
-
-
-
-
-
-
-
-
 
 }
