@@ -92,10 +92,10 @@ public class TentacleController : MonoBehaviour, IHaveTentacleReach, IHaveTentac
 
         animator = GetComponent<Animator>();
         _brain = GetComponent<TentacleBrain>();
-        IsAlive = SOLibrary.instance.Create<BooleanVariable>();
+        IsAlive = SOLibrary.Create<BooleanVariable>();
         IsAlive.Value = true;
 
-        target = SOLibrary.instance.Create<GameObjectVariable>();
+        target = SOLibrary.Create<GameObjectVariable>();
 
 
     }
@@ -213,7 +213,7 @@ public class TentacleController : MonoBehaviour, IHaveTentacleReach, IHaveTentac
 
         if (target.Value != null)
         {
-            TransformVariable newTransform = FindSpawnLocationAndOrientation(tentacleRegions, target.Value.transform.position,
+            TransformData newTransform = FindSpawnLocationAndOrientation(tentacleRegions, target.Value.transform.position,
                         parentRB.transform.rotation, parentRB.transform.position);
             transform.SetParent(null);
             transform.position = newTransform.position;
@@ -311,7 +311,7 @@ public class TentacleController : MonoBehaviour, IHaveTentacleReach, IHaveTentac
     #endregion
 
     #region Supporting Functions
-    public TransformVariable FindSpawnLocationAndOrientation(List<Bounds> boundsList, Vector3 targetPoint,
+    public TransformData FindSpawnLocationAndOrientation(List<Bounds> boundsList, Vector3 targetPoint,
        Quaternion boxRotation, Vector3 boxPosition)
     {
         List<Vector3> normals = new List<Vector3>
@@ -341,7 +341,7 @@ public class TentacleController : MonoBehaviour, IHaveTentacleReach, IHaveTentac
             }
         }
 
-        TransformVariable newtransform = new TransformVariable();
+        TransformData newtransform = new TransformData();
         newtransform.position = RandomPointOnBounds(closestBounds, boxRotation, boxPosition,
             closestBounds.size.x * .2f, closestBounds.size.y * .2f);
         newtransform.rotation = Quaternion.LookRotation(normalFromBounds, Vector3.up); // Use the normal vector for the rotation and force the up direction to be the same as world's up direction.

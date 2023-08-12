@@ -1,64 +1,63 @@
 
 
 
-Starting BakeMappings.
-Processed type PigBody implementing IUseMeshRenderer. Mappings created: 1
-Processed type PigSenses implementing IUseSightBox. Mappings created: 4
-Processed type PigConfiguration implementing IAmAlive. Mappings created: 1
-Processed type PigBody implementing IAmAlive. Mappings created: 1
-Processed type TentacleController implementing IAmAlive. Mappings created: 1
-Processed type DigestNutritionModifier implementing IAmImmuneToTargetingByTentacles. Mappings created: 0
-Processed type InBlobsStomachModifier implementing IAmImmuneToTargetingByTentacles. Mappings created: 0
-Processed type InContactWithBlobModifier implementing IAmImmuneToTargetingByTentacles. Mappings created: 0
-Processed type TargetedByTentacleModifier implementing IAmImmuneToTargetingByTentacles. Mappings created: 0
-Processed type PigBody implementing ICanBeDamaged. Mappings created: 0
-Processed type PigBody implementing ICanBeDigested. Mappings created: 0
-Processed type PigBody implementing ICanDie. Mappings created: 0
-Processed type BlobConfiguration implementing ICanSee. Mappings created: 3
-Processed type PigConfiguration implementing ICanSee. Mappings created: 3
-Processed type PigSenses implementing ICanSee. Mappings created: 3
-Processed type BlobConfiguration implementing IHaveDigestDamageDealt. Mappings created: 1
-Processed type BlobBody implementing IHaveDigestDamageDealt. Mappings created: 1
-Processed type BlobBody_Solid implementing IHaveDigestDamageDealt. Mappings created: 1
-Processed type BlobStomach_Segmented implementing IHaveDigestDamageDealt. Mappings created: 1
-Processed type PigSenses implementing IHaveEyes. Mappings created: 1
-Processed type BlobConfiguration implementing IHaveGrowthSpeed. Mappings created: 1
-Processed type PigConfiguration implementing IHaveHitPoints. Mappings created: 1
-Processed type PigBody implementing IHaveHitPoints. Mappings created: 1
-Processed type BlobConfiguration implementing IHaveMass. Mappings created: 1
-Processed type PigConfiguration implementing IHaveMass. Mappings created: 1
-Processed type PigBody implementing IHaveMass. Mappings created: 1
-Processed type BlobConfiguration implementing IHaveMassPerCubicFoot. Mappings created: 1
-Processed type BlobConfiguration implementing IHaveMoveSpeed. Mappings created: 1
-Processed type PigConfiguration implementing IHaveMoveSpeed. Mappings created: 1
-Processed type PigLocomotion implementing IHaveMoveSpeed. Mappings created: 1
-Processed type PigConfiguration implementing IHaveNutrition. Mappings created: 1
-Processed type PigBody implementing IHaveNutrition. Mappings created: 1
-Processed type BlobConfiguration implementing IHaveRotateSpeed. Mappings created: 1
-Processed type PigConfiguration implementing IHaveRotateSpeed. Mappings created: 1
-Processed type PigLocomotion implementing IHaveRotateSpeed. Mappings created: 1
-Processed type BlobConfiguration implementing IHaveSightDistance. Mappings created: 1
-Processed type PigConfiguration implementing IHaveSightDistance. Mappings created: 1
-Processed type PigSenses implementing IHaveSightDistance. Mappings created: 1
-Processed type BlobConfiguration implementing IHaveSuckSpeed. Mappings created: 1
-Processed type BlobConfiguration implementing IHaveTentacleHitSpeed. Mappings created: 1
-Processed type TentacleController implementing IHaveTentacleHitSpeed. Mappings created: 1
-Processed type BlobConfiguration implementing IHaveTentacleReach. Mappings created: 2
-Processed type TentacleController implementing IHaveTentacleReach. Mappings created: 2
-Processed type BlobConfiguration implementing IHaveThingsInMyStomach. Mappings created: 2
-Processed 44 types and created 49 mappings. Total time taken: 0.0194038 seconds.
+Starting BakeMappings for BakedMappings.
+Processed type interface IHaveMoveSpeed for mappings from BlobConfiguration to PigLocomotion. Mappings created: 1
+Processed type interface IHaveRotateSpeed for mappings from BlobConfiguration to PigLocomotion. Mappings created: 1
+Processed type interface ICanSee for mappings from BlobConfiguration to PigSenses. Mappings created: 3
+Processed type interface IHaveDigestDamageDealt for mappings from BlobConfiguration to BlobBody. Mappings created: 1
+Processed type interface IHaveDigestDamageDealt for mappings from BlobConfiguration to BlobBody_Solid. Mappings created: 1
+Processed type interface IHaveDigestDamageDealt for mappings from BlobConfiguration to BlobStomach_Segmented. Mappings created: 1
+Processed type interface IHaveEyes for mappings from BlobConfiguration to PigSenses. Mappings created: 1
+Processed type interface IUseSightBox for mappings from BlobConfiguration to PigSenses. Mappings created: 1
+Processed type interface IHaveMass for mappings from BlobConfiguration to PigBody. Mappings created: 1
+Processed type interface ICanBeDigested for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 0
+Processed type interface IHaveMoveSpeed for mappings from PreyAnimalConfiguration to PigLocomotion. Mappings created: 1
+Processed type interface ICanDie for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 0
+Processed type interface IHaveNutrition for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 1
+Processed type interface IHaveRotateSpeed for mappings from PreyAnimalConfiguration to PigLocomotion. Mappings created: 1
+Processed type interface ICanSee for mappings from PreyAnimalConfiguration to PigSenses. Mappings created: 3
+Processed type interface IUseMeshRenderer for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 1
+Processed type interface IHaveEyes for mappings from PreyAnimalConfiguration to PigSenses. Mappings created: 1
+Processed type interface IUseSightBox for mappings from PreyAnimalConfiguration to PigSenses. Mappings created: 1
+Processed type interface IHaveHitPoints for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 1
+Processed type interface IAmAlive for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 1
+Processed type interface IHaveMass for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 1
+Processed type interface ICanBeDamaged for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 0
+Total time taken: 0.0106473 seconds.
 
 
 
-Starting DetectClassesImplementingConfigurationBase.
-Processing configuration: BlobConfiguration
-Processing configuration: PigConfiguration
-Total number of configurations processed: 2
-Total time taken: 0.0631774 seconds.
+Starting BakeCharacterSystemsToConfigMappings.
+Found 3 derived types for base type Brain.
+Populated 3 ConfigurationBase types for PigBrain that implement all required interfaces.
+Populated 3 ConfigurationBase types for BlobBrain that implement all required interfaces.
+Populated 3 ConfigurationBase types for TentacleBrain that implement all required interfaces.
+Found 3 derived types for base type Body.
+Populated 2 ConfigurationBase types for PigBody that implement all required interfaces.
+Populated 2 ConfigurationBase types for BlobBody_Solid that implement all required interfaces.
+Populated 2 ConfigurationBase types for BlobStomach_Segmented that implement all required interfaces.
+Found 1 derived types for base type Nerves.
+Populated 3 ConfigurationBase types for PigNerves that implement all required interfaces.
+Found 2 derived types for base type Senses.
+Populated 3 ConfigurationBase types for PigSenses that implement all required interfaces.
+Populated 3 ConfigurationBase types for BlobSenses that implement all required interfaces.
+Found 2 derived types for base type Locomotion.
+Populated 3 ConfigurationBase types for PigLocomotion that implement all required interfaces.
+Populated 3 ConfigurationBase types for BlobLocomotion that implement all required interfaces.
+PopulateDerivedTypeDictionary completed in: 1.01343 seconds.
 
 
 
-Starting DetectAttributesInCharacterSystems.
+Starting BakeConfigurationInstances for ConfigurationInstances.
+Successfully found and processed configuration instance for: BlobConfiguration at path: Assets/BreadAI/Configurations/Instances/BlobConfiguration.asset
+Successfully found and processed configuration instance for: PreyAnimalConfiguration at path: Assets/BreadAI/Configurations/Instances/PigConfiguration.asset
+Total number of configuration instances processed: 2
+Total time taken: 0.0130397 seconds.
+
+
+
+Starting BakeAttributesInCharacterSystems for AIAttributesCache.
 Processing class: Body
 Processing class: Brain
 Processing class: Locomotion
@@ -93,4 +92,34 @@ Processing class: TentacleBrain
 Total number of classes processed: 2
 Total number of methods with custom attributes: 4
 Total number of custom attributes detected: 14
-Total time taken: 0.0181889 seconds.
+Total time taken: 0.0171523 seconds.
+
+
+
+Starting BakeScriptableObjectPropertiesDetection.
+Processing class: Body
+Processing class: Brain
+Processing class: Locomotion
+Processing class: Nerves
+Processing class: Senses
+Processing class: PigBody
+Detected 4 ScriptableObject properties in class PigBody.
+Processing class: PigBrain
+Processing class: PigLocomotion
+Detected 2 ScriptableObject properties in class PigLocomotion.
+Processing class: PigNerves
+Processing class: PigSenses
+Detected 6 ScriptableObject properties in class PigSenses.
+Processing class: BlobBody
+Detected 2 ScriptableObject properties in class BlobBody.
+Processing class: BlobBody_Solid
+Detected 2 ScriptableObject properties in class BlobBody_Solid.
+Processing class: BlobStomach_Segmented
+Detected 2 ScriptableObject properties in class BlobStomach_Segmented.
+Processing class: BlobBrain
+Processing class: BlobLocomotion
+Processing class: BlobSenses
+Processing class: TentacleBrain
+Total number of classes processed: 6
+Total number of ScriptableObject properties detected: 18
+Total time taken: 0.0074687 seconds.

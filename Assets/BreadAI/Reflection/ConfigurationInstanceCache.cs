@@ -1,0 +1,17 @@
+using System.Collections.Generic;
+using System;
+using System.Linq;
+using UnityEngine;
+
+[Serializable]
+public class ConfigurationInstanceCache
+{
+    public List<ConfigurationData> Configurations { get; private set; } = new List<ConfigurationData>();
+
+    public ConfigurationBase GetConfigurationInstance(string typeName)
+    {
+        Debug.Log(typeName);
+
+        return Configurations.FirstOrDefault(c => c.ConfigurationInstance.GetType().FullName == typeName)?.ConfigurationInstance;
+    }
+}

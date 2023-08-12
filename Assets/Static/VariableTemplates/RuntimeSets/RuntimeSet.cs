@@ -1,74 +1,58 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using UnityEngine;
 
 public abstract class RuntimeSet<T> : ScriptableObject
 {
-    private List<T> list = new List<T>();
+    [SerializeField]
+    private List<T> items = new List<T>();
 
-    public List<T> Items
-    {
-        get { return list; }
-        set { list = value; }
-    }
-
-    public void SetFromArray(T[] values)
-    {
-        if (values != null)
-            list = new List<T>(values);
-        else
-            list = new List<T>();
-    }
-
-    public void RemoveAll()
-    {
-        if (list == null)
-        {
-            Debug.LogWarning("List is null while attempting to remove all");
-        }
-        else
-        {
-            list.Clear();
-        }
-
-
-    }
-
-    public T[] ReturnAsArray()
-    {
-        return list.ToArray();
-    }
+    public ReadOnlyCollection<T> Items => items.AsReadOnly();
 
     public void Add(T t)
     {
-        if (!Items.Contains(t))
-            Items.Add(t);
-    }
-
-    public void AddUpdate(T t)
-    {
-        if (!Items.Contains(t))
-        {
-            Items.Add(t);
-        }
-        else
-        {
-            int tIndex = Items.IndexOf(t);
-            Items.Remove(t);
-            Items.Insert(tIndex, t);
-        }
-
+        if (!items.Contains(t))
+            items.Add(t);
     }
 
     public void Remove(T t)
     {
-        if (Items.Contains(t))
-            Items.Remove(t);
+        items.Remove(t);
+    }
+
+    public bool Contains(T t)
+    {
+        return items.Contains(t);
+    }
+
+    public void Clear()
+    {
+        items.Clear();
+    }
+
+    public T[] ReturnAsArray()
+    {
+        return items.ToArray();
+    }
+
+    public void AddUpdate(T t)
+    {
+        if (!items.Contains(t))
+        {
+            items.Add(t);
+        }
+        else
+        {
+            int tIndex = items.IndexOf(t);
+            items.RemoveAt(tIndex);
+            items.Insert(tIndex, t);
+        }
     }
 
     public void MatchList(List<T> matchList)
     {
         List<T> itemsToRemove = new List<T>();
-        foreach (T obj in list)
+        foreach (T obj in items)
         {
             if (!matchList.Contains(obj))
                 itemsToRemove.Add(obj);
@@ -76,16 +60,16 @@ public abstract class RuntimeSet<T> : ScriptableObject
 
         foreach (T obj in itemsToRemove)
         {
-            list.Remove(obj);
+            items.Remove(obj);
         }
 
         List<T> itemsToAdd = new List<T>();
         foreach (T obj in matchList)
         {
-            if (!list.Contains(obj))
+            if (!items.Contains(obj))
                 itemsToAdd.Add(obj);
         }
 
-        list.AddRange(itemsToAdd);
+        items.AddRange(itemsToAdd);
     }
 }

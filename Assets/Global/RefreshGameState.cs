@@ -17,10 +17,10 @@ public class RefreshGameState : MonoBehaviour
     {
 
         SceneReady.Value = false;
-        AllEnemies.RemoveAll();
-        EnemiesInStomach.RemoveAll();
-        EnemiesIntersectingPlayer.RemoveAll();
-        ThingsNearby.RemoveAll();
+        AllEnemies.Clear();
+        EnemiesInStomach.Clear();
+        EnemiesIntersectingPlayer.Clear();
+        ThingsNearby.Clear();
 
         TentacleTargeting.Value.Clear();
         EnemiesSeenByPlayer.Value.Clear();

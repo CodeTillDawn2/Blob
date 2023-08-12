@@ -7,6 +7,9 @@ using UnityEngine;
 public abstract class Senses : CharacterSystem
 {
 
+
+   
+
     #region Unity Methods
 
     protected override void Awake()
@@ -48,7 +51,7 @@ public abstract class Senses : CharacterSystem
     {
         if (this is ICanSee me && this is IUseSightBox meSB)
         {
-            if (meSB.CurrentSightBoxSize.Value != me.SightDistance.Value)
+            if (meSB.sightBox.size.x != me.SightDistance.Value)
             {
                 meSB.sightBox.size = new Vector3(me.SightDistance.Value, me.SightDistance.Value, me.SightDistance.Value);
             }
@@ -62,7 +65,7 @@ public abstract class Senses : CharacterSystem
         {
             if (col.gameObject == null) return;
             
-            if (col.gameObject.layer != (int)me.ThingNearbyFilter)
+            if (col.gameObject.layer != (int)me.ThingNearbyFilter.Value)
             {
                 if (!me.ThingsNearby.Contains(col.gameObject)) me.ThingsNearby.Add(col.gameObject);
             }
@@ -86,7 +89,7 @@ public abstract class Senses : CharacterSystem
             Dictionary<GameObject, LastSeenData> newThingsSeen = new Dictionary<GameObject, LastSeenData>();
 
             //See things
-            foreach (GameObject ThingNearby in iUseSightBox.ThingsNearby.Where(x => x != null))
+            foreach (GameObject ThingNearby in iUseSightBox.ThingsNearby.Items.Where(x => x != null))
             {
                 if ((ThingNearby.transform.position - transform.position).sqrMagnitude <= iCanSee.SightDistance.Value * iCanSee.SightDistance.Value)
                 {
@@ -145,7 +148,7 @@ public abstract class Senses : CharacterSystem
 
                             RaycastHit? rayCast = PhysicsTools.RaycastAt(eye.transform.position,
                                 LookTarget, iCanSee.SightDistance.Value,
-                                (int)iCanSee.OnlySeeMask);
+                                (int)iCanSee.OnlySeeMask.Value);
 
                             Debug.DrawLine(eye.transform.position, LookTarget, Color.red, 1f);
 

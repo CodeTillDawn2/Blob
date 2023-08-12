@@ -1,0 +1,5 @@
+﻿[BreadAIInterface]
+public interface IAmImmuneToTargetingByTentacles
+{
+
+}

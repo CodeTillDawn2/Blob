@@ -65,7 +65,7 @@ public class EnemyConsumer : MonoBehaviour
                     if (CanBeSwallowed) //Eat
                     {
 
-                        EnemiesBeingSuckedIn.Items.Remove(enemy);
+                        EnemiesBeingSuckedIn.Remove(enemy);
                         EatenEvent.Raise();
 
                     }

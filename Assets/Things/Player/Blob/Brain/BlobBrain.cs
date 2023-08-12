@@ -47,29 +47,18 @@ public class BlobBrain : Brain
     //    GUI.TextArea(new Rect(10, 10, Screen.width / 10, Screen.height / 10), "Current: " + gameObject.name + " GO: " + GameObjectName + " PO: " + PlayerObjectName);
     //}
 
-    protected void Start()
+    protected override void Start()
     {
-
+        base.Update();
 
     }
 
 
-    protected void Update()
+    protected override void Update()
     {
-
+        base.Update();
     }
 
-    protected void FixedUpdate()
-    {
 
-
-
-
-    }
-
-    private void OnDestroy()
-    {
-
-    }
 
 }

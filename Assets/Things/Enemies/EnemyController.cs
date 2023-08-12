@@ -7,7 +7,7 @@ public abstract class EnemyController : MonoBehaviour
 
 
 
-    public PigConfiguration enemyStats;
+    public PreyAnimalConfiguration enemyStats;
 
     [HideInInspector]
     public float StartingMass;

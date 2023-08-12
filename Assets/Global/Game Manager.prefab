@@ -9,9 +9,11 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9216818330091100850}
-  - component: {fileID: 7689250325950974192}
+  - component: {fileID: 7856486217617036292}
   - component: {fileID: 2808782164535011472}
   - component: {fileID: 2119135083240600853}
+  - component: {fileID: 6966205253418891893}
+  - component: {fileID: 3021509375849078537}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -34,7 +36,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7689250325950974192
+--- !u!114 &7856486217617036292
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -43,10 +45,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 4212926632751090482}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f335c7574848dfa4cb967f6540d57996, type: 3}
+  m_Script: {fileID: 11500000, guid: 54835c0c147c2194dbcf60d140949622, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bakerSO: {fileID: 11400000, guid: 6bb1a351243e2dc4fa93681bfb10db02, type: 2}
+  bakerSO: {fileID: 11400000, guid: 3be6275992031b4499c38b6a7da21062, type: 2}
 --- !u!114 &2808782164535011472
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -81,3 +83,28 @@ MonoBehaviour:
   acidDamage: {fileID: 11400000, guid: b2fbe50ae51b3c545aecdb15d2a67081, type: 2}
   fireDamage: {fileID: 11400000, guid: 67b2818171416504ea6a7dab64bd1756, type: 2}
   piercingDamage: {fileID: 11400000, guid: 1d269cc3cd3cff048a86f86421450982, type: 2}
+--- !u!114 &6966205253418891893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4212926632751090482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6e3219300b4a6f4891bcdf546084c10, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3021509375849078537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4212926632751090482}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0243482ddd42b0c469f77a033bd0ee77, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  configurationInstances: {fileID: 11400000, guid: bcd4929a4a870914f907947d975f84f4, type: 2}

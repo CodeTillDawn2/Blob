@@ -65,8 +65,8 @@ public class EnemyReleaser : MonoBehaviour
                     bool CanBeSwallowed = ColliderArea < CubeVolume.Value * .5;
                     if (!CanBeSwallowed) //Release
                     {
-                        EnemiesBeingSuckedIn.Items.Remove(enemy);
-                        EnemiesInsideStomach.Items.Remove(enemy);
+                        EnemiesBeingSuckedIn.Remove(enemy);
+                        EnemiesInsideStomach.Remove(enemy);
                         if (CanBeSwallowed)
                         {
                             gameObject.layer = (int)Shortcuts.UnityLayers.CanBeEaten;

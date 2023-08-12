@@ -13,42 +13,25 @@ public abstract class Nerves : CharacterSystem
 
     protected override void Awake()
     {
-        base.Awake();  
+        base.Awake();
+        enabled = true; //Nerves need to wake themselves up as the first part of the character to exist
+        
+    }
+
+
+    void OnEnable()
+    {
+
     }
 
     protected override void Start()
     {
-
         base.Start();
-        if (!string.IsNullOrEmpty(NervePlan.brain))
-        {
-            GameObject brainChild = new GameObject(NervePlan.brain);
-            brainChild.transform.SetParent(gameObject.transform);
-            Brain newBrain = AddComponentFromType(brainChild, NervePlan.brain) as Brain;
-            SetConfigurationBasedOnDropdown(NervePlan.brainStats, newBrain);
-        }
-        if (!string.IsNullOrEmpty(NervePlan.senses))
-        {
-            GameObject sensesChild = new GameObject(NervePlan.senses);
-            sensesChild.transform.SetParent(gameObject.transform);
-            Senses newSenses = AddComponentFromType(sensesChild, NervePlan.senses) as Senses;
-            SetConfigurationBasedOnDropdown(NervePlan.sensesStats, newSenses);
-        }
-        if (!string.IsNullOrEmpty(NervePlan.locomotion))
-        {
-            GameObject locomotionChild = new GameObject(NervePlan.locomotion);
-            locomotionChild.transform.SetParent(gameObject.transform);
-            Locomotion newLocomotion = AddComponentFromType(locomotionChild, NervePlan.locomotion) as Locomotion;
-            SetConfigurationBasedOnDropdown(NervePlan.locomotionStats, newLocomotion);
-        }
-        if (!string.IsNullOrEmpty(NervePlan.body))
-        {
-            GameObject bodyChild = transform.Find("Body")?.gameObject ?? new GameObject(NervePlan.body);
-            bodyChild.name = NervePlan.body;
-            bodyChild.transform.SetParent(gameObject.transform);
-            Body newBody = AddComponentFromType(bodyChild, NervePlan.body) as Body;
-            SetConfigurationBasedOnDropdown(NervePlan.bodyStats, newBody);
-        }
+        //CreateAndAttachComponent(NervePlan.brain, NervePlan.brainStats, gameObject);
+        //CreateAndAttachComponent(NervePlan.senses, NervePlan.sensesStats, gameObject);
+        //CreateAndAttachComponent(NervePlan.locomotion, NervePlan.locomotionStats, gameObject);
+        //CreateAndAttachComponent(NervePlan.body, NervePlan.bodyStats, transform.Find("Body")?.gameObject ?? gameObject, "Body");
+        enabled = true;
     }
 
     private Component AddComponentFromType(GameObject parentObject, string type)
@@ -56,28 +39,30 @@ public abstract class Nerves : CharacterSystem
         return GOLibrary.instance.AddComponentByTypeName(parentObject, type);
     }
 
-    private void SetConfigurationBasedOnDropdown(string statsName, CharacterSystem characterSystem)
+  
+    private void CreateAndAttachComponent(string componentType, string statsName, GameObject parentObject, string fallbackName = null)
     {
-        Type configType = null;
-        foreach (var cachedConfig in AIBaker.instance.ConfigurationDataCache.Configurations)
+        if (string.IsNullOrEmpty(componentType)) return;
+
+        GameObject childObject = new GameObject(fallbackName ?? componentType);
+        childObject.transform.SetParent(parentObject.transform);
+
+        Component newComponent = AddComponentFromType(childObject, componentType);
+
+        if (newComponent is CharacterSystem characterSystem)
         {
-            if (cachedConfig.ConfigurationType.Name == statsName)
+            ConfigurationBase configInstance = AIBaker.instance.ConfigurationDataCache.GetConfigurationInstance(statsName);
+
+            if (configInstance != null)
             {
-                configType = cachedConfig.ConfigurationType;
-                break;
+                characterSystem.AssignConfiguration(configInstance);
+            }
+            else
+            {
+                characterSystem.AssignConfiguration(null);
+                Debug.LogWarning($"No ConfigurationBase instance found for type string '{statsName}'");
             }
         }
-
-        if (configType != null)
-        {
-            ConfigurationBase newConfiguration = ScriptableObject.CreateInstance(configType) as ConfigurationBase;
-            characterSystem.configuration = newConfiguration;
-        }
-        else
-        {
-            Debug.LogWarning($"No ConfigurationBase derivative found for type string '{statsName}'");
-        }
     }
-
 
 }

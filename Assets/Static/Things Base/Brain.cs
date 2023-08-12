@@ -99,7 +99,7 @@ public abstract class Brain : CharacterSystem
             }
         }
 
-        ImpulseVariable impulseVar = SOLibrary.instance.Create<ImpulseVariable>();
+        ImpulseVariable impulseVar = SOLibrary.Create<ImpulseVariable>();
         impulseVar.Value = impulse;
         ImpulseListToEdit.Add(impulseVar);
 
