@@ -1,5 +1,4 @@
 using Newtonsoft.Json;
-using System.Collections.Generic;
 using UnityEngine;
 
 
@@ -41,7 +40,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         }
         set
         {
-            
+
         }
     }
     [JsonIgnore]
@@ -139,7 +138,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         {
             return null;
         }
-        set {  }
+        set { }
     }
 
     [JsonIgnore]
@@ -156,9 +155,9 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
     [JsonIgnore]
     public MeshRenderer meshRenderer { get; set; }
 
-    public void BeDamaged(float amount, DamageTypeEnum DamageType){}
+    public void BeDamaged(float amount, DamageTypeEnum DamageType) { }
 
-    public float BeDigested(float digestDamage){ return 0; }
+    public float BeDigested(float digestDamage) { return 0; }
 
-    public void Die() {}
+    public void Die() { }
 }

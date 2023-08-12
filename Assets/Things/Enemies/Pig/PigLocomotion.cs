@@ -1,5 +1,4 @@
 using System;
-using Unity.VisualScripting;
 
 public class PigLocomotion : Locomotion, IHaveMoveSpeed, IHaveRotateSpeed
 {
@@ -14,7 +13,7 @@ public class PigLocomotion : Locomotion, IHaveMoveSpeed, IHaveRotateSpeed
     protected override void Start()
     {
         base.Start();
-        
+
     }
 
     #endregion

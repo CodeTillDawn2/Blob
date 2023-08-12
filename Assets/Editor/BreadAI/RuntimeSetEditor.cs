@@ -1,5 +1,4 @@
 using UnityEditor;
-using UnityEngine;
 
 [CustomEditor(typeof(RuntimeSet<>), true)]
 public class RuntimeSetEditor : Editor

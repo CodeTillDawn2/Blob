@@ -17,7 +17,7 @@ public abstract class CharacterSystem : MonoBehaviour
 
     protected virtual void Start()
     {
-        
+
     }
 
 

@@ -1,14 +1,11 @@
 {
   "BlobConfiguration": {
-    "name": "BlobConfiguration",
-    "hideFlags": 0
+    "asset": "BlobConfiguration"
   },
   "PigConfiguration 1": {
-    "name": "PigConfiguration 1",
-    "hideFlags": 0
+    "asset": "PigConfiguration 1"
   },
   "PigConfiguration": {
-    "name": "PigConfiguration",
-    "hideFlags": 0
+    "asset": "PigConfiguration"
   }
 }

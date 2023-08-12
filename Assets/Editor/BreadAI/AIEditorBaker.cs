@@ -2,23 +2,19 @@
 
 
 
-using System.Reflection;
 using System;
-using UnityEngine;
-using System.Linq;
 using System.Collections.Generic;
-using System.IO;
 using System.Diagnostics;
+using System.IO;
+using System.Linq;
+using System.Reflection;
 using UnityEditor;
+using UnityEngine;
 using Debug = UnityEngine.Debug;
-using Newtonsoft.Json;
-using System.Runtime.Remoting.Messaging;
-using NUnit.Framework;
-using System.Collections;
 
 public static class AIEditorBaker
 {
-   
+
 
     // Flag to determine if it's the first log of a session
     private static bool isFirstLog = true;
@@ -32,15 +28,17 @@ public static class AIEditorBaker
     /// <summary>
     /// Cache for detected attributes within character systems and their properties.
     /// </summary>
-    public static AttributesCache AIAttributesCache { 
-        get { return AIBakerData.instance.AIAttributesCache; } 
-        private set { AIBakerData.instance.AIAttributesCache = value; } 
+    public static AttributesCache AIAttributesCache
+    {
+        get { return AIBakerData.instance.AIAttributesCache; }
+        private set { AIBakerData.instance.AIAttributesCache = value; }
     }
 
     /// <summary>
     /// Cache of instances that implement the base configuration.
     /// </summary>
-    public static ConfigurationInstanceCache ConfigurationInstances {
+    public static ConfigurationInstanceCache ConfigurationInstances
+    {
         get { return AIBakerData.instance.ConfigurationInstances; }
         private set { AIBakerData.instance.ConfigurationInstances = value; }
     }
@@ -51,7 +49,8 @@ public static class AIEditorBaker
     public static Dictionary<string, Dictionary<string, List<PropertyMapping>>> BakedConfigurationAssignmentLogic = new Dictionary<string, Dictionary<string, List<PropertyMapping>>>();
 
 
-    public static ScriptableObjectCache ScriptableObjectPropertiesDetection {
+    public static ScriptableObjectCache ScriptableObjectPropertiesDetection
+    {
         get { return AIBakerData.instance.ScriptableObjectPropertiesDetection; }
         private set { AIBakerData.instance.ScriptableObjectPropertiesDetection = value; }
     }
@@ -66,7 +65,7 @@ public static class AIEditorBaker
     /// Nested dictionary meant to fill out the menu system of the dependent dropdown box on the editor UI for Nerve Systems.
     /// Should be kept fresh after every domain reload.
     /// </summary>
-    public static Dictionary<string, Dictionary<string, List<string>>> CharacterSystemToConfigMapping 
+    public static Dictionary<string, Dictionary<string, List<string>>> CharacterSystemToConfigMapping
     {
         get { return AIBakerData.instance.CharacterSystemToConfigMapping; }
         set { AIBakerData.instance.CharacterSystemToConfigMapping = value; }
@@ -82,17 +81,15 @@ public static class AIEditorBaker
         BakeConfigurationAssignmentLogic();
         AllConfigInstances = GetAllInstancesOfDerived<ConfigurationBase>(); //Must happen before BakeCharacterSystemsToConfigMappings
         SerializationUtility.WriteToDisk<Dictionary<string, ScriptableObject>>(AllConfigInstances, AllConfigInstances_Path);
-        CharacterSystemToConfigMapping = BakeCharacterSystemsToConfigMappings();
-        SerializationUtility.WriteToDisk<Dictionary<string, Dictionary<string, List<string>>>>(CharacterSystemToConfigMapping, CharacterSystemToConfigMapping_Path);
-        ConfigurationInstances = BakeConfigurationInstances();
-        AIAttributesCache = BakeAttributesInCharacterSystems();
-        ScriptableObjectPropertiesDetection = BakeScriptableObjectPropertiesDetection();
+        //CharacterSystemToConfigMapping = BakeCharacterSystemsToConfigMappings();
+        //SerializationUtility.WriteToDisk<Dictionary<string, Dictionary<string, List<string>>>>(CharacterSystemToConfigMapping, CharacterSystemToConfigMapping_Path);
+        //ConfigurationInstances = BakeConfigurationInstances();
+        //AIAttributesCache = BakeAttributesInCharacterSystems();
+        //ScriptableObjectPropertiesDetection = BakeScriptableObjectPropertiesDetection();
     }
 
     public static string CharacterSystemToConfigMapping_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/CharacterSystemToConfigMapping.json";
     public static string AllConfigInstances_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/AllConfigInstances.json";
-
-   
 
 
     /// <summary>
@@ -275,30 +272,30 @@ public static class AIEditorBaker
 
 
             foreach (var iface in interfaces)
+            {
+                // Find classes that derive from CharacterSystem and implement the same interface as the configuration
+                var potentialDestTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(CharacterSystem)) && iface.IsAssignableFrom(t));
+
+                foreach (var destType in potentialDestTypes)
                 {
-                    // Find classes that derive from CharacterSystem and implement the same interface as the configuration
-                    var potentialDestTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(CharacterSystem)) && iface.IsAssignableFrom(t));
-
-                    foreach (var destType in potentialDestTypes)
+                    // Initialize the nested dictionary
+                    if (!BakedConfigurationAssignmentLogic.ContainsKey(destType.FullName))
                     {
-                        // Initialize the nested dictionary
-                        if (!BakedConfigurationAssignmentLogic.ContainsKey(destType.FullName))
-                        {
-                            BakedConfigurationAssignmentLogic[destType.FullName] = new Dictionary<string, List<PropertyMapping>>();
-                        }
-
-                        var mappings = BuildPropertyMappings(iface, destType);
-
-                        foreach (var mapping in mappings)
-                        {
-                            mapping.SourceInstanceType = sourceType;  // Set the derived ConfigurationBase type as the source
-                        }
-
-                        BakedConfigurationAssignmentLogic[destType.FullName][iface.Name] = mappings;
-
-                        LogToFile($"Processed type interface {iface.FullName} for mappings from {sourceType.FullName} to {destType.FullName}. Mappings created: {mappings.Count}");
+                        BakedConfigurationAssignmentLogic[destType.FullName] = new Dictionary<string, List<PropertyMapping>>();
                     }
+
+                    var mappings = BuildPropertyMappings(iface, destType);
+
+                    foreach (var mapping in mappings)
+                    {
+                        mapping.SourceInstanceType = sourceType;  // Set the derived ConfigurationBase type as the source
+                    }
+
+                    BakedConfigurationAssignmentLogic[destType.FullName][iface.Name] = mappings;
+
+                    LogToFile($"Processed type interface {iface.FullName} for mappings from {sourceType.FullName} to {destType.FullName}. Mappings created: {mappings.Count}");
                 }
+            }
             //}
         }
 
@@ -325,7 +322,7 @@ public static class AIEditorBaker
 
         foreach (var sourceProperty in sourceProperties)
         {
-            var targetProperty = targetType.GetProperty(sourceProperty.Name, BindingFlags.Public |  BindingFlags.Instance);
+            var targetProperty = targetType.GetProperty(sourceProperty.Name, BindingFlags.Public | BindingFlags.Instance);
             if (targetProperty != null && targetProperty.PropertyType == sourceProperty.PropertyType)
             {
                 mappings.Add(new PropertyMapping

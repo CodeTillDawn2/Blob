@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 /// <summary>
 /// Represents entities that use a sight box for heuristics. Reduces the need for raycasting by providing a general 

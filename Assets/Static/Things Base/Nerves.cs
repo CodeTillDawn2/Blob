@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public abstract class Nerves : CharacterSystem
@@ -15,7 +14,7 @@ public abstract class Nerves : CharacterSystem
     {
         base.Awake();
         enabled = true; //Nerves need to wake themselves up as the first part of the character to exist
-        
+
     }
 
 
@@ -40,7 +39,7 @@ public abstract class Nerves : CharacterSystem
         return GOLibrary.instance.AddComponentByTypeName(parentObject, type);
     }
 
-  
+
     private void CreateAndAttachComponent(string componentType, string statsName, GameObject parentObject, string fallbackName = null)
     {
         if (string.IsNullOrEmpty(componentType)) return;

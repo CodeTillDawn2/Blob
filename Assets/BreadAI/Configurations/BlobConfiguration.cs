@@ -1,8 +1,5 @@
-using UnityEngine;
-using System.Collections.Generic;
-using System;
-using Pathfinding.Serialization;
 using Newtonsoft.Json;
+using UnityEngine;
 
 [CreateAssetMenu(fileName = "BlobConfiguration", menuName = "AIConfiguration/Blob")]
 public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateSpeed, IHaveMass, ICanSee, IHaveTentacleReach, IHaveThingsInMyStomach, IHaveSuckSpeed, IHaveMassPerCubicFoot,
@@ -202,7 +199,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
         set
         {
-            
+
         }
     }
 
@@ -215,7 +212,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
         set
         {
-            
+
         }
     }
 

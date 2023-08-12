@@ -1,22 +1,14 @@
-
-
-
-
-using System.Reflection;
-using System;
-using UnityEngine;
-using System.Linq;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.IO;
-using System.Diagnostics;
-using UnityEditor;
+using System.Linq;
+using UnityEngine;
 using Debug = UnityEngine.Debug;
-using Newtonsoft.Json;
 
 [CreateAssetMenu(fileName = "BakerSO", menuName = "Baking/BakerSO")]
 public class AIBakerData : ScriptableObject
 {
-    
+
 
     private static AIBakerData _instance;
 
@@ -72,7 +64,7 @@ public class AIBakerData : ScriptableObject
     /// </summary>
     public Dictionary<string, Dictionary<string, List<string>>> CharacterSystemToConfigMapping = new Dictionary<string, Dictionary<string, List<string>>>();
 
-    
+
 
     string CharacterSystemToConfigMapping_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/CharacterSystemToConfigMapping.json";
 
@@ -88,7 +80,7 @@ public class AIBakerData : ScriptableObject
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
-            return JsonConvert.DeserializeObject<T>(json);
+            return SerializationUtility.DeserializeObject<T>(json);
         }
         else
         {
@@ -97,7 +89,7 @@ public class AIBakerData : ScriptableObject
         }
     }
 
-  
+
 
 
 }

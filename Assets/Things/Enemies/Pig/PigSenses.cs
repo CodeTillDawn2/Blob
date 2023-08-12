@@ -17,7 +17,7 @@ public class PigSenses : Senses, ICanSee, IHaveEyes, IUseSightBox
     protected override void Start()
     {
         base.Start();
-        
+
     }
 
     protected override void Update()
