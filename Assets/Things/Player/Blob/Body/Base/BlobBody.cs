@@ -49,8 +49,9 @@ public abstract class BlobBody : Body, IHaveDigestDamageDealt
 
     [SerializeField] public FloatVariable DigestDamageDealt { get; set; }
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         ResetStats();
         ChangingSize = false;
         ResetCubeDims();

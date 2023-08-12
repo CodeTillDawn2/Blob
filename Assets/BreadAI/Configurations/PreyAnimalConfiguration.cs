@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
     [SerializeField] private bool _isAlive;
     [SerializeField] private Shortcuts.LayerMasks _onlySeeMask;
 
-
+    [JsonIgnore]
     public LayerMaskVariable OnlySeeMask
     {
         get
@@ -31,6 +32,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
     /// <summary>
     /// Provide brand new dictionary
     /// </summary>
+    [JsonIgnore]
     public Dict_GameObjectToLastSeen ThingsSeen
     {
         get
@@ -42,7 +44,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
             
         }
     }
-
+    [JsonIgnore]
     public BooleanVariable IsAlive
     {
         get
@@ -53,7 +55,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         }
         set { _isAlive = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable MoveSpeed
     {
         get
@@ -64,7 +66,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         }
         set { _moveSpeed = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable RotateSpeed
     {
         get
@@ -75,7 +77,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         }
         set { _rotateSpeed = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable Mass
     {
         get
@@ -86,7 +88,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         }
         set { _mass = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable HitPoints
     {
         get
@@ -97,7 +99,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         }
         set { _hitPoints = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable Nutrition
     {
         get
@@ -108,7 +110,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         }
         set { _nutrition = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable SightDistance
     {
         get
@@ -119,7 +121,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         }
         set { _sightDistance = value.Value; }
     }
-
+    [JsonIgnore]
     public UnityLayerVariable ThingNearbyFilter
     {
         get
@@ -130,6 +132,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         }
         set { _thingNearbyFilter = value.Value; }
     }
+    [JsonIgnore]
     public GameObjectRuntimeSet ThingsNearby
     {
         get
@@ -139,7 +142,9 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         set {  }
     }
 
+    [JsonIgnore]
     public BoxCollider sightBox { get; set; }
+    [JsonIgnore]
     public GameObjectRuntimeSet Eyes
     {
         get
@@ -148,6 +153,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         }
         set { }
     }
+    [JsonIgnore]
     public MeshRenderer meshRenderer { get; set; }
 
     public void BeDamaged(float amount, DamageTypeEnum DamageType){}

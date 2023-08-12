@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: PigNervePlan
   m_EditorClassIdentifier: 
   brain: None
-  senses: PigSenses:PreyAnimalConfiguration
+  senses: PigSenses:PigConfiguration
   locomotion: None
   body: None

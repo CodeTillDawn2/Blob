@@ -28,9 +28,9 @@ public class BlobBody_Solid : BlobBody
     private LayerMask canBeEatenAndBeingEatenMask;
 
     protected Vector3 TargetSideLengths;
-    protected void Awake()
+    protected override void Awake()
     {
-
+        base.Awake();
     }
 
     protected override void Start()

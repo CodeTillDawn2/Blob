@@ -48,7 +48,7 @@ public class AIBaker : MonoBehaviour
 
         //instance = this;
         DontDestroyOnLoad(this.gameObject); // Ensure this object persists between scenes
-      
+        AIBakerData.instance.LoadBakesFromDisk();
     }
 
     private void FixedUpdate()

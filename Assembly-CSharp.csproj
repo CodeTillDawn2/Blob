@@ -71,6 +71,7 @@
     <Compile Include="Assets\Animation_TentacleDespawn.cs" />
     <Compile Include="Assets\BreadAI\Reflection\ScriptableObjectCache.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\InContactWithBlobModifier.cs" />
+    <Compile Include="Assets\BreadAI\BreadTools\SerializationUtility.cs" />
     <Compile Include="Assets\BreadAI\Attributes\ActionAttributes\AIRequiredFieldFalse.cs" />
     <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\ISearch.cs" />
     <Compile Include="Assets\Global\Shortcuts.cs" />

@@ -32,7 +32,7 @@ public class AIBakerData : ScriptableObject
                     Debug.LogError("AIBakerSO instance not found!");
                 }
             }
-            
+            string test = "";
             return _instance;
         }
     }
@@ -64,6 +64,8 @@ public class AIBakerData : ScriptableObject
 
     public ScriptableObjectCache ScriptableObjectPropertiesDetection { get; set; }
 
+    public Dictionary<string, ScriptableObject> AllConfigInstances { get; set; }
+
     /// <summary>
     /// Nested dictionary meant to fill out the menu system of the dependent dropdown box on the editor UI for Nerve Systems.
     /// Should be kept fresh after every domain reload.
@@ -78,28 +80,24 @@ public class AIBakerData : ScriptableObject
 
     internal void LoadBakesFromDisk()
     {
-        CharacterSystemToConfigMapping = ReadFromDisk(CharacterSystemToConfigMapping_Path);
+        CharacterSystemToConfigMapping = ReadFromDisk<Dictionary<string, Dictionary<string, List<string>>>>(CharacterSystemToConfigMapping_Path);
     }
 
-    public void WriteToDisk(Dictionary<string, Dictionary<string, List<string>>> dictionary, string filePath)
-    {
-        string json = JsonConvert.SerializeObject(dictionary, Newtonsoft.Json.Formatting.Indented);
-        File.WriteAllText(filePath, json);
-    }
-
-    public Dictionary<string, Dictionary<string, List<string>>> ReadFromDisk(string filePath)
+    public T ReadFromDisk<T>(string filePath)
     {
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
-            return JsonConvert.DeserializeObject<Dictionary<string, Dictionary<string, List<string>>>>(json);
+            return JsonConvert.DeserializeObject<T>(json);
         }
         else
         {
             Debug.LogError("File not found at: " + filePath);
-            return null;
+            return default(T); // Returns the default value for the type (e.g., null for reference types)
         }
     }
+
+  
 
 
 }

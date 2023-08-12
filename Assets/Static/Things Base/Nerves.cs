@@ -52,7 +52,7 @@ public abstract class Nerves : CharacterSystem
 
         if (newComponent is CharacterSystem characterSystem)
         {
-            ConfigurationBase configInstance = AIBakerData.instance.ConfigurationInstances.GetConfigurationInstance(statsName);
+            ConfigurationBase configInstance = (ConfigurationBase)AIBakerData.instance.AllConfigInstances[statsName];
 
             if (configInstance != null)
             {

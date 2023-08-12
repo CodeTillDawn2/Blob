@@ -1,5 +1,8 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+using Pathfinding.Serialization;
+using Newtonsoft.Json;
 
 [CreateAssetMenu(fileName = "BlobConfiguration", menuName = "AIConfiguration/Blob")]
 public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateSpeed, IHaveMass, ICanSee, IHaveTentacleReach, IHaveThingsInMyStomach, IHaveSuckSpeed, IHaveMassPerCubicFoot,
@@ -22,7 +25,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
     [SerializeField] private Shortcuts.LayerMasks _onlySeeMask;
     [SerializeField] private Shortcuts.UnityLayers _thingNearbyFilter;
 
-
+    [JsonIgnore]
     public FloatVariable MoveSpeed
     {
         get
@@ -33,7 +36,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
         set { _moveSpeed = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable RotateSpeed
     {
         get
@@ -44,7 +47,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
         set { _rotateSpeed = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable Mass
     {
         get
@@ -55,7 +58,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
         set { _mass = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable SightDistance
     {
         get
@@ -66,7 +69,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
         set { _sightDistance = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable MinTentacleReach
     {
         get
@@ -77,7 +80,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
         set { _minTentacleReach = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable MaxTentacleReach
     {
         get
@@ -88,7 +91,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
         set { _maxTentacleReach = value.Value; }
     }
-
+    [JsonIgnore]
     public IntegerVariable MaxTentacles
     {
         get
@@ -99,7 +102,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
         set { _maxTentacles = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable TentacleHitSpeed
     {
         get
@@ -110,7 +113,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
         set { _tentacleHitSpeed = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable DragInsideStomach
     {
         get
@@ -121,7 +124,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
         set { _dragInsideStomach = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable AngularDragInsideStomach
     {
         get
@@ -132,7 +135,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
         set { _angularDragInsideStomach = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable SuckSpeed
     {
         get
@@ -143,7 +146,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
         set { _suckSpeed = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable MassPerCubicFoot
     {
         get
@@ -154,7 +157,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
         set { _massPerCubicFoot = value.Value; }
     }
-
+    [JsonIgnore]
     public FloatVariable DigestDamageDealt
     {
         get
@@ -166,6 +169,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         set { _digestDamageDealt = value.Value; }
     }
 
+    [JsonIgnore]
     public FloatVariable GrowthSpeed
     {
         get
@@ -177,6 +181,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         set { _growthSpeed = value.Value; }
     }
 
+    [JsonIgnore]
     public LayerMaskVariable OnlySeeMask
     {
         get
@@ -188,6 +193,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         set { _onlySeeMask = value.Value; }
     }
 
+    [JsonIgnore]
     public Dict_GameObjectToLastSeen ThingsSeen
     {
         get
@@ -200,7 +206,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
     }
 
-
+    [JsonIgnore]
     public GameObjectRuntimeSet ThingsNearby
     {
         get
@@ -213,6 +219,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         }
     }
 
+    [JsonIgnore]
     public UnityLayerVariable ThingNearbyFilter
     {
         get
@@ -224,8 +231,8 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
         set { _thingNearbyFilter = value.Value; }
     }
 
-
-
+    [JsonIgnore]
     public BoxCollider sightBox { get; set; }
+    [JsonIgnore]
     public GameObjectRuntimeSet Eyes { get; set; }
 }

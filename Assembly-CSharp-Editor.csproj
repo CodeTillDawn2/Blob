@@ -9,8 +9,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <ProjectGuid>{781C67D0-C948-50A5-8D74-A986F8805498}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
@@ -61,10 +60,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\BreadAI\AIBakerSOInitializer.cs" />
+    <Compile Include="Assets\Editor\BreadAI\AIEditorBaker.cs" />
     <Compile Include="Assets\Editor\BreadAI\Drawers\BasicDropdown.cs" />
     <Compile Include="Assets\Editor\BreadAI\RuntimeSetEditor.cs" />
     <Compile Include="Assets\Editor\ScriptedImporterEditorScript.cs" />
-    <Compile Include="Assets\Editor\BreadAI\AIEditorBaker.cs" />
     <Compile Include="Assets\Editor\BreadAI\BakerEditor.cs" />
     <Compile Include="Assets\Editor\BreadAI\Drawers\CompoundDependentDropdown.cs" />
   </ItemGroup>

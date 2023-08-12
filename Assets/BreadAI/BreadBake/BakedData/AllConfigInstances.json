@@ -1,0 +1,14 @@
+{
+  "BlobConfiguration": {
+    "name": "BlobConfiguration",
+    "hideFlags": 0
+  },
+  "PigConfiguration 1": {
+    "name": "PigConfiguration 1",
+    "hideFlags": 0
+  },
+  "PigConfiguration": {
+    "name": "PigConfiguration",
+    "hideFlags": 0
+  }
+}
