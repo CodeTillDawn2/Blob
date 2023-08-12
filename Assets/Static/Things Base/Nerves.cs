@@ -26,11 +26,12 @@ public abstract class Nerves : CharacterSystem
 
     protected override void Start()
     {
+
         base.Start();
-        //CreateAndAttachComponent(NervePlan.brain, NervePlan.brainStats, gameObject);
-        //CreateAndAttachComponent(NervePlan.senses, NervePlan.sensesStats, gameObject);
-        //CreateAndAttachComponent(NervePlan.locomotion, NervePlan.locomotionStats, gameObject);
-        //CreateAndAttachComponent(NervePlan.body, NervePlan.bodyStats, transform.Find("Body")?.gameObject ?? gameObject, "Body");
+        CreateAndAttachComponent(NervePlan.Brain, NervePlan.BrainConfig, gameObject);
+        CreateAndAttachComponent(NervePlan.Senses, NervePlan.SensesConfig, gameObject);
+        CreateAndAttachComponent(NervePlan.Locomotion, NervePlan.LocomotionConfig, gameObject);
+        CreateAndAttachComponent(NervePlan.Body, NervePlan.BodyConfig, transform.Find("Body")?.gameObject ?? gameObject, "Body");
         enabled = true;
     }
 
@@ -51,7 +52,7 @@ public abstract class Nerves : CharacterSystem
 
         if (newComponent is CharacterSystem characterSystem)
         {
-            ConfigurationBase configInstance = AIBaker.instance.ConfigurationDataCache.GetConfigurationInstance(statsName);
+            ConfigurationBase configInstance = AIBakerData.instance.ConfigurationInstances.GetConfigurationInstance(statsName);
 
             if (configInstance != null)
             {

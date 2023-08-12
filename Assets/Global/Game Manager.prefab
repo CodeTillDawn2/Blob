@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9216818330091100850}
   - component: {fileID: 7856486217617036292}
-  - component: {fileID: 2808782164535011472}
   - component: {fileID: 2119135083240600853}
   - component: {fileID: 6966205253418891893}
   - component: {fileID: 3021509375849078537}
@@ -34,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7856486217617036292
 MonoBehaviour:
@@ -49,25 +48,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bakerSO: {fileID: 11400000, guid: 3be6275992031b4499c38b6a7da21062, type: 2}
---- !u!114 &2808782164535011472
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4212926632751090482}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0779c864dd2e983498c64b004003fecd, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  AllEnemies: {fileID: 11400000, guid: fa0c60002b04f7e41a425af7034babd9, type: 2}
-  EnemiesInStomach: {fileID: 11400000, guid: 983a650bfcdbb62449ac35722fad4a4f, type: 2}
-  EnemiesIntersectingPlayer: {fileID: 11400000, guid: 4b06ac8144799e845abb56c11e6fab30, type: 2}
-  ThingsNearby: {fileID: 11400000, guid: 3c7bad5fc00d8944fb953de0a7fb083c, type: 2}
-  SceneReady: {fileID: 11400000, guid: fd89fcd26764fcb4f988ced3c304ff34, type: 2}
-  TentacleTargeting: {fileID: 11400000, guid: da24446fa717b0a4785ac684bf0dd61b, type: 2}
-  EnemiesSeenByPlayer: {fileID: 11400000, guid: 8678ebe371638bf4db345b4d33a76498, type: 2}
 --- !u!114 &2119135083240600853
 MonoBehaviour:
   m_ObjectHideFlags: 0

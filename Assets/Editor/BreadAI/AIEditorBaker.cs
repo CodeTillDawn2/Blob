@@ -12,48 +12,65 @@ using System.Diagnostics;
 using UnityEditor;
 using Debug = UnityEngine.Debug;
 using Newtonsoft.Json;
+using System.Runtime.Remoting.Messaging;
 
 [CreateAssetMenu(fileName = "BakerSO", menuName = "Baking/BakerSO")]
-public class AIBakerSO : ScriptableObject
+public static class AIEditorBaker
 {
+   
+
     // Flag to determine if it's the first log of a session
-    private bool isFirstLog = true;
+    private static bool isFirstLog = true;
 
     /// <summary>
     /// Enables or disables logging. Defaults to false.
     /// </summary>
     [SerializeField]
-    private bool enableLogging = false;
+    private static bool enableLogging = false;
 
     /// <summary>
     /// Cache for detected attributes within character systems and their properties.
     /// </summary>
-    public AttributesCache AIAttributesCache { get; private set; }
+    public static AttributesCache AIAttributesCache { 
+        get { return AIBakerData.instance.AIAttributesCache; } 
+        private set { AIBakerData.instance.AIAttributesCache = value; } 
+    }
 
     /// <summary>
     /// Cache of instances that implement the base configuration.
     /// </summary>
-    public ConfigurationInstanceCache ConfigurationInstances { get; private set; }
+    public static ConfigurationInstanceCache ConfigurationInstances {
+        get { return AIBakerData.instance.ConfigurationInstances; }
+        private set { AIBakerData.instance.ConfigurationInstances = value; }
+    }
 
     /// <summary>
     /// A nested dictionary containing mappings between classes and their interfaces.
     /// </summary>
-    public Dictionary<string, Dictionary<string, List<PropertyMapping>>> BakedConfigurationAssignmentLogic = new Dictionary<string, Dictionary<string, List<PropertyMapping>>>();
+    public static Dictionary<string, Dictionary<string, List<PropertyMapping>>> BakedConfigurationAssignmentLogic = new Dictionary<string, Dictionary<string, List<PropertyMapping>>>();
 
 
-    public ScriptableObjectCache ScriptableObjectPropertiesDetection { get; private set; }
+    public static ScriptableObjectCache ScriptableObjectPropertiesDetection {
+        get { return AIBakerData.instance.ScriptableObjectPropertiesDetection; }
+        private set { AIBakerData.instance.ScriptableObjectPropertiesDetection = value; }
+    }
 
     /// <summary>
     /// Nested dictionary meant to fill out the menu system of the dependent dropdown box on the editor UI for Nerve Systems.
     /// Should be kept fresh after every domain reload.
     /// </summary>
-    public Dictionary<string, Dictionary<string, List<string>>> CharacterSystemToConfigMapping = new Dictionary<string, Dictionary<string, List<string>>>();
+    public static Dictionary<string, Dictionary<string, List<string>>> CharacterSystemToConfigMapping 
+    {
+        get { return AIBakerData.instance.CharacterSystemToConfigMapping; }
+        set { AIBakerData.instance.CharacterSystemToConfigMapping = value; }
+    }
 
     /// <summary>
     /// Coordinates the process of baking all relevant AI and configuration data.
     /// </summary>
-    public void BakeAI()
+    public static void BakeAI()
     {
+        Debug.Log("Baking...");
         isFirstLog = true;
         BakeConfigurationAssignmentLogic();
         CharacterSystemToConfigMapping = BakeCharacterSystemsToConfigMappings();
@@ -62,23 +79,22 @@ public class AIBakerSO : ScriptableObject
         ScriptableObjectPropertiesDetection = BakeScriptableObjectPropertiesDetection();
     }
 
-    string CharacterSystemToConfigMapping_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/CharacterSystemToConfigMapping.json";
+    public static string CharacterSystemToConfigMapping_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/CharacterSystemToConfigMapping.json";
 
 
 
-    internal void LoadBakesFromDisk()
+    public static void LoadBakesFromDisk()
     {
-        string test = "";
         CharacterSystemToConfigMapping = ReadFromDisk(CharacterSystemToConfigMapping_Path);
     }
 
-    public void WriteToDisk(Dictionary<string, Dictionary<string, List<string>>> dictionary, string filePath)
+    public static void WriteToDisk(Dictionary<string, Dictionary<string, List<string>>> dictionary, string filePath)
     {
         string json = JsonConvert.SerializeObject(dictionary, Newtonsoft.Json.Formatting.Indented);
         File.WriteAllText(filePath, json);
     }
 
-    public Dictionary<string, Dictionary<string, List<string>>> ReadFromDisk(string filePath)
+    public static Dictionary<string, Dictionary<string, List<string>>> ReadFromDisk(string filePath)
     {
         if (File.Exists(filePath))
         {
@@ -97,7 +113,7 @@ public class AIBakerSO : ScriptableObject
     /// Detects and caches ScriptableObject properties within classes derived from CharacterSystem.
     /// </summary>
     /// <returns>Cache of detected ScriptableObject properties.</returns>
-    public ScriptableObjectCache BakeScriptableObjectPropertiesDetection()
+    public static ScriptableObjectCache BakeScriptableObjectPropertiesDetection()
     {
         LogToFile("");
         LogToFile("");
@@ -142,7 +158,7 @@ public class AIBakerSO : ScriptableObject
 
         return cache;
     }
-    public Dictionary<string, Dictionary<string, List<string>>> BakeCharacterSystemsToConfigMappings()
+    public static Dictionary<string, Dictionary<string, List<string>>> BakeCharacterSystemsToConfigMappings()
     {
         LogToFile("");
         LogToFile("");
@@ -210,7 +226,7 @@ public class AIBakerSO : ScriptableObject
     /// <summary>
     /// Constructs mappings between ConfigurationBase-derived class properties and classes derived from CharacterSystem that implement the same interfaces.
     /// </summary>
-    public void BakeConfigurationAssignmentLogic()
+    public static void BakeConfigurationAssignmentLogic()
     {
         LogToFile("");
         LogToFile("");
@@ -280,7 +296,7 @@ public class AIBakerSO : ScriptableObject
     /// <param name="sourceInterface">The interface to map from.</param>
     /// <param name="targetType">The class to map to.</param>
     /// <returns>A list of property mappings.</returns>
-    private List<PropertyMapping> BuildPropertyMappings(Type sourceInterface, Type targetType)
+    private static List<PropertyMapping> BuildPropertyMappings(Type sourceInterface, Type targetType)
     {
         var mappings = new List<PropertyMapping>();
         var sourceProperties = sourceInterface.GetProperties();
@@ -308,7 +324,7 @@ public class AIBakerSO : ScriptableObject
     /// Detects custom attributes within methods of classes derived from CharacterSystem.
     /// </summary>
     /// <returns>Cache of detected attributes.</returns>
-    public AttributesCache BakeAttributesInCharacterSystems()
+    public static AttributesCache BakeAttributesInCharacterSystems()
     {
         LogToFile("");
         LogToFile("");
@@ -400,7 +416,7 @@ public class AIBakerSO : ScriptableObject
     /// Detects and logs instances derived from ConfigurationBase.
     /// </summary>
     /// <returns>Cache of detected configuration instances.</returns>
-    public ConfigurationInstanceCache BakeConfigurationInstances()
+    public static ConfigurationInstanceCache BakeConfigurationInstances()
     {
         LogToFile("");
         LogToFile("");
@@ -456,7 +472,7 @@ public class AIBakerSO : ScriptableObject
     /// Utility to log messages to a file. If this is the first log entry of a run, any existing log file is overwritten.
     /// </summary>
     /// <param name="message">Message to be logged.</param>
-    private void LogToFile(string message)
+    private static void LogToFile(string message)
     {
         // If logging is disabled, simply return.
         if (!enableLogging) return;

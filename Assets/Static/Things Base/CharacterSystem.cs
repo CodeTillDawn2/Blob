@@ -41,10 +41,13 @@ public abstract class CharacterSystem : MonoBehaviour
 
     public void AssignConfiguration(ConfigurationBase config = null)
     {
+
         AssignComponentProperties();
+        PigSenses senses = PigSenses.instance;
         if (config != null)
         {
-            AssignConfigurationProperties(config);
+            //AssignConfigurationProperties(config);
+            string test = "";
             //AssignConfigurationConditionals(config);
         }
         enabled = true;
@@ -53,13 +56,14 @@ public abstract class CharacterSystem : MonoBehaviour
 
     private void AssignComponentProperties()
     {
-        //ICanSee, IHaveEyes, IUseSightBox
-        PigSenses senses = PigSenses.instance;
 
-        if (AIBaker.instance.BakedConfigurationAssignmentLogic.ContainsKey(GetType().FullName))
+        PigSenses senses = PigSenses.instance;
+        GameObject go = senses.gameObject;
+        string gopath = go.name;
+        if (AIBakerData.instance.BakedConfigurationAssignmentLogic.ContainsKey(GetType().FullName))
         {
-            var test22 = AIBaker.instance.BakedConfigurationAssignmentLogic[GetType().FullName];
-            foreach (var interfaceMapping in AIBaker.instance.BakedConfigurationAssignmentLogic[GetType().FullName])
+            var test22 = AIBakerData.instance.BakedConfigurationAssignmentLogic[GetType().FullName];
+            foreach (var interfaceMapping in AIBakerData.instance.BakedConfigurationAssignmentLogic[GetType().FullName])
             {
                 string test = interfaceMapping.Key + "|" + interfaceMapping.Value;
                 foreach (var propertyMapping in interfaceMapping.Value)
@@ -92,7 +96,7 @@ public abstract class CharacterSystem : MonoBehaviour
                     else
                     {
                         // For non-Component types, retrieve the value from the source.
-                        var sourceInstance = AIBaker.instance.BakerSO.ConfigurationInstances.GetConfigurationInstance(propertyMapping.SourceInstanceType.FullName);
+                        var sourceInstance = AIBakerData.instance.ConfigurationInstances.GetConfigurationInstance(propertyMapping.SourceInstanceType.FullName);
                         var valueFromSource = propertyMapping.SourceProperty.GetValue(sourceInstance);
 
                         // Debugging: Print the values of the sourceInstance and valueFromSource.
@@ -125,9 +129,9 @@ public abstract class CharacterSystem : MonoBehaviour
 
     private void AssignConfigurationProperties(ConfigurationBase config)
     {
-        if (AIBaker.instance.BakedConfigurationAssignmentLogic.ContainsKey(GetType().FullName))
+        if (AIBakerData.instance.BakedConfigurationAssignmentLogic.ContainsKey(GetType().FullName))
         {
-            foreach (var interfaceMapping in AIBaker.instance.BakedConfigurationAssignmentLogic[GetType().FullName])
+            foreach (var interfaceMapping in AIBakerData.instance.BakedConfigurationAssignmentLogic[GetType().FullName])
             {
                 foreach (var propertyMapping in interfaceMapping.Value)
                 {

@@ -4,18 +4,91 @@ using UnityEngine;
 public class NervePlan : ScriptableObject
 {
     [Header("Brain")]
-    [BaseClassRequired("Brain")]
-    public string brain;
+    [SerializeField]
+    [CompountDependentDropdown("Brain")]
+    private string brain;
+
+    public string Brain
+    {
+        get
+        {
+            if (brain == "None") return null;
+            return brain.Split(":")[0];
+        }
+    }
+
+    public string BrainConfig
+    {
+        get
+        {
+            if (brain == "None") return null;
+            return brain.Split(":")[1];
+        }
+    }
 
     [Header("Senses")]
-    [BaseClassRequired("Senses")]
-    public string senses;
+    [SerializeField]
+    [CompountDependentDropdown("Senses")]
+    private string senses;
+
+    public string Senses
+    {
+        get
+        {
+            if (senses == "None") return null;
+            return senses.Split(":")[0];
+        }
+    }
+    public string SensesConfig
+    {
+        get
+        {
+            if (senses == "None") return null;
+            return senses.Split(":")[1];
+        }
+    }
 
     [Header("Locomotion")]
-    [BaseClassRequired("Locomotion")]
-    public string locomotion;
+    [SerializeField]
+    [CompountDependentDropdown("Locomotion")]
+    private string locomotion;
+
+    public string Locomotion
+    {
+        get
+        {
+            if (locomotion == "None") return null;
+            return locomotion.Split(":")[0];
+        }
+    }
+    public string LocomotionConfig
+    {
+        get
+        {
+            if (locomotion == "None") return null;
+            return locomotion.Split(":")[1];
+        }
+    }
 
     [Header("Body")]
-    [BaseClassRequired("Body")]
-    public string body;
+    [SerializeField]
+    [CompountDependentDropdown("Body")]
+    private string body;
+
+    public string Body
+    {
+        get
+        {
+            if (body == "None") return null;
+            return body.Split(":")[0];
+        }
+    }
+    public string BodyConfig
+    {
+        get
+        {
+            if (body == "None") return null;
+            return body.Split(":")[1];
+        }
+    }
 }

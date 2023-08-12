@@ -60,6 +60,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\IntegerVariable.cs" />
+    <Compile Include="Assets\BreadAI\BreadBake\AIBakerData.cs" />
     <Compile Include="Assets\Animation_TentacleReadied.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\BooleanVariable.cs" />
     <Compile Include="Assets\BreadAI\Attributes\AIInterfaceAttributes\BreadAIInterfaceAttribute.cs" />
@@ -137,7 +138,6 @@
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\StringVariable.cs" />
     <Compile Include="Assets\Events\GameEvent.cs" />
     <Compile Include="Assets\Static\Things Base\Locomotion.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\UI\BaseClassRequiredImplementingInterfacesAttribute.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGameObjectAndString.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_GameObjectToString.cs" />
     <Compile Include="Assets\Things\Modifiers\Base\ModifierClass.cs" />
@@ -156,6 +156,7 @@
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\UnityLayerVariable.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanGainNutrition.cs" />
     <Compile Include="Assets\Static\VariableTemplates\RuntimeSets\RuntimeSet.cs" />
+    <Compile Include="Assets\BreadAI\Attributes\UI\BasicDropdownAttribute.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveNutrition.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveHitPoints.cs" />
     <Compile Include="Assets\Global\SOLibrary.cs" />
@@ -178,6 +179,7 @@
     <Compile Include="Assets\BreadAI\Attributes\ActionAttributes\AIRequiredFieldTrue.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveMaxTentacles.cs" />
     <Compile Include="Assets\Global\RefreshGameState.cs" />
+    <Compile Include="Assets\BreadAI\Attributes\UI\CompountDependentDropdownAttribute.cs" />
     <Compile Include="Assets\Things\Modifiers\Base\GameObjectIsGameObjectCondition.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_GameObjectToVector3.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ELStreamingEngine.cs" />
@@ -187,11 +189,9 @@
     <Compile Include="Assets\Camera\FollowPlayerCamera.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\GameObjectVariable.cs" />
     <Compile Include="Assets\BreadAI\Reflection\MethodData.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\UI\BaseClassRequiredAttribute.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\QuaternionVariable.cs" />
     <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\ISpawn.cs" />
     <Compile Include="Assets\BreadAI\Neurons\Neuron.cs" />
-    <Compile Include="Assets\BreadAI\BreadBake\AIBakerSO.cs" />
     <Compile Include="Assets\Things\Modifiers\Damage\DealDamageModifier.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\Vector3Variable.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\ComponentProperties\IUseMeshRenderer.cs" />

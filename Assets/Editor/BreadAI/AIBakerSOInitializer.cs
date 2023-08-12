@@ -11,17 +11,10 @@ public static class AIBakerSOInitializer
 
     private static void ReBakeData()
     {
-        // Locate your AIBakerSO instance. Assuming you have only one in your project:
-        string[] guids = AssetDatabase.FindAssets("t:AIBakerSO");
-        if (guids.Length > 0)
-        {
-            string assetPath = AssetDatabase.GUIDToAssetPath(guids[0]);
-            AIBakerSO baker = AssetDatabase.LoadAssetAtPath<AIBakerSO>(assetPath);
-            if (baker != null)
-            {
-                baker.BakeAI(); // This will re-bake your data.
-            }
-        }
+
+        AIEditorBaker.BakeAI();
+
+      
     }
 }
 #endif

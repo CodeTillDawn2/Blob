@@ -1066,7 +1066,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2486617767586004082, guid: d9ff4c857dd27b34f87e756eaf3e3464, type: 3}
       propertyPath: m_Name
-      value: Test Pig
+      value: Special Pig
       objectReference: {fileID: 0}
     - target: {fileID: 7783987683569690203, guid: d9ff4c857dd27b34f87e756eaf3e3464, type: 3}
       propertyPath: m_Enabled

@@ -24,7 +24,7 @@ Processed type interface IHaveHitPoints for mappings from PreyAnimalConfiguratio
 Processed type interface IAmAlive for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 1
 Processed type interface IHaveMass for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 1
 Processed type interface ICanBeDamaged for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 0
-Total time taken: 0.0106473 seconds.
+Total time taken: 0.0123321 seconds.
 
 
 
@@ -45,15 +45,16 @@ Populated 3 ConfigurationBase types for BlobSenses that implement all required i
 Found 2 derived types for base type Locomotion.
 Populated 3 ConfigurationBase types for PigLocomotion that implement all required interfaces.
 Populated 3 ConfigurationBase types for BlobLocomotion that implement all required interfaces.
-PopulateDerivedTypeDictionary completed in: 1.01343 seconds.
+PopulateDerivedTypeDictionary completed in: 0.9278149 seconds.
 
 
 
 Starting BakeConfigurationInstances for ConfigurationInstances.
 Successfully found and processed configuration instance for: BlobConfiguration at path: Assets/BreadAI/Configurations/Instances/BlobConfiguration.asset
+Successfully found and processed configuration instance for: PreyAnimalConfiguration at path: Assets/BreadAI/Configurations/Instances/PigConfiguration 1.asset
 Successfully found and processed configuration instance for: PreyAnimalConfiguration at path: Assets/BreadAI/Configurations/Instances/PigConfiguration.asset
-Total number of configuration instances processed: 2
-Total time taken: 0.0130397 seconds.
+Total number of configuration instances processed: 3
+Total time taken: 0.0127348 seconds.
 
 
 
@@ -92,7 +93,7 @@ Processing class: TentacleBrain
 Total number of classes processed: 2
 Total number of methods with custom attributes: 4
 Total number of custom attributes detected: 14
-Total time taken: 0.0171523 seconds.
+Total time taken: 0.0193267 seconds.
 
 
 
@@ -122,4 +123,4 @@ Processing class: BlobSenses
 Processing class: TentacleBrain
 Total number of classes processed: 6
 Total number of ScriptableObject properties detected: 18
-Total time taken: 0.0074687 seconds.
+Total time taken: 0.0091842 seconds.

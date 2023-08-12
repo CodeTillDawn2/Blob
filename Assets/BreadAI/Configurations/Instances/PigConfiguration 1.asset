@@ -9,10 +9,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2872f44133ab0d64aa26ca31e5118667, type: 3}
-  m_Name: PigNervePlan
+  m_Script: {fileID: 11500000, guid: 65c4cdfb40d511c40942197fc3fe845d, type: 3}
+  m_Name: PigConfiguration 1
   m_EditorClassIdentifier: 
-  brain: None
-  senses: PigSenses:PreyAnimalConfiguration
-  locomotion: None
-  body: None
+  _moveSpeed: 5
+  _rotateSpeed: 5
+  _mass: 5
+  _hitPoints: 20
+  _nutrition: 20
+  _sightDistance: 20
+  _isAlive: 1
+  _onlySeeMask: -9
