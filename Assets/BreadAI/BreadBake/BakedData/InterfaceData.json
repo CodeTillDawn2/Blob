@@ -1,0 +1,221 @@
+{
+  "IUseMeshRenderer": [
+    {
+      "Name": "meshRenderer",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IUseRigidbody": [
+    {
+      "Name": "rigidbody",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IUseSightBox": [
+    {
+      "Name": "sightBox",
+      "MemberType": "Property",
+      "Attributes": []
+    },
+    {
+      "Name": "ThingsNearby",
+      "MemberType": "Property",
+      "Attributes": []
+    },
+    {
+      "Name": "ThingNearbyFilter",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IAmAlive": [
+    {
+      "Name": "IsAlive",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IAmImmuneToTargetingByTentacles": [],
+  "ICanBeDamaged": [
+    {
+      "ReturnType": "System.Void",
+      "ParameterTypes": [
+        "System.Single",
+        "DamageTypeEnum"
+      ],
+      "Name": "BeDamaged",
+      "MemberType": "Method",
+      "Attributes": []
+    }
+  ],
+  "ICanBeDigested": [
+    {
+      "ReturnType": "System.Single",
+      "ParameterTypes": [
+        "System.Single"
+      ],
+      "Name": "BeDigested",
+      "MemberType": "Method",
+      "Attributes": []
+    }
+  ],
+  "ICanDie": [
+    {
+      "ReturnType": "System.Void",
+      "ParameterTypes": [],
+      "Name": "Die",
+      "MemberType": "Method",
+      "Attributes": []
+    }
+  ],
+  "ICanGainNutrition": [
+    {
+      "ReturnType": "System.Void",
+      "ParameterTypes": [
+        "System.Single"
+      ],
+      "Name": "GainNutrition",
+      "MemberType": "Method",
+      "Attributes": []
+    }
+  ],
+  "ICanSee": [
+    {
+      "Name": "SightDistance",
+      "MemberType": "Property",
+      "Attributes": []
+    },
+    {
+      "Name": "OnlySeeMask",
+      "MemberType": "Property",
+      "Attributes": []
+    },
+    {
+      "Name": "ThingsSeen",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveDigestDamageDealt": [
+    {
+      "Name": "DigestDamageDealt",
+      "MemberType": "Property",
+      "Attributes": []
+    },
+    {
+      "Name": "DamageType",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveEyes": [
+    {
+      "Name": "Eyes",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveGrowthSpeed": [
+    {
+      "Name": "GrowthSpeed",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveHitPoints": [
+    {
+      "Name": "HitPoints",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveMass": [
+    {
+      "Name": "Mass",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveMassPerCubicFoot": [
+    {
+      "Name": "MassPerCubicFoot",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveMaxTentacles": [
+    {
+      "Name": "MaxTentacles",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveMoveSpeed": [
+    {
+      "Name": "MoveSpeed",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveNutrition": [
+    {
+      "Name": "Nutrition",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveRotateSpeed": [
+    {
+      "Name": "RotateSpeed",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveSuckSpeed": [
+    {
+      "Name": "SuckSpeed",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveTentacleHitSpeed": [
+    {
+      "Name": "TentacleHitSpeed",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveTentacleReach": [
+    {
+      "Name": "MinTentacleReach",
+      "MemberType": "Property",
+      "Attributes": []
+    },
+    {
+      "Name": "MaxTentacleReach",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveThingsInMyStomach": [
+    {
+      "Name": "DragInsideStomach",
+      "MemberType": "Property",
+      "Attributes": []
+    },
+    {
+      "Name": "AngularDragInsideStomach",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ],
+  "IHaveThingsSeen": [
+    {
+      "Name": "GrowthSpeed",
+      "MemberType": "Property",
+      "Attributes": []
+    }
+  ]
+}

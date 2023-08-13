@@ -47,5 +47,4 @@ public class PigLocomotion : Locomotion, IHaveMoveSpeed, IHaveRotateSpeed
 
 
 
-
 }

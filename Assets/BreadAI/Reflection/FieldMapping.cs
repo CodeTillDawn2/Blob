@@ -7,4 +7,5 @@ public class FieldMapping
     public PropertyInfo DestinationProperty { get; set; }
     public Type SourceInstanceType { get; set; }
 
+
 }

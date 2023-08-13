@@ -43,10 +43,10 @@ public class AIBakerData : ScriptableObject
     /// </summary>
     public AttributesCache AIAttributesCache { get; set; }
 
-    /// <summary>
-    /// Cache of instances that implement the base configuration.
-    /// </summary>
-    public ConfigurationInstanceCache ConfigurationInstances { get; set; }
+    ///// <summary>
+    ///// Cache of instances that implement the base configuration.
+    ///// </summary>
+    //public ConfigurationInstanceCache ConfigurationInstances { get; set; }
 
     /// <summary>
     /// A nested dictionary containing mappings between classes and their interfaces.

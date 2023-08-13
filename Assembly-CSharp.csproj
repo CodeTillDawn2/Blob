@@ -67,6 +67,8 @@
     <Compile Include="Assets\Executive\EnemyConsumer.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Markers\IAmImmuneToTargetingByTentacles.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\SerializableDictionary.cs" />
+    <Compile Include="Assets\BreadAI\Reflection\BasicMemberInfo.cs" />
+    <Compile Include="Assets\BreadAI\Reflection\SimpleMethodInfo.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveEyes.cs" />
     <Compile Include="Assets\Animation_TentacleDespawn.cs" />
     <Compile Include="Assets\BreadAI\Reflection\ScriptableObjectCache.cs" />
@@ -80,15 +82,18 @@
     <Compile Include="Assets\Static\VariableTemplates\Variables\IConfigDefault\IConfigDefault.cs" />
     <Compile Include="Assets\BreadAI\Attributes\ActionAttributes\AIOptionalRisk.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\ELSpeaker.cs" />
+    <Compile Include="Assets\BreadAI\Reflection\MethodInfoRepresentation.cs" />
     <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\IAttack.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanSee.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanBeDigested.cs" />
     <Compile Include="Assets\GPT AI Integration\VoiceRecorder\VoiceRecorder.cs" />
+    <Compile Include="Assets\BreadAI\Reflection\SimplePropertyInfo.cs" />
     <Compile Include="Assets\BreadAI\Configurations\Base\ConfigurationBase.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Configuration\ELAuthArgsV1.cs" />
     <Compile Include="Assets\Static\Things Base\Eye.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveMassPerCubicFoot.cs" />
     <Compile Include="Assets\GPT AI Integration\VoiceRecorder\WavUtility.cs" />
+    <Compile Include="Assets\BreadAI\Reflection\SimpleAttributeInfo.cs" />
     <Compile Include="Assets\Things\Player\Blob\Locomotion\BlobLocomotion.cs" />
     <Compile Include="Assets\Things\Enemies\Pig\PigNerves.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\ComponentProperties\IUseSightBox.cs" />
@@ -102,6 +107,7 @@
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGameObjectAndLastSeenData.cs" />
     <Compile Include="Assets\Static\Things Base\Nerves.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Base\BlobBody.cs" />
+    <Compile Include="Assets\BreadAI\Reflection\BasicFieldInfo.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\DigestNutritionModifier.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Conditional\IAmAlive.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGameObjectAndVector3.cs" />
@@ -116,11 +122,14 @@
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_StringIntVariable.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveDigestDamageDealt.cs" />
     <Compile Include="Assets\Things\Player\Blob\Tentacles\Tentacle\TentacleController.cs" />
+    <Compile Include="Assets\BreadAI\Reflection\DelegateRepresentation.cs" />
     <Compile Include="Assets\Things\Modifiers\Base\GameObjectInListModifierCondition.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Test\BlobJiggleNew.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveSuckSpeed.cs" />
     <Compile Include="Assets\BreadAI\Reflection\AttributesCache.cs" />
+    <Compile Include="Assets\BreadAI\Reflection\SimpleFieldInfo.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\WrappedFunc.cs" />
+    <Compile Include="Assets\BreadAI\Reflection\SimpleMemberInfo.cs" />
     <Compile Include="Assets\BreadAI\Attributes\ActionAttributes\AIInvoluntaryAttribute.cs" />
     <Compile Include="Assets\Events\GameEventListener.cs" />
     <Compile Include="Assets\Global\PhysicsTools.cs" />
@@ -133,6 +142,7 @@
     <Compile Include="Assets\Things\Player\Blob\Tentacles\Tentacle\SmoothTentacleWhap.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveMass.cs" />
     <Compile Include="Assets\Things\Enemies\Pig\PigSenses.cs" />
+    <Compile Include="Assets\BreadAI\Reflection\SimpleParameterInfo.cs" />
     <Compile Include="Assets\BreadAI\Reflection\ClassData.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Test\BlobStomach_Segmented.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveThingsSeen.cs" />
@@ -147,6 +157,7 @@
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveTentacleHitSpeed.cs" />
     <Compile Include="Assets\BreadAI\Configurations\NervePlan.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ProducerConsumerStream.cs" />
+    <Compile Include="Assets\BreadAI\Reflection\BasicMethodInfo.cs" />
     <Compile Include="Assets\Executive\EnemySucker.cs" />
     <Compile Include="Assets\BreadAI\AILibrary.cs" />
     <Compile Include="Assets\Static\Things Base\Body.cs" />
@@ -218,6 +229,7 @@
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\FloatVariable.cs" />
     <Compile Include="Assets\Things\Player\Blob\Brain\BlobBrain.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanBeDamaged.cs" />
+    <Compile Include="Assets\BreadAI\Reflection\BasicPropertyInfo.cs" />
     <Compile Include="Assets\GPT AI Integration\Demo Scripts\Visual Scripting\OpenAiVS.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\OBB.cs" />
     <Compile Include="Assets\BreadAI\Reflection\FieldMapping.cs" />
@@ -488,14 +500,32 @@
     <Reference Include="UnityEditor.UnityConnectModule">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.4f1\Editor\Data\Managed\UnityEngine\UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
+    <Reference Include="Sirenix.Reflection.Editor">
+      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Reflection.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Collections.LowLevel.ILSupport">
       <HintPath>Library\PackageCache\com.unity.collections@1.2.4\Unity.Collections.LowLevel.ILSupport\Unity.Collections.LowLevel.ILSupport.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Serialization">
+      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Serialization.Config">
+      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.OdinInspector.Editor">
+      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll</HintPath>
     </Reference>
     <Reference Include="NAudio.WinMM">
       <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.WinMM.dll</HintPath>
     </Reference>
     <Reference Include="NAudio.Wasapi">
       <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Wasapi.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.OdinInspector.Attributes">
+      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll</HintPath>
+    </Reference>
+    <Reference Include="Sirenix.Utilities">
+      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
@@ -509,6 +539,9 @@
     <Reference Include="NAudio">
       <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.dll</HintPath>
     </Reference>
+    <Reference Include="Sirenix.Utilities.Editor">
+      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -517,27 +550,6 @@
     </Reference>
     <Reference Include="Pathfinding.Ionic.Zip.Reduced">
       <HintPath>Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Reflection.Editor">
-      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Reflection.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.OdinInspector.Attributes">
-      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Attributes.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Serialization.Config">
-      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.Config.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Utilities.Editor">
-      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Utilities">
-      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.OdinInspector.Editor">
-      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Sirenix.Serialization">
-      <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.4f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -929,9 +941,6 @@
     <Reference Include="Unity.VisualScripting.Shared.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Shared.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Animation.Rigging.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
@@ -991,6 +1000,9 @@
     </Reference>
     <Reference Include="Unity.InputSystem.ForUI">
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Animation.Rigging.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>

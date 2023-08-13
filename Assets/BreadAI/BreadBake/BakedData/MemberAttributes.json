@@ -1,0 +1,884 @@
+{
+  "$id": "1",
+  "ClassToScriptableObjectProperties": {
+    "$id": "2",
+    "BlobConfiguration": [
+      {
+        "MemberName": "MoveSpeed",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "RotateSpeed",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "Mass",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "SightDistance",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "MinTentacleReach",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "MaxTentacleReach",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "MaxTentacles",
+        "MemberType": "IntegerVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "TentacleHitSpeed",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "DragInsideStomach",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "AngularDragInsideStomach",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "SuckSpeed",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "MassPerCubicFoot",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "DigestDamageDealt",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "GrowthSpeed",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "OnlySeeMask",
+        "MemberType": "LayerMaskVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "ThingsSeen",
+        "MemberType": "Dict_GameObjectToLastSeen",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "ThingsNearby",
+        "MemberType": "GameObjectRuntimeSet",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "ThingNearbyFilter",
+        "MemberType": "UnityLayerVariable",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "Eyes",
+        "MemberType": "GameObjectRuntimeSet",
+        "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      }
+    ],
+    "PreyAnimalConfiguration": [
+      {
+        "MemberName": "OnlySeeMask",
+        "MemberType": "LayerMaskVariable",
+        "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "ThingsSeen",
+        "MemberType": "Dict_GameObjectToLastSeen",
+        "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "IsAlive",
+        "MemberType": "BooleanVariable",
+        "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "MoveSpeed",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "RotateSpeed",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "Mass",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "HitPoints",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "Nutrition",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "SightDistance",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "ThingNearbyFilter",
+        "MemberType": "UnityLayerVariable",
+        "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "ThingsNearby",
+        "MemberType": "GameObjectRuntimeSet",
+        "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "Eyes",
+        "MemberType": "GameObjectRuntimeSet",
+        "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      }
+    ],
+    "Body": [
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      }
+    ],
+    "Brain": [
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "IsAlive",
+        "MemberType": "BooleanVariable",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      }
+    ],
+    "Locomotion": [
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      }
+    ],
+    "Nerves": [
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      }
+    ],
+    "Senses": [
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      }
+    ],
+    "PigBody": [
+      {
+        "MemberName": "IsAlive",
+        "MemberType": "BooleanVariable",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "Mass",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "HitPoints",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "Nutrition",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      }
+    ],
+    "PigBrain": [
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "target",
+        "MemberType": "GameObjectVariable",
+        "declaringTypeName": "PigBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "IsAlive",
+        "MemberType": "BooleanVariable",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      }
+    ],
+    "PigLocomotion": [
+      {
+        "MemberName": "MoveSpeed",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "RotateSpeed",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      }
+    ],
+    "PigNerves": [
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      }
+    ],
+    "PigSenses": [
+      {
+        "MemberName": "SightDistance",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "OnlySeeMask",
+        "MemberType": "LayerMaskVariable",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "Eyes",
+        "MemberType": "GameObjectRuntimeSet",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "ThingsSeen",
+        "MemberType": "Dict_GameObjectToLastSeen",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      }
+    ],
+    "BlobBody": [
+      {
+        "MemberName": "OriginalSize",
+        "MemberType": "Vector3Variable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "BodyRotation",
+        "MemberType": "QuaternionVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "BodyDims",
+        "MemberType": "Vector3Variable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "DigestDamageDealt",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CubeVolume",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "IntersectsPlayer",
+        "MemberType": "GameObjectRuntimeSet",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "ContainedInStomach",
+        "MemberType": "GameObjectRuntimeSet",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentSuckSpeedModifier",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentGrowthSpeedModifier",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentDragInsideStomach",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentAngularDragInsideStomach",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "TentacleHitSpeed",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "StartingStats",
+        "MemberType": "BlobConfiguration",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "MassTarget",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentMassPerCubicFoot",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      }
+    ],
+    "BlobBody_Solid": [
+      {
+        "MemberName": "BodyDims",
+        "MemberType": "Vector3Variable",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "BodyConstraints",
+        "MemberType": "Vector3Variable",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "OriginalSize",
+        "MemberType": "Vector3Variable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "BodyRotation",
+        "MemberType": "QuaternionVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "DigestDamageDealt",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CubeVolume",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "IntersectsPlayer",
+        "MemberType": "GameObjectRuntimeSet",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "ContainedInStomach",
+        "MemberType": "GameObjectRuntimeSet",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentSuckSpeedModifier",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentGrowthSpeedModifier",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentDragInsideStomach",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentAngularDragInsideStomach",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "TentacleHitSpeed",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "StartingStats",
+        "MemberType": "BlobConfiguration",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "MassTarget",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentMassPerCubicFoot",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      }
+    ],
+    "BlobStomach_Segmented": [
+      {
+        "MemberName": "BodyDims",
+        "MemberType": "Vector3Variable",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "BodyConstraints",
+        "MemberType": "Vector3Variable",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "OriginalSize",
+        "MemberType": "Vector3Variable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "BodyRotation",
+        "MemberType": "QuaternionVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "DigestDamageDealt",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CubeVolume",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "IntersectsPlayer",
+        "MemberType": "GameObjectRuntimeSet",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "ContainedInStomach",
+        "MemberType": "GameObjectRuntimeSet",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentSuckSpeedModifier",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentGrowthSpeedModifier",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentDragInsideStomach",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentAngularDragInsideStomach",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "TentacleHitSpeed",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "StartingStats",
+        "MemberType": "BlobConfiguration",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "MassTarget",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentMassPerCubicFoot",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      }
+    ],
+    "BlobBrain": [
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "PlayerIsAlive",
+        "MemberType": "BooleanVariable",
+        "declaringTypeName": "BlobBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "PlayerGameObject",
+        "MemberType": "GameObjectVariable",
+        "declaringTypeName": "BlobBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "IsAlive",
+        "MemberType": "BooleanVariable",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      }
+    ],
+    "BlobLocomotion": [
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentRotationSpeed",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "CurrentMoveSpeed",
+        "MemberType": "FloatVariable",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "StartingStats",
+        "MemberType": "BlobConfiguration",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "BlobDims",
+        "MemberType": "Vector3Variable",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "BodyRotation",
+        "MemberType": "QuaternionVariable",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "RigidbodyObject",
+        "MemberType": "GameObjectVariable",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      }
+    ],
+    "BlobSenses": [
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "StartingStats",
+        "MemberType": "BlobConfiguration",
+        "declaringTypeName": "BlobSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      }
+    ],
+    "TentacleBrain": [
+      {
+        "MemberName": "configuration",
+        "MemberType": "ConfigurationBase",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Property",
+        "Attributes": []
+      },
+      {
+        "MemberName": "target",
+        "MemberType": "GameObjectVariable",
+        "declaringTypeName": "TentacleBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      },
+      {
+        "MemberName": "IsAlive",
+        "MemberType": "BooleanVariable",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "MemberKind": "Field",
+        "Attributes": []
+      }
+    ]
+  }
+}

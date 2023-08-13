@@ -1,0 +1,197 @@
+{
+  "ClassesData": [
+    {
+      "ClassType": "PigBody",
+      "MethodsData": [
+        {
+          "Method": {
+            "MethodName": "BeDigested",
+            "ParameterTypes": [
+              "Single"
+            ]
+          },
+          "Attributes": [
+            {
+              "AttributeTypeName": "AIInvoluntaryAttribute",
+              "AttributeProperties": {
+                "TypeId": [
+                  "AIInvoluntaryAttribute"
+                ]
+              }
+            },
+            {
+              "AttributeTypeName": "AIRequiredFieldFalseAttribute",
+              "AttributeProperties": {
+                "FieldToEvaluate": [
+                  "IAmAlive"
+                ],
+                "TypeId": [
+                  "AIRequiredFieldFalseAttribute"
+                ]
+              }
+            },
+            {
+              "AttributeTypeName": "AIRequiredFieldTrueAttribute",
+              "AttributeProperties": {
+                "FieldToEvaluate": [
+                  "ICanBeDigested"
+                ],
+                "TypeId": [
+                  "AIRequiredFieldTrueAttribute"
+                ]
+              }
+            },
+            {
+              "AttributeTypeName": "AIRequiredRiskAttribute",
+              "AttributeProperties": {
+                "RiskType": [
+                  "IHaveNutrition"
+                ],
+                "TypeId": [
+                  "AIRequiredRiskAttribute"
+                ]
+              }
+            }
+          ],
+          "AttributeEvaluators": []
+        },
+        {
+          "Method": {
+            "MethodName": "BeDamaged",
+            "ParameterTypes": [
+              "Single",
+              "DamageTypeEnum"
+            ]
+          },
+          "Attributes": [
+            {
+              "AttributeTypeName": "AIInvoluntaryAttribute",
+              "AttributeProperties": {
+                "TypeId": [
+                  "AIInvoluntaryAttribute"
+                ]
+              }
+            },
+            {
+              "AttributeTypeName": "AIRequiredRiskAttribute",
+              "AttributeProperties": {
+                "RiskType": [
+                  "IHaveHitPoints"
+                ],
+                "TypeId": [
+                  "AIRequiredRiskAttribute"
+                ]
+              }
+            },
+            {
+              "AttributeTypeName": "AIRequiredRiskAttribute",
+              "AttributeProperties": {
+                "RiskType": [
+                  "ICanDie"
+                ],
+                "TypeId": [
+                  "AIRequiredRiskAttribute"
+                ]
+              }
+            },
+            {
+              "AttributeTypeName": "AIRequiredInputOrAttribute",
+              "AttributeProperties": {
+                "InputTypes": [
+                  "IHaveDigestDamageDealt"
+                ],
+                "TypeId": [
+                  "AIRequiredInputOrAttribute"
+                ]
+              }
+            }
+          ],
+          "AttributeEvaluators": []
+        },
+        {
+          "Method": {
+            "MethodName": "Die",
+            "ParameterTypes": []
+          },
+          "Attributes": [
+            {
+              "AttributeTypeName": "AIInvoluntaryAttribute",
+              "AttributeProperties": {
+                "TypeId": [
+                  "AIInvoluntaryAttribute"
+                ]
+              }
+            },
+            {
+              "AttributeTypeName": "AIRequiredRiskAttribute",
+              "AttributeProperties": {
+                "RiskType": [
+                  "IAmAlive"
+                ],
+                "TypeId": [
+                  "AIRequiredRiskAttribute"
+                ]
+              }
+            },
+            {
+              "AttributeTypeName": "AIOptionalInfluencerAttribute",
+              "AttributeProperties": {
+                "InfluencerType": [
+                  "IHaveHitPoints"
+                ],
+                "TypeId": [
+                  "AIOptionalInfluencerAttribute"
+                ]
+              }
+            }
+          ],
+          "AttributeEvaluators": []
+        }
+      ]
+    },
+    {
+      "ClassType": "PigLocomotion",
+      "MethodsData": [
+        {
+          "Method": {
+            "MethodName": "Move",
+            "ParameterTypes": []
+          },
+          "Attributes": [
+            {
+              "AttributeTypeName": "AIMovementAttribute",
+              "AttributeProperties": {
+                "TypeId": [
+                  "AIMovementAttribute"
+                ]
+              }
+            },
+            {
+              "AttributeTypeName": "AIRequiredInfluencerAttribute",
+              "AttributeProperties": {
+                "InfluencerType": [
+                  "IHaveMoveSpeed"
+                ],
+                "TypeId": [
+                  "AIRequiredInfluencerAttribute"
+                ]
+              }
+            },
+            {
+              "AttributeTypeName": "AIRequiredInfluencerAttribute",
+              "AttributeProperties": {
+                "InfluencerType": [
+                  "IHaveRotateSpeed"
+                ],
+                "TypeId": [
+                  "AIRequiredInfluencerAttribute"
+                ]
+              }
+            }
+          ],
+          "AttributeEvaluators": []
+        }
+      ]
+    }
+  ]
+}

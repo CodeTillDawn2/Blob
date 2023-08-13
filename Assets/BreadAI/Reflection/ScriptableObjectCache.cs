@@ -4,5 +4,6 @@ using System.Reflection;
 
 public class ScriptableObjectCache
 {
-    public Dictionary<Type, List<PropertyInfo>> ClassToScriptableObjectProperties { get; set; } = new Dictionary<Type, List<PropertyInfo>>();
+
+    public Dictionary<string, List<SimpleMemberInfo>> ClassToScriptableObjectProperties { get; set; } = new Dictionary<string, List<SimpleMemberInfo>>();
 }

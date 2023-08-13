@@ -1,126 +1,73 @@
+______________________________
 
-
-
-Starting BakeMappings for BakedMappings.
-Processed type interface IHaveMoveSpeed for mappings from BlobConfiguration to PigLocomotion. Mappings created: 1
-Processed type interface IHaveRotateSpeed for mappings from BlobConfiguration to PigLocomotion. Mappings created: 1
-Processed type interface ICanSee for mappings from BlobConfiguration to PigSenses. Mappings created: 3
-Processed type interface IHaveDigestDamageDealt for mappings from BlobConfiguration to BlobBody. Mappings created: 1
-Processed type interface IHaveDigestDamageDealt for mappings from BlobConfiguration to BlobBody_Solid. Mappings created: 1
-Processed type interface IHaveDigestDamageDealt for mappings from BlobConfiguration to BlobStomach_Segmented. Mappings created: 1
-Processed type interface IHaveEyes for mappings from BlobConfiguration to PigSenses. Mappings created: 1
-Processed type interface IUseSightBox for mappings from BlobConfiguration to PigSenses. Mappings created: 1
-Processed type interface IHaveMass for mappings from BlobConfiguration to PigBody. Mappings created: 1
-Processed type interface ICanBeDigested for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 0
-Processed type interface IHaveMoveSpeed for mappings from PreyAnimalConfiguration to PigLocomotion. Mappings created: 1
-Processed type interface ICanDie for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 0
-Processed type interface IHaveNutrition for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 1
-Processed type interface IHaveRotateSpeed for mappings from PreyAnimalConfiguration to PigLocomotion. Mappings created: 1
-Processed type interface ICanSee for mappings from PreyAnimalConfiguration to PigSenses. Mappings created: 3
-Processed type interface IUseMeshRenderer for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 1
-Processed type interface IHaveEyes for mappings from PreyAnimalConfiguration to PigSenses. Mappings created: 1
-Processed type interface IUseSightBox for mappings from PreyAnimalConfiguration to PigSenses. Mappings created: 1
-Processed type interface IHaveHitPoints for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 1
-Processed type interface IAmAlive for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 1
-Processed type interface IHaveMass for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 1
-Processed type interface ICanBeDamaged for mappings from PreyAnimalConfiguration to PigBody. Mappings created: 0
-Total time taken: 0.0123321 seconds.
-
-
-
-Starting BakeCharacterSystemsToConfigMappings.
+Starting BakeSystemToConfigMapping.
 Found 3 derived types for base type Brain.
-Populated 3 ConfigurationBase types for PigBrain that implement all required interfaces.
-Populated 3 ConfigurationBase types for BlobBrain that implement all required interfaces.
-Populated 3 ConfigurationBase types for TentacleBrain that implement all required interfaces.
+Populated 4 ConfigurationBase types for PigBrain that implement all required interfaces.
+Populated 4 ConfigurationBase types for BlobBrain that implement all required interfaces.
+Populated 4 ConfigurationBase types for TentacleBrain that implement all required interfaces.
 Found 3 derived types for base type Body.
-Populated 2 ConfigurationBase types for PigBody that implement all required interfaces.
+Populated 3 ConfigurationBase types for PigBody that implement all required interfaces.
 Populated 2 ConfigurationBase types for BlobBody_Solid that implement all required interfaces.
 Populated 2 ConfigurationBase types for BlobStomach_Segmented that implement all required interfaces.
 Found 1 derived types for base type Nerves.
-Populated 3 ConfigurationBase types for PigNerves that implement all required interfaces.
+Populated 4 ConfigurationBase types for PigNerves that implement all required interfaces.
 Found 2 derived types for base type Senses.
-Populated 3 ConfigurationBase types for PigSenses that implement all required interfaces.
-Populated 3 ConfigurationBase types for BlobSenses that implement all required interfaces.
+Populated 4 ConfigurationBase types for PigSenses that implement all required interfaces.
+Populated 4 ConfigurationBase types for BlobSenses that implement all required interfaces.
 Found 2 derived types for base type Locomotion.
-Populated 3 ConfigurationBase types for PigLocomotion that implement all required interfaces.
-Populated 3 ConfigurationBase types for BlobLocomotion that implement all required interfaces.
-PopulateDerivedTypeDictionary completed in: 0.9278149 seconds.
+Populated 4 ConfigurationBase types for PigLocomotion that implement all required interfaces.
+Populated 4 ConfigurationBase types for BlobLocomotion that implement all required interfaces.
+PopulateDerivedTypeDictionary completed in: 0.1691144 seconds.
+______________________________
 
+Starting BakeMemberAttributes.
+Processing class: BlobConfiguration
+Detected 19 ScriptableObject (useable) members in class BlobConfiguration.
+Processing class: PreyAnimalConfiguration
+Detected 12 ScriptableObject (useable) members in class PreyAnimalConfiguration.
+Processing class: Body
+Detected 1 ScriptableObject (useable) members in class Body.
+Processing class: Brain
+Detected 2 ScriptableObject (useable) members in class Brain.
+Processing class: Locomotion
+Detected 1 ScriptableObject (useable) members in class Locomotion.
+Processing class: Nerves
+Detected 1 ScriptableObject (useable) members in class Nerves.
+Processing class: Senses
+Detected 1 ScriptableObject (useable) members in class Senses.
+Processing class: PigBody
+Detected 5 ScriptableObject (useable) members in class PigBody.
+Processing class: PigBrain
+Detected 3 ScriptableObject (useable) members in class PigBrain.
+Processing class: PigLocomotion
+Detected 3 ScriptableObject (useable) members in class PigLocomotion.
+Processing class: PigNerves
+Detected 1 ScriptableObject (useable) members in class PigNerves.
+Processing class: PigSenses
+Detected 5 ScriptableObject (useable) members in class PigSenses.
+Processing class: BlobBody
+Detected 16 ScriptableObject (useable) members in class BlobBody.
+Processing class: BlobBody_Solid
+Detected 17 ScriptableObject (useable) members in class BlobBody_Solid.
+Processing class: BlobStomach_Segmented
+Detected 17 ScriptableObject (useable) members in class BlobStomach_Segmented.
+Processing class: BlobBrain
+Detected 4 ScriptableObject (useable) members in class BlobBrain.
+Processing class: BlobLocomotion
+Detected 7 ScriptableObject (useable) members in class BlobLocomotion.
+Processing class: BlobSenses
+Detected 2 ScriptableObject (useable) members in class BlobSenses.
+Processing class: TentacleBrain
+Detected 3 ScriptableObject (useable) members in class TentacleBrain.
+Total number of classes processed: 19
+Total number of usable members detected: 120
+Total time taken: 0.0605096 seconds.
+______________________________
 
-
-Starting BakeConfigurationInstances for ConfigurationInstances.
-Successfully found and processed configuration instance for: BlobConfiguration at path: Assets/BreadAI/Configurations/Instances/BlobConfiguration.asset
-Successfully found and processed configuration instance for: PreyAnimalConfiguration at path: Assets/BreadAI/Configurations/Instances/PigConfiguration 1.asset
-Successfully found and processed configuration instance for: PreyAnimalConfiguration at path: Assets/BreadAI/Configurations/Instances/PigConfiguration.asset
-Total number of configuration instances processed: 3
-Total time taken: 0.0127348 seconds.
-
-
-
-Starting BakeAttributesInCharacterSystems for AIAttributesCache.
+Starting BakeAttributesInCharacterSystems.
 Processing class: Body
 Processing class: Brain
 Processing class: Locomotion
 Processing class: Nerves
 Processing class: Senses
 Processing class: PigBody
-Attribute AIInvoluntaryAttribute detected for method BeDigested in class PigBody.
-Attribute AIRequiredFieldFalseAttribute detected for method BeDigested in class PigBody.
-Attribute AIRequiredFieldTrueAttribute detected for method BeDigested in class PigBody.
-Attribute AIRequiredRiskAttribute detected for method BeDigested in class PigBody.
-Attribute AIInvoluntaryAttribute detected for method BeDamaged in class PigBody.
-Attribute AIRequiredRiskAttribute detected for method BeDamaged in class PigBody.
-Attribute AIRequiredRiskAttribute detected for method BeDamaged in class PigBody.
-Attribute AIRequiredInputOrAttribute detected for method BeDamaged in class PigBody.
-Attribute AIInvoluntaryAttribute detected for method Die in class PigBody.
-Attribute AIRequiredRiskAttribute detected for method Die in class PigBody.
-Attribute AIOptionalInfluencerAttribute detected for method Die in class PigBody.
-Processing class: PigBrain
-Processing class: PigLocomotion
-Attribute AIMovementAttribute detected for method Move in class PigLocomotion.
-Attribute AIRequiredInfluencerAttribute detected for method Move in class PigLocomotion.
-Attribute AIRequiredInfluencerAttribute detected for method Move in class PigLocomotion.
-Processing class: PigNerves
-Processing class: PigSenses
-Processing class: BlobBody
-Processing class: BlobBody_Solid
-Processing class: BlobStomach_Segmented
-Processing class: BlobBrain
-Processing class: BlobLocomotion
-Processing class: BlobSenses
-Processing class: TentacleBrain
-Total number of classes processed: 2
-Total number of methods with custom attributes: 4
-Total number of custom attributes detected: 14
-Total time taken: 0.0193267 seconds.
-
-
-
-Starting BakeScriptableObjectPropertiesDetection.
-Processing class: Body
-Processing class: Brain
-Processing class: Locomotion
-Processing class: Nerves
-Processing class: Senses
-Processing class: PigBody
-Detected 4 ScriptableObject properties in class PigBody.
-Processing class: PigBrain
-Processing class: PigLocomotion
-Detected 2 ScriptableObject properties in class PigLocomotion.
-Processing class: PigNerves
-Processing class: PigSenses
-Detected 6 ScriptableObject properties in class PigSenses.
-Processing class: BlobBody
-Detected 2 ScriptableObject properties in class BlobBody.
-Processing class: BlobBody_Solid
-Detected 2 ScriptableObject properties in class BlobBody_Solid.
-Processing class: BlobStomach_Segmented
-Detected 2 ScriptableObject properties in class BlobStomach_Segmented.
-Processing class: BlobBrain
-Processing class: BlobLocomotion
-Processing class: BlobSenses
-Processing class: TentacleBrain
-Total number of classes processed: 6
-Total number of ScriptableObject properties detected: 18
-Total time taken: 0.0091842 seconds.

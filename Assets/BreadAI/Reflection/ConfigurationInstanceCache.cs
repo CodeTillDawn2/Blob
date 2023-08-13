@@ -10,8 +10,6 @@ public class ConfigurationInstanceCache
 
     public ConfigurationBase GetConfigurationInstance(string typeName)
     {
-        Debug.Log(typeName);
-
         return Configurations.FirstOrDefault(c => c.ConfigurationInstance.GetType().FullName == typeName)?.ConfigurationInstance;
     }
 }

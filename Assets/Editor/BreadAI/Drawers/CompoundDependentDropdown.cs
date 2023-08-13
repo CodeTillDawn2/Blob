@@ -27,7 +27,7 @@ public class CompoundDependentDropdown : PropertyDrawer
         var primaryTypeSelection = splitValues[0];
         var dependentTypeSelection = splitValues.Length > 1 ? splitValues[1] : "None";
 
-        if (AIEditorBaker.CharacterSystemToConfigMapping.TryGetValue(attributeData.Key, out var primaryDict))
+        if (AIEditorBaker.SystemToConfigMapping.TryGetValue(attributeData.Key, out var primaryDict))
         {
             dataError = false;
             derivedTypeNames = primaryDict.Keys.ToList();
@@ -51,7 +51,7 @@ public class CompoundDependentDropdown : PropertyDrawer
 
     private void UpdateDependentDropdownList(string baseType, string primaryTypeSelection, string dependentTypeSelection)
     {
-        if (AIEditorBaker.CharacterSystemToConfigMapping.ContainsKey(baseType) && AIEditorBaker.CharacterSystemToConfigMapping[baseType].TryGetValue(primaryTypeSelection, out var configs))
+        if (AIEditorBaker.SystemToConfigMapping.ContainsKey(baseType) && AIEditorBaker.SystemToConfigMapping[baseType].TryGetValue(primaryTypeSelection, out var configs))
         {
             dependentTypeNames = configs;
             if (!dependentTypeNames.Contains("None"))

@@ -8,6 +8,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -28,28 +29,28 @@ public static class AIEditorBaker
     /// <summary>
     /// Cache for detected attributes within character systems and their properties.
     /// </summary>
-    public static AttributesCache AIAttributesCache
+    public static AttributesCache MethodAttributes
     {
         get { return AIBakerData.instance.AIAttributesCache; }
         private set { AIBakerData.instance.AIAttributesCache = value; }
     }
 
-    /// <summary>
-    /// Cache of instances that implement the base configuration.
-    /// </summary>
-    public static ConfigurationInstanceCache ConfigurationInstances
-    {
-        get { return AIBakerData.instance.ConfigurationInstances; }
-        private set { AIBakerData.instance.ConfigurationInstances = value; }
-    }
+    ///// <summary>
+    ///// Cache of instances that implement the base configuration.
+    ///// </summary>
+    //public static ConfigurationInstanceCache ConfigurationInstances
+    //{
+    //    get { return AIBakerData.instance.ConfigurationInstances; }
+    //    private set { AIBakerData.instance.ConfigurationInstances = value; }
+    //}
 
     /// <summary>
     /// A nested dictionary containing mappings between classes and their interfaces.
     /// </summary>
-    public static Dictionary<string, Dictionary<string, List<PropertyMapping>>> BakedConfigurationAssignmentLogic = new Dictionary<string, Dictionary<string, List<PropertyMapping>>>();
+    public static Dictionary<string, List<SimpleMemberInfo>> InterfaceData = new Dictionary<string, List<SimpleMemberInfo>>();
 
 
-    public static ScriptableObjectCache ScriptableObjectPropertiesDetection
+    public static ScriptableObjectCache MemberAttributes
     {
         get { return AIBakerData.instance.ScriptableObjectPropertiesDetection; }
         private set { AIBakerData.instance.ScriptableObjectPropertiesDetection = value; }
@@ -65,7 +66,7 @@ public static class AIEditorBaker
     /// Nested dictionary meant to fill out the menu system of the dependent dropdown box on the editor UI for Nerve Systems.
     /// Should be kept fresh after every domain reload.
     /// </summary>
-    public static Dictionary<string, Dictionary<string, List<string>>> CharacterSystemToConfigMapping
+    public static Dictionary<string, Dictionary<string, List<string>>> SystemToConfigMapping
     {
         get { return AIBakerData.instance.CharacterSystemToConfigMapping; }
         set { AIBakerData.instance.CharacterSystemToConfigMapping = value; }
@@ -76,85 +77,158 @@ public static class AIEditorBaker
     /// </summary>
     public static void BakeAI()
     {
-        Debug.Log("Baking...");
+        
+        LogToFile("Starting AI Bake process.");
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
         isFirstLog = true;
-        BakeConfigurationAssignmentLogic();
-        AllConfigInstances = GetAllInstancesOfDerived<ConfigurationBase>(); //Must happen before BakeCharacterSystemsToConfigMappings
-        SerializationUtility.WriteToDisk<Dictionary<string, ScriptableObject>>(AllConfigInstances, AllConfigInstances_Path);
-        //CharacterSystemToConfigMapping = BakeCharacterSystemsToConfigMappings();
-        //SerializationUtility.WriteToDisk<Dictionary<string, Dictionary<string, List<string>>>>(CharacterSystemToConfigMapping, CharacterSystemToConfigMapping_Path);
-        //ConfigurationInstances = BakeConfigurationInstances();
-        //AIAttributesCache = BakeAttributesInCharacterSystems();
-        //ScriptableObjectPropertiesDetection = BakeScriptableObjectPropertiesDetection();
+        BakeConfigurationMappings();
+        BakeMembers();
+        BakeMethods();
+        BakeInterfaces();
+
+        stopwatch.Stop();
+        LogToFile($"AI Bake process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
+        Debug.Log($"AI Bake process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
     }
 
-    public static string CharacterSystemToConfigMapping_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/CharacterSystemToConfigMapping.json";
-    public static string AllConfigInstances_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/AllConfigInstances.json";
 
+
+    private static void BakeConfigurationMappings()
+    {
+        AllConfigInstances = GetAllInstancesOfDerived<ConfigurationBase>(); //Must happen before BakeCharacterSystemsToConfigMappings
+        LogToFileIfError(SerializationUtility.WriteToDisk(AllConfigInstances, AllConfigInstances_Path));
+        SystemToConfigMapping = BakeSystemToConfigMapping();
+        LogToFileIfError(SerializationUtility.WriteToDisk(SystemToConfigMapping, SystemToConfigMapping_Path));
+    }
+
+    private static void LogToFileIfError(string errorMessage)
+    {
+        if (errorMessage != "")
+        {
+            LogToFile("!!!!!!!!!!!!!!");
+            LogToFile("ERROR: " + errorMessage);
+            LogToFile("!!!!!!!!!!!!!!");
+        }
+    }
+
+
+    private static void BakeMembers()
+    {
+        MemberAttributes = BakeMemberAttributes();
+        LogToFileIfError(SerializationUtility.WriteToDisk(MemberAttributes, MemberAttributes_Path));
+    }
+    private static void BakeMethods()
+    {
+        MethodAttributes = BakeAttributesInCharacterSystems();
+        LogToFileIfError(SerializationUtility.WriteToDisk(MethodAttributes, MethodAttributes_Path));
+    }
+
+    private static void BakeInterfaces()
+    {
+        InterfaceData = BakeInterfaceData();
+        LogToFileIfError(SerializationUtility.WriteToDisk(InterfaceData, InterfaceData_Path));
+    }
+
+    public static string SystemToConfigMapping_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/SystemToConfigMapping.json";
+    public static string AllConfigInstances_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/AllConfigInstances.json";
+    public static string MethodAttributes_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/MethodAttributes.json";
+    public static string MemberAttributes_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/MemberAttributes.json";
+    public static string InterfaceData_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/InterfaceData.json";
+    //public static string ConfigurationInstanceCache_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/ConfigurationInstanceCache.json";
 
     /// <summary>
     /// Detects and caches ScriptableObject properties within classes derived from CharacterSystem.
     /// </summary>
     /// <returns>Cache of detected ScriptableObject properties.</returns>
-    public static ScriptableObjectCache BakeScriptableObjectPropertiesDetection()
+    public static ScriptableObjectCache BakeMemberAttributes()
     {
-        LogToFile("");
-        LogToFile("");
-        LogToFile("");
-        LogToFile("Starting BakeScriptableObjectPropertiesDetection.");
+        LogToFile($"______________________________");
+        LogToFile($"");
+        LogToFile($"Starting {System.Reflection.MethodBase.GetCurrentMethod().Name}.");
 
-        ScriptableObjectCache cache = new ScriptableObjectCache();
+        ScriptableObjectCache bakedMemberAttributes = new ScriptableObjectCache();
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
 
-        var derivedTypes = Assembly.GetExecutingAssembly().GetTypes()
-                                   .Where(t => t.IsSubclassOf(typeof(CharacterSystem)));
+        var derivedTypes = allAssemblies.SelectMany(assembly => assembly.GetTypes()
+                                        .Where(t => t.IsSubclassOf(typeof(CharacterSystem)) || t.IsSubclassOf(typeof(ConfigurationBase))))
+                                        .ToList();
 
         if (!derivedTypes.Any())
         {
-            LogToFile("No classes derived from CharacterSystem found.");
+            LogToFile("No classes found.");
         }
 
         foreach (Type type in derivedTypes)
         {
             LogToFile($"Processing class: {type.Name}");
 
-            var scriptableObjectProperties = type.GetInterfaces()
-                .SelectMany(iface => iface.GetProperties())
-                .Where(prop => typeof(ScriptableObject).IsAssignableFrom(prop.PropertyType))
-                .ToList();
+            var allScriptableObjects = new List<SimpleMemberInfo>();
 
-            if (scriptableObjectProperties.Count > 0)
+            // Filter properties by ScriptableObject type
+            var scriptableObjectProperties = type.GetProperties()
+                .Where(prop => typeof(ScriptableObject).IsAssignableFrom(prop.PropertyType))
+                .Select(prop =>
+                {
+                    var info = new SimplePropertyInfo(prop);
+                    info.Attributes.RemoveAll(attr => !(attr is CustomAIAttributeBase));
+                    return (SimpleMemberInfo)info;
+                });
+
+            // Filter fields by ScriptableObject type
+            var scriptableObjectFields = type.GetFields()
+                .Where(field => typeof(ScriptableObject).IsAssignableFrom(field.FieldType))
+                .Select(field =>
+                {
+                    var info = new SimpleFieldInfo(field);
+                    info.Attributes.RemoveAll(attr => !(attr is CustomAIAttributeBase));
+                    return (SimpleMemberInfo)info;
+                });
+
+            allScriptableObjects.AddRange(scriptableObjectProperties);
+            allScriptableObjects.AddRange(scriptableObjectFields);
+
+            if (allScriptableObjects.Count > 0)
             {
-                cache.ClassToScriptableObjectProperties[type] = scriptableObjectProperties;
-                LogToFile($"Detected {scriptableObjectProperties.Count} ScriptableObject properties in class {type.Name}.");
+                bakedMemberAttributes.ClassToScriptableObjectProperties[type.FullName] = allScriptableObjects;
+                LogToFile($"Detected {allScriptableObjects.Count} ScriptableObject (useable) members in class {type.Name}.");
             }
         }
 
         // Confirmation logging at the end
-        LogToFile($"Total number of classes processed: {cache.ClassToScriptableObjectProperties.Keys.Count}");
-        int totalProperties = cache.ClassToScriptableObjectProperties.Sum(kvp => kvp.Value.Count);
-        LogToFile($"Total number of ScriptableObject properties detected: {totalProperties}");
+        int keyCount = bakedMemberAttributes.ClassToScriptableObjectProperties.Keys.Count;
+        LogToFile($"Total number of classes processed: {keyCount}");
+        int totalMembers = bakedMemberAttributes.ClassToScriptableObjectProperties.Sum(kvp => kvp.Value.Count);
+        LogToFile($"Total number of usable members detected: {totalMembers}");
         stopwatch.Stop();
         LogToFile($"Total time taken: {stopwatch.Elapsed.TotalSeconds} seconds.");
 
-        return cache;
+        if (totalMembers == 0 || keyCount == 0)
+        {
+            Debug.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name} returned no results.");
+        }
+
+        return bakedMemberAttributes;
     }
+
 
     /// <summary>
     /// Bakes the relationship between character systems and config instances which can be mapped to them
     /// </summary>
     /// <returns></returns>
-    public static Dictionary<string, Dictionary<string, List<string>>> BakeCharacterSystemsToConfigMappings()
+    public static Dictionary<string, Dictionary<string, List<string>>> BakeSystemToConfigMapping()
     {
-        LogToFile("");
-        LogToFile("");
-        LogToFile("");
-        LogToFile("Starting BakeCharacterSystemsToConfigMappings.");
+        LogToFile($"______________________________");
+        LogToFile($"");
+        LogToFile($"Starting {System.Reflection.MethodBase.GetCurrentMethod().Name}.");
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
+
+        int TotalPopulated = 0;
+        int TotalClassesProcessed = 0;
 
         // Define our base types
         Type[] baseTypes =
@@ -166,22 +240,24 @@ public static class AIEditorBaker
             typeof(Locomotion)
         };
 
-        var mappings = new Dictionary<string, Dictionary<string, List<string>>>();
+        var systemToConfigMappings = new Dictionary<string, Dictionary<string, List<string>>>();
 
         foreach (var baseType in baseTypes)
         {
-            var derivedTypesFromBase = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(type => baseType.IsAssignableFrom(type) && !type.IsAbstract)
-                .ToArray();
-
-            LogToFile($"Found {derivedTypesFromBase.Length} derived types for base type {baseType.FullName}.");
-
-            var innerDictionary = new Dictionary<string, List<string>>();
-
-            foreach (var derivedType in derivedTypesFromBase)
+            List<Type> derivedTypesFromBase = new List<Type>();
+            foreach (Assembly assembly in allAssemblies)
             {
-                var requiredInterfaces = derivedType.GetInterfaces();
+                derivedTypesFromBase.AddRange(assembly.GetTypes().Where(type => baseType.IsAssignableFrom(type) && !type.IsAbstract));
+            }
+
+            LogToFile($"Found {derivedTypesFromBase.Count} derived types for base type {baseType.FullName}.");
+
+            var configDictionary = new Dictionary<string, List<string>>();
+
+            foreach (var characterSystem in derivedTypesFromBase)
+            {
+                TotalClassesProcessed++;
+                var requiredInterfaces = characterSystem.GetInterfaces();
                 string test = "";
 
                 var filteredByInterfaces = AllConfigInstances
@@ -191,26 +267,24 @@ public static class AIEditorBaker
                     .Select(kv => kv.Key)
                     .ToList();
 
-                //var configTypeInstances = AllConfigInstances
-                //    .Where(kv => derivedType.IsAssignableFrom(kv.Value.GetType())
-                //            && requiredInterfaces.All(iface => iface.IsAssignableFrom(kv.Value.GetType())))
-                //    .Select(kv => kv.Key)
-                //    .ToList();
-
                 configTypeInstances.Insert(0, "None");
 
-                innerDictionary[derivedType.FullName] = configTypeInstances;
-
-                LogToFile($"Populated {configTypeInstances.Count} ConfigurationBase types for {derivedType.FullName} that implement all required interfaces.");
+                configDictionary[characterSystem.FullName] = configTypeInstances;
+                TotalPopulated = TotalPopulated + configTypeInstances.Count;
+                LogToFile($"Populated {configTypeInstances.Count} ConfigurationBase types for {characterSystem.FullName} that implement all required interfaces.");
             }
 
-            mappings[baseType.Name] = innerDictionary;
+            systemToConfigMappings[baseType.Name] = configDictionary;
         }
 
         stopwatch.Stop();
         LogToFile($"PopulateDerivedTypeDictionary completed in: {stopwatch.Elapsed.TotalSeconds} seconds.");
-
-        return mappings;
+        if (TotalClassesProcessed == 0 || TotalPopulated == 0)
+        {
+            Debug.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name} returned no results.");
+        }
+        
+        return systemToConfigMappings;
     }
 
     public static Dictionary<string, ScriptableObject> GetAllInstancesOfDerived<T>() where T : ScriptableObject
@@ -241,72 +315,124 @@ public static class AIEditorBaker
         return instances;
     }
 
+    private static Assembly[] allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
 
-    /// <summary>
-    /// Constructs mappings between ConfigurationBase-derived class properties and classes derived from CharacterSystem that implement the same interfaces.
-    /// </summary>
-    public static void BakeConfigurationAssignmentLogic()
+    public static Dictionary<string, List<SimpleMemberInfo>> BakeInterfaceData()
     {
-        LogToFile("");
-        LogToFile("");
-        LogToFile("");
-        LogToFile("Starting BakeMappings for BakedMappings.");
-
-        BakedConfigurationAssignmentLogic.Clear();
+        LogToFile($"______________________________");
+        LogToFile($"");
+        LogToFile($"Starting {System.Reflection.MethodBase.GetCurrentMethod().Name}.");
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
 
-        // Fetch all classes derived from ConfigurationBase
-        var derivedConfigBaseTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(ConfigurationBase)));
+        var resultMappings = new Dictionary<string, List<SimpleMemberInfo>>();
 
-        foreach (var sourceType in derivedConfigBaseTypes)
+        foreach (var assembly in allAssemblies)
         {
-            // Get all the properties of the derived ConfigurationBase type
-            //var properties = sourceType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+            var interfacesWithAttribute = assembly.GetTypes().Where(t => t.IsInterface && t.GetCustomAttributes(typeof(BreadAIInterfaceAttribute), false).Any());
 
-            //foreach (var property in properties)
-            //{
-            // Check if the Configuration implements any interfaces
-            var interfaces = sourceType.GetInterfaces().Where(i => i.GetCustomAttributes(typeof(BreadAIInterfaceAttribute), false).Length > 0);
-
-
-            foreach (var iface in interfaces)
+            foreach (var iface in interfacesWithAttribute)
             {
-                // Find classes that derive from CharacterSystem and implement the same interface as the configuration
-                var potentialDestTypes = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.IsSubclassOf(typeof(CharacterSystem)) && iface.IsAssignableFrom(t));
+                var members = new List<SimpleMemberInfo>();
 
-                foreach (var destType in potentialDestTypes)
+                // Extract fields
+                members.AddRange(iface.GetFields().Select(field => new SimpleMemberInfo(field.Name, field.MemberType.ToString(),
+                    field.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())));
+
+                // Extract properties
+                members.AddRange(iface.GetProperties().Select(prop => new SimpleMemberInfo(prop.Name, prop.MemberType.ToString(),
+                    prop.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())));
+
+                // Extract methods
+                foreach (var method in iface.GetMethods().Where(m => !m.IsSpecialName))
                 {
-                    // Initialize the nested dictionary
-                    if (!BakedConfigurationAssignmentLogic.ContainsKey(destType.FullName))
-                    {
-                        BakedConfigurationAssignmentLogic[destType.FullName] = new Dictionary<string, List<PropertyMapping>>();
-                    }
-
-                    var mappings = BuildPropertyMappings(iface, destType);
-
-                    foreach (var mapping in mappings)
-                    {
-                        mapping.SourceInstanceType = sourceType;  // Set the derived ConfigurationBase type as the source
-                    }
-
-                    BakedConfigurationAssignmentLogic[destType.FullName][iface.Name] = mappings;
-
-                    LogToFile($"Processed type interface {iface.FullName} for mappings from {sourceType.FullName} to {destType.FullName}. Mappings created: {mappings.Count}");
+                    members.Add(new SimpleMethodInfo(method.Name, method.MemberType.DisplayName(),
+                        method.GetParameters().Select(p => p.ParameterType).Select(x => x.FullName).ToList(),
+                        method.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList()));
                 }
+
+                resultMappings[iface.FullName] = members;
+
+                LogToFile($"Processed interface {iface.FullName}. Members found: {members.Count}");
             }
-            //}
         }
 
         stopwatch.Stop();
         LogToFile($"Total time taken: {stopwatch.Elapsed.TotalSeconds} seconds.");
+
+        return resultMappings;
     }
 
 
 
 
+    // This function should return both fields and properties of a given type.
+    public static List<SimpleMemberInfo> GetSimpleMembers(Type type)
+    {
+        List<SimpleMemberInfo> members = new List<SimpleMemberInfo>();
 
+        // Get fields
+        foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Instance))
+        {
+            members.Add(new SimpleFieldInfo(field));
+        }
+
+        // Get properties
+        foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
+        {
+            members.Add(new SimplePropertyInfo(prop));
+        }
+
+        return members;
+    }
+
+    public static List<SimpleMemberInfo> GetBasicMembers(Type type)
+    {
+        var members = new List<SimpleMemberInfo>();
+
+        // Extract fields and properties
+        members.AddRange(type.GetFields(BindingFlags.Public | BindingFlags.Instance).Select(field => 
+            new SimpleMemberInfo(field.Name,field.MemberType.ToString(), field.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())));
+        members.AddRange(type.GetProperties(BindingFlags.Public | BindingFlags.Instance).Select(prop => 
+            new SimpleMemberInfo(prop.Name, prop.MemberType.ToString(), prop.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())));
+
+        return members;
+    }
+
+
+    public static List<SimpleMemberInfo> ExtractSimpleMembers(Type iface, Type destType)
+    {
+        var members = new List<SimpleMemberInfo>();
+
+        // Extract members from the interface
+        var ifaceProperties = iface.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        foreach (var prop in ifaceProperties)
+        {
+            members.Add(new SimplePropertyInfo(prop));
+        }
+
+        var ifaceFields = iface.GetFields(BindingFlags.Public | BindingFlags.Instance);
+        foreach (var field in ifaceFields)
+        {
+            members.Add(new SimpleFieldInfo(field));
+        }
+
+        // Extract members from the destType (CharacterSystem derived class)
+        var destProperties = destType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+        foreach (var prop in destProperties)
+        {
+            members.Add(new SimplePropertyInfo(prop));
+        }
+
+        var destFields = destType.GetFields(BindingFlags.Public | BindingFlags.Instance);
+        foreach (var field in destFields)
+        {
+            members.Add(new SimpleFieldInfo(field));
+        }
+
+        return members;
+    }
 
 
     /// <summary>
@@ -339,74 +465,68 @@ public static class AIEditorBaker
 
 
 
+
     /// <summary>
     /// Detects custom attributes within methods of classes derived from CharacterSystem.
     /// </summary>
     /// <returns>Cache of detected attributes.</returns>
     public static AttributesCache BakeAttributesInCharacterSystems()
     {
-        LogToFile("");
-        LogToFile("");
-        LogToFile("");
-        LogToFile("Starting BakeAttributesInCharacterSystems for AIAttributesCache.");
+        LogToFile($"______________________________");
+        LogToFile($"");
+        LogToFile($"Starting {System.Reflection.MethodBase.GetCurrentMethod().Name}.");
 
         AttributesCache cache = new AttributesCache();
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
 
-        var derivedTypes = Assembly.GetExecutingAssembly().GetTypes()
-                                   .Where(t => t.IsSubclassOf(typeof(CharacterSystem)));
+        var allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+        var derivedTypes = new List<Type>();
+
+        foreach (var assembly in allAssemblies)
+        {
+            derivedTypes.AddRange(assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(CharacterSystem))));
+        }
 
         if (!derivedTypes.Any())
         {
             LogToFile("No classes derived from CharacterSystem found.");
         }
 
+
         foreach (Type type in derivedTypes)
         {
-            ClassData classData = new ClassData { ClassType = type };
+            ClassData classData = new ClassData { ClassType = type.FullName };
             LogToFile($"Processing class: {type.Name}");
 
             MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance);
 
-            if (methods.Length == 0)
-            {
-                LogToFile($"Class {type.Name} has no public instance methods.");
-            }
-
             foreach (var method in methods)
             {
                 var customAttributes = method.GetCustomAttributes()
-                             .Where(attr => attr is CustomAIAttributeBase)
-                             .ToArray();
+                                             .Where(attr => attr is CustomAIAttributeBase)
+                                             .ToArray();
 
+
+
+                var allAttributes = method.GetCustomAttributes().ToArray();
                 if (customAttributes.Length > 0)
                 {
                     MethodData methodData = new MethodData
                     {
-                        Method = method,
-                        Attributes = new HashSet<Attribute>(customAttributes)
+                        Method = new SimpleMethodInfo(method.Name, method.MemberType.DisplayName(), 
+                        method.GetParameters().Select(p => p.ParameterType.Name).ToList(),
+                        method.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())
                     };
 
                     foreach (var attribute in customAttributes)
                     {
+                        SimpleAttributeInfo simpleAttr = new SimpleAttributeInfo(attribute);
+                        methodData.Attributes.Add(simpleAttr);
+
                         LogToFile($"Attribute {attribute.GetType().Name} detected for method {method.Name} in class {type.Name}.");
 
-                        // Baking evaluators
-                        if (attribute is AIRequiredFieldTrueAttribute requiredTrueAttr)
-                        {
-                            Type requiredType = requiredTrueAttr.FieldToEvaluate;
-                            PropertyInfo propInfo = requiredType.GetProperty("Value");
-                            Func<GameObject, bool> evaluator = (go) =>
-                            {
-                                var component = go.GetComponent(requiredType);
-                                return component != null && (bool)propInfo.GetValue(component);
-                            };
-                            methodData.AttributeEvaluators.Add(evaluator);
-                        }
-
-                        // Add similar blocks for other attribute types...
                     }
 
                     classData.MethodsData.Add(methodData);
@@ -419,17 +539,18 @@ public static class AIEditorBaker
             }
         }
 
-        // Confirmation logging at the end
         LogToFile($"Total number of classes processed: {cache.ClassesData.Count}");
         int totalMethods = cache.ClassesData.Sum(cd => cd.MethodsData.Count);
         LogToFile($"Total number of methods with custom attributes: {totalMethods}");
         int totalAttributes = cache.ClassesData.Sum(cd => cd.MethodsData.Sum(md => md.Attributes.Count));
         LogToFile($"Total number of custom attributes detected: {totalAttributes}");
+
         stopwatch.Stop();
         LogToFile($"Total time taken: {stopwatch.Elapsed.TotalSeconds} seconds.");
 
         return cache;
     }
+
 
     /// <summary>
     /// Detects and logs instances derived from ConfigurationBase.
@@ -437,10 +558,9 @@ public static class AIEditorBaker
     /// <returns>Cache of detected configuration instances.</returns>
     public static ConfigurationInstanceCache BakeConfigurationInstances()
     {
-        LogToFile("");
-        LogToFile("");
-        LogToFile("");
-        LogToFile("Starting BakeConfigurationInstances for ConfigurationInstances.");
+        LogToFile($"______________________________");
+        LogToFile($"");
+        LogToFile($"Starting {System.Reflection.MethodBase.GetCurrentMethod().Name}.");
         ConfigurationInstanceCache cache = new ConfigurationInstanceCache();
 
         Stopwatch stopwatch = new Stopwatch();
@@ -494,7 +614,7 @@ public static class AIEditorBaker
     private static void LogToFile(string message)
     {
         // If logging is disabled, simply return.
-        if (!enableLogging) return;
+        //if (!enableLogging) return;
 
         // Determine the path to the log file.
         string path = "C:\\Users\\peter\\Blob\\BakingLogs\\CharacterSystemBakeLog.txt";
