@@ -17,17 +17,17 @@ public class AILibrary : MonoBehaviour
         DontDestroyOnLoad(this.gameObject); // Ensure this object persists between scenes
     }
 
-    public bool AreAttributeConditionsMet(GameObject go, MethodData methodData)
-    {
-        foreach (var evaluator in methodData.AttributeEvaluators)
-        {
-            if (!evaluator(go))
-            {
-                return false;
-            }
-        }
-        return true;
-    }
+    //public bool AreAttributeConditionsMet(GameObject go, SimpleMethodInfo methodData)
+    //{
+    //    foreach (var evaluator in methodData.AttributeEvaluators)
+    //    {
+    //        if (!evaluator(go))
+    //        {
+    //            return false;
+    //        }
+    //    }
+    //    return true;
+    //}
 
 
 }

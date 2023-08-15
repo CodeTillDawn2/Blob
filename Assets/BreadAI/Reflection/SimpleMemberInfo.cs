@@ -1,29 +1,31 @@
 using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 [Serializable]
-public class SimpleMemberInfo
+public abstract class SimpleMemberInfo
 {
-    public enum Kind
-    {
-        Property,
-        Field,
-        Method
-    }
+
 
     public string MemberName { get; set; }
     public string MemberType { get; set; }
-    public Kind MemberKind { get; set; }
+    
+    public Type declaringTypeName { get; set; }
+
+
     public List<SimpleAttributeInfo> Attributes { get; set; } = new List<SimpleAttributeInfo>();
 
-    // We no longer have the delegate representations here
 
-    public SimpleMemberInfo(string name, string type, List<SimpleAttributeInfo> attributeInfos)
+
+    public SimpleMemberInfo(string name, string type, Type declaringType, List<SimpleAttributeInfo> attributeInfos)
     {
         MemberName = name;
         MemberType = type;
+        declaringTypeName = declaringType;
         Attributes = attributeInfos;
+
     }
+
 
     // Introducing virtual methods
     public virtual object GetValue(object target)

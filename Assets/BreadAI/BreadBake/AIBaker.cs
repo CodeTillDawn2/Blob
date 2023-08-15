@@ -8,7 +8,7 @@ public class AIBaker : MonoBehaviour
     /// <summary>
     /// Cache for detected attributes within character systems and their properties.
     /// </summary>
-    public AttributesCache AIAttributesCache { get; private set; }
+    public List<ClassData> AIAttributesCache { get; private set; }
 
     /// <summary>
     /// Cache of instances that implement the base configuration.
@@ -21,7 +21,7 @@ public class AIBaker : MonoBehaviour
     public Dictionary<string, Dictionary<string, List<PropertyMapping>>> BakedConfigurationAssignmentLogic = new Dictionary<string, Dictionary<string, List<PropertyMapping>>>();
 
 
-    public ScriptableObjectCache ScriptableObjectPropertiesDetection { get; private set; }
+    public List<ClassData> ScriptableObjectPropertiesDetection { get; private set; }
 
     /// <summary>
     /// Nested dictionary meant to fill out the menu system of the dependent dropdown box on the editor UI for Nerve Systems.

@@ -67,11 +67,10 @@
     <Compile Include="Assets\Executive\EnemyConsumer.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Markers\IAmImmuneToTargetingByTentacles.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\SerializableDictionary.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\BasicMemberInfo.cs" />
     <Compile Include="Assets\BreadAI\Reflection\SimpleMethodInfo.cs" />
+    <Compile Include="Assets\BreadAI\Reflection\BasicMemberInfo.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveEyes.cs" />
     <Compile Include="Assets\Animation_TentacleDespawn.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\ScriptableObjectCache.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\InContactWithBlobModifier.cs" />
     <Compile Include="Assets\BreadAI\BreadTools\SerializationUtility.cs" />
     <Compile Include="Assets\BreadAI\Attributes\ActionAttributes\AIRequiredFieldFalse.cs" />
@@ -126,7 +125,6 @@
     <Compile Include="Assets\Things\Modifiers\Base\GameObjectInListModifierCondition.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Test\BlobJiggleNew.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveSuckSpeed.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\AttributesCache.cs" />
     <Compile Include="Assets\BreadAI\Reflection\SimpleFieldInfo.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\WrappedFunc.cs" />
     <Compile Include="Assets\BreadAI\Reflection\SimpleMemberInfo.cs" />

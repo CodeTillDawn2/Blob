@@ -1,221 +1,249 @@
 {
+  "$id": "1",
   "IUseMeshRenderer": [
     {
-      "Name": "meshRenderer",
+      "MemberName": "meshRenderer",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "UnityEngine.MeshRenderer, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IUseMeshRenderer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IUseRigidbody": [
     {
-      "Name": "rigidbody",
+      "MemberName": "rigidbody",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "UnityEngine.Rigidbody, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IUseRigidbody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IUseSightBox": [
     {
-      "Name": "sightBox",
+      "MemberName": "sightBox",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "UnityEngine.BoxCollider, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     },
     {
-      "Name": "ThingsNearby",
+      "MemberName": "ThingsNearby",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "GameObjectRuntimeSet, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     },
     {
-      "Name": "ThingNearbyFilter",
+      "MemberName": "ThingNearbyFilter",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "UnityLayerVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IAmAlive": [
     {
-      "Name": "IsAlive",
+      "MemberName": "IsAlive",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "BooleanVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IAmAlive, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IAmImmuneToTargetingByTentacles": [],
   "ICanBeDamaged": [
     {
-      "ReturnType": "System.Void",
-      "ParameterTypes": [
-        "System.Single",
-        "DamageTypeEnum"
-      ],
-      "Name": "BeDamaged",
+      "MemberName": "BeDamaged",
       "MemberType": "Method",
-      "Attributes": []
+      "Accessibility": "Public",
+      "declaringTypeName": "ICanBeDamaged, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "ParameterTypes": [
+        "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+        "DamageTypeEnum, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+      ]
     }
   ],
   "ICanBeDigested": [
     {
-      "ReturnType": "System.Single",
-      "ParameterTypes": [
-        "System.Single"
-      ],
-      "Name": "BeDigested",
+      "MemberName": "BeDigested",
       "MemberType": "Method",
-      "Attributes": []
+      "Accessibility": "Public",
+      "declaringTypeName": "ICanBeDigested, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "ParameterTypes": [
+        "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      ]
     }
   ],
   "ICanDie": [
     {
-      "ReturnType": "System.Void",
-      "ParameterTypes": [],
-      "Name": "Die",
+      "MemberName": "Die",
       "MemberType": "Method",
-      "Attributes": []
+      "Accessibility": "Public",
+      "declaringTypeName": "ICanDie, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "ParameterTypes": []
     }
   ],
   "ICanGainNutrition": [
     {
-      "ReturnType": "System.Void",
-      "ParameterTypes": [
-        "System.Single"
-      ],
-      "Name": "GainNutrition",
+      "MemberName": "GainNutrition",
       "MemberType": "Method",
-      "Attributes": []
+      "Accessibility": "Public",
+      "declaringTypeName": "ICanGainNutrition, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "ParameterTypes": [
+        "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+      ]
     }
   ],
   "ICanSee": [
     {
-      "Name": "SightDistance",
+      "MemberName": "SightDistance",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "ICanSee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     },
     {
-      "Name": "OnlySeeMask",
+      "MemberName": "OnlySeeMask",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "LayerMaskVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "ICanSee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     },
     {
-      "Name": "ThingsSeen",
+      "MemberName": "ThingsSeen",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "Dict_GameObjectToLastSeen, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "ICanSee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveDigestDamageDealt": [
     {
-      "Name": "DigestDamageDealt",
+      "MemberName": "DigestDamageDealt",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveDigestDamageDealt, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     },
     {
-      "Name": "DamageType",
+      "MemberName": "DamageType",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "DamageTypeEnum, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveDigestDamageDealt, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveEyes": [
     {
-      "Name": "Eyes",
+      "MemberName": "Eyes",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "GameObjectRuntimeSet, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveEyes, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveGrowthSpeed": [
     {
-      "Name": "GrowthSpeed",
+      "MemberName": "GrowthSpeed",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveGrowthSpeed, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveHitPoints": [
     {
-      "Name": "HitPoints",
+      "MemberName": "HitPoints",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveHitPoints, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveMass": [
     {
-      "Name": "Mass",
+      "MemberName": "Mass",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveMass, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveMassPerCubicFoot": [
     {
-      "Name": "MassPerCubicFoot",
+      "MemberName": "MassPerCubicFoot",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveMassPerCubicFoot, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveMaxTentacles": [
     {
-      "Name": "MaxTentacles",
+      "MemberName": "MaxTentacles",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "IntegerVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveMaxTentacles, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveMoveSpeed": [
     {
-      "Name": "MoveSpeed",
+      "MemberName": "MoveSpeed",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveMoveSpeed, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveNutrition": [
     {
-      "Name": "Nutrition",
+      "MemberName": "Nutrition",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveNutrition, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveRotateSpeed": [
     {
-      "Name": "RotateSpeed",
+      "MemberName": "RotateSpeed",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveRotateSpeed, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveSuckSpeed": [
     {
-      "Name": "SuckSpeed",
+      "MemberName": "SuckSpeed",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveSuckSpeed, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveTentacleHitSpeed": [
     {
-      "Name": "TentacleHitSpeed",
+      "MemberName": "TentacleHitSpeed",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveTentacleHitSpeed, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveTentacleReach": [
     {
-      "Name": "MinTentacleReach",
+      "MemberName": "MinTentacleReach",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveTentacleReach, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     },
     {
-      "Name": "MaxTentacleReach",
+      "MemberName": "MaxTentacleReach",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveTentacleReach, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveThingsInMyStomach": [
     {
-      "Name": "DragInsideStomach",
+      "MemberName": "DragInsideStomach",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveThingsInMyStomach, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     },
     {
-      "Name": "AngularDragInsideStomach",
+      "MemberName": "AngularDragInsideStomach",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveThingsInMyStomach, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "IHaveThingsSeen": [
     {
-      "Name": "GrowthSpeed",
+      "MemberName": "GrowthSpeed",
       "MemberType": "Property",
-      "Attributes": []
+      "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "IHaveThingsSeen, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ]
 }

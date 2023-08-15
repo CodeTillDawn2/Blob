@@ -4,7 +4,7 @@ using System.Reflection;
 using UnityEngine;
 
 [Serializable]
-public class MethodData
+public class MethodData2
 {
 
     public SimpleMethodInfo Method { get; set; }

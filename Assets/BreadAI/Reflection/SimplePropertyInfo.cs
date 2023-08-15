@@ -5,24 +5,21 @@ using System.Linq;
 
 public class SimplePropertyInfo : SimpleMemberInfo
 {
-    public string declaringTypeName;
+
+    public Type VariableType { get; set; }
+
     [Newtonsoft.Json.JsonIgnore]
-    public PropertyInfo cachedPropertyInfo;
+    public PropertyInfo cachedPropertyInfo { get; set; }
 
-    public SimplePropertyInfo(PropertyInfo propInfo) : base(propInfo.Name, propInfo.PropertyType.FullName, 
-        propInfo.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())
+    public SimplePropertyInfo(PropertyInfo propertyInfo)
+        : base(propertyInfo.Name, "Property", propertyInfo.DeclaringType,
+            propertyInfo.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())
     {
-        MemberKind = Kind.Property;
-        declaringTypeName = propInfo.DeclaringType.AssemblyQualifiedName; // Save the full type name
 
-        // Cache the PropertyInfo
-        cachedPropertyInfo = propInfo;
+        VariableType = propertyInfo.PropertyType;
 
-        foreach (var attr in propInfo.GetCustomAttributes())
-        {
-            if (attr is CustomAIAttributeBase) // Filter by your attribute
-                Attributes.Add(new SimpleAttributeInfo(attr));
-        }
+        // Cache the field info (for future uses without re-reflecting)
+        cachedPropertyInfo = propertyInfo;
     }
 
     public override object GetValue(object target)
@@ -41,13 +38,12 @@ public class SimplePropertyInfo : SimpleMemberInfo
     {
         if (cachedPropertyInfo == null)
         {
-            var type = Type.GetType(declaringTypeName);
-            if (type == null)
+            if (declaringTypeName == null)
             {
                 throw new InvalidOperationException($"Cannot find type: {declaringTypeName}");
             }
 
-            cachedPropertyInfo = type.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+            cachedPropertyInfo = declaringTypeName.GetProperties(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
                                      .FirstOrDefault(p => p.Name == MemberName);
             if (cachedPropertyInfo == null)
             {

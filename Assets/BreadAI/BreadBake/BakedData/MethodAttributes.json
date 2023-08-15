@@ -1,197 +1,2194 @@
-{
-  "ClassesData": [
-    {
-      "ClassType": "PigBody",
-      "MethodsData": [
-        {
-          "Method": {
-            "MethodName": "BeDigested",
-            "ParameterTypes": [
-              "Single"
-            ]
-          },
-          "Attributes": [
-            {
-              "AttributeTypeName": "AIInvoluntaryAttribute",
-              "AttributeProperties": {
-                "TypeId": [
-                  "AIInvoluntaryAttribute"
-                ]
-              }
-            },
-            {
-              "AttributeTypeName": "AIRequiredFieldFalseAttribute",
-              "AttributeProperties": {
-                "FieldToEvaluate": [
-                  "IAmAlive"
-                ],
-                "TypeId": [
-                  "AIRequiredFieldFalseAttribute"
-                ]
-              }
-            },
-            {
-              "AttributeTypeName": "AIRequiredFieldTrueAttribute",
-              "AttributeProperties": {
-                "FieldToEvaluate": [
-                  "ICanBeDigested"
-                ],
-                "TypeId": [
-                  "AIRequiredFieldTrueAttribute"
-                ]
-              }
-            },
-            {
-              "AttributeTypeName": "AIRequiredRiskAttribute",
-              "AttributeProperties": {
-                "RiskType": [
-                  "IHaveNutrition"
-                ],
-                "TypeId": [
-                  "AIRequiredRiskAttribute"
-                ]
-              }
-            }
-          ],
-          "AttributeEvaluators": []
-        },
-        {
-          "Method": {
-            "MethodName": "BeDamaged",
-            "ParameterTypes": [
-              "Single",
-              "DamageTypeEnum"
-            ]
-          },
-          "Attributes": [
-            {
-              "AttributeTypeName": "AIInvoluntaryAttribute",
-              "AttributeProperties": {
-                "TypeId": [
-                  "AIInvoluntaryAttribute"
-                ]
-              }
-            },
-            {
-              "AttributeTypeName": "AIRequiredRiskAttribute",
-              "AttributeProperties": {
-                "RiskType": [
-                  "IHaveHitPoints"
-                ],
-                "TypeId": [
-                  "AIRequiredRiskAttribute"
-                ]
-              }
-            },
-            {
-              "AttributeTypeName": "AIRequiredRiskAttribute",
-              "AttributeProperties": {
-                "RiskType": [
-                  "ICanDie"
-                ],
-                "TypeId": [
-                  "AIRequiredRiskAttribute"
-                ]
-              }
-            },
-            {
-              "AttributeTypeName": "AIRequiredInputOrAttribute",
-              "AttributeProperties": {
-                "InputTypes": [
-                  "IHaveDigestDamageDealt"
-                ],
-                "TypeId": [
-                  "AIRequiredInputOrAttribute"
-                ]
-              }
-            }
-          ],
-          "AttributeEvaluators": []
-        },
-        {
-          "Method": {
-            "MethodName": "Die",
-            "ParameterTypes": []
-          },
-          "Attributes": [
-            {
-              "AttributeTypeName": "AIInvoluntaryAttribute",
-              "AttributeProperties": {
-                "TypeId": [
-                  "AIInvoluntaryAttribute"
-                ]
-              }
-            },
-            {
-              "AttributeTypeName": "AIRequiredRiskAttribute",
-              "AttributeProperties": {
-                "RiskType": [
-                  "IAmAlive"
-                ],
-                "TypeId": [
-                  "AIRequiredRiskAttribute"
-                ]
-              }
-            },
-            {
-              "AttributeTypeName": "AIOptionalInfluencerAttribute",
-              "AttributeProperties": {
-                "InfluencerType": [
-                  "IHaveHitPoints"
-                ],
-                "TypeId": [
-                  "AIOptionalInfluencerAttribute"
-                ]
-              }
-            }
-          ],
-          "AttributeEvaluators": []
-        }
-      ]
-    },
-    {
-      "ClassType": "PigLocomotion",
-      "MethodsData": [
-        {
-          "Method": {
-            "MethodName": "Move",
-            "ParameterTypes": []
-          },
-          "Attributes": [
-            {
-              "AttributeTypeName": "AIMovementAttribute",
-              "AttributeProperties": {
-                "TypeId": [
-                  "AIMovementAttribute"
-                ]
-              }
-            },
-            {
-              "AttributeTypeName": "AIRequiredInfluencerAttribute",
-              "AttributeProperties": {
-                "InfluencerType": [
-                  "IHaveMoveSpeed"
-                ],
-                "TypeId": [
-                  "AIRequiredInfluencerAttribute"
-                ]
-              }
-            },
-            {
-              "AttributeTypeName": "AIRequiredInfluencerAttribute",
-              "AttributeProperties": {
-                "InfluencerType": [
-                  "IHaveRotateSpeed"
-                ],
-                "TypeId": [
-                  "AIRequiredInfluencerAttribute"
-                ]
-              }
-            }
-          ],
-          "AttributeEvaluators": []
-        }
-      ]
-    }
-  ]
-}
+[
+  {
+    "$id": "1",
+    "ClassType": "Body",
+    "MethodsData": [
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Body, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Body, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "2",
+    "ClassType": "Brain",
+    "MethodsData": [
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Update",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "DoActions",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "AddImpulse",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Impulse+ImpulseType, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "System.Func`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+          "ImpulseStep[], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "3",
+    "ClassType": "Locomotion",
+    "MethodsData": [
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Locomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Locomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "4",
+    "ClassType": "Nerves",
+    "MethodsData": [
+      {
+        "MemberName": "get_brain",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Nerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_senses",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Nerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_locomotion",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Nerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_body",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Nerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_NervePlan",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Nerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Nerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "OnEnable",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "Nerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Nerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "AddComponentFromType",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "Nerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "CreateAndAttachComponent",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "Nerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+          "UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "5",
+    "ClassType": "Senses",
+    "MethodsData": [
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Update",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "FixedUpdate",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "OnTriggerEnter",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.Collider, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "OnTriggerExit",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.Collider, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "SeeWithEyes",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ICanSee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IHaveEyes, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "6",
+    "ClassType": "PigBody",
+    "MethodsData": [
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_meshRenderer",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_meshRenderer",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.MeshRenderer, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_IsAlive",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_IsAlive",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "BooleanVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_Mass",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_Mass",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_HitPoints",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_HitPoints",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_Nutrition",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_Nutrition",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "BeDigested",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "BeDamaged",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+          "DamageTypeEnum, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Die",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "7",
+    "ClassType": "PigBrain",
+    "MethodsData": [
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Update",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "DoActions",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "AddImpulse",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Impulse+ImpulseType, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "System.Func`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+          "ImpulseStep[], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "8",
+    "ClassType": "PigLocomotion",
+    "MethodsData": [
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_MoveSpeed",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_MoveSpeed",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_RotateSpeed",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_RotateSpeed",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Move",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "9",
+    "ClassType": "PigNerves",
+    "MethodsData": [
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigNerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigNerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigNerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_brain",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigNerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_senses",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigNerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_locomotion",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigNerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_body",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigNerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_NervePlan",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigNerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "10",
+    "ClassType": "PigSenses",
+    "MethodsData": [
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Update",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "FixedUpdate",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_SightDistance",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_SightDistance",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_OnlySeeMask",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_OnlySeeMask",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "LayerMaskVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_Eyes",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_Eyes",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "GameObjectRuntimeSet, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_ThingsSeen",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_ThingsSeen",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Dict_GameObjectToLastSeen, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_sightBox",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_sightBox",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.BoxCollider, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "set_ThingsNearby",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "get_ThingNearbyFilter",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_ThingNearbyFilter",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Shortcuts+UnityLayers, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "IUseSightBox.get_ThingsNearby",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "IUseSightBox.set_ThingsNearby",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "GameObjectRuntimeSet, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "IUseSightBox.get_ThingNearbyFilter",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "IUseSightBox.set_ThingNearbyFilter",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityLayerVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "OnTriggerEnter",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.Collider, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "OnTriggerExit",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.Collider, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "SeeWithEyes",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ICanSee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IHaveEyes, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "11",
+    "ClassType": "BlobBody",
+    "MethodsData": [
+      {
+        "MemberName": "get_OriginalSize",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_OriginalSize",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Vector3Variable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_BodyRotation",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_BodyRotation",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "QuaternionVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_BodyDims",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_BodyDims",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Vector3Variable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_rb",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_rb",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.Rigidbody, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_DigestDamageDealt",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_DigestDamageDealt",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Update",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "FixedUpdate",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "ResetStats",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "GainNutrition",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "ChangeSize",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "CalculateIntersections",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "ResetCubeDims",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "UnparentEdibles",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "ParentEdibles",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "DigestEnemies",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "SuckInEnemies",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "<SuckInEnemies>b__42_0",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Body, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "12",
+    "ClassType": "BlobBody_Solid",
+    "MethodsData": [
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_BodyDims",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_BodyDims",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Vector3Variable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_BodyConstraints",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_BodyConstraints",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Vector3Variable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_rb",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_rb",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.Rigidbody, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Update",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "FixedUpdate",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "FindObjectsContainedAndTouching",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]&, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+          "System.Collections.Generic.List`1[[UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null]]&, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "CalculateIntersections",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "GetBoxSideSizes",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "ChangeSize",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "ResetCubeDims",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody_Solid, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_OriginalSize",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_OriginalSize",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Vector3Variable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_BodyRotation",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_BodyRotation",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "QuaternionVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_DigestDamageDealt",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_DigestDamageDealt",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "GainNutrition",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "UnparentEdibles",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "ParentEdibles",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "DigestEnemies",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "SuckInEnemies",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "13",
+    "ClassType": "BlobStomach_Segmented",
+    "MethodsData": [
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_BodyDims",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_BodyDims",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Vector3Variable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_BodyConstraints",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_BodyConstraints",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Vector3Variable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_rb",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_rb",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.Rigidbody, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_SubCubeDims",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "AssignSubBoxes",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Update",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "FixedUpdate",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "MoveCubesToMatch",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "RotateForward",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_Vector3_CubeHalfExtents",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "CalculateIntersections",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "GetBoxSideSizes",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.Vector3, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "ChangeSize",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "ResetCubeDims",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobStomach_Segmented, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_OriginalSize",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_OriginalSize",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Vector3Variable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_BodyRotation",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_BodyRotation",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "QuaternionVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_DigestDamageDealt",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_DigestDamageDealt",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "GainNutrition",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "UnparentEdibles",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "ParentEdibles",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "DigestEnemies",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "SuckInEnemies",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Body, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "14",
+    "ClassType": "BlobBrain",
+    "MethodsData": [
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "DoActions",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Update",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "AddImpulse",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Impulse+ImpulseType, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "System.Func`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+          "ImpulseStep[], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "15",
+    "ClassType": "BlobLocomotion",
+    "MethodsData": [
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Update",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "DetectSteps",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "FixedUpdate",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "OnForward",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.InputSystem.InputValue, Unity.InputSystem, Version=1.6.3.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "OnBackward",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.InputSystem.InputValue, Unity.InputSystem, Version=1.6.3.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "OnTurnLeft",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.InputSystem.InputValue, Unity.InputSystem, Version=1.6.3.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "OnTurnRight",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.InputSystem.InputValue, Unity.InputSystem, Version=1.6.3.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Move",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Locomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Locomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "16",
+    "ClassType": "BlobSenses",
+    "MethodsData": [
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "get_OnlySeeMask",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_OnlySeeMask",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Shortcuts+LayerMasks, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Update",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "FixedUpdate",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "OnTriggerEnter",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.Collider, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "OnTriggerExit",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.Collider, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "SeeWithEyes",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Senses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ICanSee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IHaveEyes, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  },
+  {
+    "$id": "17",
+    "ClassType": "TentacleBrain",
+    "MethodsData": [
+      {
+        "MemberName": "get_ExpectedStatsInterfaces",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "TentacleBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Awake",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "TentacleBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "TentacleBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Update",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "TentacleBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "DoActions",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "TentacleBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "Start",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "AddImpulse",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Impulse+ImpulseType, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "System.Func`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+          "ImpulseStep[], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "get_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": []
+      },
+      {
+        "MemberName": "set_configuration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      }
+    ]
+  }
+]

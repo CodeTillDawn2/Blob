@@ -41,7 +41,7 @@ public class AIBakerData : ScriptableObject
     /// <summary>
     /// Cache for detected attributes within character systems and their properties.
     /// </summary>
-    public AttributesCache AIAttributesCache { get; set; }
+    public List<ClassData> AIAttributesCache { get; set; }
 
     ///// <summary>
     ///// Cache of instances that implement the base configuration.
@@ -54,7 +54,7 @@ public class AIBakerData : ScriptableObject
     public Dictionary<string, Dictionary<string, List<PropertyMapping>>> BakedConfigurationAssignmentLogic = new Dictionary<string, Dictionary<string, List<PropertyMapping>>>();
 
 
-    public ScriptableObjectCache ScriptableObjectPropertiesDetection { get; set; }
+    public Dictionary<string, List<SimpleMemberInfo>> ScriptableObjectPropertiesDetection { get; set; }
 
     public Dictionary<string, ScriptableObject> AllConfigInstances { get; set; }
 

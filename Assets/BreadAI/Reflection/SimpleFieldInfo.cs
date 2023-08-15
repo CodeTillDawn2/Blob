@@ -1,29 +1,30 @@
 using System.Reflection;
 using System;
 using System.Linq;
+using Newtonsoft.Json;
 
 [Serializable]
 public class SimpleFieldInfo : SimpleMemberInfo
 {
-    public string declaringTypeName;
-    [NonSerialized]
-    public FieldInfo cachedFieldInfo;
+    
+    [JsonIgnore]
+    public FieldInfo cachedFieldInfo { get; set; }
 
-    public SimpleFieldInfo(FieldInfo fieldInfo) : base(fieldInfo.Name, fieldInfo.FieldType.FullName,
+    public Type VariableType { get; set; }
+    public string Accessibility { get; set; }
+    
+    public SimpleFieldInfo(FieldInfo fieldInfo) : base(fieldInfo.Name, "Field", fieldInfo.DeclaringType,
         fieldInfo.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())
     {
-        MemberKind = Kind.Field;
-        declaringTypeName = fieldInfo.DeclaringType.AssemblyQualifiedName; // Save the full type name
+
+        VariableType = fieldInfo.FieldType;
 
         // Cache the field info (for future uses without re-reflecting)
         cachedFieldInfo = fieldInfo;
 
-        foreach (var attr in fieldInfo.GetCustomAttributes())
-        {
-            if (attr is CustomAIAttributeBase) // Filter by your attribute
-                Attributes.Add(new SimpleAttributeInfo(attr));
-        }
+        Accessibility = fieldInfo.IsPublic ? "Public" : fieldInfo.IsPrivate ? "Private" : fieldInfo.IsFamily ? "Protected" : "Unknown";
     }
+
 
 
     public override object GetValue(object target)
@@ -42,13 +43,12 @@ public class SimpleFieldInfo : SimpleMemberInfo
     {
         if (cachedFieldInfo == null)
         {
-            var type = Type.GetType(declaringTypeName);
-            if (type == null)
+            if (declaringTypeName == null)
             {
                 throw new InvalidOperationException($"Cannot find type: {declaringTypeName}");
             }
 
-            cachedFieldInfo = type.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
+            cachedFieldInfo = declaringTypeName.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance)
                                    .FirstOrDefault(f => f.Name == MemberName);
             if (cachedFieldInfo == null)
             {

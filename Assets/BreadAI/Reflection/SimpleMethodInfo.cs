@@ -2,19 +2,28 @@ using System.Collections.Generic;
 using System;
 using System.Reflection;
 using System.Linq;
+using static UnityEditor.Profiling.FrameDataView;
+using MethodInfo = System.Reflection.MethodInfo;
 
 [Serializable]
 public class SimpleMethodInfo : SimpleMemberInfo
 {
-    public List<string> ParameterTypes { get; set; } = new List<string>();
+    public string ReturnType { get; set; }
+    public List<SimpleParameterInfo> ParameterTypes { get; set; } = new List<SimpleParameterInfo>();
 
+    [Newtonsoft.Json.JsonIgnore]
+    public MethodInfo cachedPropertyInfo { get; set; }
 
+    public string Accessibility { get; set; }
 
-    public SimpleMethodInfo(string methodName, string MethodType, List<string> parameters, List<SimpleAttributeInfo> attributes) 
-        : base(methodName, MethodType, attributes)
+    public SimpleMethodInfo(MethodInfo method)
+        : base(method.Name, "Method", method.DeclaringType,           
+            method.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())
     {
-        MemberKind = Kind.Method;
-        ParameterTypes = parameters;
+        cachedPropertyInfo = method;
+        ReturnType = method.ReturnType.FullName;
+        ParameterTypes = method.GetParameters().Select(x => new SimpleParameterInfo(x)).ToList();
+        Accessibility = method.IsPublic ? "Public" : method.IsPrivate ? "Private" : method.IsFamily ? "Protected" : "Unknown";
     }
 
     public override bool Equals(object obj)

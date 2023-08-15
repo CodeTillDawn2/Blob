@@ -2,6 +2,7 @@
 
 
 
+using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -11,6 +12,7 @@ using System.Reflection;
 using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
+using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using Debug = UnityEngine.Debug;
 
 public static class AIEditorBaker
@@ -29,7 +31,7 @@ public static class AIEditorBaker
     /// <summary>
     /// Cache for detected attributes within character systems and their properties.
     /// </summary>
-    public static AttributesCache MethodAttributes
+    public static List<ClassData> MethodAttributes
     {
         get { return AIBakerData.instance.AIAttributesCache; }
         private set { AIBakerData.instance.AIAttributesCache = value; }
@@ -50,7 +52,7 @@ public static class AIEditorBaker
     public static Dictionary<string, List<SimpleMemberInfo>> InterfaceData = new Dictionary<string, List<SimpleMemberInfo>>();
 
 
-    public static ScriptableObjectCache MemberAttributes
+    public static Dictionary<string, List<SimpleMemberInfo>> MemberAttributes
     {
         get { return AIBakerData.instance.ScriptableObjectPropertiesDetection; }
         private set { AIBakerData.instance.ScriptableObjectPropertiesDetection = value; }
@@ -78,19 +80,33 @@ public static class AIEditorBaker
     public static void BakeAI()
     {
         
-        LogToFile("Starting AI Bake process.");
+
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
         isFirstLog = true;
+        Debug.Log("Baking ConfigurationMappings");
         BakeConfigurationMappings();
+        Debug.Log("Baked ConfigurationMappings");
+        Debug.Log("Baking BakeMembers");
         BakeMembers();
+        Debug.Log("Baked BakeMembers");
+
+        Debug.Log("Baking Methods");
         BakeMethods();
+        Debug.Log("Baked Methods");
+
+        Debug.Log("Baking Interfaces");
         BakeInterfaces();
+        Debug.Log("Baked Interfaces");
 
         stopwatch.Stop();
         LogToFile($"AI Bake process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
         Debug.Log($"AI Bake process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
+
+
     }
+
+
 
 
 
@@ -141,13 +157,13 @@ public static class AIEditorBaker
     /// Detects and caches ScriptableObject properties within classes derived from CharacterSystem.
     /// </summary>
     /// <returns>Cache of detected ScriptableObject properties.</returns>
-    public static ScriptableObjectCache BakeMemberAttributes()
+    public static Dictionary<string, List<SimpleMemberInfo>> BakeMemberAttributes()
     {
         LogToFile($"______________________________");
         LogToFile($"");
         LogToFile($"Starting {System.Reflection.MethodBase.GetCurrentMethod().Name}.");
 
-        ScriptableObjectCache bakedMemberAttributes = new ScriptableObjectCache();
+        Dictionary<string, List<SimpleMemberInfo>> bakedMemberAttributes = new Dictionary<string, List<SimpleMemberInfo>>();
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
@@ -192,15 +208,15 @@ public static class AIEditorBaker
 
             if (allScriptableObjects.Count > 0)
             {
-                bakedMemberAttributes.ClassToScriptableObjectProperties[type.FullName] = allScriptableObjects;
+                bakedMemberAttributes[type.FullName] = allScriptableObjects;
                 LogToFile($"Detected {allScriptableObjects.Count} ScriptableObject (useable) members in class {type.Name}.");
             }
         }
 
         // Confirmation logging at the end
-        int keyCount = bakedMemberAttributes.ClassToScriptableObjectProperties.Keys.Count;
+        int keyCount = bakedMemberAttributes.Keys.Count;
         LogToFile($"Total number of classes processed: {keyCount}");
-        int totalMembers = bakedMemberAttributes.ClassToScriptableObjectProperties.Sum(kvp => kvp.Value.Count);
+        int totalMembers = bakedMemberAttributes.Sum(kvp => kvp.Value.Count);
         LogToFile($"Total number of usable members detected: {totalMembers}");
         stopwatch.Stop();
         LogToFile($"Total time taken: {stopwatch.Elapsed.TotalSeconds} seconds.");
@@ -212,6 +228,7 @@ public static class AIEditorBaker
 
         return bakedMemberAttributes;
     }
+
 
 
     /// <summary>
@@ -337,19 +354,15 @@ public static class AIEditorBaker
                 var members = new List<SimpleMemberInfo>();
 
                 // Extract fields
-                members.AddRange(iface.GetFields().Select(field => new SimpleMemberInfo(field.Name, field.MemberType.ToString(),
-                    field.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())));
+                members.AddRange(iface.GetFields().Select(field => new SimpleFieldInfo(field)));
 
                 // Extract properties
-                members.AddRange(iface.GetProperties().Select(prop => new SimpleMemberInfo(prop.Name, prop.MemberType.ToString(),
-                    prop.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())));
+                members.AddRange(iface.GetProperties().Select(prop => new SimplePropertyInfo(prop)));
 
                 // Extract methods
                 foreach (var method in iface.GetMethods().Where(m => !m.IsSpecialName))
                 {
-                    members.Add(new SimpleMethodInfo(method.Name, method.MemberType.DisplayName(),
-                        method.GetParameters().Select(p => p.ParameterType).Select(x => x.FullName).ToList(),
-                        method.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList()));
+                    members.Add(new SimpleMethodInfo(method));
                 }
 
                 resultMappings[iface.FullName] = members;
@@ -357,6 +370,7 @@ public static class AIEditorBaker
                 LogToFile($"Processed interface {iface.FullName}. Members found: {members.Count}");
             }
         }
+
 
         stopwatch.Stop();
         LogToFile($"Total time taken: {stopwatch.Elapsed.TotalSeconds} seconds.");
@@ -387,52 +401,52 @@ public static class AIEditorBaker
         return members;
     }
 
-    public static List<SimpleMemberInfo> GetBasicMembers(Type type)
-    {
-        var members = new List<SimpleMemberInfo>();
+    //public static List<SimpleMemberInfo> GetBasicMembers(Type type)
+    //{
+    //    var members = new List<SimpleMemberInfo>();
 
-        // Extract fields and properties
-        members.AddRange(type.GetFields(BindingFlags.Public | BindingFlags.Instance).Select(field => 
-            new SimpleMemberInfo(field.Name,field.MemberType.ToString(), field.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())));
-        members.AddRange(type.GetProperties(BindingFlags.Public | BindingFlags.Instance).Select(prop => 
-            new SimpleMemberInfo(prop.Name, prop.MemberType.ToString(), prop.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())));
+    //    // Extract fields and properties
+    //    members.AddRange(type.GetFields(BindingFlags.Public | BindingFlags.Instance).Select(field => 
+    //        new SimpleMemberInfo(field.Name,field.MemberType.ToString(),  field.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())));
+    //    members.AddRange(type.GetProperties(BindingFlags.Public | BindingFlags.Instance).Select(prop => 
+    //        new SimpleMemberInfo(prop.Name, prop.MemberType.ToString(),  prop.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())));
 
-        return members;
-    }
+    //    return members;
+    //}
 
 
-    public static List<SimpleMemberInfo> ExtractSimpleMembers(Type iface, Type destType)
-    {
-        var members = new List<SimpleMemberInfo>();
+    //public static List<SimpleMemberInfo> ExtractSimpleMembers(Type iface, Type destType)
+    //{
+    //    var members = new List<SimpleMemberInfo>();
 
-        // Extract members from the interface
-        var ifaceProperties = iface.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-        foreach (var prop in ifaceProperties)
-        {
-            members.Add(new SimplePropertyInfo(prop));
-        }
+    //    // Extract members from the interface
+    //    var ifaceProperties = iface.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+    //    foreach (var prop in ifaceProperties)
+    //    {
+    //        members.Add(new SimplePropertyInfo(prop));
+    //    }
 
-        var ifaceFields = iface.GetFields(BindingFlags.Public | BindingFlags.Instance);
-        foreach (var field in ifaceFields)
-        {
-            members.Add(new SimpleFieldInfo(field));
-        }
+    //    var ifaceFields = iface.GetFields(BindingFlags.Public | BindingFlags.Instance);
+    //    foreach (var field in ifaceFields)
+    //    {
+    //        members.Add(new SimpleFieldInfo(field));
+    //    }
 
-        // Extract members from the destType (CharacterSystem derived class)
-        var destProperties = destType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-        foreach (var prop in destProperties)
-        {
-            members.Add(new SimplePropertyInfo(prop));
-        }
+    //    // Extract members from the destType (CharacterSystem derived class)
+    //    var destProperties = destType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
+    //    foreach (var prop in destProperties)
+    //    {
+    //        members.Add(new SimplePropertyInfo(prop));
+    //    }
 
-        var destFields = destType.GetFields(BindingFlags.Public | BindingFlags.Instance);
-        foreach (var field in destFields)
-        {
-            members.Add(new SimpleFieldInfo(field));
-        }
+    //    var destFields = destType.GetFields(BindingFlags.Public | BindingFlags.Instance);
+    //    foreach (var field in destFields)
+    //    {
+    //        members.Add(new SimpleFieldInfo(field));
+    //    }
 
-        return members;
-    }
+    //    return members;
+    //}
 
 
     /// <summary>
@@ -470,13 +484,13 @@ public static class AIEditorBaker
     /// Detects custom attributes within methods of classes derived from CharacterSystem.
     /// </summary>
     /// <returns>Cache of detected attributes.</returns>
-    public static AttributesCache BakeAttributesInCharacterSystems()
+    public static List<ClassData> BakeAttributesInCharacterSystems()
     {
         LogToFile($"______________________________");
         LogToFile($"");
         LogToFile($"Starting {System.Reflection.MethodBase.GetCurrentMethod().Name}.");
 
-        AttributesCache cache = new AttributesCache();
+        List<ClassData> cache = new List<ClassData>();
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
@@ -500,49 +514,38 @@ public static class AIEditorBaker
             ClassData classData = new ClassData { ClassType = type.FullName };
             LogToFile($"Processing class: {type.Name}");
 
-            MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.Instance);
+            MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
 
             foreach (var method in methods)
             {
-                var customAttributes = method.GetCustomAttributes()
-                                             .Where(attr => attr is CustomAIAttributeBase)
-                                             .ToArray();
+                // Exclude methods with generic parameters or a generic return type
+                if (method.IsGenericMethod || method.ReturnType.IsGenericType)
+                    continue;
+
+                // Exclude methods that come from UnityEngine.MonoBehaviour or its ancestors
+                if (method.DeclaringType == typeof(UnityEngine.MonoBehaviour) ||
+                    method.DeclaringType == typeof(UnityEngine.Component) ||
+                    method.DeclaringType == typeof(UnityEngine.MonoBehaviour) ||
+                    method.DeclaringType == typeof(System.Object) ||
+                    method.DeclaringType == typeof(UnityEngine.Object) ||
+                    method.DeclaringType == typeof(UnityEngine.Behaviour))
+                    continue;
+
+                classData.MethodsData.Add(new SimpleMethodInfo(method));
 
 
-
-                var allAttributes = method.GetCustomAttributes().ToArray();
-                if (customAttributes.Length > 0)
-                {
-                    MethodData methodData = new MethodData
-                    {
-                        Method = new SimpleMethodInfo(method.Name, method.MemberType.DisplayName(), 
-                        method.GetParameters().Select(p => p.ParameterType.Name).ToList(),
-                        method.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())
-                    };
-
-                    foreach (var attribute in customAttributes)
-                    {
-                        SimpleAttributeInfo simpleAttr = new SimpleAttributeInfo(attribute);
-                        methodData.Attributes.Add(simpleAttr);
-
-                        LogToFile($"Attribute {attribute.GetType().Name} detected for method {method.Name} in class {type.Name}.");
-
-                    }
-
-                    classData.MethodsData.Add(methodData);
-                }
             }
 
             if (classData.MethodsData.Count > 0)
             {
-                cache.ClassesData.Add(classData);
+                cache.Add(classData);
             }
         }
 
-        LogToFile($"Total number of classes processed: {cache.ClassesData.Count}");
-        int totalMethods = cache.ClassesData.Sum(cd => cd.MethodsData.Count);
+        LogToFile($"Total number of classes processed: {cache.Count}");
+        int totalMethods = cache.Sum(cd => cd.MethodsData.Count);
         LogToFile($"Total number of methods with custom attributes: {totalMethods}");
-        int totalAttributes = cache.ClassesData.Sum(cd => cd.MethodsData.Sum(md => md.Attributes.Count));
+        int totalAttributes = cache.Sum(cd => cd.MethodsData.Sum(md => md.Attributes.Count));
         LogToFile($"Total number of custom attributes detected: {totalAttributes}");
 
         stopwatch.Stop();

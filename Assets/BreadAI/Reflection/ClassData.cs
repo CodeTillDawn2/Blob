@@ -5,5 +5,5 @@ using System.Collections.Generic;
 public class ClassData
 {
     public string ClassType;
-    public List<MethodData> MethodsData = new List<MethodData>();
+    public List<SimpleMethodInfo> MethodsData = new List<SimpleMethodInfo>();
 }
