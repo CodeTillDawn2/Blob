@@ -1,6 +1,6 @@
 ______________________________
 
-Starting BakeSystemToConfigMapping.
+Starting BakeBreadValidConfigurations.
 Found 3 derived types for base type Brain.
 Populated 4 ConfigurationBase types for PigBrain that implement all required interfaces.
 Populated 4 ConfigurationBase types for BlobBrain that implement all required interfaces.
@@ -17,10 +17,10 @@ Populated 4 ConfigurationBase types for BlobSenses that implement all required i
 Found 2 derived types for base type Locomotion.
 Populated 4 ConfigurationBase types for PigLocomotion that implement all required interfaces.
 Populated 4 ConfigurationBase types for BlobLocomotion that implement all required interfaces.
-PopulateDerivedTypeDictionary completed in: 0.2017806 seconds.
+PopulateDerivedTypeDictionary completed in: 0.1706473 seconds.
 ______________________________
 
-Starting BakeMemberAttributes.
+Starting BakeBreadMembers.
 Processing class: BlobConfiguration
 Detected 19 ScriptableObject (useable) members in class BlobConfiguration.
 Processing class: PreyAnimalConfiguration
@@ -61,10 +61,10 @@ Processing class: TentacleBrain
 Detected 3 ScriptableObject (useable) members in class TentacleBrain.
 Total number of classes processed: 19
 Total number of usable members detected: 120
-Total time taken: 0.0658533 seconds.
+Total time taken: 0.0529557 seconds.
 ______________________________
 
-Starting BakeAttributesInCharacterSystems.
+Starting BakeBreadMethods.
 Processing class: Body
 Processing class: Brain
 Processing class: Locomotion
@@ -83,9 +83,9 @@ Processing class: BlobLocomotion
 Processing class: BlobSenses
 Processing class: TentacleBrain
 Total number of classes processed: 17
-Total number of methods with custom attributes: 268
-Total number of custom attributes detected: 101
-Total time taken: 0.0549254 seconds.
+Total number of methods with custom attributes: 76
+Total number of custom attributes detected: 14
+Total time taken: 0.0578976 seconds.
 ______________________________
 
 Starting BakeInterfaceData.
@@ -114,5 +114,6 @@ Processed interface IHaveTentacleHitSpeed. Members found: 1
 Processed interface IHaveTentacleReach. Members found: 2
 Processed interface IHaveThingsInMyStomach. Members found: 2
 Processed interface IHaveThingsSeen. Members found: 1
-Total time taken: 0.0493849 seconds.
-AI Bake process completed in 1.4478896 seconds.
+Total time taken: 0.0482934 seconds.
+Baked CharacterSystem Interface Implementations in 34ms
+AI Bake process completed in 2.7773716 seconds.

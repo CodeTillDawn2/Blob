@@ -5,7 +5,7 @@ using System;
 /// are required for the action to occur.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-public class AIRequiredFieldExistsAttribute : CustomAIAttributeBase
+public class AIRequiredFieldExistsAttribute : BreadAIAttributeBase
 {
     public Type FieldToEvaluate { get; }
 

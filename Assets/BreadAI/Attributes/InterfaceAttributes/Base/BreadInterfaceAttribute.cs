@@ -6,7 +6,7 @@ using System;
 /// necessary for the action to occur.
 /// </summary>
 [AttributeUsage(AttributeTargets.Interface, AllowMultiple = false)]
-public class BreadAIInterfaceAttribute : CustomAIAttributeBase
+public class BreadInterfaceAttribute : BreadAIAttributeBase
 {
 
 }

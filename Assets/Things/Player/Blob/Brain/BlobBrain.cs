@@ -19,8 +19,9 @@ public class BlobBrain : Brain
     string PlayerObjectName = "";
 
     //Unity Functions
-    protected void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         MomentumSensor moSensor = GetComponent<MomentumSensor>();
         if (moSensor == null)
         {

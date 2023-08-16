@@ -5,7 +5,7 @@ using System;
 /// are required to evaluate to a boolean true.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-public class AIRequiredFieldTrueAttribute : CustomAIAttributeBase
+public class AIRequiredFieldTrueAttribute : BreadAIAttributeBase
 {
     public Type FieldToEvaluate { get; }
 

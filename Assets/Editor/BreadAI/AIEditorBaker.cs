@@ -1,18 +1,11 @@
-
-
-
-
-using Sirenix.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
 using Debug = UnityEngine.Debug;
 
 public static class AIEditorBaker
@@ -31,7 +24,7 @@ public static class AIEditorBaker
     /// <summary>
     /// Cache for detected attributes within character systems and their properties.
     /// </summary>
-    public static List<ClassData> MethodAttributes
+    public static List<ClassData> BreadMethods
     {
         get { return AIBakerData.instance.AIAttributesCache; }
         private set { AIBakerData.instance.AIAttributesCache = value; }
@@ -49,20 +42,36 @@ public static class AIEditorBaker
     /// <summary>
     /// A nested dictionary containing mappings between classes and their interfaces.
     /// </summary>
-    public static Dictionary<string, List<SimpleMemberInfo>> InterfaceData = new Dictionary<string, List<SimpleMemberInfo>>();
+    public static Dictionary<string, List<SimpleMemberInfo>> BreadInterfaces
+    {
+        get
+        {
+            return AIBakerData.instance.InterfaceData;
+        }
+        private set
+        {
+            AIBakerData.instance.InterfaceData = value;
+        }
+    }
 
-
-    public static Dictionary<string, List<SimpleMemberInfo>> MemberAttributes
+    public static Dictionary<string, List<SimpleMemberInfo>> BreadDataMembers
     {
         get { return AIBakerData.instance.ScriptableObjectPropertiesDetection; }
         private set { AIBakerData.instance.ScriptableObjectPropertiesDetection = value; }
     }
 
-    public static Dictionary<string, ScriptableObject> AllConfigInstances
+    public static Dictionary<string, ScriptableObject> BreadConfigurations
     {
         get { return AIBakerData.instance.AllConfigInstances; }
         private set { AIBakerData.instance.AllConfigInstances = value; }
     }
+    public static Dictionary<Type, List<Type>> BreadSystemInterfaces
+    {
+        get { return AIBakerData.instance.BreadSystemInterfaces; }
+        private set { AIBakerData.instance.BreadSystemInterfaces = value; }
+    }
+
+
 
     /// <summary>
     /// Nested dictionary meant to fill out the menu system of the dependent dropdown box on the editor UI for Nerve Systems.
@@ -71,15 +80,95 @@ public static class AIEditorBaker
     public static Dictionary<string, Dictionary<string, List<string>>> SystemToConfigMapping
     {
         get { return AIBakerData.instance.CharacterSystemToConfigMapping; }
-        set { AIBakerData.instance.CharacterSystemToConfigMapping = value; }
+        private set { AIBakerData.instance.CharacterSystemToConfigMapping = value; }
     }
+
+
+    private static HashSet<string> unitySpecialMethods = new HashSet<string>
+{
+    // Lifecycle methods
+    "Awake",
+    "Start",
+    "Update",
+    "FixedUpdate",
+    "LateUpdate",
+    "OnEnable",
+    "OnDisable",
+    "OnDestroy",
+    "OnApplicationQuit",
+    "OnApplicationPause",
+    "OnApplicationFocus",
+
+    // Rendering
+    "OnPreCull",
+    "OnPreRender",
+    "OnPostRender",
+    "OnRenderObject",
+    "OnWillRenderObject",
+    "OnBecameVisible",
+    "OnBecameInvisible",
+    "OnDrawGizmos",
+    "OnDrawGizmosSelected",
+    
+    // Collision
+    "OnCollisionEnter",
+    "OnCollisionStay",
+    "OnCollisionExit",
+    "OnCollisionEnter2D",
+    "OnCollisionStay2D",
+    "OnCollisionExit2D",
+    
+    // Trigger
+    "OnTriggerEnter",
+    "OnTriggerStay",
+    "OnTriggerExit",
+    "OnTriggerEnter2D",
+    "OnTriggerStay2D",
+    "OnTriggerExit2D",
+
+    // Mouse and Input
+    "OnMouseDown",
+    "OnMouseUp",
+    "OnMouseDrag",
+    "OnMouseEnter",
+    "OnMouseExit",
+    "OnMouseOver",
+    "OnMouseUpAsButton",
+    
+    // UI related
+    "OnRectTransformDimensionsChange",
+    "OnRectTransformRemoved",
+    "OnBeforeTransformParentChanged",
+    "OnTransformParentChanged",
+    "OnTransformChildrenChanged",
+    
+    // Physics
+    "OnJointBreak",
+    "OnJointBreak2D",
+    
+    // Audio
+    "OnAudioFilterRead",
+    "OnLevelWasLoaded",
+    
+    // Networking (Legacy)
+    "OnPlayerConnected",
+    "OnPlayerDisconnected",
+    "OnServerInitialized",
+    "OnNetworkInstantiate",
+    "OnDisconnectedFromServer",
+    "OnFailedToConnect",
+    "OnFailedToConnectToMasterServer",
+    "OnNetworkLoadedLevel",
+
+
+};
 
     /// <summary>
     /// Coordinates the process of baking all relevant AI and configuration data.
     /// </summary>
-    public static void BakeAI()
+    public static void BakeBread()
     {
-        
+
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
@@ -96,7 +185,7 @@ public static class AIEditorBaker
         Debug.Log("Baked Methods");
 
         Debug.Log("Baking Interfaces");
-        BakeInterfaces();
+        BakeBreadInterfaces();
         Debug.Log("Baked Interfaces");
 
         stopwatch.Stop();
@@ -112,10 +201,10 @@ public static class AIEditorBaker
 
     private static void BakeConfigurationMappings()
     {
-        AllConfigInstances = GetAllInstancesOfDerived<ConfigurationBase>(); //Must happen before BakeCharacterSystemsToConfigMappings
-        LogToFileIfError(SerializationUtility.WriteToDisk(AllConfigInstances, AllConfigInstances_Path));
-        SystemToConfigMapping = BakeSystemToConfigMapping();
-        LogToFileIfError(SerializationUtility.WriteToDisk(SystemToConfigMapping, SystemToConfigMapping_Path));
+        BreadConfigurations = GetAllInstancesOfDerived<ConfigurationBase>(); //Must happen before BakeCharacterSystemsToConfigMappings
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadConfigurations, BreadConfigurations_Path));
+        SystemToConfigMapping = BakeBreadValidConfigurations();
+        LogToFileIfError(SerializationUtility.WriteToDisk(SystemToConfigMapping, BreadValidConfigurations_Path));
     }
 
     private static void LogToFileIfError(string errorMessage)
@@ -131,39 +220,74 @@ public static class AIEditorBaker
 
     private static void BakeMembers()
     {
-        MemberAttributes = BakeMemberAttributes();
-        LogToFileIfError(SerializationUtility.WriteToDisk(MemberAttributes, MemberAttributes_Path));
+        BreadDataMembers = BakeBreadMembers();
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadDataMembers, BreadDataMembersPath));
     }
     private static void BakeMethods()
     {
-        MethodAttributes = BakeAttributesInCharacterSystems();
-        LogToFileIfError(SerializationUtility.WriteToDisk(MethodAttributes, MethodAttributes_Path));
+        BreadMethods = BakeBreadMethods();
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadMethods, BreadMethods_Path));
     }
 
-    private static void BakeInterfaces()
+    private static void BakeBreadInterfaces()
     {
-        InterfaceData = BakeInterfaceData();
-        LogToFileIfError(SerializationUtility.WriteToDisk(InterfaceData, InterfaceData_Path));
+        BreadInterfaces = BakeInterfaceData();
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadInterfaces, BreadInterfaces_Path));
+        BreadSystemInterfaces = BakeBreadSystemInterfaces();
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadSystemInterfaces, BreadSystemInterfaces_Path));
     }
 
-    public static string SystemToConfigMapping_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/SystemToConfigMapping.json";
-    public static string AllConfigInstances_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/AllConfigInstances.json";
-    public static string MethodAttributes_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/MethodAttributes.json";
-    public static string MemberAttributes_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/MemberAttributes.json";
-    public static string InterfaceData_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/InterfaceData.json";
-    //public static string ConfigurationInstanceCache_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/ConfigurationInstanceCache.json";
+
+    public static string BreadValidConfigurations_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadValidConfigurations.json";
+    public static string BreadConfigurations_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadConfigurations.json";
+    public static string BreadMethods_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadMethods.json";
+    public static string BreadDataMembersPath = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadDataMembers.json";
+    public static string BreadInterfaces_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadInterfaces.json";
+    public static string BreadSystemInterfaces_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadSystemInterfaces.json";
+
+
+    private static Dictionary<Type, List<Type>> BakeBreadSystemInterfaces()
+    {
+        var stopwatch = Stopwatch.StartNew();
+        var result = new Dictionary<Type, List<Type>>();
+
+        var characterSystemType = typeof(CharacterSystem);
+        List<Type> types = new List<Type>();
+        foreach (Assembly assemb in allAssemblies)
+        {
+            types.AddRange(assemb.GetTypes().Where(p => characterSystemType.IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract));
+        }
+
+        foreach (var type in types)
+        {
+            var interfaces = type.GetInterfaces()
+                                  .Where(i => i.GetCustomAttribute<BreadInterfaceAttribute>() != null)
+                                  .ToList();
+
+            if (interfaces.Count > 0)
+            {
+                result[type] = interfaces;
+            }
+        }
+
+
+        stopwatch.Stop();
+        LogToFile($"Baked CharacterSystem Interface Implementations in {stopwatch.ElapsedMilliseconds}ms");
+
+        return result;
+    }
 
     /// <summary>
     /// Detects and caches ScriptableObject properties within classes derived from CharacterSystem.
     /// </summary>
     /// <returns>Cache of detected ScriptableObject properties.</returns>
-    public static Dictionary<string, List<SimpleMemberInfo>> BakeMemberAttributes()
+    public static Dictionary<string, List<SimpleMemberInfo>> BakeBreadMembers()
     {
         LogToFile($"______________________________");
         LogToFile($"");
         LogToFile($"Starting {System.Reflection.MethodBase.GetCurrentMethod().Name}.");
 
-        Dictionary<string, List<SimpleMemberInfo>> bakedMemberAttributes = new Dictionary<string, List<SimpleMemberInfo>>();
+        Dictionary<string, List<SimpleMemberInfo>> breadMembers = new Dictionary<string, List<SimpleMemberInfo>>();
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
@@ -189,7 +313,7 @@ public static class AIEditorBaker
                 .Select(prop =>
                 {
                     var info = new SimplePropertyInfo(prop);
-                    info.Attributes.RemoveAll(attr => !(attr is CustomAIAttributeBase));
+                    info.Attributes.RemoveAll(attr => !(attr is BreadAIAttributeBase));
                     return (SimpleMemberInfo)info;
                 });
 
@@ -199,7 +323,7 @@ public static class AIEditorBaker
                 .Select(field =>
                 {
                     var info = new SimpleFieldInfo(field);
-                    info.Attributes.RemoveAll(attr => !(attr is CustomAIAttributeBase));
+                    info.Attributes.RemoveAll(attr => !(attr is BreadAIAttributeBase));
                     return (SimpleMemberInfo)info;
                 });
 
@@ -208,15 +332,15 @@ public static class AIEditorBaker
 
             if (allScriptableObjects.Count > 0)
             {
-                bakedMemberAttributes[type.FullName] = allScriptableObjects;
+                breadMembers[type.FullName] = allScriptableObjects;
                 LogToFile($"Detected {allScriptableObjects.Count} ScriptableObject (useable) members in class {type.Name}.");
             }
         }
 
         // Confirmation logging at the end
-        int keyCount = bakedMemberAttributes.Keys.Count;
+        int keyCount = breadMembers.Keys.Count;
         LogToFile($"Total number of classes processed: {keyCount}");
-        int totalMembers = bakedMemberAttributes.Sum(kvp => kvp.Value.Count);
+        int totalMembers = breadMembers.Sum(kvp => kvp.Value.Count);
         LogToFile($"Total number of usable members detected: {totalMembers}");
         stopwatch.Stop();
         LogToFile($"Total time taken: {stopwatch.Elapsed.TotalSeconds} seconds.");
@@ -226,7 +350,7 @@ public static class AIEditorBaker
             Debug.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name} returned no results.");
         }
 
-        return bakedMemberAttributes;
+        return breadMembers;
     }
 
 
@@ -235,7 +359,7 @@ public static class AIEditorBaker
     /// Bakes the relationship between character systems and config instances which can be mapped to them
     /// </summary>
     /// <returns></returns>
-    public static Dictionary<string, Dictionary<string, List<string>>> BakeSystemToConfigMapping()
+    public static Dictionary<string, Dictionary<string, List<string>>> BakeBreadValidConfigurations()
     {
         LogToFile($"______________________________");
         LogToFile($"");
@@ -277,7 +401,7 @@ public static class AIEditorBaker
                 var requiredInterfaces = characterSystem.GetInterfaces();
                 string test = "";
 
-                var filteredByInterfaces = AllConfigInstances
+                var filteredByInterfaces = BreadConfigurations
                     .Where(kv => requiredInterfaces.All(iface => iface.IsAssignableFrom(kv.Value.GetType()))).ToList();
 
                 var configTypeInstances = filteredByInterfaces
@@ -300,7 +424,7 @@ public static class AIEditorBaker
         {
             Debug.LogError($"{System.Reflection.MethodBase.GetCurrentMethod().Name} returned no results.");
         }
-        
+
         return systemToConfigMappings;
     }
 
@@ -347,7 +471,7 @@ public static class AIEditorBaker
 
         foreach (var assembly in allAssemblies)
         {
-            var interfacesWithAttribute = assembly.GetTypes().Where(t => t.IsInterface && t.GetCustomAttributes(typeof(BreadAIInterfaceAttribute), false).Any());
+            var interfacesWithAttribute = assembly.GetTypes().Where(t => t.IsInterface && t.GetCustomAttributes(typeof(BreadAIAttributeBase), true).Any());
 
             foreach (var iface in interfacesWithAttribute)
             {
@@ -401,52 +525,6 @@ public static class AIEditorBaker
         return members;
     }
 
-    //public static List<SimpleMemberInfo> GetBasicMembers(Type type)
-    //{
-    //    var members = new List<SimpleMemberInfo>();
-
-    //    // Extract fields and properties
-    //    members.AddRange(type.GetFields(BindingFlags.Public | BindingFlags.Instance).Select(field => 
-    //        new SimpleMemberInfo(field.Name,field.MemberType.ToString(),  field.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())));
-    //    members.AddRange(type.GetProperties(BindingFlags.Public | BindingFlags.Instance).Select(prop => 
-    //        new SimpleMemberInfo(prop.Name, prop.MemberType.ToString(),  prop.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())));
-
-    //    return members;
-    //}
-
-
-    //public static List<SimpleMemberInfo> ExtractSimpleMembers(Type iface, Type destType)
-    //{
-    //    var members = new List<SimpleMemberInfo>();
-
-    //    // Extract members from the interface
-    //    var ifaceProperties = iface.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-    //    foreach (var prop in ifaceProperties)
-    //    {
-    //        members.Add(new SimplePropertyInfo(prop));
-    //    }
-
-    //    var ifaceFields = iface.GetFields(BindingFlags.Public | BindingFlags.Instance);
-    //    foreach (var field in ifaceFields)
-    //    {
-    //        members.Add(new SimpleFieldInfo(field));
-    //    }
-
-    //    // Extract members from the destType (CharacterSystem derived class)
-    //    var destProperties = destType.GetProperties(BindingFlags.Public | BindingFlags.Instance);
-    //    foreach (var prop in destProperties)
-    //    {
-    //        members.Add(new SimplePropertyInfo(prop));
-    //    }
-
-    //    var destFields = destType.GetFields(BindingFlags.Public | BindingFlags.Instance);
-    //    foreach (var field in destFields)
-    //    {
-    //        members.Add(new SimpleFieldInfo(field));
-    //    }
-
-    //    return members;
-    //}
 
 
     /// <summary>
@@ -484,7 +562,7 @@ public static class AIEditorBaker
     /// Detects custom attributes within methods of classes derived from CharacterSystem.
     /// </summary>
     /// <returns>Cache of detected attributes.</returns>
-    public static List<ClassData> BakeAttributesInCharacterSystems()
+    public static List<ClassData> BakeBreadMethods()
     {
         LogToFile($"______________________________");
         LogToFile($"");
@@ -518,6 +596,14 @@ public static class AIEditorBaker
 
             foreach (var method in methods)
             {
+                // Exclude methods that are property getters or setters
+                if (method.IsSpecialName && (method.Name.StartsWith("get_") || method.Name.StartsWith("set_")))
+                    continue;
+
+                // Exclude Unity's special methods
+                if (unitySpecialMethods.Contains(method.Name))
+                    continue;
+
                 // Exclude methods with generic parameters or a generic return type
                 if (method.IsGenericMethod || method.ReturnType.IsGenericType)
                     continue;
@@ -532,8 +618,6 @@ public static class AIEditorBaker
                     continue;
 
                 classData.MethodsData.Add(new SimpleMethodInfo(method));
-
-
             }
 
             if (classData.MethodsData.Count > 0)

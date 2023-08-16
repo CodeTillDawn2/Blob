@@ -14,7 +14,7 @@ public class TentacleBrain : Brain
         base.Awake();
     }
 
-    protected void Start()
+    protected override void Start()
     {
 
 

@@ -1,4 +1,4 @@
-[BreadAIInterface]
+[BreadInterface]
 public interface IHaveThingsInMyStomach
 {
     public abstract FloatVariable DragInsideStomach { get; set; }

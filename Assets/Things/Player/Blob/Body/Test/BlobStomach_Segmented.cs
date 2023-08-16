@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
 using static Shortcuts;
@@ -41,9 +40,9 @@ public class BlobStomach_Segmented : BlobBody
     private Dictionary<GameObject, int[]> SubCubeInstructions = new Dictionary<GameObject, int[]>();
 
     protected Vector3 TargetSideLengths;
-    protected void Awake()
+    protected override void Awake()
     {
-
+        base.Awake();
     }
 
 
@@ -90,10 +89,11 @@ public class BlobStomach_Segmented : BlobBody
     }
     protected override void Start()
     {
+        base.Start();
         meshRenderer = MeshObject.GetComponent<MeshRenderer>();
         OriginalMeshSize = meshRenderer.bounds.size;
         AssignSubBoxes();
-        base.Start();
+
 
 
     }
@@ -315,10 +315,7 @@ public class BlobStomach_Segmented : BlobBody
         RaycastHit[] insideStomach = Physics.BoxCastAll(gameObject.transform.position + new Vector3(0, bodyDims.Value.y * .5f, 0),
             Vector3_CubeHalfExtents * .9f,
             transform.up, gameObject.transform.rotation, 0, StomachSees);
-        if (touchingEdge.Count() > 0)
-        {
-            string test = "";
-        }
+
         List<GameObject> NewIntersects = new List<GameObject>();
         List<GameObject> NewInStomach = new List<GameObject>();
 

@@ -1,6 +1,5 @@
 using System;
 using System.Collections.Generic;
-using System.Reflection;
 
 [Serializable]
 public abstract class SimpleMemberInfo
@@ -9,7 +8,7 @@ public abstract class SimpleMemberInfo
 
     public string MemberName { get; set; }
     public string MemberType { get; set; }
-    
+
     public Type declaringTypeName { get; set; }
 
 
@@ -19,6 +18,11 @@ public abstract class SimpleMemberInfo
 
     public SimpleMemberInfo(string name, string type, Type declaringType, List<SimpleAttributeInfo> attributeInfos)
     {
+        if (attributeInfos.Count > 0)
+        {
+            string test = "";
+        }
+
         MemberName = name;
         MemberType = type;
         declaringTypeName = declaringType;

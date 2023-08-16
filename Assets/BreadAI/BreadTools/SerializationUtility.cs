@@ -1,41 +1,54 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.Serialization.Formatters;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Assertions;
-using UnityEngine.Rendering.VirtualTexturing;
-using static UnityEditor.Experimental.AssetDatabaseExperimental.AssetDatabaseCounters;
-using static UnityEditor.Profiling.FrameDataView;
 
 public static class SerializationUtility
 {
 
+using Newtonsoft.Json;
+using System.Collections.Generic;
 
-    // Static method to serialize an object using the default resolver
-    public static string SerializeObject(object obj)
+public static class SerializationHelper
+{
+    /// <summary>
+    /// Converts an object into its JSON representation.
+    /// </summary>
+    /// <param name="obj">Object to serialize.</param>
+    /// <param name="humanReadable">If true, the serialization retains object references, preventing circular issues.</param>
+    /// <returns>A formatted JSON string of the object.</returns>
+    public static string SerializeObject(object obj, bool humanReadable)
     {
         var settings = new JsonSerializerSettings
         {
-            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+            // Determines whether to preserve object references.
+            PreserveReferencesHandling = humanReadable ? PreserveReferencesHandling.Objects : PreserveReferencesHandling.None,
+
+            // Auto-detects object's type during serialization.
             TypeNameHandling = TypeNameHandling.Auto,
+
+            // Custom converters to handle specific serialization cases.
             Converters = new List<JsonConverter>
-        {
-            new InstanceScriptableObjectConverter(),
-            new SimpleMemberConverter()
-        },
-            Formatting = Formatting.Indented
+    {
+        new InstanceScriptableObjectConverter(),
+        new SimpleMemberConverter(),
+        new TypeJsonConverter()
+    },
+
+            // Produces human-readable JSON if the flag is set, otherwise it's compact.
+            Formatting = humanReadable ? Formatting.Indented : Formatting.None
         };
+
+        // Return the serialized JSON string.
         return JsonConvert.SerializeObject(obj, settings);
     }
+
+
 
 
 
@@ -44,11 +57,12 @@ public static class SerializationUtility
     /// This is a list of all known configs which can be serialized. Allows me not to have to test check every time 
     /// since I know there are good configurations
     /// </summary>
-    //private static HashSet<Type> GoodConfigs = new HashSet<Type>() { typeof(Dictionary<string, string>),
-    //                                typeof(Dictionary<String, Dictionary<String, List<String>>>),
-    //                                typeof(Dictionary<String, ScriptableObject>)};
-
-    private static HashSet<Type> GoodConfigs = new HashSet<Type>();
+    private static HashSet<Type> GoodConfigs = new HashSet<Type>() { typeof(List<ClassData>),
+        typeof(Dictionary<String, List<SimpleMemberInfo>>),
+        typeof(Dictionary<String, Dictionary<String, List<String>>>),
+        typeof(Dictionary<String, ScriptableObject>),
+        typeof(Dictionary<Type,Type>)
+    };
 
     public static string GeneratePathForObjectName(string objectName)
     {
@@ -68,14 +82,17 @@ public static class SerializationUtility
         try
         {
             // Use the new SerializationUtility to get the JSON string.
-            string json = SerializationUtility.SerializeObject(dataObject);
+            string json = SerializationUtility.SerializeObject(dataObject, true);
+            string json2 = SerializationUtility.SerializeObject(dataObject, false);
             File.WriteAllText(filePath, json);
+            File.WriteAllText(filePath.Replace(".json", "_readable.json"), json2);
+
 
             string typeo = typeof(T).Name;
             if (!GoodConfigs.Contains(typeof(T)))
             {
                 string testingJson = File.ReadAllText(filePath);
-                T testingObject = SerializationUtility.DeserializeObject<T>(json);
+                T testingObject = SerializationUtility.DeserializeObject<T>(json, true);
                 var comparer = new UnityObjectComparer<T>();
                 if (comparer.Equals(dataObject, testingObject))
                 {
@@ -99,21 +116,24 @@ public static class SerializationUtility
 
 
 
-    public static T DeserializeObject<T>(string json)
+    public static T DeserializeObject<T>(string json, bool useRefPreserveReferencesHandlingObjects)
     {
         var settings = new JsonSerializerSettings
         {
-            PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+            PreserveReferencesHandling = useRefPreserveReferencesHandlingObjects
+                                         ? PreserveReferencesHandling.Objects
+                                         : PreserveReferencesHandling.None,
             TypeNameHandling = TypeNameHandling.Auto,
-            Converters = new List<JsonConverter> { new InstanceScriptableObjectConverter(),
-                //new SimplePropertyInfoConverter(),
-                //                                   new SimpleFieldInfoConverter(),
-                //                                    new SimpleMethodInfoConverter()
-                                                    new SimpleMemberConverter()
-            }
+            Converters = new List<JsonConverter>
+        {
+            new InstanceScriptableObjectConverter(),
+            new SimpleMemberConverter(),
+            new TypeJsonConverter()
+        }
         };
         return JsonConvert.DeserializeObject<T>(json, settings);
     }
+
 
     private static void TestSerializabilityOfObject<T>(T obj, string parentPath = "", int depth = 0)
     {
@@ -123,7 +143,7 @@ public static class SerializationUtility
             return;
         }
 
-        const int MAX_DEPTH = 10; // Change this value based on what's reasonable for your structures.
+        const int MAX_DEPTH = 4; // this is about how deep a custom object might get
 
         if (depth > MAX_DEPTH)
         {
@@ -163,7 +183,7 @@ public static class SerializationUtility
         try
         {
             // Use the new SerializationUtility to get the JSON string.
-            string json = SerializationUtility.SerializeObject(obj);
+            string json = SerializationUtility.SerializeObject(obj, true);
         }
         catch (Exception ex)
         {
@@ -181,12 +201,15 @@ public static class SerializationUtility
 
         public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
         {
-
             var obj = JObject.Load(reader);
 
-            // Use a common identifier in JSON to decide which derived class to instantiate.
-            var memberType = obj["MemberType"].ToString();
+            // Validate the existence of required properties
+            if (!obj.ContainsKey("MemberType") || !obj.ContainsKey("MemberName") || !obj.ContainsKey("declaringTypeName"))
+            {
+                throw new JsonSerializationException("Required properties missing in the JSON data.");
+            }
 
+            var memberType = obj["MemberType"].ToString();
             string MemberName = obj["MemberName"].ToString();
             string declaringTypeName = obj["declaringTypeName"].ToString();
             Type declaringType = Type.GetType(declaringTypeName);
@@ -195,7 +218,6 @@ public static class SerializationUtility
             {
                 var property = declaringType.GetProperty(MemberName);
                 var propInfo = new SimplePropertyInfo(property);
-
                 return propInfo;
             }
             else if (memberType == "Field")
@@ -208,7 +230,7 @@ public static class SerializationUtility
             {
                 Type[] parameterTypes = new Type[0];
 
-                if (obj["ParameterTypes"] is JArray parameterTypesArray)
+                if (obj.TryGetValue("ParameterTypes", out JToken parameterTypesToken) && parameterTypesToken is JArray parameterTypesArray)
                 {
                     int ParameterCount = parameterTypesArray.Count;
                     parameterTypes = new Type[ParameterCount];
@@ -216,19 +238,22 @@ public static class SerializationUtility
                     for (int i = 0; i < ParameterCount; i++)
                     {
                         var paramTypeString = parameterTypesArray[i].ToString();
-
-                        if (string.IsNullOrEmpty(paramTypeString))
+                        if (!string.IsNullOrEmpty(paramTypeString))
                         {
-                            continue;
-
+                            parameterTypes[i] = Type.GetType(paramTypeString);
                         }
-                        parameterTypes[i] = Type.GetType(paramTypeString);
                     }
                 }
-                var method = declaringType.GetMethod(MemberName, 
-                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy, 
+
+                var method = declaringType.GetMethod(MemberName,
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.FlattenHierarchy,
                     null, parameterTypes.Where(type => type != null).ToArray(), null);
-                //var method = declaringType.GetMethod(MemberName, parameterTypes.Where(type => type != null).ToArray());
+
+                if (method == null)
+                {
+                    throw new JsonSerializationException($"Failed to find method: {MemberName} in type: {declaringTypeName}.");
+                }
+
                 var methodInfo = new SimpleMethodInfo(method);
                 return methodInfo;
             }
@@ -236,19 +261,13 @@ public static class SerializationUtility
             {
                 throw new JsonSerializationException("Unknown member type: " + memberType);
             }
-            throw new JsonSerializationException("Unknown member type: " + memberType);
         }
 
 
-
-        private int DebugInt = 0;
-
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
-
-            
-
             JObject obj = new JObject();
+            JArray attributesArray;
 
             if (value is SimplePropertyInfo propInfo)
             {
@@ -256,6 +275,14 @@ public static class SerializationUtility
                 obj["MemberType"] = propInfo.MemberType;
                 obj["VariableType"] = propInfo.VariableType.AssemblyQualifiedName;
                 obj["declaringTypeName"] = propInfo.declaringTypeName.AssemblyQualifiedName;
+
+                attributesArray = JArray.FromObject(propInfo.cachedPropertyInfo.GetCustomAttributes(typeof(BreadAIAttributeBase), true)
+                           .OfType<BreadAIAttributeBase>()
+                           .Select(x => new SimpleAttributeInfo(x))
+                           .ToList(), serializer);
+
+                if (attributesArray.Count > 0)
+                    obj["Attributes"] = attributesArray;
             }
             else if (value is SimpleFieldInfo fieldInfo)
             {
@@ -264,6 +291,14 @@ public static class SerializationUtility
                 obj["Accessibility"] = fieldInfo.Accessibility;
                 obj["VariableType"] = fieldInfo.VariableType.AssemblyQualifiedName;
                 obj["declaringTypeName"] = fieldInfo.declaringTypeName.AssemblyQualifiedName;
+
+                attributesArray = JArray.FromObject(fieldInfo.cachedFieldInfo.GetCustomAttributes(typeof(BreadAIAttributeBase), true)
+                           .OfType<BreadAIAttributeBase>()
+                           .Select(x => new SimpleAttributeInfo(x))
+                           .ToList(), serializer);
+
+                if (attributesArray.Count > 0)
+                    obj["Attributes"] = attributesArray;
             }
             else if (value is SimpleMethodInfo methodInfo)
             {
@@ -286,7 +321,16 @@ public static class SerializationUtility
                     }
                 }
 
-                obj["ParameterTypes"] = JArray.FromObject(parameterTypeNames, serializer);
+                if (parameterTypeNames.Count > 0)
+                    obj["ParameterTypes"] = JArray.FromObject(parameterTypeNames, serializer);
+
+                attributesArray = JArray.FromObject(methodInfo.cachedMethodInfo.GetCustomAttributes(typeof(BreadAIAttributeBase), true)
+                           .OfType<BreadAIAttributeBase>()
+                           .Select(x => new SimpleAttributeInfo(x))
+                           .ToList(), serializer);
+
+                if (attributesArray.Count > 0)
+                    obj["Attributes"] = attributesArray;
             }
             else
             {
@@ -300,11 +344,32 @@ public static class SerializationUtility
         public override bool CanRead => true;
     }
 
+
+    public class TypeJsonConverter : JsonConverter
+    {
+        public override bool CanConvert(Type objectType)
+        {
+            return typeof(Type).IsAssignableFrom(objectType);
+        }
+
+        public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
+        {
+            var type = (Type)value;
+            serializer.Serialize(writer, type.AssemblyQualifiedName);
+        }
+
+        public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+        {
+            var typeName = serializer.Deserialize<string>(reader);
+            return Type.GetType(typeName);
+        }
+    }
+
     public class SimpleParameterInfoConverter : JsonConverter
     {
         public override bool CanConvert(Type objectType)
         {
-            return  objectType == typeof(SimpleParameterInfo);
+            return objectType == typeof(SimpleParameterInfo);
         }
 
         private int DebugReadInt = 0;
@@ -445,7 +510,7 @@ public static class SerializationUtility
     public class UnityObjectComparer<T> : IEqualityComparer<T>
     {
 
-     
+
 
         public bool Equals(T x, T y)
         {
@@ -502,7 +567,7 @@ public static class SerializationUtility
                 return true; // If we reached here, all items in the lists are equal.
             }
 
-          
+
             return true;
         }
 
@@ -516,7 +581,7 @@ public static class SerializationUtility
             return list;
         }
 
- 
+
 
         private bool AreUnityObjectsEqual(UnityEngine.Object x, UnityEngine.Object y)
         {

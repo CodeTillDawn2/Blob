@@ -1,7 +1,7 @@
 /// <summary>
 /// Describes entities capable of seeing.
 /// </summary>
-[BreadAIInterface]
+[BreadInterface]
 public interface ICanSee
 {
     /// <summary>

@@ -1,7 +1,7 @@
 using UnityEngine;
-[BreadAIInterface]
+[BreadInterface]
 public interface IUseRigidbody
 {
-    public abstract Rigidbody rigidbody { get; set; }
+    public abstract Rigidbody MyRigidbody { get; set; }
 
 }

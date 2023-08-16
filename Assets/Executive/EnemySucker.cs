@@ -36,7 +36,7 @@ public class EnemySucker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        string test = "";
+
     }
 
     public IEnumerator SuckInEnemies()

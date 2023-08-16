@@ -6,7 +6,7 @@ using System;
 /// necessary for the action to occur.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-public class AIRequiredRewardAttribute : CustomAIAttributeBase
+public class AIRequiredRewardAttribute : BreadAIAttributeBase
 {
     public Type RewardType { get; }
 

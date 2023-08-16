@@ -217,7 +217,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
     }
 
     [JsonIgnore]
-    public UnityLayerVariable ThingNearbyFilter
+    public UnityLayerVariable ThingsNearbyFilter
     {
         get
         {
@@ -229,7 +229,7 @@ public class BlobConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveRotateS
     }
 
     [JsonIgnore]
-    public BoxCollider sightBox { get; set; }
+    public BoxCollider MySightBox { get; set; }
     [JsonIgnore]
     public GameObjectRuntimeSet Eyes { get; set; }
 }

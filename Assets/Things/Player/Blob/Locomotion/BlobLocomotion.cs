@@ -29,23 +29,23 @@ public class BlobLocomotion : Locomotion
     private bool RotateLeft = false;
     private bool RotateRight = false;
 
-    private void Awake()
+    protected override void Awake()
     {
 
         lastMovedVector = new Vector3(1, 0f, 0f);
 
     }
 
-    void Start()
+    protected override void Start()
     {
-
+        base.Start();
 
         rb = RigidbodyObject.Value.GetComponent<Rigidbody>();
         CurrentMoveSpeed.Value = StartingStats.MoveSpeed.Value;
         CurrentRotationSpeed.Value = StartingStats.RotateSpeed.Value;
     }
 
-    void Update()
+    private void Update()
     {
         DetectSteps();
     }

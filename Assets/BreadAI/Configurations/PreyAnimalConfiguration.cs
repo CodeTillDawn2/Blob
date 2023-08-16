@@ -121,7 +121,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         set { _sightDistance = value.Value; }
     }
     [JsonIgnore]
-    public UnityLayerVariable ThingNearbyFilter
+    public UnityLayerVariable ThingsNearbyFilter
     {
         get
         {
@@ -142,7 +142,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
     }
 
     [JsonIgnore]
-    public BoxCollider sightBox { get; set; }
+    public BoxCollider MySightBox { get; set; }
     [JsonIgnore]
     public GameObjectRuntimeSet Eyes
     {
@@ -153,7 +153,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         set { }
     }
     [JsonIgnore]
-    public MeshRenderer meshRenderer { get; set; }
+    public MeshRenderer MyMeshRenderer { get; set; }
 
     public void BeDamaged(float amount, DamageTypeEnum DamageType) { }
 

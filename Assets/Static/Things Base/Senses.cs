@@ -40,10 +40,16 @@ public abstract class Senses : CharacterSystem
 
     protected virtual void Update()
     {
-        if (this is ICanSee iCanSee && this is IHaveEyes iHaveEyes && this is IUseSightBox iUseSightBox)
+        if (Am(typeof(ICanSee), typeof(IHaveEyes), typeof(IUseSightBox)))
         {
-            SeeWithEyes(iCanSee, iHaveEyes, iUseSightBox);
+            
+            SeeWithEyes(I<ICanSee>(), I<IHaveEyes>(), I<IUseSightBox>());
         }
+
+        //if (Am<ICanSee>(out var iCanSee) && Am<IHaveEyes>(out var iHaveEyes) && Am<IUseSightBox>(out var iUseSightBox))
+        //{
+        //    SeeWithEyes(iCanSee, iHaveEyes, iUseSightBox);
+        //}
 
     }
 
@@ -51,9 +57,9 @@ public abstract class Senses : CharacterSystem
     {
         if (this is ICanSee me && this is IUseSightBox meSB)
         {
-            if (meSB.sightBox.size.x != me.SightDistance.Value)
+            if (meSB.MySightBox.size.x != me.SightDistance.Value)
             {
-                meSB.sightBox.size = new Vector3(me.SightDistance.Value, me.SightDistance.Value, me.SightDistance.Value);
+                meSB.MySightBox.size = new Vector3(me.SightDistance.Value, me.SightDistance.Value, me.SightDistance.Value);
             }
         }
 
@@ -65,18 +71,17 @@ public abstract class Senses : CharacterSystem
         {
             if (col.gameObject == null) return;
 
-            if (col.gameObject.layer != (int)me.ThingNearbyFilter.Value)
+            if (col.gameObject.layer != (int)me.ThingsNearbyFilter.Value)
             {
                 if (!me.ThingsNearby.Contains(col.gameObject)) me.ThingsNearby.Add(col.gameObject);
             }
         }
-
     }
-
 
     protected void OnTriggerExit(Collider col)
     {
-        if (this is IUseSightBox me)
+
+        if (Am<IUseSightBox>(out var me))
         {
             if (col.gameObject == null) return;
             me.ThingsNearby.Remove(col.gameObject);

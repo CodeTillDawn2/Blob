@@ -12,7 +12,7 @@ public static class AIBakerSOInitializer
     private static void ReBakeData()
     {
 
-        AIEditorBaker.BakeAI();
+        AIEditorBaker.BakeBread();
 
     }
 }

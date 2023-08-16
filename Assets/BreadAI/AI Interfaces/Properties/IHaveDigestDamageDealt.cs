@@ -1,4 +1,4 @@
-[BreadAIInterface]
+[BreadInterface]
 public interface IHaveDigestDamageDealt
 {
     public FloatVariable DigestDamageDealt { get; set; }

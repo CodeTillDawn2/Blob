@@ -1,8 +1,8 @@
 using UnityEngine;
 
-[BreadAIInterface]
+[BreadInterface]
 public interface IUseMeshRenderer
 {
-    public abstract MeshRenderer meshRenderer { get; set; }
+    public abstract MeshRenderer MyMeshRenderer { get; set; }
 
 }

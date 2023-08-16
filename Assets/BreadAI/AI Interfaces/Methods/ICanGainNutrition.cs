@@ -1,4 +1,4 @@
-[BreadAIInterface]
+[BreadInterface]
 public interface ICanGainNutrition
 {
     public abstract void GainNutrition(float amount);

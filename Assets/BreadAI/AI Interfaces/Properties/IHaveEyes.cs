@@ -1,7 +1,7 @@
 /// <summary>
 /// Represents entities equipped with physical eyes. Important for determining sight based on specific locations in space.
 /// </summary>
-[BreadAIInterface]
+[BreadInterface]
 public interface IHaveEyes
 {
     /// <summary>

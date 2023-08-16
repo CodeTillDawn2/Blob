@@ -11,14 +11,15 @@ public class BlobSenses : Senses
 
     public Shortcuts.LayerMasks OnlySeeMask { get; set; }
 
-    protected void Awake()
+    protected override void Awake()
     {
+        base.Awake();
     }
 
     // Start is called before the first frame update
-    protected void Start()
+    protected override void Start()
     {
-
+        base.Start();
     }
 
 

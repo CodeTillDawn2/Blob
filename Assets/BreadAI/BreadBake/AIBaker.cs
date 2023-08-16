@@ -1,34 +1,7 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class AIBaker : MonoBehaviour
 {
-
-
-    /// <summary>
-    /// Cache for detected attributes within character systems and their properties.
-    /// </summary>
-    public List<ClassData> AIAttributesCache { get; private set; }
-
-    /// <summary>
-    /// Cache of instances that implement the base configuration.
-    /// </summary>
-    public ConfigurationInstanceCache ConfigurationInstances { get; private set; }
-
-    /// <summary>
-    /// A nested dictionary containing mappings between classes and their interfaces.
-    /// </summary>
-    public Dictionary<string, Dictionary<string, List<PropertyMapping>>> BakedConfigurationAssignmentLogic = new Dictionary<string, Dictionary<string, List<PropertyMapping>>>();
-
-
-    public List<ClassData> ScriptableObjectPropertiesDetection { get; private set; }
-
-    /// <summary>
-    /// Nested dictionary meant to fill out the menu system of the dependent dropdown box on the editor UI for Nerve Systems.
-    /// Should be kept fresh after every domain reload.
-    /// </summary>
-    public Dictionary<string, Dictionary<string, List<string>>> CharacterSystemToConfigMapping = new Dictionary<string, Dictionary<string, List<string>>>();
-
 
 
 
@@ -44,7 +17,7 @@ public class AIBaker : MonoBehaviour
 
         //instance = this;
         DontDestroyOnLoad(this.gameObject); // Ensure this object persists between scenes
-        AIBakerData.instance.LoadBakesFromDisk();
+        AIBakerData.instance.LoadBakesFromDisk(true);
     }
 
     private void FixedUpdate()

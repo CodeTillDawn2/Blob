@@ -104,7 +104,7 @@
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     },
     {
-      "MemberName": "ThingNearbyFilter",
+      "MemberName": "ThingsNearbyFilter",
       "MemberType": "Property",
       "VariableType": "UnityLayerVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -172,7 +172,7 @@
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     },
     {
-      "MemberName": "ThingNearbyFilter",
+      "MemberName": "ThingsNearbyFilter",
       "MemberType": "Property",
       "VariableType": "UnityLayerVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"

@@ -1,8 +1,6 @@
-using System.Collections.Generic;
 using System;
-using System.Reflection;
+using System.Collections.Generic;
 using System.Linq;
-using static UnityEditor.Profiling.FrameDataView;
 using MethodInfo = System.Reflection.MethodInfo;
 
 [Serializable]
@@ -12,15 +10,17 @@ public class SimpleMethodInfo : SimpleMemberInfo
     public List<SimpleParameterInfo> ParameterTypes { get; set; } = new List<SimpleParameterInfo>();
 
     [Newtonsoft.Json.JsonIgnore]
-    public MethodInfo cachedPropertyInfo { get; set; }
+    public MethodInfo cachedMethodInfo { get; set; }
 
     public string Accessibility { get; set; }
 
     public SimpleMethodInfo(MethodInfo method)
-        : base(method.Name, "Method", method.DeclaringType,           
-            method.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())
+        : base(method.Name, "Method", method.DeclaringType,
+            method.GetCustomAttributes(typeof(BreadAIAttributeBase), true)
+                       .OfType<BreadAIAttributeBase>()
+                       .Select(x => new SimpleAttributeInfo(x)).ToList())
     {
-        cachedPropertyInfo = method;
+        cachedMethodInfo = method;
         ReturnType = method.ReturnType.FullName;
         ParameterTypes = method.GetParameters().Select(x => new SimpleParameterInfo(x)).ToList();
         Accessibility = method.IsPublic ? "Public" : method.IsPrivate ? "Private" : method.IsFamily ? "Protected" : "Unknown";

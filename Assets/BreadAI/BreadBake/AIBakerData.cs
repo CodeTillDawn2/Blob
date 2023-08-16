@@ -1,4 +1,4 @@
-using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -24,7 +24,7 @@ public class AIBakerData : ScriptableObject
                     Debug.LogError("AIBakerSO instance not found!");
                 }
             }
-            string test = "";
+
             return _instance;
         }
     }
@@ -42,6 +42,7 @@ public class AIBakerData : ScriptableObject
     /// Cache for detected attributes within character systems and their properties.
     /// </summary>
     public List<ClassData> AIAttributesCache { get; set; }
+    public Dictionary<Type, List<Type>> BreadSystemInterfaces { get; set; }
 
     ///// <summary>
     ///// Cache of instances that implement the base configuration.
@@ -54,9 +55,9 @@ public class AIBakerData : ScriptableObject
     public Dictionary<string, Dictionary<string, List<PropertyMapping>>> BakedConfigurationAssignmentLogic = new Dictionary<string, Dictionary<string, List<PropertyMapping>>>();
 
 
-    public Dictionary<string, List<SimpleMemberInfo>> ScriptableObjectPropertiesDetection { get; set; }
+    public Dictionary<string, List<SimpleMemberInfo>> ScriptableObjectPropertiesDetection = new Dictionary<string, List<SimpleMemberInfo>>();
 
-    public Dictionary<string, ScriptableObject> AllConfigInstances { get; set; }
+    public Dictionary<string, ScriptableObject> AllConfigInstances = new Dictionary<string, ScriptableObject>();
 
     /// <summary>
     /// Nested dictionary meant to fill out the menu system of the dependent dropdown box on the editor UI for Nerve Systems.
@@ -64,23 +65,23 @@ public class AIBakerData : ScriptableObject
     /// </summary>
     public Dictionary<string, Dictionary<string, List<string>>> CharacterSystemToConfigMapping = new Dictionary<string, Dictionary<string, List<string>>>();
 
-
+    public Dictionary<string, List<SimpleMemberInfo>> InterfaceData = new Dictionary<string, List<SimpleMemberInfo>>();
 
     string CharacterSystemToConfigMapping_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/CharacterSystemToConfigMapping.json";
 
 
 
-    internal void LoadBakesFromDisk()
+    internal void LoadBakesFromDisk(bool useRefPreserveReferencesHandlingObjects)
     {
-        CharacterSystemToConfigMapping = ReadFromDisk<Dictionary<string, Dictionary<string, List<string>>>>(CharacterSystemToConfigMapping_Path);
+        CharacterSystemToConfigMapping = ReadFromDisk<Dictionary<string, Dictionary<string, List<string>>>>(CharacterSystemToConfigMapping_Path, useRefPreserveReferencesHandlingObjects);
     }
 
-    public T ReadFromDisk<T>(string filePath)
+    public T ReadFromDisk<T>(string filePath, bool useRefPreserveReferencesHandlingObjects)
     {
         if (File.Exists(filePath))
         {
             string json = File.ReadAllText(filePath);
-            return SerializationUtility.DeserializeObject<T>(json);
+            return SerializationUtility.DeserializeObject<T>(json, useRefPreserveReferencesHandlingObjects);
         }
         else
         {

@@ -24,7 +24,7 @@ public class PigBody : Body, IUseMeshRenderer, IAmAlive, IHaveHitPoints, IHaveNu
     public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
 
 
-    public MeshRenderer meshRenderer { get; set; }
+    public MeshRenderer MyMeshRenderer { get; set; }
     public BooleanVariable IsAlive { get; set; }
     public FloatVariable Mass { get; set; }
     public FloatVariable HitPoints { get; set; }

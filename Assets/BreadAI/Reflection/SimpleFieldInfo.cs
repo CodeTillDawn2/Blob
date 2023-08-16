@@ -1,20 +1,22 @@
-using System.Reflection;
+using Newtonsoft.Json;
 using System;
 using System.Linq;
-using Newtonsoft.Json;
+using System.Reflection;
 
 [Serializable]
 public class SimpleFieldInfo : SimpleMemberInfo
 {
-    
+
     [JsonIgnore]
     public FieldInfo cachedFieldInfo { get; set; }
 
     public Type VariableType { get; set; }
     public string Accessibility { get; set; }
-    
+
     public SimpleFieldInfo(FieldInfo fieldInfo) : base(fieldInfo.Name, "Field", fieldInfo.DeclaringType,
-        fieldInfo.GetCustomAttributes().Select(x => new SimpleAttributeInfo(x)).ToList())
+        fieldInfo.GetCustomAttributes(typeof(BreadAIAttributeBase), true)
+                       .OfType<BreadAIAttributeBase>()
+                       .Select(x => new SimpleAttributeInfo(x)).ToList())
     {
 
         VariableType = fieldInfo.FieldType;

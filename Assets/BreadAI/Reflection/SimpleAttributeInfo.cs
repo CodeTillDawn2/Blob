@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using System;
+using System.Collections.Generic;
 using System.Reflection;
-using Sirenix.OdinInspector.Editor;
 
 [Serializable]
 public class SimpleAttributeInfo
@@ -21,9 +20,13 @@ public class SimpleAttributeInfo
             if (property.GetCustomAttribute<NonSerializedAttribute>() != null)
                 continue;
 
+
             var propertyValue = property.GetValue(attribute);
             if (propertyValue != null)
             {
+
+                if (property.Name == "TypeId") continue; //Don't need to capture this as it is elsewhere in the data structure
+
                 if (!AttributeProperties.ContainsKey(property.Name))
                 {
                     AttributeProperties[property.Name] = new List<string>();

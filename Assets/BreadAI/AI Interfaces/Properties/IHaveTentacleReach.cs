@@ -1,4 +1,4 @@
-[BreadAIInterface]
+[BreadInterface]
 public interface IHaveTentacleReach
 {
     public abstract FloatVariable MinTentacleReach { get; set; }

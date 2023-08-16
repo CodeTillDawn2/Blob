@@ -6,7 +6,7 @@ using System;
 /// the action to occur.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-public class AIOptionalInfluencerAttribute : CustomAIAttributeBase
+public class AIOptionalInfluencerAttribute : BreadAIAttributeBase
 {
     public Type InfluencerType { get; }
 

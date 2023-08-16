@@ -5,6 +5,6 @@ using System;
 /// should still be aware of
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-public class AIAttackAttribute : CustomAIAttributeBase
+public class AIAttackAttribute : BreadAIAttributeBase
 {
 }

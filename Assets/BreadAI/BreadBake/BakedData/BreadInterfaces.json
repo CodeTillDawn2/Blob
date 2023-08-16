@@ -2,7 +2,7 @@
   "$id": "1",
   "IUseMeshRenderer": [
     {
-      "MemberName": "meshRenderer",
+      "MemberName": "MyMeshRenderer",
       "MemberType": "Property",
       "VariableType": "UnityEngine.MeshRenderer, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "IUseMeshRenderer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -10,7 +10,7 @@
   ],
   "IUseRigidbody": [
     {
-      "MemberName": "rigidbody",
+      "MemberName": "MyRigidbody",
       "MemberType": "Property",
       "VariableType": "UnityEngine.Rigidbody, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "IUseRigidbody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -18,7 +18,7 @@
   ],
   "IUseSightBox": [
     {
-      "MemberName": "sightBox",
+      "MemberName": "MySightBox",
       "MemberType": "Property",
       "VariableType": "UnityEngine.BoxCollider, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -30,7 +30,7 @@
       "declaringTypeName": "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     },
     {
-      "MemberName": "ThingNearbyFilter",
+      "MemberName": "ThingsNearbyFilter",
       "MemberType": "Property",
       "VariableType": "UnityLayerVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
@@ -73,8 +73,7 @@
       "MemberName": "Die",
       "MemberType": "Method",
       "Accessibility": "Public",
-      "declaringTypeName": "ICanDie, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "ParameterTypes": []
+      "declaringTypeName": "ICanDie, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "ICanGainNutrition": [

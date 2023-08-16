@@ -6,7 +6,7 @@ using System;
 /// necessary for the action to occur.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-public class AIRequiredRiskAttribute : CustomAIAttributeBase
+public class AIRequiredRiskAttribute : BreadAIAttributeBase
 {
     public Type RiskType { get; }
 

@@ -1,4 +1,3 @@
-using NAudio.Utils;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -40,11 +39,11 @@ public class PigSenses : Senses, ICanSee, IHaveEyes, IUseSightBox
     public LayerMaskVariable OnlySeeMask { get; set; }
     public GameObjectRuntimeSet Eyes { get; set; }
     public Dict_GameObjectToLastSeen ThingsSeen { get; set; }
-    public BoxCollider sightBox { get; set; }
+    public BoxCollider MySightBox { get; set; }
     public List<GameObject> ThingsNearby { get; set; }
     public Shortcuts.UnityLayers ThingNearbyFilter { get; set; }
     GameObjectRuntimeSet IUseSightBox.ThingsNearby { get; set; }
-    UnityLayerVariable IUseSightBox.ThingNearbyFilter { get; set; }
+    UnityLayerVariable IUseSightBox.ThingsNearbyFilter { get; set; }
 
     #endregion
 

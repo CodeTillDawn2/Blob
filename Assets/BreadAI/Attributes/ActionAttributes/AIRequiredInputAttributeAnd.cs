@@ -5,7 +5,7 @@ using System;
 /// as a parameter for this method. If multiple are provided, all are needed.
 /// </summary>
 [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
-public class AIRequiredInputAndAttribute : CustomAIAttributeBase
+public class AIRequiredInputAndAttribute : BreadAIAttributeBase
 {
     public Type[] InputTypes { get; }
 
