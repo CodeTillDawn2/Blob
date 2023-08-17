@@ -120,6 +120,7 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
         }
         set { _sightDistance = value.Value; }
     }
+
     [JsonIgnore]
     public UnityLayerVariable ThingsNearbyFilter
     {

@@ -20,8 +20,6 @@ public class PigNerves : Nerves
     #endregion
 
     #region Interface Fields
-    public static Type[] _expectedStatsInterfaces = null;
-    public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
 
     #endregion
 

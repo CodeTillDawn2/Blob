@@ -1,12 +1,16 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
+using UnityEngine.Analytics;
 
 public abstract class CharacterSystem : MonoBehaviour
 {
 
     public readonly Dictionary<Type, object> interfaces = new Dictionary<Type, object>();
 
+    private Type myType;
 
     public bool Am<U>(out U result) where U : class
     {
@@ -110,96 +114,132 @@ public abstract class CharacterSystem : MonoBehaviour
     #region Private methods
     private void SetupInterfaceDictionary()
     {
-        foreach (var iface in AIBakerData.instance.BreadSystemInterfaces[GetType()])
+        Type currentType = this.GetType();
+        if (AIBakerData.instance.BreadSystemInterfaces.TryGetValue(currentType, out var interfaceTypes))
         {
-            interfaces[iface] = this;
-        }
-    }
-
-    #endregion
-    public ConfigurationBase configuration { get; set; }
-
-    public abstract Type[] ExpectedStatsInterfaces { get; }
-
-    public void AssignConfiguration(ConfigurationBase config = null)
-    {
-
-        AssignComponentProperties();
-        PigSenses senses = PigSenses.instance;
-        if (config != null)
-        {
-            //AssignConfigurationProperties(config);
-            //AssignConfigurationConditionals(config);
-        }
-        enabled = true;
-    }
-
-
-    private void AssignComponentProperties()
-    {
-
-        PigSenses senses = PigSenses.instance;
-        GameObject go = senses.gameObject;
-        string gopath = go.name;
-        if (AIBakerData.instance.BakedConfigurationAssignmentLogic.ContainsKey(GetType().FullName))
-        {
-            var test22 = AIBakerData.instance.BakedConfigurationAssignmentLogic[GetType().FullName];
-            foreach (var interfaceMapping in AIBakerData.instance.BakedConfigurationAssignmentLogic[GetType().FullName])
+            foreach (var iface in interfaceTypes)
             {
-                string test = interfaceMapping.Key + "|" + interfaceMapping.Value;
-                foreach (var propertyMapping in interfaceMapping.Value)
-                {
-                    string test2 = propertyMapping.SourceProperty + "|" + propertyMapping.DestinationProperty;
-                    // Debugging: Print the names of the Source and Destination properties.
-                    Debug.Log($"Property Mapping - Source: {propertyMapping.SourceProperty.Name}, Destination: {propertyMapping.DestinationProperty.Name}");
-
-                    if (typeof(Component).IsAssignableFrom(propertyMapping.DestinationProperty.PropertyType))
-                    {
-                        // Add the component of the desired type if it doesn't already exist.
-                        Component componentInstance = GetComponent(propertyMapping.DestinationProperty.PropertyType);
-                        if (componentInstance == null)
-                        {
-                            componentInstance = gameObject.AddComponent(propertyMapping.DestinationProperty.PropertyType);
-                        }
-
-                        Debug.Log("Successfully added/logged (Component) " + propertyMapping.SourceProperty.Name + " to " + propertyMapping.DestinationProperty.Name);
-                        propertyMapping.DestinationProperty.SetValue(this, componentInstance);
-
-
-                        Component[] componentsOnObject = GetComponents<Component>();
-                        string componentNames = "Components on GameObject after assignment: ";
-                        foreach (var component in componentsOnObject)
-                        {
-                            componentNames += component.GetType().Name + ", ";
-                        }
-                        Debug.Log(componentNames.TrimEnd(',', ' ')); // This will log all the component names attached to the GameObject.
-                    }
-                    else
-                    {
-                        // For non-Component types, retrieve the value from the source.
-                        var sourceInstance = AIBakerData.instance.AllConfigInstances[propertyMapping.SourceInstanceType];
-                        var valueFromSource = propertyMapping.SourceProperty.GetValue(sourceInstance);
-
-                        // Debugging: Print the values of the sourceInstance and valueFromSource.
-                        Debug.Log($"SourceInstance Type: {sourceInstance?.GetType().Name ?? "null"}, ValueFromSource: {valueFromSource}");
-
-                        // If value from source is null, create a new instance
-                        if (valueFromSource == null)
-                        {
-                            var newInstance = SOLibrary.Create(propertyMapping.DestinationProperty.PropertyType);
-                            if (newInstance != null)
-                            {
-                                Debug.Log($"Created new instance of type: {newInstance.GetType().Name}");
-                                propertyMapping.DestinationProperty.SetValue(this, newInstance);
-                                continue; // Skip to the next propertyMapping iteration since this one is handled.
-                            }
-                        }
-                        // Otherwise, set the value on the destination.
-                        Debug.Log("Successfully logged " + propertyMapping.SourceProperty.Name + " to " + propertyMapping.DestinationProperty.Name);
-                        propertyMapping.DestinationProperty.SetValue(this, valueFromSource);
-                    }
-                }
+                interfaces[iface] = this;
             }
         }
     }
+    #endregion
+
+    public void AssignConfiguration(string configName)
+    {
+        if (string.IsNullOrEmpty(configName))
+        {
+            Debug.LogError("Configuration name is null or empty.");
+            return;
+        }
+
+        // 1. Get the ConfigurationBase instance.
+        if (!AIBakerData.instance.BreadConfigurations.TryGetValue(configName, out var configObj))
+        {
+            Debug.LogError($"Configuration {configName} not found.");
+            return;
+        }
+
+        var configInstance = configObj as ConfigurationBase;
+        if (configInstance == null)
+        {
+            Debug.LogError($"Config {configName} is not of type ConfigurationBase.");
+            return;
+        }
+
+        // 2. Loop through the interfaces of CharacterSystem.
+        Type currentType = this.GetType();
+        if (!AIBakerData.instance.BreadSystemInterfaces.TryGetValue(currentType, out var interfaceList))
+        {
+            Debug.LogError($"No interfaces found for type: {currentType.FullName}");
+            return;
+        }
+
+        bool AllImplemented = true;
+        // For each interface implemented by CharacterSystem
+        foreach (var iface in interfaceList)
+        {
+            if (iface == null)
+            {
+                Debug.LogWarning("Encountered a null interface in the interface list.");
+                continue;
+            }
+
+            // Check if the ConfigurationBase instance also implements this interface
+            List<Type> configInterfaces;
+            if (!AIBakerData.instance.BreadSystemInterfaces.TryGetValue(configInstance.GetType(), out configInterfaces)
+                || !configInterfaces.Contains(iface))
+            {
+                AllImplemented = false;
+                break;  // Skip to the next interface if configInstance does not implement iface
+            }
+
+            // Now we know that both CharacterSystem and configInstance implement iface
+            // We can proceed to transfer member data between them
+            if (!AIBakerData.instance.BreadDataMembers.TryGetValue(currentType.FullName, out var members))
+                continue;
+
+            foreach (var member in members)
+            {
+                var memberInfo = member as SimpleDataMemberInfo;
+                if (memberInfo == null)
+                {
+                    Debug.LogWarning($"Failed to cast member to SimpleDataMemberInfo for interface: {iface.FullName}");
+                    continue;
+                }
+
+                var ConfigMember = memberInfo.FindMatchingMember(configInstance);
+                if (ConfigMember == null)
+                {
+                    AllImplemented = false;
+                    break;
+                }
+                TransferInitialConfigurations(configInstance, this, (SimpleDataMemberInfo)ConfigMember, memberInfo);
+            }
+        }
+
+        if (!AllImplemented)
+        {
+            Debug.LogWarning("Not all interfaces matched between " + currentType + " and " + configInstance.GetType());
+        }
+    }
+
+
+
+
+    private void TransferInitialConfigurations(ConfigurationBase config, CharacterSystem character, SimpleDataMemberInfo configInfo, SimpleDataMemberInfo systemInfo)
+    {
+
+        if (configInfo.VariableType.FullName != systemInfo.VariableType.FullName)
+        {
+            Debug.LogError($"Expected a {systemInfo.VariableType.FullName}. Got: {configInfo.VariableType}");
+            return;
+        }
+        try
+        {
+            // Get value from config using SimpleDataMemberInfo
+            var configValue = configInfo.GetValue(config);
+
+            // Set value to character using a different, appropriate SimpleDataMemberInfo
+            systemInfo.SetValue(character, configValue);
+        }
+        catch (TargetInvocationException invE)
+        {
+            if (invE.InnerException != null)
+            {
+                Debug.LogError($"Inner exception: {invE.InnerException.Message}");
+            }
+            else
+            {
+                Debug.LogError(invE.Message);
+            }
+        }
+        catch (Exception e)
+        {
+            Debug.LogError($"Failed to transfer value for {configInfo.MemberName}: {e.Message}");
+        }
+    }
+
+
+
 }

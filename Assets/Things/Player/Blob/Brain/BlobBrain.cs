@@ -9,8 +9,6 @@ using Unity.VisualScripting;
 public class BlobBrain : Brain
 {
 
-    public static Type[] _expectedStatsInterfaces = { typeof(IHaveMoveSpeed) };
-    public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
 
     [Serialize] public BooleanVariable PlayerIsAlive;
     [Serialize] public GameObjectVariable PlayerGameObject;

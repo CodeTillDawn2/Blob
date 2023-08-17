@@ -26,8 +26,8 @@ public static class AIEditorBaker
     /// </summary>
     public static List<ClassData> BreadMethods
     {
-        get { return AIBakerData.instance.AIAttributesCache; }
-        private set { AIBakerData.instance.AIAttributesCache = value; }
+        get { return AIBakerData.instance.BreadMethods; }
+        private set { AIBakerData.instance.BreadMethods = value; }
     }
 
     ///// <summary>
@@ -46,24 +46,24 @@ public static class AIEditorBaker
     {
         get
         {
-            return AIBakerData.instance.InterfaceData;
+            return AIBakerData.instance.BreadInterfaces;
         }
         private set
         {
-            AIBakerData.instance.InterfaceData = value;
+            AIBakerData.instance.BreadInterfaces = value;
         }
     }
 
     public static Dictionary<string, List<SimpleMemberInfo>> BreadDataMembers
     {
-        get { return AIBakerData.instance.ScriptableObjectPropertiesDetection; }
-        private set { AIBakerData.instance.ScriptableObjectPropertiesDetection = value; }
+        get { return AIBakerData.instance.BreadDataMembers; }
+        private set { AIBakerData.instance.BreadDataMembers = value; }
     }
 
     public static Dictionary<string, ScriptableObject> BreadConfigurations
     {
-        get { return AIBakerData.instance.AllConfigInstances; }
-        private set { AIBakerData.instance.AllConfigInstances = value; }
+        get { return AIBakerData.instance.BreadConfigurations; }
+        private set { AIBakerData.instance.BreadConfigurations = value; }
     }
     public static Dictionary<Type, List<Type>> BreadSystemInterfaces
     {
@@ -77,76 +77,76 @@ public static class AIEditorBaker
     /// Nested dictionary meant to fill out the menu system of the dependent dropdown box on the editor UI for Nerve Systems.
     /// Should be kept fresh after every domain reload.
     /// </summary>
-    public static Dictionary<string, Dictionary<string, List<string>>> SystemToConfigMapping
+    public static Dictionary<string, Dictionary<string, List<string>>> BreadValidConfigurations
     {
-        get { return AIBakerData.instance.CharacterSystemToConfigMapping; }
-        private set { AIBakerData.instance.CharacterSystemToConfigMapping = value; }
+        get { return AIBakerData.instance.BreadValidConfigurations; }
+        private set { AIBakerData.instance.BreadValidConfigurations = value; }
     }
 
+    public static void StartBake()
+    {
+        ProofBread();
+        BakeBread();
+        StoreBread();
+    }
 
+    private static void ProofBread()
+    {
+
+    }
 
     /// <summary>
     /// Coordinates the process of baking all relevant AI and configuration data.
     /// </summary>
-    public static void BakeBread()
+    private static void BakeBread()
     {
 
 
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
         isFirstLog = true;
-        Debug.Log("Baking ConfigurationMappings");
+        Debug.Log("Proofing ConfigurationMappings");
         BakeConfigurationMappings();
-        Debug.Log("Baked ConfigurationMappings");
-        Debug.Log("Baking BakeMembers");
+        Debug.Log("Proofed ConfigurationMappings");
+        Debug.Log("Proofing BakeMembers");
         BakeMembers();
-        Debug.Log("Baked BakeMembers");
+        Debug.Log("Proofed BakeMembers");
 
-        Debug.Log("Baking Methods");
+        Debug.Log("Proofing Methods");
         BakeMethods();
-        Debug.Log("Baked Methods");
+        Debug.Log("Proofed Methods");
 
-        Debug.Log("Baking Interfaces");
+        Debug.Log("Proofing Interfaces");
         BakeBreadInterfaces();
-        Debug.Log("Baked Interfaces");
+        Debug.Log("Proofed Interfaces");
 
         stopwatch.Stop();
-        LogToFile($"AI Bake process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
-        Debug.Log($"AI Bake process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
+        LogToFile($"AI proof process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
+        Debug.Log($"AI proof process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
 
 
     }
 
-    //public static Dictionary<(Type characterSystemType, Type configType), Func<ConfigurationBase, CharacterSystem>> 
-    //    BakedMappings = new Dictionary<(Type characterSystemType, Type configType), Func<ConfigurationBase, CharacterSystem>>()
-    //    public static BakedMappings BakeMappings()
-    //    {
-
-    //        foreach (var configType in AllConfigTypes)
-    //        {
-    //            foreach (var charType in AllCharacterSystemTypes)
-    //            {dd
-    //                // Check interface mappings and create Func delegates
-    //                var transformationLogic = CreateTransformationLogic(configType, charType);
-    //                if (transformationLogic != null)
-    //                {
-    //                    bakedMappings.Mappings.Add((charType, configType), transformationLogic);
-    //                }
-    //            }
-    //        }
-
-    //        return bakedMappings;
-    //    }
-    
-
+    private static void StoreBread()
+    {
+        Debug.Log("Baking Bread");
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadConfigurations, AIBakerData.instance.BreadConfigurations_Path));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadValidConfigurations, AIBakerData.instance.BreadValidConfigurations_Path));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadDataMembers, AIBakerData.instance.BreadDataMembers_Path));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadMethods, AIBakerData.instance.BreadMethods_Path));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadInterfaces, AIBakerData.instance.BreadInterfaces_Path));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadSystemInterfaces, AIBakerData.instance.BreadSystemInterfaces_Path));
+        LogToFile($"AI Bake process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
+        Debug.Log($"AI Bake process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
+    }
 
 
     private static void BakeConfigurationMappings()
     {
         BreadConfigurations = GetAllInstancesOfDerived<ConfigurationBase>(); //Must happen before BakeCharacterSystemsToConfigMappings
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadConfigurations, BreadConfigurations_Path));
-        SystemToConfigMapping = BakeBreadValidConfigurations();
-        LogToFileIfError(SerializationUtility.WriteToDisk(SystemToConfigMapping, BreadValidConfigurations_Path));
+        BreadValidConfigurations = BakeBreadValidConfigurations();
     }
 
     private static void LogToFileIfError(string errorMessage)
@@ -163,29 +163,22 @@ public static class AIEditorBaker
     private static void BakeMembers()
     {
         BreadDataMembers = BakeBreadMembers();
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadDataMembers, BreadDataMembersPath));
+        
     }
     private static void BakeMethods()
     {
         BreadMethods = BakeBreadMethods();
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadMethods, BreadMethods_Path));
+        
     }
 
     private static void BakeBreadInterfaces()
     {
         BreadInterfaces = BakeInterfaceData();
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadInterfaces, BreadInterfaces_Path));
+        
         BreadSystemInterfaces = BakeBreadSystemInterfaces();
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadSystemInterfaces, BreadSystemInterfaces_Path));
+
     }
 
-
-    public static string BreadValidConfigurations_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadValidConfigurations.json";
-    public static string BreadConfigurations_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadConfigurations.json";
-    public static string BreadMethods_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadMethods.json";
-    public static string BreadDataMembersPath = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadDataMembers.json";
-    public static string BreadInterfaces_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadInterfaces.json";
-    public static string BreadSystemInterfaces_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadSystemInterfaces.json";
 
 
     private static Dictionary<Type, List<Type>> BakeBreadSystemInterfaces()
@@ -194,10 +187,12 @@ public static class AIEditorBaker
         var result = new Dictionary<Type, List<Type>>();
 
         var characterSystemType = typeof(CharacterSystem);
+        var characterSystemType2 = typeof(ConfigurationBase);
         List<Type> types = new List<Type>();
         foreach (Assembly assemb in allAssemblies)
         {
-            types.AddRange(assemb.GetTypes().Where(p => characterSystemType.IsAssignableFrom(p) && !p.IsInterface && !p.IsAbstract));
+            types.AddRange(assemb.GetTypes().Where(p => (characterSystemType.IsAssignableFrom(p) 
+            || characterSystemType2.IsAssignableFrom(p)) && !p.IsInterface && !p.IsAbstract));
         }
 
         foreach (var type in types)
@@ -447,53 +442,31 @@ public static class AIEditorBaker
 
 
 
-    // This function should return both fields and properties of a given type.
-    public static List<SimpleMemberInfo> GetSimpleMembers(Type type)
-    {
-        List<SimpleMemberInfo> members = new List<SimpleMemberInfo>();
+    ///// <summary>
+    ///// Constructs property mappings between a given interface and its implementing class.
+    ///// </summary>
+    ///// <param name="sourceInterface">The interface to map from.</param>
+    ///// <param name="targetType">The class to map to.</param>
+    ///// <returns>A list of property mappings.</returns>
+    //private static List<PropertyMapping> BuildPropertyMappings(Type sourceInterface, Type targetType)
+    //{
+    //    var mappings = new List<PropertyMapping>();
+    //    var sourceProperties = sourceInterface.GetProperties();
 
-        // Get fields
-        foreach (var field in type.GetFields(BindingFlags.Public | BindingFlags.Instance))
-        {
-            members.Add(new SimpleFieldInfo(field));
-        }
-
-        // Get properties
-        foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
-        {
-            members.Add(new SimplePropertyInfo(prop));
-        }
-
-        return members;
-    }
-
-
-
-    /// <summary>
-    /// Constructs property mappings between a given interface and its implementing class.
-    /// </summary>
-    /// <param name="sourceInterface">The interface to map from.</param>
-    /// <param name="targetType">The class to map to.</param>
-    /// <returns>A list of property mappings.</returns>
-    private static List<PropertyMapping> BuildPropertyMappings(Type sourceInterface, Type targetType)
-    {
-        var mappings = new List<PropertyMapping>();
-        var sourceProperties = sourceInterface.GetProperties();
-
-        foreach (var sourceProperty in sourceProperties)
-        {
-            var targetProperty = targetType.GetProperty(sourceProperty.Name, BindingFlags.Public | BindingFlags.Instance);
-            if (targetProperty != null && targetProperty.PropertyType == sourceProperty.PropertyType)
-            {
-                mappings.Add(new PropertyMapping
-                {
-                    SourceProperty = sourceProperty,
-                    DestinationProperty = targetProperty
-                });
-            }
-        }
-        return mappings;
-    }
+    //    foreach (var sourceProperty in sourceProperties)
+    //    {
+    //        var targetProperty = targetType.GetProperty(sourceProperty.Name, BindingFlags.Public | BindingFlags.Instance);
+    //        if (targetProperty != null && targetProperty.PropertyType == sourceProperty.PropertyType)
+    //        {
+    //            mappings.Add(new PropertyMapping
+    //            {
+    //                SourceProperty = sourceProperty,
+    //                DestinationProperty = targetProperty
+    //            });
+    //        }
+    //    }
+    //    return mappings;
+    //}
 
 
 
@@ -580,60 +553,6 @@ public static class AIEditorBaker
         return cache;
     }
 
-
-    /// <summary>
-    /// Detects and logs instances derived from ConfigurationBase.
-    /// </summary>
-    /// <returns>Cache of detected configuration instances.</returns>
-    public static ConfigurationInstanceCache BakeConfigurationInstances()
-    {
-        LogToFile($"______________________________");
-        LogToFile($"");
-        LogToFile($"Starting {System.Reflection.MethodBase.GetCurrentMethod().Name}.");
-        ConfigurationInstanceCache cache = new ConfigurationInstanceCache();
-
-        Stopwatch stopwatch = new Stopwatch();
-        stopwatch.Start();
-
-        // Detect all classes derived from ConfigurationBase that are not interfaces or abstract
-        var assembly = Assembly.Load("Assembly-CSharp");
-        var subclasses = assembly.GetTypes()
-                                 .Where(t => t.IsSubclassOf(typeof(ConfigurationBase)) && !t.IsInterface && !t.IsAbstract);
-
-        if (!subclasses.Any())
-        {
-            LogToFile("No classes derived from ConfigurationBase found.");
-            return cache; // Return empty cache
-        }
-
-        foreach (Type type in subclasses)
-        {
-            // Find existing ScriptableObject instances in the project
-            string[] guids = AssetDatabase.FindAssets($"t:{type.Name}");
-            foreach (var guid in guids)
-            {
-                string assetPath = AssetDatabase.GUIDToAssetPath(guid);
-                var existingInstance = AssetDatabase.LoadAssetAtPath(assetPath, type) as ConfigurationBase;
-
-                if (existingInstance != null)
-                {
-                    ConfigurationData configData = new ConfigurationData
-                    {
-                        ConfigurationInstance = existingInstance
-                    };
-                    cache.Configurations.Add(configData);
-                    LogToFile($"Successfully found and processed configuration instance for: {type.Name} at path: {assetPath}");
-                }
-            }
-        }
-
-        // Confirmation logging at the end
-        LogToFile($"Total number of configuration instances processed: {cache.Configurations.Count}");
-        stopwatch.Stop();
-        LogToFile($"Total time taken: {stopwatch.Elapsed.TotalSeconds} seconds.");
-
-        return cache;
-    }
 
 
     /// <summary>

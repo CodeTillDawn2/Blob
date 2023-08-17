@@ -4,10 +4,7 @@ using Unity.VisualScripting;
 public class BlobSenses : Senses
 {
 
-    public static Type[] _expectedStatsInterfaces = { typeof(IHaveMoveSpeed) };
-    public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
 
-    [Serialize] public BlobConfiguration StartingStats;
 
     public Shortcuts.LayerMasks OnlySeeMask { get; set; }
 

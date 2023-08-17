@@ -4,8 +4,6 @@ using System.Collections;
 public class TentacleBrain : Brain
 {
 
-    public static Type[] _expectedStatsInterfaces = null;
-    public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
 
     public GameObjectVariable target;
 

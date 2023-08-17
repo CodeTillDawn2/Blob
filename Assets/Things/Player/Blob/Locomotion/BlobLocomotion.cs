@@ -5,8 +5,7 @@ using UnityEngine.InputSystem;
 
 public class BlobLocomotion : Locomotion
 {
-    public static Type[] _expectedStatsInterfaces = { typeof(IHaveMoveSpeed) };
-    public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
+
 
     [Header("Stat Block")]
     [Serialize] public FloatVariable CurrentRotationSpeed;

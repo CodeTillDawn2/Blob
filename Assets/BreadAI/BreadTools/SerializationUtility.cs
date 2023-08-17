@@ -13,12 +13,12 @@ public static class SerializationUtility
 
 
 
-    public static string SerializeObject(object obj, bool humanReadable)
+    public static string SerializeObject(object obj, bool humanReadable, bool useRefPreserveReferencesHandlingObjects)
     {
         var settings = new JsonSerializerSettings
         {
             // Determines whether to preserve object references.
-            PreserveReferencesHandling = humanReadable ? PreserveReferencesHandling.None : PreserveReferencesHandling.Objects,
+            PreserveReferencesHandling = useRefPreserveReferencesHandlingObjects ? PreserveReferencesHandling.Objects : PreserveReferencesHandling.None,
 
             // Auto-detects object's type during serialization.
             TypeNameHandling = TypeNameHandling.Auto,
@@ -73,8 +73,8 @@ public static class SerializationUtility
         try
         {
             // Use the new SerializationUtility to get the JSON string.
-            string json = SerializationUtility.SerializeObject(dataObject, false);
-            string json2 = SerializationUtility.SerializeObject(dataObject, true);
+            string json = SerializationUtility.SerializeObject(dataObject, false, true);
+            string json2 = SerializationUtility.SerializeObject(dataObject, true, false);
             File.WriteAllText(filePath, json);
             File.WriteAllText(filePath.Replace(".json", "_readable.json"), json2);
 
@@ -174,7 +174,7 @@ public static class SerializationUtility
         try
         {
             // Use the new SerializationUtility to get the JSON string.
-            string json = SerializationUtility.SerializeObject(obj, true);
+            string json = SerializationUtility.SerializeObject(obj, false , true);
         }
         catch (Exception ex)
         {
@@ -255,6 +255,7 @@ public static class SerializationUtility
         }
 
 
+
         public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
         {
             JObject obj = new JObject();
@@ -267,10 +268,7 @@ public static class SerializationUtility
                 obj["VariableType"] = propInfo.VariableType.AssemblyQualifiedName;
                 obj["declaringTypeName"] = propInfo.declaringTypeName.AssemblyQualifiedName;
 
-                attributesArray = JArray.FromObject(propInfo.cachedPropertyInfo.GetCustomAttributes(typeof(BreadAIAttributeBase), true)
-                           .OfType<BreadAIAttributeBase>()
-                           .Select(x => new SimpleAttributeInfo(x))
-                           .ToList(), serializer);
+                attributesArray = JArray.FromObject(propInfo.Attributes, serializer);
 
                 if (attributesArray.Count > 0)
                     obj["Attributes"] = attributesArray;
@@ -283,10 +281,7 @@ public static class SerializationUtility
                 obj["VariableType"] = fieldInfo.VariableType.AssemblyQualifiedName;
                 obj["declaringTypeName"] = fieldInfo.declaringTypeName.AssemblyQualifiedName;
 
-                attributesArray = JArray.FromObject(fieldInfo.cachedFieldInfo.GetCustomAttributes(typeof(BreadAIAttributeBase), true)
-                           .OfType<BreadAIAttributeBase>()
-                           .Select(x => new SimpleAttributeInfo(x))
-                           .ToList(), serializer);
+                attributesArray = JArray.FromObject(fieldInfo.Attributes, serializer);
 
                 if (attributesArray.Count > 0)
                     obj["Attributes"] = attributesArray;
@@ -315,10 +310,7 @@ public static class SerializationUtility
                 if (parameterTypeNames.Count > 0)
                     obj["ParameterTypes"] = JArray.FromObject(parameterTypeNames, serializer);
 
-                attributesArray = JArray.FromObject(methodInfo.cachedMethodInfo.GetCustomAttributes(typeof(BreadAIAttributeBase), true)
-                           .OfType<BreadAIAttributeBase>()
-                           .Select(x => new SimpleAttributeInfo(x))
-                           .ToList(), serializer);
+                attributesArray = JArray.FromObject(methodInfo.Attributes, serializer);
 
                 if (attributesArray.Count > 0)
                     obj["Attributes"] = attributesArray;

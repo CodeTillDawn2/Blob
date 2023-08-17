@@ -29,6 +29,15 @@ public class AIBakerData : ScriptableObject
         }
     }
 
+
+    public string BreadValidConfigurations_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadValidConfigurations.json";
+    public string BreadConfigurations_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadConfigurations.json";
+    public string BreadMethods_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadMethods.json";
+    public string BreadDataMembers_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadDataMembers.json";
+    public string BreadInterfaces_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadInterfaces.json";
+    public string BreadSystemInterfaces_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/BreadSystemInterfaces.json";
+
+
     // Flag to determine if it's the first log of a session
     private bool isFirstLog = true;
 
@@ -41,7 +50,7 @@ public class AIBakerData : ScriptableObject
     /// <summary>
     /// Cache for detected attributes within character systems and their properties.
     /// </summary>
-    public List<ClassData> AIAttributesCache { get; set; }
+    public List<ClassData> BreadMethods { get; set; }
     public Dictionary<Type, List<Type>> BreadSystemInterfaces { get; set; }
 
     ///// <summary>
@@ -49,46 +58,22 @@ public class AIBakerData : ScriptableObject
     ///// </summary>
     //public ConfigurationInstanceCache ConfigurationInstances { get; set; }
 
-    /// <summary>
-    /// A nested dictionary containing mappings between classes and their interfaces.
-    /// </summary>
-    public Dictionary<string, Dictionary<string, List<PropertyMapping>>> BakedConfigurationAssignmentLogic = new Dictionary<string, Dictionary<string, List<PropertyMapping>>>();
 
+    public Dictionary<string, List<SimpleMemberInfo>> BreadDataMembers = new Dictionary<string, List<SimpleMemberInfo>>();
 
-    public Dictionary<string, List<SimpleMemberInfo>> ScriptableObjectPropertiesDetection = new Dictionary<string, List<SimpleMemberInfo>>();
-
-    public Dictionary<string, ScriptableObject> AllConfigInstances = new Dictionary<string, ScriptableObject>();
+    public Dictionary<string, ScriptableObject> BreadConfigurations = new Dictionary<string, ScriptableObject>();
 
     /// <summary>
     /// Nested dictionary meant to fill out the menu system of the dependent dropdown box on the editor UI for Nerve Systems.
     /// Should be kept fresh after every domain reload.
     /// </summary>
-    public Dictionary<string, Dictionary<string, List<string>>> CharacterSystemToConfigMapping = new Dictionary<string, Dictionary<string, List<string>>>();
+    public Dictionary<string, Dictionary<string, List<string>>> BreadValidConfigurations = new Dictionary<string, Dictionary<string, List<string>>>();
 
-    public Dictionary<string, List<SimpleMemberInfo>> InterfaceData = new Dictionary<string, List<SimpleMemberInfo>>();
+    public Dictionary<string, List<SimpleMemberInfo>> BreadInterfaces = new Dictionary<string, List<SimpleMemberInfo>>();
 
     string CharacterSystemToConfigMapping_Path = Application.dataPath + @"/BreadAI/BreadBake/BakedData/CharacterSystemToConfigMapping.json";
 
 
-
-    internal void LoadBakesFromDisk(bool useRefPreserveReferencesHandlingObjects)
-    {
-        CharacterSystemToConfigMapping = ReadFromDisk<Dictionary<string, Dictionary<string, List<string>>>>(CharacterSystemToConfigMapping_Path, useRefPreserveReferencesHandlingObjects);
-    }
-
-    public T ReadFromDisk<T>(string filePath, bool useRefPreserveReferencesHandlingObjects)
-    {
-        if (File.Exists(filePath))
-        {
-            string json = File.ReadAllText(filePath);
-            return SerializationUtility.DeserializeObject<T>(json, useRefPreserveReferencesHandlingObjects);
-        }
-        else
-        {
-            Debug.LogError("File not found at: " + filePath);
-            return default(T); // Returns the default value for the type (e.g., null for reference types)
-        }
-    }
 
 
 

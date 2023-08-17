@@ -4,8 +4,6 @@ using System.Collections;
 public class PigBrain : Brain
 {
 
-    public static Type[] _expectedStatsInterfaces = { typeof(IHaveMoveSpeed) };
-    public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
 
     public GameObjectVariable target;
 

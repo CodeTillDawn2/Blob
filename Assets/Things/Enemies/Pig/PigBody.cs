@@ -18,10 +18,6 @@ public class PigBody : Body, IUseMeshRenderer, IAmAlive, IHaveHitPoints, IHaveNu
 
     #region Interface Fields
 
-    public static Type[] _expectedStatsInterfaces = { typeof(IAmAlive), typeof(IHaveHitPoints)
-                                                    , typeof(IHaveMass)
-    };
-    public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
 
 
     public MeshRenderer MyMeshRenderer { get; set; }

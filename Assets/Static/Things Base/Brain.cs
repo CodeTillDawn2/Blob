@@ -30,10 +30,6 @@ public abstract class Brain : CharacterSystem
     protected override void Awake()
     {
         base.Awake();
-        if (ExpectedStatsInterfaces == null || ExpectedStatsInterfaces.Length == 0)
-        {
-            throw new Exception("ExpectedStatsInterfaces must be initialized!");
-        }
         SearchImpulses = new List<ImpulseVariable>();
         AttackImpulses = new List<ImpulseVariable>();
         SpawnImpulses = new List<ImpulseVariable>();

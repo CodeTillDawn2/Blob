@@ -1,39 +1,65 @@
-using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using UnityEngine;
 
-[Serializable]
+/// <summary>
+/// Provides a simplified representation of a property, along with basic reflection capabilities.
+/// </summary>
 public class SimplePropertyInfo : SimpleDataMemberInfo
 {
-    [JsonIgnore]
-    public PropertyInfo cachedPropertyInfo { get; set; }
+    /// <summary>
+    /// Gets or sets the cached reflection PropertyInfo for faster access.
+    /// </summary>
+    public PropertyInfo CachedPropertyInfo { get; set; }
 
+    /// <summary>
+    /// Gets or sets the accessibility level of the property (e.g., Public, Private, Mixed).
+    /// </summary>
     public string Accessibility { get; set; }
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SimplePropertyInfo"/> class.
+    /// </summary>
     public SimplePropertyInfo(PropertyInfo propertyInfo)
-        : base(propertyInfo.Name, "Property", propertyInfo.DeclaringType,
-            propertyInfo.GetCustomAttributes(typeof(BreadAIAttributeBase), true)
-                       .OfType<BreadAIAttributeBase>()
-                       .Select(x => new SimpleAttributeInfo(x)).ToList())
+        : base(propertyInfo.Name, "Property", propertyInfo.DeclaringType)
     {
         VariableType = propertyInfo.PropertyType;
+        CachedPropertyInfo = propertyInfo;
 
-        // Cache the property info and its getter and setter methods (for future uses without re-reflecting)
-        cachedPropertyInfo = propertyInfo;
-        var cachedGetMethod = propertyInfo.GetGetMethod(true); // 'true' allows for non-public getters
-        var cachedSetMethod = propertyInfo.GetSetMethod(true); // 'true' allows for non-public setters
+        var cachedGetMethod = propertyInfo.GetGetMethod(true);
+        var cachedSetMethod = propertyInfo.GetSetMethod(true);
 
-        // Determining accessibility
         var getAccess = cachedGetMethod?.IsPublic ?? false;
         var setAccess = cachedSetMethod?.IsPublic ?? false;
 
         if (getAccess && setAccess) Accessibility = "Public";
         else if (!getAccess && !setAccess) Accessibility = "Private";
-        else Accessibility = "Mixed";  // for cases where one is public and the other is private
-
-        // Bake the accessors using the cached methods
-        getter = target => cachedGetMethod?.Invoke(target, null);
-        setter = (target, value) => cachedSetMethod?.Invoke(target, new object[] { value });
+        else Accessibility = "Mixed";
+        Attributes = ReflectAttributes();
     }
+
+    public override object GetValue(object target)
+    {
+        try
+        {
+            
+            string test = target.ToString();
+            Debug.Log($"Attempting to get value from object of type: {target.GetType().Name}, member: {MemberName}");
+
+            return CachedPropertyInfo.GetValue(target);
+        }
+        catch (Exception ex)
+        {
+            Debug.LogError($"Error getting value from {target.GetType().Name}.{CachedPropertyInfo.Name}: {ex.Message}");
+            throw;
+        }
+    }
+
+    public override void SetValue(object target, object value)
+    {
+        CachedPropertyInfo.SetValue(target, value);
+    }
+
 }

@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public class AIBaker : MonoBehaviour
@@ -9,15 +12,8 @@ public class AIBaker : MonoBehaviour
 
     private void Awake()
     {
-        //if (instance != null && instance != this)
-        //{
-        //    Destroy(this.gameObject);
-        //    return;
-        //}
-
-        //instance = this;
         DontDestroyOnLoad(this.gameObject); // Ensure this object persists between scenes
-        AIBakerData.instance.LoadBakesFromDisk(true);
+        EatBread();
     }
 
     private void FixedUpdate()
@@ -25,18 +21,24 @@ public class AIBaker : MonoBehaviour
 
     }
 
-    //#if UNITY_EDITOR
-    //    private static AIBakerSO FindAIBakerSOInstance()
-    //    {
-    //        string[] guids = UnityEditor.AssetDatabase.FindAssets("t:AIBakerSO");
+    private static void EatBread()
+    {
+        string json = "";
 
-    //        if (guids.Length > 0)
-    //        {
-    //            string assetPath = UnityEditor.AssetDatabase.GUIDToAssetPath(guids[0]);
-    //            return UnityEditor.AssetDatabase.LoadAssetAtPath<AIBakerSO>(assetPath);
-    //        }
+        json = File.ReadAllText(AIBakerData.instance.BreadConfigurations_Path);
+        AIBakerData.instance.BreadConfigurations = SerializationUtility.DeserializeObject<Dictionary<string, ScriptableObject>>(json, false);
+        json = File.ReadAllText(AIBakerData.instance.BreadValidConfigurations_Path);
+        AIBakerData.instance.BreadValidConfigurations = SerializationUtility.DeserializeObject<Dictionary<string, Dictionary<string, List<string>>>>(json, false);
+        json = File.ReadAllText(AIBakerData.instance.BreadDataMembers_Path);
+        AIBakerData.instance.BreadDataMembers = SerializationUtility.DeserializeObject<Dictionary<string, List<SimpleMemberInfo>>>(json, false);
+        json = File.ReadAllText(AIBakerData.instance.BreadMethods_Path);
+        AIBakerData.instance.BreadMethods = SerializationUtility.DeserializeObject<List<ClassData>>(json, false);
+        json = File.ReadAllText(AIBakerData.instance.BreadInterfaces_Path);
+        AIBakerData.instance.BreadInterfaces = SerializationUtility.DeserializeObject<Dictionary<string, List<SimpleMemberInfo>>>(json, false);
+        json = File.ReadAllText(AIBakerData.instance.BreadSystemInterfaces_Path);
+        AIBakerData.instance.BreadSystemInterfaces = SerializationUtility.DeserializeObject<Dictionary<Type, List<Type>>>(json, false);
+    }
 
-    //        return null;
-    //    }
-    //#endif
+
+ 
 }

@@ -51,18 +51,19 @@ public abstract class Nerves : CharacterSystem
 
         if (newComponent is CharacterSystem characterSystem)
         {
-            ConfigurationBase configInstance = (ConfigurationBase)AIBakerData.instance.AllConfigInstances[statsName];
-
-            if (configInstance != null)
-            {
-                characterSystem.AssignConfiguration(configInstance);
-            }
-            else
-            {
-                characterSystem.AssignConfiguration(null);
-                Debug.LogWarning($"No ConfigurationBase instance found for type string '{statsName}'");
-            }
+            characterSystem.AssignConfiguration(statsName);
+            //if (AIBakerData.instance.BreadConfigurations.TryGetValue(statsName, out var configObject)
+            //    && configObject is ConfigurationBase configInstance)
+            //{
+            //    characterSystem.AssignConfiguration(configInstance);
+            //}
+            //else
+            //{
+            //    characterSystem.AssignConfiguration();
+            //    Debug.LogWarning($"No ConfigurationBase instance found for type string '{statsName}'");
+            //}
         }
     }
+
 
 }

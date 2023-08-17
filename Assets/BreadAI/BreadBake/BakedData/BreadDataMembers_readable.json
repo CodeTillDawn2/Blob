@@ -189,51 +189,13 @@
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
-  "Body": [
-    {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    }
-  ],
   "Brain": [
-    {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    },
     {
       "MemberName": "IsAlive",
       "MemberType": "Field",
       "Accessibility": "Public",
       "VariableType": "BooleanVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    }
-  ],
-  "Locomotion": [
-    {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    }
-  ],
-  "Nerves": [
-    {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    }
-  ],
-  "Senses": [
-    {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "PigBody": [
@@ -260,21 +222,9 @@
       "MemberType": "Property",
       "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    },
-    {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "PigBrain": [
-    {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    },
     {
       "MemberName": "target",
       "MemberType": "Field",
@@ -302,20 +252,6 @@
       "MemberType": "Property",
       "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    },
-    {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    }
-  ],
-  "PigNerves": [
-    {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "PigSenses": [
@@ -342,12 +278,6 @@
       "MemberType": "Property",
       "VariableType": "Dict_GameObjectToLastSeen, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    },
-    {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
   "BlobBody": [
@@ -374,12 +304,6 @@
       "MemberType": "Property",
       "VariableType": "FloatVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    },
-    {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     },
     {
       "MemberName": "CubeVolume",
@@ -491,12 +415,6 @@
       "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     },
     {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    },
-    {
       "MemberName": "CubeVolume",
       "MemberType": "Field",
       "Accessibility": "Public",
@@ -606,12 +524,6 @@
       "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     },
     {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    },
-    {
       "MemberName": "CubeVolume",
       "MemberType": "Field",
       "Accessibility": "Public",
@@ -691,12 +603,6 @@
   ],
   "BlobBrain": [
     {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    },
-    {
       "MemberName": "PlayerIsAlive",
       "MemberType": "Field",
       "Accessibility": "Public",
@@ -719,12 +625,6 @@
     }
   ],
   "BlobLocomotion": [
-    {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    },
     {
       "MemberName": "CurrentRotationSpeed",
       "MemberType": "Field",
@@ -768,28 +668,7 @@
       "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
     }
   ],
-  "BlobSenses": [
-    {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    },
-    {
-      "MemberName": "StartingStats",
-      "MemberType": "Field",
-      "Accessibility": "Public",
-      "VariableType": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "BlobSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    }
-  ],
   "TentacleBrain": [
-    {
-      "MemberName": "configuration",
-      "MemberType": "Property",
-      "VariableType": "ConfigurationBase, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-    },
     {
       "MemberName": "target",
       "MemberType": "Field",

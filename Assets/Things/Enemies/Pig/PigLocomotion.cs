@@ -19,8 +19,7 @@ public class PigLocomotion : Locomotion, IHaveMoveSpeed, IHaveRotateSpeed
     #endregion
 
     #region Interface Fields
-    public static Type[] _expectedStatsInterfaces = { typeof(IHaveMoveSpeed), typeof(IHaveRotateSpeed) };
-    public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
+
     public FloatVariable MoveSpeed { get; set; }
     public FloatVariable RotateSpeed { get; set; }
     #endregion

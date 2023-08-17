@@ -33,8 +33,6 @@ public class PigSenses : Senses, ICanSee, IHaveEyes, IUseSightBox
     #endregion
 
     #region Interface Fields
-    public static Type[] _expectedStatsInterfaces = { typeof(IHaveMoveSpeed) };
-    public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
     public FloatVariable SightDistance { get; set; }
     public LayerMaskVariable OnlySeeMask { get; set; }
     public GameObjectRuntimeSet Eyes { get; set; }

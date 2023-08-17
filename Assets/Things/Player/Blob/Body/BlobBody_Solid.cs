@@ -8,9 +8,6 @@ using Color = UnityEngine.Color;
 public class BlobBody_Solid : BlobBody
 {
 
-    public static Type[] _expectedStatsInterfaces = { typeof(IHaveMoveSpeed) };
-    public override Type[] ExpectedStatsInterfaces => _expectedStatsInterfaces;
-
     [SerializeField] LayerMask BodySees;
 
     [SerializeField] protected Vector3Variable bodyDims;
