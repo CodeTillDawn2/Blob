@@ -1,13 +1,14 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 public abstract class Nerves : CharacterSystem
 {
-    protected abstract Brain brain { get; }
-    protected abstract Senses senses { get; }
-    protected abstract Locomotion locomotion { get; }
-    protected abstract Body body { get; }
+    protected virtual Brain brain { get; private set; }
+    protected virtual Senses senses { get; private set; }
+    protected virtual Locomotion locomotion { get; private set; }
+    protected virtual Body body { get; private set; }
 
-    protected abstract NervePlan NervePlan { get; }
+    protected virtual NervePlan NervePlan { get; private set; }
 
 
     protected override void Awake()
@@ -27,11 +28,15 @@ public abstract class Nerves : CharacterSystem
     {
 
         base.Start();
-        CreateAndAttachComponent(NervePlan.Brain, NervePlan.BrainConfig, gameObject);
-        CreateAndAttachComponent(NervePlan.Senses, NervePlan.SensesConfig, gameObject);
-        CreateAndAttachComponent(NervePlan.Locomotion, NervePlan.LocomotionConfig, gameObject);
-        CreateAndAttachComponent(NervePlan.Body, NervePlan.BodyConfig, transform.Find("Body")?.gameObject ?? gameObject, "Body");
+        brain = (Brain)CreateAndAttachSystem(NervePlan.Brain, NervePlan.BrainConfig, gameObject);
+        senses = (Senses)CreateAndAttachSystem(NervePlan.Senses, NervePlan.SensesConfig, gameObject);
+        locomotion = (Locomotion)CreateAndAttachSystem(NervePlan.Locomotion, NervePlan.LocomotionConfig, gameObject);
+        body = (Body)CreateAndAttachSystem(NervePlan.Body, NervePlan.BodyConfig, transform.Find("Body")?.gameObject ?? gameObject, "Body");
         enabled = true;
+        if (senses != null) senses.enabled = true;
+        if (locomotion != null) locomotion.enabled = true;
+        if (body != null) body.enabled = true;
+        if (brain != null) brain.enabled = true;
     }
 
     private Component AddComponentFromType(GameObject parentObject, string type)
@@ -40,9 +45,9 @@ public abstract class Nerves : CharacterSystem
     }
 
 
-    private void CreateAndAttachComponent(string componentType, string statsName, GameObject parentObject, string fallbackName = null)
+    private CharacterSystem CreateAndAttachSystem(string componentType, string statsName, GameObject parentObject, string fallbackName = null)
     {
-        if (string.IsNullOrEmpty(componentType)) return;
+        if (string.IsNullOrEmpty(componentType)) return null;
 
         GameObject childObject = new GameObject(fallbackName ?? componentType);
         childObject.transform.SetParent(parentObject.transform);
@@ -52,17 +57,9 @@ public abstract class Nerves : CharacterSystem
         if (newComponent is CharacterSystem characterSystem)
         {
             characterSystem.AssignConfiguration(statsName);
-            //if (AIBakerData.instance.BreadConfigurations.TryGetValue(statsName, out var configObject)
-            //    && configObject is ConfigurationBase configInstance)
-            //{
-            //    characterSystem.AssignConfiguration(configInstance);
-            //}
-            //else
-            //{
-            //    characterSystem.AssignConfiguration();
-            //    Debug.LogWarning($"No ConfigurationBase instance found for type string '{statsName}'");
-            //}
+            return characterSystem;
         }
+        return null;
     }
 
 

@@ -143,7 +143,13 @@ public class PreyAnimalConfiguration : ConfigurationBase, IHaveMoveSpeed, IHaveR
     }
 
     [JsonIgnore]
-    public BoxCollider MySightBox { get; set; }
+    public BoxCollider MySightBox {
+        get 
+        {
+            return null;
+        }
+        set {  }
+    }
     [JsonIgnore]
     public GameObjectRuntimeSet Eyes
     {

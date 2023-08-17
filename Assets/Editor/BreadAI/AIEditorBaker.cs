@@ -213,11 +213,6 @@ public static class AIEditorBaker
 
         return result;
     }
-
-    /// <summary>
-    /// Detects and caches ScriptableObject properties within classes derived from CharacterSystem.
-    /// </summary>
-    /// <returns>Cache of detected ScriptableObject properties.</returns>
     public static Dictionary<string, List<SimpleMemberInfo>> BakeBreadMembers()
     {
         LogToFile($"______________________________");
@@ -230,8 +225,8 @@ public static class AIEditorBaker
         stopwatch.Start();
 
         var derivedTypes = allAssemblies.SelectMany(assembly => assembly.GetTypes()
-                                        .Where(t => t.IsSubclassOf(typeof(CharacterSystem)) || t.IsSubclassOf(typeof(ConfigurationBase))))
-                                        .ToList();
+                                    .Where(t => t.IsSubclassOf(typeof(CharacterSystem)) || t.IsSubclassOf(typeof(ConfigurationBase))))
+                                    .ToList();
 
         if (!derivedTypes.Any())
         {
@@ -242,11 +237,19 @@ public static class AIEditorBaker
         {
             LogToFile($"Processing class: {type.Name}");
 
-            var allScriptableObjects = new List<SimpleMemberInfo>();
+            var allMembers = new List<SimpleMemberInfo>();
 
-            // Filter properties by ScriptableObject type
-            var scriptableObjectProperties = type.GetProperties()
-                .Where(prop => typeof(ScriptableObject).IsAssignableFrom(prop.PropertyType))
+            // Identify interfaces that have the AIInterfaceAttribute.
+            var interfacesWithAIAttribute = type.GetInterfaces()
+                .Where(intf => intf.GetCustomAttribute<BreadInterfaceAttribute>() != null)
+                .ToList();
+
+            if (!interfacesWithAIAttribute.Any())
+                continue; // skip types that don't implement interfaces with AIInterfaceAttribute
+
+            // Filter properties based on the identified interfaces
+            var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Where(prop => interfacesWithAIAttribute.Any(intf => intf.GetProperties().Any(iprop => iprop.Name == prop.Name && iprop.PropertyType == prop.PropertyType)))
                 .Select(prop =>
                 {
                     var info = new SimplePropertyInfo(prop);
@@ -254,9 +257,9 @@ public static class AIEditorBaker
                     return (SimpleMemberInfo)info;
                 });
 
-            // Filter fields by ScriptableObject type
-            var scriptableObjectFields = type.GetFields()
-                .Where(field => typeof(ScriptableObject).IsAssignableFrom(field.FieldType))
+            // Filter fields based on the identified interfaces
+            var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance)
+                .Where(field => interfacesWithAIAttribute.Any(intf => intf.GetFields().Any(ifield => ifield.Name == field.Name && ifield.FieldType == field.FieldType)))
                 .Select(field =>
                 {
                     var info = new SimpleFieldInfo(field);
@@ -264,13 +267,13 @@ public static class AIEditorBaker
                     return (SimpleMemberInfo)info;
                 });
 
-            allScriptableObjects.AddRange(scriptableObjectProperties);
-            allScriptableObjects.AddRange(scriptableObjectFields);
+            allMembers.AddRange(properties);
+            allMembers.AddRange(fields);
 
-            if (allScriptableObjects.Count > 0)
+            if (allMembers.Count > 0)
             {
-                breadMembers[type.FullName] = allScriptableObjects;
-                LogToFile($"Detected {allScriptableObjects.Count} ScriptableObject (useable) members in class {type.Name}.");
+                breadMembers[type.FullName] = allMembers;
+                LogToFile($"Detected {allMembers.Count} members (usable) in class {type.Name}.");
             }
         }
 
@@ -289,6 +292,8 @@ public static class AIEditorBaker
 
         return breadMembers;
     }
+
+
 
 
 
@@ -439,34 +444,6 @@ public static class AIEditorBaker
         return resultMappings;
     }
 
-
-
-
-    ///// <summary>
-    ///// Constructs property mappings between a given interface and its implementing class.
-    ///// </summary>
-    ///// <param name="sourceInterface">The interface to map from.</param>
-    ///// <param name="targetType">The class to map to.</param>
-    ///// <returns>A list of property mappings.</returns>
-    //private static List<PropertyMapping> BuildPropertyMappings(Type sourceInterface, Type targetType)
-    //{
-    //    var mappings = new List<PropertyMapping>();
-    //    var sourceProperties = sourceInterface.GetProperties();
-
-    //    foreach (var sourceProperty in sourceProperties)
-    //    {
-    //        var targetProperty = targetType.GetProperty(sourceProperty.Name, BindingFlags.Public | BindingFlags.Instance);
-    //        if (targetProperty != null && targetProperty.PropertyType == sourceProperty.PropertyType)
-    //        {
-    //            mappings.Add(new PropertyMapping
-    //            {
-    //                SourceProperty = sourceProperty,
-    //                DestinationProperty = targetProperty
-    //            });
-    //        }
-    //    }
-    //    return mappings;
-    //}
 
 
 

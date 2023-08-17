@@ -17,45 +17,40 @@ Populated 4 ConfigurationBase types for BlobSenses that implement all required i
 Found 2 derived types for base type Locomotion.
 Populated 4 ConfigurationBase types for PigLocomotion that implement all required interfaces.
 Populated 4 ConfigurationBase types for BlobLocomotion that implement all required interfaces.
-PopulateDerivedTypeDictionary completed in: 0.2072168 seconds.
+PopulateDerivedTypeDictionary completed in: 0.1980833 seconds.
 ______________________________
 
 Starting BakeBreadMembers.
 Processing class: BlobConfiguration
-Detected 19 ScriptableObject (useable) members in class BlobConfiguration.
+Detected 19 members (usable) in class BlobConfiguration.
 Processing class: PreyAnimalConfiguration
-Detected 12 ScriptableObject (useable) members in class PreyAnimalConfiguration.
+Detected 14 members (usable) in class PreyAnimalConfiguration.
 Processing class: Body
 Processing class: Brain
-Detected 1 ScriptableObject (useable) members in class Brain.
 Processing class: Locomotion
 Processing class: Nerves
 Processing class: Senses
 Processing class: PigBody
-Detected 4 ScriptableObject (useable) members in class PigBody.
+Detected 5 members (usable) in class PigBody.
 Processing class: PigBrain
-Detected 2 ScriptableObject (useable) members in class PigBrain.
 Processing class: PigLocomotion
-Detected 2 ScriptableObject (useable) members in class PigLocomotion.
+Detected 2 members (usable) in class PigLocomotion.
 Processing class: PigNerves
 Processing class: PigSenses
-Detected 4 ScriptableObject (useable) members in class PigSenses.
+Detected 7 members (usable) in class PigSenses.
 Processing class: BlobBody
-Detected 15 ScriptableObject (useable) members in class BlobBody.
+Detected 1 members (usable) in class BlobBody.
 Processing class: BlobBody_Solid
-Detected 16 ScriptableObject (useable) members in class BlobBody_Solid.
+Detected 1 members (usable) in class BlobBody_Solid.
 Processing class: BlobStomach_Segmented
-Detected 16 ScriptableObject (useable) members in class BlobStomach_Segmented.
+Detected 1 members (usable) in class BlobStomach_Segmented.
 Processing class: BlobBrain
-Detected 3 ScriptableObject (useable) members in class BlobBrain.
 Processing class: BlobLocomotion
-Detected 6 ScriptableObject (useable) members in class BlobLocomotion.
 Processing class: BlobSenses
 Processing class: TentacleBrain
-Detected 2 ScriptableObject (useable) members in class TentacleBrain.
-Total number of classes processed: 13
-Total number of usable members detected: 102
-Total time taken: 0.0586765 seconds.
+Total number of classes processed: 8
+Total number of usable members detected: 50
+Total time taken: 0.0593821 seconds.
 ______________________________
 
 Starting BakeBreadMethods.
@@ -77,9 +72,9 @@ Processing class: BlobLocomotion
 Processing class: BlobSenses
 Processing class: TentacleBrain
 Total number of classes processed: 17
-Total number of methods with custom attributes: 93
+Total number of methods with custom attributes: 89
 Total number of custom attributes detected: 14
-Total time taken: 0.0502027 seconds.
+Total time taken: 0.052037 seconds.
 ______________________________
 
 Starting BakeInterfaceData.
@@ -108,7 +103,7 @@ Processed interface IHaveTentacleHitSpeed. Members found: 1
 Processed interface IHaveTentacleReach. Members found: 2
 Processed interface IHaveThingsInMyStomach. Members found: 2
 Processed interface IHaveThingsSeen. Members found: 1
-Total time taken: 0.0578011 seconds.
+Total time taken: 0.051349 seconds.
 Baked CharacterSystem Interface Implementations in 47ms
-AI proof process completed in 0.4910878 seconds.
-AI Bake process completed in 0.2576483 seconds.
+AI proof process completed in 0.5430117 seconds.
+AI Bake process completed in 0.1621867 seconds.

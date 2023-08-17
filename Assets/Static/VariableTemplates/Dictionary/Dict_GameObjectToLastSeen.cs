@@ -4,4 +4,11 @@ using UnityEngine;
 public class Dict_GameObjectToLastSeen : ScriptableObject
 {
     public DictionaryOfGameObjectAndLastSeenData Value;
+
+    private void OnEnable()
+    {
+        if (Value == null)
+            Value = new DictionaryOfGameObjectAndLastSeenData();
+    }
+
 }

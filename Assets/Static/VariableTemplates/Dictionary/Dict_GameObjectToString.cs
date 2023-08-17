@@ -4,4 +4,10 @@ using UnityEngine;
 public class Dict_GameObjectToString : ScriptableObject
 {
     public DictionaryOfStringAndInt Value;
+
+    private void OnEnable()
+    {
+        if (Value == null)
+            Value = new DictionaryOfStringAndInt();
+    }
 }

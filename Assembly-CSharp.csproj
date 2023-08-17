@@ -67,7 +67,6 @@
     <Compile Include="Assets\BreadAI\AI Interfaces\Markers\IAmImmuneToTargetingByTentacles.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\SerializableDictionary.cs" />
     <Compile Include="Assets\BreadAI\Reflection\SimpleMethodInfo.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\BasicMemberInfo.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveEyes.cs" />
     <Compile Include="Assets\Animation_TentacleDespawn.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\InContactWithBlobModifier.cs" />
@@ -80,7 +79,6 @@
     <Compile Include="Assets\Static\VariableTemplates\Variables\IConfigDefault\IConfigDefault.cs" />
     <Compile Include="Assets\BreadAI\Attributes\ActionAttributes\AIOptionalRisk.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\ELSpeaker.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\MethodInfoRepresentation.cs" />
     <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\IAttack.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanSee.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanBeDigested.cs" />
@@ -96,7 +94,6 @@
     <Compile Include="Assets\Things\Enemies\Pig\PigNerves.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\ComponentProperties\IUseSightBox.cs" />
     <Compile Include="Assets\BreadAI\Attributes\ActionAttributes\AIRequiredRisk.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\ConfigurationInstanceCache.cs" />
     <Compile Include="Assets\GPT AI Integration\Demo Scripts\ImageGenerator\OpenAiImageGenerator.cs" />
     <Compile Include="Assets\BreadAI\Impulses\Impulse.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\RaycastHitInfo.cs" />
@@ -105,7 +102,6 @@
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGameObjectAndLastSeenData.cs" />
     <Compile Include="Assets\Static\Things Base\Nerves.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Base\BlobBody.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\BasicFieldInfo.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\DigestNutritionModifier.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Conditional\IAmAlive.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGameObjectAndVector3.cs" />
@@ -121,7 +117,6 @@
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_StringIntVariable.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveDigestDamageDealt.cs" />
     <Compile Include="Assets\Things\Player\Blob\Tentacles\Tentacle\TentacleController.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\DelegateRepresentation.cs" />
     <Compile Include="Assets\Things\Modifiers\Base\GameObjectInListModifierCondition.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Test\BlobJiggleNew.cs" />
     <Compile Include="Assets\BreadAI\Attributes\GUIAttributes\CompountDependentDropdownAttribute.cs" />
@@ -136,7 +131,6 @@
     <Compile Include="Assets\Things\Enemies\Pig\PigBody.cs" />
     <Compile Include="Assets\GPT AI Integration\VoiceRecorder\MicInput.cs" />
     <Compile Include="Assets\Things\Player\Blob\Tentacles\BlobTentacles.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\PropertyMapping.cs" />
     <Compile Include="Assets\BreadAI\Attributes\ActionAttributes\AIOptionalReward.cs" />
     <Compile Include="Assets\Things\Player\Blob\Tentacles\Tentacle\SmoothTentacleWhap.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveMass.cs" />
@@ -156,7 +150,6 @@
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveTentacleHitSpeed.cs" />
     <Compile Include="Assets\BreadAI\Configurations\NervePlan.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ProducerConsumerStream.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\BasicMethodInfo.cs" />
     <Compile Include="Assets\Executive\EnemySucker.cs" />
     <Compile Include="Assets\BreadAI\AILibrary.cs" />
     <Compile Include="Assets\Static\Things Base\Body.cs" />
@@ -198,7 +191,6 @@
     <Compile Include="Assets\BreadAI\Attributes\ActionAttributes\AIRequiredInputAttributeOr.cs" />
     <Compile Include="Assets\Camera\FollowPlayerCamera.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\GameObjectVariable.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\MethodData.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\QuaternionVariable.cs" />
     <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\ISpawn.cs" />
     <Compile Include="Assets\BreadAI\Neurons\Neuron.cs" />
@@ -215,7 +207,6 @@
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanDie.cs" />
     <Compile Include="Assets\Static\Things Base\CharacterSystem.cs" />
     <Compile Include="Assets\Executive\EnemyReleaser.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\ConfigurationData.cs" />
     <Compile Include="Assets\BreadAI\Attributes\ActionAttributes\AIOptionalInfluencerAttribute.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ReadFullyStream.cs" />
     <Compile Include="Assets\BreadAI\Reflection\SimpleDataMemberInfo.cs" />
@@ -230,10 +221,8 @@
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\FloatVariable.cs" />
     <Compile Include="Assets\Things\Player\Blob\Brain\BlobBrain.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanBeDamaged.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\BasicPropertyInfo.cs" />
     <Compile Include="Assets\GPT AI Integration\Demo Scripts\Visual Scripting\OpenAiVS.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\OBB.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\FieldMapping.cs" />
     <Compile Include="Assets\Global\ModifierLibrary.cs" />
     <Compile Include="Assets\Things\Modifiers\Base\OneTimeModifierCondition.cs" />
     <Compile Include="Assets\Things\Enemies\Pig\PigBrain.cs" />

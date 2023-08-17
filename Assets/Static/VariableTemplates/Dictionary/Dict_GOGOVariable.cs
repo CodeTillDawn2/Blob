@@ -4,4 +4,10 @@ using UnityEngine;
 public class Dict_GameObjectToGameObject : ScriptableObject
 {
     public DictionaryOfGOAndGO Value;
+
+    private void OnEnable()
+    {
+        if (Value == null)
+            Value = new DictionaryOfGOAndGO();
+    }
 }

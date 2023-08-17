@@ -33,13 +33,7 @@ public class PigNerves : Nerves
     #endregion
 
     #region Nerves
-    protected override Brain brain { get; }
 
-    protected override Senses senses { get; }
-
-    protected override Locomotion locomotion { get; }
-
-    protected override Body body { get; }
 
     [SerializeField]
     protected NervePlan _nervePlan;

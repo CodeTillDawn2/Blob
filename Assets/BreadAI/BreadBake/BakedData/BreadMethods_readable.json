@@ -99,7 +99,7 @@
         ]
       },
       {
-        "MemberName": "CreateAndAttachComponent",
+        "MemberName": "CreateAndAttachSystem",
         "MemberType": "Method",
         "Accessibility": "Private",
         "declaringTypeName": "Nerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -411,36 +411,6 @@
   {
     "ClassType": "PigSenses",
     "MethodsData": [
-      {
-        "MemberName": "IUseSightBox.get_ThingsNearby",
-        "MemberType": "Method",
-        "Accessibility": "Private",
-        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "MemberName": "IUseSightBox.set_ThingsNearby",
-        "MemberType": "Method",
-        "Accessibility": "Private",
-        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "GameObjectRuntimeSet, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-        ]
-      },
-      {
-        "MemberName": "IUseSightBox.get_ThingsNearbyFilter",
-        "MemberType": "Method",
-        "Accessibility": "Private",
-        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "MemberName": "IUseSightBox.set_ThingsNearbyFilter",
-        "MemberType": "Method",
-        "Accessibility": "Private",
-        "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "UnityLayerVariable, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-        ]
-      },
       {
         "MemberName": "SeeWithEyes",
         "MemberType": "Method",

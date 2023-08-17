@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Analytics;
 
@@ -156,45 +157,54 @@ public abstract class CharacterSystem : MonoBehaviour
         }
 
         bool AllImplemented = true;
-        // For each interface implemented by CharacterSystem
-        foreach (var iface in interfaceList)
+
+        if (!AIBakerData.instance.BreadDataMembers.TryGetValue(currentType.FullName, out var members))
         {
-            if (iface == null)
+            Debug.LogError($"No members found for type: {currentType.FullName}");
+            return;
+        }
+
+        // Loop through the members of the class
+        foreach (var member in members)
+        {
+            var memberInfo = member as SimpleDataMemberInfo;
+            if (memberInfo == null)
             {
-                Debug.LogWarning("Encountered a null interface in the interface list.");
+                Debug.LogWarning($"Failed to cast member to SimpleDataMemberInfo.");
                 continue;
             }
 
-            // Check if the ConfigurationBase instance also implements this interface
-            List<Type> configInterfaces;
-            if (!AIBakerData.instance.BreadSystemInterfaces.TryGetValue(configInstance.GetType(), out configInterfaces)
-                || !configInterfaces.Contains(iface))
-            {
-                AllImplemented = false;
-                break;  // Skip to the next interface if configInstance does not implement iface
-            }
+            bool memberImplemented = false;
 
-            // Now we know that both CharacterSystem and configInstance implement iface
-            // We can proceed to transfer member data between them
-            if (!AIBakerData.instance.BreadDataMembers.TryGetValue(currentType.FullName, out var members))
-                continue;
-
-            foreach (var member in members)
+            // For each interface implemented by CharacterSystem
+            foreach (var iface in interfaceList)
             {
-                var memberInfo = member as SimpleDataMemberInfo;
-                if (memberInfo == null)
+                if (iface == null)
                 {
-                    Debug.LogWarning($"Failed to cast member to SimpleDataMemberInfo for interface: {iface.FullName}");
+                    Debug.LogWarning("Encountered a null interface in the interface list.");
                     continue;
                 }
 
-                var ConfigMember = memberInfo.FindMatchingMember(configInstance);
-                if (ConfigMember == null)
+                // Check if the ConfigurationBase instance also implements this interface
+                List<Type> configInterfaces;
+                if (!AIBakerData.instance.BreadSystemInterfaces.TryGetValue(configInstance.GetType(), out configInterfaces)
+                    || !configInterfaces.Contains(iface))
                 {
-                    AllImplemented = false;
-                    break;
+                    continue;  // Skip to the next interface if configInstance does not implement iface
                 }
-                TransferInitialConfigurations(configInstance, this, (SimpleDataMemberInfo)ConfigMember, memberInfo);
+
+                var ConfigMember = memberInfo.FindMatchingMember(configInstance);
+                if (ConfigMember != null)
+                {
+                    memberImplemented = true;
+                    TransferInitialConfigurations(configInstance, this, (SimpleDataMemberInfo)ConfigMember, memberInfo);
+                    break; // Exit the inner loop as we have found a matching interface
+                }
+            }
+
+            if (!memberImplemented)
+            {
+                AllImplemented = false;
             }
         }
 
@@ -203,6 +213,7 @@ public abstract class CharacterSystem : MonoBehaviour
             Debug.LogWarning("Not all interfaces matched between " + currentType + " and " + configInstance.GetType());
         }
     }
+
 
 
 
@@ -220,8 +231,18 @@ public abstract class CharacterSystem : MonoBehaviour
             // Get value from config using SimpleDataMemberInfo
             var configValue = configInfo.GetValue(config);
 
+            if (typeof(Component).IsAssignableFrom(configInfo.VariableType))
+            {
+                systemInfo.SetValue(character, GOLibrary.instance.AddComponentByTypeName(character.gameObject, systemInfo.VariableType.AssemblyQualifiedName));
+            }
+            else
+            {
+                systemInfo.SetValue(character, configValue); 
+            }
+
             // Set value to character using a different, appropriate SimpleDataMemberInfo
-            systemInfo.SetValue(character, configValue);
+
+            
         }
         catch (TargetInvocationException invE)
         {

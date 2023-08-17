@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class GOLibrary : MonoBehaviour
@@ -8,41 +9,7 @@ public class GOLibrary : MonoBehaviour
 
     public static GOLibrary instance { get; private set; }
 
-    private Dictionary<string, Type> _derivedTypeCache = null;
-
-    public Dictionary<string, Type> DerivedTypeCache
-    {
-        get
-        {
-            return _derivedTypeCache;
-        }
-    }
-
-
-    private void InitializeDerivedTypeCache()
-    {
-        if (_derivedTypeCache == null)
-        {
-            _derivedTypeCache = new Dictionary<string, Type>();
-        }
-
-        Type[] baseTypes = { typeof(Brain), typeof(Body), typeof(Locomotion), typeof(Senses) };
-
-        foreach (Type baseType in baseTypes)
-        {
-            var derivedTypes = AppDomain.CurrentDomain.GetAssemblies()
-                .SelectMany(assembly => assembly.GetTypes())
-                .Where(type => baseType.IsAssignableFrom(type) && !type.IsAbstract);
-
-            foreach (Type derivedType in derivedTypes)
-            {
-                if (!_derivedTypeCache.ContainsKey(derivedType.FullName))
-                {
-                    _derivedTypeCache.Add(derivedType.FullName, derivedType);
-                }
-            }
-        }
-    }
+    Dictionary<string, Type> TypesDecoded = new Dictionary<string, Type>();
 
     private void Awake()
     {
@@ -54,16 +21,24 @@ public class GOLibrary : MonoBehaviour
 
         instance = this;
         DontDestroyOnLoad(this.gameObject);
-        InitializeDerivedTypeCache();
     }
 
     public Component AddComponentByTypeName(GameObject target, string typeName)
     {
-        if (_derivedTypeCache.TryGetValue(typeName, out Type componentType))
+        if (TypesDecoded.TryGetValue(typeName, out Type foundtype))
         {
-            return target.AddComponent(componentType);
+            return target.AddComponent(foundtype);
         }
-        return null;
+        else
+        {
+
+            Type type = Type.GetType(typeName);
+            TypesDecoded.Add(typeName, type);
+            return target.AddComponent(type);
+        }
+
+        
+
     }
 
 }
