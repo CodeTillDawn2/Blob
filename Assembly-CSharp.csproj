@@ -218,6 +218,7 @@
     <Compile Include="Assets\BreadAI\Reflection\ConfigurationData.cs" />
     <Compile Include="Assets\BreadAI\Attributes\ActionAttributes\AIOptionalInfluencerAttribute.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ReadFullyStream.cs" />
+    <Compile Include="Assets\BreadAI\Reflection\SimpleDataMemberInfo.cs" />
     <Compile Include="Assets\Things\Modifiers\Tentacle\TargetedByTentacleModifier.cs" />
     <Compile Include="Assets\BreadAI\BreadTools\SimplifiedInterfaceSyntax.cs" />
     <Compile Include="Assets\Static\Things Base\Brain.cs" />

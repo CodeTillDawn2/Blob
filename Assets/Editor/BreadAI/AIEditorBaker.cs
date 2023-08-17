@@ -84,84 +84,6 @@ public static class AIEditorBaker
     }
 
 
-    private static HashSet<string> unitySpecialMethods = new HashSet<string>
-{
-    // Lifecycle methods
-    "Awake",
-    "Start",
-    "Update",
-    "FixedUpdate",
-    "LateUpdate",
-    "OnEnable",
-    "OnDisable",
-    "OnDestroy",
-    "OnApplicationQuit",
-    "OnApplicationPause",
-    "OnApplicationFocus",
-
-    // Rendering
-    "OnPreCull",
-    "OnPreRender",
-    "OnPostRender",
-    "OnRenderObject",
-    "OnWillRenderObject",
-    "OnBecameVisible",
-    "OnBecameInvisible",
-    "OnDrawGizmos",
-    "OnDrawGizmosSelected",
-    
-    // Collision
-    "OnCollisionEnter",
-    "OnCollisionStay",
-    "OnCollisionExit",
-    "OnCollisionEnter2D",
-    "OnCollisionStay2D",
-    "OnCollisionExit2D",
-    
-    // Trigger
-    "OnTriggerEnter",
-    "OnTriggerStay",
-    "OnTriggerExit",
-    "OnTriggerEnter2D",
-    "OnTriggerStay2D",
-    "OnTriggerExit2D",
-
-    // Mouse and Input
-    "OnMouseDown",
-    "OnMouseUp",
-    "OnMouseDrag",
-    "OnMouseEnter",
-    "OnMouseExit",
-    "OnMouseOver",
-    "OnMouseUpAsButton",
-    
-    // UI related
-    "OnRectTransformDimensionsChange",
-    "OnRectTransformRemoved",
-    "OnBeforeTransformParentChanged",
-    "OnTransformParentChanged",
-    "OnTransformChildrenChanged",
-    
-    // Physics
-    "OnJointBreak",
-    "OnJointBreak2D",
-    
-    // Audio
-    "OnAudioFilterRead",
-    "OnLevelWasLoaded",
-    
-    // Networking (Legacy)
-    "OnPlayerConnected",
-    "OnPlayerDisconnected",
-    "OnServerInitialized",
-    "OnNetworkInstantiate",
-    "OnDisconnectedFromServer",
-    "OnFailedToConnect",
-    "OnFailedToConnectToMasterServer",
-    "OnNetworkLoadedLevel",
-
-
-};
 
     /// <summary>
     /// Coordinates the process of baking all relevant AI and configuration data.
@@ -195,7 +117,27 @@ public static class AIEditorBaker
 
     }
 
+    //public static Dictionary<(Type characterSystemType, Type configType), Func<ConfigurationBase, CharacterSystem>> 
+    //    BakedMappings = new Dictionary<(Type characterSystemType, Type configType), Func<ConfigurationBase, CharacterSystem>>()
+    //    public static BakedMappings BakeMappings()
+    //    {
 
+    //        foreach (var configType in AllConfigTypes)
+    //        {
+    //            foreach (var charType in AllCharacterSystemTypes)
+    //            {dd
+    //                // Check interface mappings and create Func delegates
+    //                var transformationLogic = CreateTransformationLogic(configType, charType);
+    //                if (transformationLogic != null)
+    //                {
+    //                    bakedMappings.Mappings.Add((charType, configType), transformationLogic);
+    //                }
+    //            }
+    //        }
+
+    //        return bakedMappings;
+    //    }
+    
 
 
 
@@ -724,4 +666,82 @@ public static class AIEditorBaker
     }
 
 
+    private static HashSet<string> unitySpecialMethods = new HashSet<string>
+{
+    // Lifecycle methods
+    "Awake",
+    "Start",
+    "Update",
+    "FixedUpdate",
+    "LateUpdate",
+    "OnEnable",
+    "OnDisable",
+    "OnDestroy",
+    "OnApplicationQuit",
+    "OnApplicationPause",
+    "OnApplicationFocus",
+
+    // Rendering
+    "OnPreCull",
+    "OnPreRender",
+    "OnPostRender",
+    "OnRenderObject",
+    "OnWillRenderObject",
+    "OnBecameVisible",
+    "OnBecameInvisible",
+    "OnDrawGizmos",
+    "OnDrawGizmosSelected",
+    
+    // Collision
+    "OnCollisionEnter",
+    "OnCollisionStay",
+    "OnCollisionExit",
+    "OnCollisionEnter2D",
+    "OnCollisionStay2D",
+    "OnCollisionExit2D",
+    
+    // Trigger
+    "OnTriggerEnter",
+    "OnTriggerStay",
+    "OnTriggerExit",
+    "OnTriggerEnter2D",
+    "OnTriggerStay2D",
+    "OnTriggerExit2D",
+
+    // Mouse and Input
+    "OnMouseDown",
+    "OnMouseUp",
+    "OnMouseDrag",
+    "OnMouseEnter",
+    "OnMouseExit",
+    "OnMouseOver",
+    "OnMouseUpAsButton",
+    
+    // UI related
+    "OnRectTransformDimensionsChange",
+    "OnRectTransformRemoved",
+    "OnBeforeTransformParentChanged",
+    "OnTransformParentChanged",
+    "OnTransformChildrenChanged",
+    
+    // Physics
+    "OnJointBreak",
+    "OnJointBreak2D",
+    
+    // Audio
+    "OnAudioFilterRead",
+    "OnLevelWasLoaded",
+    
+    // Networking (Legacy)
+    "OnPlayerConnected",
+    "OnPlayerDisconnected",
+    "OnServerInitialized",
+    "OnNetworkInstantiate",
+    "OnDisconnectedFromServer",
+    "OnFailedToConnect",
+    "OnFailedToConnectToMasterServer",
+    "OnNetworkLoadedLevel",
+
+
+};
 }

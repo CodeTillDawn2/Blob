@@ -3,6 +3,15 @@
     "ClassType": "Body",
     "MethodsData": [
       {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
@@ -34,6 +43,15 @@
         ]
       },
       {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
@@ -47,6 +65,15 @@
   {
     "ClassType": "Locomotion",
     "MethodsData": [
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
       {
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
@@ -84,6 +111,15 @@
         ]
       },
       {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
@@ -106,6 +142,15 @@
           "ICanSee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
           "IHaveEyes, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
           "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
       },
       {
@@ -230,6 +275,15 @@
         ]
       },
       {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
@@ -258,6 +312,15 @@
           "Impulse+ImpulseType, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
           "System.Func`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
           "ImpulseStep[], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
       },
       {
@@ -303,6 +366,15 @@
         ]
       },
       {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
@@ -316,6 +388,15 @@
   {
     "ClassType": "PigNerves",
     "MethodsData": [
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
       {
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
@@ -369,6 +450,15 @@
           "ICanSee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
           "IHaveEyes, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
           "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
       },
       {
@@ -449,6 +539,15 @@
         "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
       },
       {
@@ -535,6 +634,15 @@
         "MemberType": "Method",
         "Accessibility": "Protected",
         "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+      },
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
       },
       {
         "MemberName": "AssignConfiguration",
@@ -630,6 +738,15 @@
         "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
@@ -658,6 +775,15 @@
           "Impulse+ImpulseType, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
           "System.Func`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
           "ImpulseStep[], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
       },
       {
@@ -723,6 +849,15 @@
         "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
@@ -745,6 +880,15 @@
           "ICanSee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
           "IHaveEyes, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
           "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
       },
       {
@@ -776,6 +920,15 @@
           "Impulse+ImpulseType, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
           "System.Func`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
           "ImpulseStep[], Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
       },
       {

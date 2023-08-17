@@ -11,23 +11,14 @@ using UnityEngine;
 public static class SerializationUtility
 {
 
-using Newtonsoft.Json;
-using System.Collections.Generic;
 
-public static class SerializationHelper
-{
-    /// <summary>
-    /// Converts an object into its JSON representation.
-    /// </summary>
-    /// <param name="obj">Object to serialize.</param>
-    /// <param name="humanReadable">If true, the serialization retains object references, preventing circular issues.</param>
-    /// <returns>A formatted JSON string of the object.</returns>
+
     public static string SerializeObject(object obj, bool humanReadable)
     {
         var settings = new JsonSerializerSettings
         {
             // Determines whether to preserve object references.
-            PreserveReferencesHandling = humanReadable ? PreserveReferencesHandling.Objects : PreserveReferencesHandling.None,
+            PreserveReferencesHandling = humanReadable ? PreserveReferencesHandling.None : PreserveReferencesHandling.Objects,
 
             // Auto-detects object's type during serialization.
             TypeNameHandling = TypeNameHandling.Auto,
@@ -82,8 +73,8 @@ public static class SerializationHelper
         try
         {
             // Use the new SerializationUtility to get the JSON string.
-            string json = SerializationUtility.SerializeObject(dataObject, true);
-            string json2 = SerializationUtility.SerializeObject(dataObject, false);
+            string json = SerializationUtility.SerializeObject(dataObject, false);
+            string json2 = SerializationUtility.SerializeObject(dataObject, true);
             File.WriteAllText(filePath, json);
             File.WriteAllText(filePath.Replace(".json", "_readable.json"), json2);
 
@@ -92,7 +83,7 @@ public static class SerializationHelper
             if (!GoodConfigs.Contains(typeof(T)))
             {
                 string testingJson = File.ReadAllText(filePath);
-                T testingObject = SerializationUtility.DeserializeObject<T>(json, true);
+                T testingObject = SerializationUtility.DeserializeObject<T>(json, false);
                 var comparer = new UnityObjectComparer<T>();
                 if (comparer.Equals(dataObject, testingObject))
                 {
