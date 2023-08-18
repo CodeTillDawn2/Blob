@@ -60,7 +60,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\IntegerVariable.cs" />
-    <Compile Include="Assets\BreadAI\BreadBake\AIBakerData.cs" />
     <Compile Include="Assets\Animation_TentacleReadied.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\BooleanVariable.cs" />
     <Compile Include="Assets\BreadAI\Attributes\ComponentAtributes\IsTriggerAttribute.cs" />
@@ -72,15 +71,12 @@
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveEyes.cs" />
     <Compile Include="Assets\Animation_TentacleDespawn.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\InContactWithBlobModifier.cs" />
-    <Compile Include="Assets\BreadAI\BreadTools\SerializationUtility.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\Objects\SimplePropertyInfo.cs" />
     <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\ISearch.cs" />
     <Compile Include="Assets\Global\Shortcuts.cs" />
     <Compile Include="Assets\GPT AI Integration\Demo Scripts\OpenAIDemo.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveThingsInMyStomach.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\IConfigDefault\IConfigDefault.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\ELSpeaker.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\Objects\SimpleMemberInfo.cs" />
     <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\IAttack.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanSee.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanBeDigested.cs" />
@@ -112,18 +108,14 @@
     <Compile Include="Assets\Things\Player\Blob\Body\Test\BlobJiggle.cs" />
     <Compile Include="Assets\Things\Modifiers\Tentacle\TentacleWhapModifer.cs" />
     <Compile Include="Assets\Animation_TentacleSmack.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\Objects\SimpleMethodInfo.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_GameObjectToLastSeen.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\GUIAttributes\BasicDropdownAttribute.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\TransformData.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_StringIntVariable.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveDigestDamageDealt.cs" />
     <Compile Include="Assets\Things\Player\Blob\Tentacles\Tentacle\TentacleController.cs" />
     <Compile Include="Assets\Things\Modifiers\Base\GameObjectInListModifierCondition.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Test\BlobJiggleNew.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\GUIAttributes\CompountDependentDropdownAttribute.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveSuckSpeed.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\Objects\SimpleParameterInfo.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\WrappedFunc.cs" />
     <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Conditional\AIRequiredField.cs" />
     <Compile Include="Assets\Events\GameEventListener.cs" />
@@ -138,8 +130,6 @@
     <Compile Include="Assets\Things\Enemies\Pig\PigSenses.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Test\BlobStomach_Segmented.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveThingsSeen.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\Objects\ClassData.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\Objects\SimpleDataMemberInfo.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\StringVariable.cs" />
     <Compile Include="Assets\Events\GameEvent.cs" />
     <Compile Include="Assets\Static\Things Base\Locomotion.cs" />
@@ -178,12 +168,9 @@
     <Compile Include="Assets\Static\Enums\DamageTypeEnum.cs" />
     <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Conditional\AIRequiredEvalBoolAttribute.cs" />
     <Compile Include="Assets\Global\DamageTypeLibrary.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\Base\BreadAIAttributeBase.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\ComponentAtributes\BasicComponentAttribute.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\LastSeenData.cs" />
     <Compile Include="Assets\Global\GOLibrary.cs" />
     <Compile Include="Assets\Static\Things Base\Senses.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\Objects\SimpleFieldInfo.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveMaxTentacles.cs" />
     <Compile Include="Assets\Global\RefreshGameState.cs" />
     <Compile Include="Assets\Things\Modifiers\Base\GameObjectIsGameObjectCondition.cs" />
@@ -195,11 +182,9 @@
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\QuaternionVariable.cs" />
     <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\ISpawn.cs" />
     <Compile Include="Assets\BreadAI\Neurons\Neuron.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\Objects\SimpleAttributeInfo.cs" />
     <Compile Include="Assets\Things\Modifiers\Damage\DealDamageModifier.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\Vector3Variable.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\ComponentProperties\IUseMeshRenderer.cs" />
-    <Compile Include="Assets\BreadAI\BreadBake\AIBaker.cs" />
     <Compile Include="Assets\BreadAI\Configurations\PreyAnimalConfiguration.cs" />
     <Compile Include="Assets\BreadAI\Configurations\BlobConfiguration.cs" />
     <Compile Include="Assets\Animation_TentacleSpawn.cs" />
@@ -209,7 +194,6 @@
     <Compile Include="Assets\Executive\EnemyReleaser.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ReadFullyStream.cs" />
     <Compile Include="Assets\Things\Modifiers\Tentacle\TargetedByTentacleModifier.cs" />
-    <Compile Include="Assets\BreadAI\BreadTools\SimplifiedInterfaceSyntax.cs" />
     <Compile Include="Assets\Static\Things Base\Brain.cs" />
     <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\IImpulse.cs" />
     <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Input\AIRequiredInputAttributeAnd.cs" />
@@ -217,12 +201,10 @@
     <Compile Include="Assets\Static\VariableTemplates\RuntimeSets\GameObjectRuntimeSet.cs" />
     <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Weights\AIOptionalInfluencerAttribute.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\LayerMaskVariable.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\InterfaceAttributes\Base\BreadInterfaceAttribute.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGOAndGO.cs" />
     <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Rewards\AIOptionalReward.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\FloatVariable.cs" />
     <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Rewards\AIRequiredReward.cs" />
-    <Compile Include="Assets\BreadAI\Reflection\DynamicCode.cs" />
     <Compile Include="Assets\Things\Player\Blob\Brain\BlobBrain.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanBeDamaged.cs" />
     <Compile Include="Assets\GPT AI Integration\Demo Scripts\Visual Scripting\OpenAiVS.cs" />
