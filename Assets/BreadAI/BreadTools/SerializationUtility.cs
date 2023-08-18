@@ -6,12 +6,14 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.Serialization.Formatters;
 using UnityEngine;
+using static UnityEditor.Profiling.FrameDataView;
 
 public static class SerializationUtility
 {
 
-
+    public static bool ExportExtraFields = false;
 
     public static string SerializeObject(object obj, bool humanReadable, bool useRefPreserveReferencesHandlingObjects)
     {
@@ -35,6 +37,15 @@ public static class SerializationUtility
             Formatting = humanReadable ? Formatting.Indented : Formatting.None
         };
 
+        if (humanReadable)
+        {
+            ExportExtraFields = true;
+        }
+        else
+        {
+            ExportExtraFields = false;
+        }
+        
         // Return the serialized JSON string.
         return JsonConvert.SerializeObject(obj, settings);
     }
@@ -268,23 +279,53 @@ public static class SerializationUtility
                 obj["VariableType"] = propInfo.VariableType.AssemblyQualifiedName;
                 obj["declaringTypeName"] = propInfo.declaringTypeName.AssemblyQualifiedName;
 
-                attributesArray = JArray.FromObject(propInfo.Attributes, serializer);
+                if (ExportExtraFields)
+                {
+                    attributesArray = JArray.FromObject(propInfo.Attributes, serializer);
 
-                if (attributesArray.Count > 0)
-                    obj["Attributes"] = attributesArray;
+                    if (attributesArray.Count > 0)
+                        obj["Attributes"] = attributesArray;
+
+                    // Serialize InterfaceAttributes as a dictionary
+                    var interfaceAttributesObject = new JObject();
+                    foreach (var pair in propInfo.InterfaceAttributes)
+                    {
+                        var interfaceType = pair.Key.Name; // Assuming you want the name of the interface as the key in the JSON
+                        var attributesList = JArray.FromObject(pair.Value, serializer);
+                        interfaceAttributesObject[interfaceType] = attributesList;
+                    }
+                    if (interfaceAttributesObject.Count > 0)
+                        obj["InterfaceAttributes"] = interfaceAttributesObject;
+                }
+
             }
             else if (value is SimpleFieldInfo fieldInfo)
             {
                 obj["MemberName"] = fieldInfo.MemberName;
-                obj["MemberType"] = fieldInfo.MemberType;
+                if (ExportExtraFields) obj["MemberType"] = fieldInfo.MemberType;
                 obj["Accessibility"] = fieldInfo.Accessibility;
                 obj["VariableType"] = fieldInfo.VariableType.AssemblyQualifiedName;
                 obj["declaringTypeName"] = fieldInfo.declaringTypeName.AssemblyQualifiedName;
 
-                attributesArray = JArray.FromObject(fieldInfo.Attributes, serializer);
+                if (ExportExtraFields)
+                {
+                    attributesArray = JArray.FromObject(fieldInfo.Attributes, serializer);
 
-                if (attributesArray.Count > 0)
-                    obj["Attributes"] = attributesArray;
+                    if (attributesArray.Count > 0)
+                        obj["Attributes"] = attributesArray;
+
+                    // Serialize InterfaceAttributes as a dictionary
+                    var interfaceAttributesObject = new JObject();
+                    foreach (var pair in fieldInfo.InterfaceAttributes)
+                    {
+                        var interfaceType = pair.Key.Name; // Assuming you want the name of the interface as the key in the JSON
+                        var attributesList = JArray.FromObject(pair.Value, serializer);
+                        interfaceAttributesObject[interfaceType] = attributesList;
+                    }
+                    if (interfaceAttributesObject.Count > 0)
+                        obj["InterfaceAttributes"] = interfaceAttributesObject;
+                }
+                    
             }
             else if (value is SimpleMethodInfo methodInfo)
             {
@@ -293,27 +334,43 @@ public static class SerializationUtility
                 obj["Accessibility"] = methodInfo.Accessibility;
                 obj["declaringTypeName"] = methodInfo.declaringTypeName.AssemblyQualifiedName;
 
-                List<string> parameterTypeNames = new List<string>();
 
-                foreach (SimpleParameterInfo param in methodInfo.ParameterTypes)
+                if (ExportExtraFields)
                 {
-                    if (param.IsGeneric)
+                    List<string> parameterTypeNames = new List<string>();
+
+                    foreach (SimpleParameterInfo param in methodInfo.ParameterTypes)
                     {
-                        parameterTypeNames.Add("T");
+                        if (param.IsGeneric)
+                        {
+                            parameterTypeNames.Add("T");
+                        }
+                        else
+                        {
+                            parameterTypeNames.Add(param.ParameterType.AssemblyQualifiedName);
+                        }
                     }
-                    else
+
+                    if (parameterTypeNames.Count > 0)
+                        obj["ParameterTypes"] = JArray.FromObject(parameterTypeNames, serializer);
+
+                    attributesArray = JArray.FromObject(methodInfo.Attributes, serializer);
+
+                    if (attributesArray.Count > 0)
+                        obj["Attributes"] = attributesArray;
+
+                    // Serialize InterfaceAttributes as a dictionary
+                    var interfaceAttributesObject = new JObject();
+                    foreach (var pair in methodInfo.InterfaceAttributes)
                     {
-                        parameterTypeNames.Add(param.ParameterType.AssemblyQualifiedName);
+                        var interfaceType = pair.Key.Name; // Assuming you want the name of the interface as the key in the JSON
+                        var attributesList = JArray.FromObject(pair.Value, serializer);
+                        interfaceAttributesObject[interfaceType] = attributesList;
                     }
+                    if (interfaceAttributesObject.Count > 0)
+                        obj["InterfaceAttributes"] = interfaceAttributesObject;
                 }
-
-                if (parameterTypeNames.Count > 0)
-                    obj["ParameterTypes"] = JArray.FromObject(parameterTypeNames, serializer);
-
-                attributesArray = JArray.FromObject(methodInfo.Attributes, serializer);
-
-                if (attributesArray.Count > 0)
-                    obj["Attributes"] = attributesArray;
+                
             }
             else
             {
@@ -326,6 +383,7 @@ public static class SerializationUtility
 
         public override bool CanRead => true;
     }
+
 
 
     public class TypeJsonConverter : JsonConverter

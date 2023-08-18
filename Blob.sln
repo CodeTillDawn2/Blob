@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33815.320
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{7C1D3D07-1001-6DCA-9AE0-047442B21688}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AstarPathfindingProject", "AstarPathfindingProject.csproj", "{21C372D8-A9E7-A610-234D-CE70891A07FD}"
@@ -18,6 +20,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PackageToolsEditor", "PackageToolsEditor.csproj", "{726AFA8A-6532-E894-4BEC-E255CB223930}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirenix.OdinInspector.Modules.UnityMathematics", "Sirenix.OdinInspector.Modules.UnityMathematics.csproj", "{313DD723-0862-6853-5F3E-3B87F45B34E4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BreadAICodeGenerator", "BreadAICodeGenerator\BreadAICodeGenerator.csproj", "{8147AD87-2A36-42E5-87BB-0D8581596D0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,6 +65,10 @@ Global
 		{313DD723-0862-6853-5F3E-3B87F45B34E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{313DD723-0862-6853-5F3E-3B87F45B34E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{313DD723-0862-6853-5F3E-3B87F45B34E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8147AD87-2A36-42E5-87BB-0D8581596D0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8147AD87-2A36-42E5-87BB-0D8581596D0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8147AD87-2A36-42E5-87BB-0D8581596D0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8147AD87-2A36-42E5-87BB-0D8581596D0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

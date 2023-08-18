@@ -175,36 +175,9 @@
         "ParameterTypes": [
           "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ],
-        "Attributes": [
-          {
-            "AttributeTypeName": "AIInvoluntaryAttribute",
-            "AttributeProperties": {}
-          },
-          {
-            "AttributeTypeName": "AIRequiredFieldFalseAttribute",
-            "AttributeProperties": {
-              "FieldToEvaluate": [
-                "IAmAlive"
-              ]
-            }
-          },
-          {
-            "AttributeTypeName": "AIRequiredFieldTrueAttribute",
-            "AttributeProperties": {
-              "FieldToEvaluate": [
-                "ICanBeDigested"
-              ]
-            }
-          },
-          {
-            "AttributeTypeName": "AIRequiredRiskAttribute",
-            "AttributeProperties": {
-              "RiskType": [
-                "IHaveNutrition"
-              ]
-            }
-          }
-        ]
+        "InterfaceAttributes": {
+          "ICanBeDigested": []
+        }
       },
       {
         "MemberName": "BeDamaged",
@@ -215,64 +188,18 @@
           "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
           "DamageTypeEnum, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
         ],
-        "Attributes": [
-          {
-            "AttributeTypeName": "AIInvoluntaryAttribute",
-            "AttributeProperties": {}
-          },
-          {
-            "AttributeTypeName": "AIRequiredRiskAttribute",
-            "AttributeProperties": {
-              "RiskType": [
-                "IHaveHitPoints"
-              ]
-            }
-          },
-          {
-            "AttributeTypeName": "AIRequiredRiskAttribute",
-            "AttributeProperties": {
-              "RiskType": [
-                "ICanDie"
-              ]
-            }
-          },
-          {
-            "AttributeTypeName": "AIRequiredInputOrAttribute",
-            "AttributeProperties": {
-              "InputTypes": [
-                "IHaveDigestDamageDealt"
-              ]
-            }
-          }
-        ]
+        "InterfaceAttributes": {
+          "ICanBeDamaged": []
+        }
       },
       {
         "MemberName": "Die",
         "MemberType": "Method",
         "Accessibility": "Public",
         "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "Attributes": [
-          {
-            "AttributeTypeName": "AIInvoluntaryAttribute",
-            "AttributeProperties": {}
-          },
-          {
-            "AttributeTypeName": "AIRequiredRiskAttribute",
-            "AttributeProperties": {
-              "RiskType": [
-                "IAmAlive"
-              ]
-            }
-          },
-          {
-            "AttributeTypeName": "AIOptionalInfluencerAttribute",
-            "AttributeProperties": {
-              "InfluencerType": [
-                "IHaveHitPoints"
-              ]
-            }
-          }
-        ]
+        "InterfaceAttributes": {
+          "ICanDie": []
+        }
       },
       {
         "MemberName": "Am",
@@ -341,29 +268,7 @@
         "MemberName": "Move",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "Attributes": [
-          {
-            "AttributeTypeName": "AIMovementAttribute",
-            "AttributeProperties": {}
-          },
-          {
-            "AttributeTypeName": "AIRequiredInfluencerAttribute",
-            "AttributeProperties": {
-              "InfluencerType": [
-                "IHaveMoveSpeed"
-              ]
-            }
-          },
-          {
-            "AttributeTypeName": "AIRequiredInfluencerAttribute",
-            "AttributeProperties": {
-              "InfluencerType": [
-                "IHaveRotateSpeed"
-              ]
-            }
-          }
-        ]
+        "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "MemberName": "Am",

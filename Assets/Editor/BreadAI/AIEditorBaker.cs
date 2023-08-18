@@ -4,6 +4,9 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Unity.Burst.Intrinsics;
+using Unity.VisualScripting.YamlDotNet.Core;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -162,7 +165,7 @@ public static class AIEditorBaker
 
     private static void BakeMembers()
     {
-        BreadDataMembers = BakeBreadMembers();
+        BreadDataMembers = BakeBreadDataMembers();
         
     }
     private static void BakeMethods()
@@ -213,7 +216,7 @@ public static class AIEditorBaker
 
         return result;
     }
-    public static Dictionary<string, List<SimpleMemberInfo>> BakeBreadMembers()
+    public static Dictionary<string, List<SimpleMemberInfo>> BakeBreadDataMembers()
     {
         LogToFile($"______________________________");
         LogToFile($"");
@@ -224,6 +227,7 @@ public static class AIEditorBaker
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
 
+        var allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
         var derivedTypes = allAssemblies.SelectMany(assembly => assembly.GetTypes()
                                     .Where(t => t.IsSubclassOf(typeof(CharacterSystem)) || t.IsSubclassOf(typeof(ConfigurationBase))))
                                     .ToList();
@@ -247,28 +251,49 @@ public static class AIEditorBaker
             if (!interfacesWithAIAttribute.Any())
                 continue; // skip types that don't implement interfaces with AIInterfaceAttribute
 
-            // Filter properties based on the identified interfaces
-            var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Where(prop => interfacesWithAIAttribute.Any(intf => intf.GetProperties().Any(iprop => iprop.Name == prop.Name && iprop.PropertyType == prop.PropertyType)))
-                .Select(prop =>
-                {
-                    var info = new SimplePropertyInfo(prop);
-                    info.Attributes.RemoveAll(attr => !(attr is BreadAIAttributeBase));
-                    return (SimpleMemberInfo)info;
-                });
+            foreach (var intf in interfacesWithAIAttribute)
+            {
+                // Filter properties based on the identified interfaces
+                var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                    .Where(prop => intf.GetProperties().Any(iprop => iprop.Name == prop.Name && iprop.PropertyType == prop.PropertyType))
+                    .Select(prop =>
+                    {
+                        SimplePropertyInfo info = new SimplePropertyInfo(prop);
+                        info.Attributes.RemoveAll(attr => (!(attr is BreadAIAttributeBase) && !(attr is BasicComponentAttribute)));
+                        var correspondingInterfaceProperty = intf.GetProperties().FirstOrDefault(iprop => iprop.Name == prop.Name && iprop.PropertyType == prop.PropertyType);
+                        if (correspondingInterfaceProperty != null)
+                        {
+                            var interfaceAttributes = correspondingInterfaceProperty.GetCustomAttributes(true)
+                                                                                  .OfType<Attribute>()
+                                                                                  .Select(attr => new SimpleAttributeInfo(attr))
+                                                                                  .ToList();
+                            info.InterfaceAttributes[intf] = interfaceAttributes;
+                        }
+                        return info;
+                    });
 
-            // Filter fields based on the identified interfaces
-            var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance)
-                .Where(field => interfacesWithAIAttribute.Any(intf => intf.GetFields().Any(ifield => ifield.Name == field.Name && ifield.FieldType == field.FieldType)))
-                .Select(field =>
-                {
-                    var info = new SimpleFieldInfo(field);
-                    info.Attributes.RemoveAll(attr => !(attr is BreadAIAttributeBase));
-                    return (SimpleMemberInfo)info;
-                });
+                // Filter fields based on the identified interfaces
+                var fields = type.GetFields(BindingFlags.Public | BindingFlags.Instance)
+                    .Where(field => intf.GetFields().Any(ifield => ifield.Name == field.Name && ifield.FieldType == field.FieldType))
+                    .Select(field =>
+                    {
+                        SimpleFieldInfo info = new SimpleFieldInfo(field);
+                        info.Attributes.RemoveAll(attr => (!(attr is BreadAIAttributeBase) && !(attr is BasicComponentAttribute)));
+                        var correspondingInterfaceField = intf.GetFields().FirstOrDefault(ifield => ifield.Name == field.Name && ifield.FieldType == field.FieldType);
+                        if (correspondingInterfaceField != null)
+                        {
+                            var interfaceAttributes = correspondingInterfaceField.GetCustomAttributes(true)
+                                                                                  .OfType<Attribute>()
+                                                                                  .Select(attr => new SimpleAttributeInfo(attr))
+                                                                                  .ToList();
+                            info.InterfaceAttributes[intf] = interfaceAttributes;
+                        }
+                        return info;
+                    });
 
-            allMembers.AddRange(properties);
-            allMembers.AddRange(fields);
+                allMembers.AddRange(properties);
+                allMembers.AddRange(fields);
+            }
 
             if (allMembers.Count > 0)
             {
@@ -292,8 +317,6 @@ public static class AIEditorBaker
 
         return breadMembers;
     }
-
-
 
 
 
@@ -466,18 +489,13 @@ public static class AIEditorBaker
         stopwatch.Start();
 
         var allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
-        var derivedTypes = new List<Type>();
-
-        foreach (var assembly in allAssemblies)
-        {
-            derivedTypes.AddRange(assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(CharacterSystem))));
-        }
+        var derivedTypes = allAssemblies.SelectMany(assembly => assembly.GetTypes().Where(t => t.IsSubclassOf(typeof(CharacterSystem))))
+                                        .ToList();
 
         if (!derivedTypes.Any())
         {
             LogToFile("No classes derived from CharacterSystem found.");
         }
-
 
         foreach (Type type in derivedTypes)
         {
@@ -509,7 +527,24 @@ public static class AIEditorBaker
                     method.DeclaringType == typeof(UnityEngine.Behaviour))
                     continue;
 
-                classData.MethodsData.Add(new SimpleMethodInfo(method));
+                SimpleMethodInfo info = new SimpleMethodInfo(method);
+                info.Attributes.RemoveAll(attr => (!(attr is BreadAIAttributeBase) && !(attr is BasicComponentAttribute)));
+
+                foreach (var intf in type.GetInterfaces().Where(intf => intf.GetCustomAttribute<BreadInterfaceAttribute>() != null))
+                {
+                    var correspondingInterfaceMethod = intf.GetMethods().FirstOrDefault(imethod => imethod.Name == method.Name && imethod.ReturnType == method.ReturnType);
+
+                    if (correspondingInterfaceMethod != null)
+                    {
+                        var interfaceAttributes = correspondingInterfaceMethod.GetCustomAttributes(true)
+                                                                              .OfType<Attribute>()
+                                                                              .Select(attr => new SimpleAttributeInfo(attr))
+                                                                              .ToList();
+                        info.InterfaceAttributes[intf] = interfaceAttributes;
+                    }
+                }
+
+                classData.MethodsData.Add(info);
             }
 
             if (classData.MethodsData.Count > 0)
@@ -521,7 +556,7 @@ public static class AIEditorBaker
         LogToFile($"Total number of classes processed: {cache.Count}");
         int totalMethods = cache.Sum(cd => cd.MethodsData.Count);
         LogToFile($"Total number of methods with custom attributes: {totalMethods}");
-        int totalAttributes = cache.Sum(cd => cd.MethodsData.Sum(md => md.Attributes.Count));
+        int totalAttributes = cache.Sum(cd => cd.MethodsData.Sum(md => md.InterfaceAttributes.Values.Sum(interfAttr => interfAttr.Count)));
         LogToFile($"Total number of custom attributes detected: {totalAttributes}");
 
         stopwatch.Stop();
@@ -529,6 +564,12 @@ public static class AIEditorBaker
 
         return cache;
     }
+
+
+
+
+
+
 
 
 

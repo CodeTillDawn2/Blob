@@ -9,6 +9,7 @@ public interface IUseSightBox
     /// <summary>
     /// Gets or sets the sight box collider.
     /// </summary>
+    [IsTrigger]
     BoxCollider MySightBox { get; set; }
 
     /// <summary>

@@ -17,10 +17,10 @@ Populated 4 ConfigurationBase types for BlobSenses that implement all required i
 Found 2 derived types for base type Locomotion.
 Populated 4 ConfigurationBase types for PigLocomotion that implement all required interfaces.
 Populated 4 ConfigurationBase types for BlobLocomotion that implement all required interfaces.
-PopulateDerivedTypeDictionary completed in: 0.1980833 seconds.
+PopulateDerivedTypeDictionary completed in: 0.2163372 seconds.
 ______________________________
 
-Starting BakeBreadMembers.
+Starting BakeBreadDataMembers.
 Processing class: BlobConfiguration
 Detected 19 members (usable) in class BlobConfiguration.
 Processing class: PreyAnimalConfiguration
@@ -50,7 +50,7 @@ Processing class: BlobSenses
 Processing class: TentacleBrain
 Total number of classes processed: 8
 Total number of usable members detected: 50
-Total time taken: 0.0593821 seconds.
+Total time taken: 0.0536808 seconds.
 ______________________________
 
 Starting BakeBreadMethods.
@@ -73,8 +73,8 @@ Processing class: BlobSenses
 Processing class: TentacleBrain
 Total number of classes processed: 17
 Total number of methods with custom attributes: 89
-Total number of custom attributes detected: 14
-Total time taken: 0.052037 seconds.
+Total number of custom attributes detected: 0
+Total time taken: 0.0494768 seconds.
 ______________________________
 
 Starting BakeInterfaceData.
@@ -103,7 +103,7 @@ Processed interface IHaveTentacleHitSpeed. Members found: 1
 Processed interface IHaveTentacleReach. Members found: 2
 Processed interface IHaveThingsInMyStomach. Members found: 2
 Processed interface IHaveThingsSeen. Members found: 1
-Total time taken: 0.051349 seconds.
-Baked CharacterSystem Interface Implementations in 47ms
-AI proof process completed in 0.5430117 seconds.
-AI Bake process completed in 0.1621867 seconds.
+Total time taken: 0.0533055 seconds.
+Baked CharacterSystem Interface Implementations in 46ms
+AI proof process completed in 0.4939197 seconds.
+AI Bake process completed in 0.1653555 seconds.

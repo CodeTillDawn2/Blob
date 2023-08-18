@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -31,6 +32,7 @@ public class PigSenses : Senses, ICanSee, IHaveEyes, IUseSightBox
 
     #endregion
 
+
     #region Interface Fields
     private GameObjectRuntimeSet _eyes;  
     private Dict_GameObjectToLastSeen _thingsSeen; 
@@ -39,6 +41,7 @@ public class PigSenses : Senses, ICanSee, IHaveEyes, IUseSightBox
     public FloatVariable SightDistance { get; set; }
     public LayerMaskVariable OnlySeeMask { get; set; }
 
+    [IsTrigger]
     public BoxCollider MySightBox { get; set; }
     public UnityLayerVariable ThingsNearbyFilter { get; set; }
 
@@ -75,6 +78,7 @@ public class PigSenses : Senses, ICanSee, IHaveEyes, IUseSightBox
         }
     }
 
+    
     public GameObjectRuntimeSet ThingsNearby
     {
         get

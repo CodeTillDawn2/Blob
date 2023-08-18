@@ -20,7 +20,17 @@
       "MemberName": "MySightBox",
       "MemberType": "Property",
       "VariableType": "UnityEngine.BoxCollider, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+      "declaringTypeName": "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Attributes": [
+        {
+          "AttributeTypeName": "IsTriggerAttribute",
+          "AttributeProperties": {
+            "order": [
+              "0"
+            ]
+          }
+        }
+      ]
     },
     {
       "MemberName": "ThingsNearby",

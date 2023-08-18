@@ -30,8 +30,8 @@ public class PigBody : Body, IUseMeshRenderer, IAmAlive, IHaveHitPoints, IHaveNu
     #region Interface Methods
 
     [AIInvoluntary]
-    [AIRequiredFieldFalse(typeof(IAmAlive))]
-    [AIRequiredFieldTrue(typeof(ICanBeDigested))]
+    [AIRequiredEvalBool(typeof(IAmAlive), true)]
+    [AIRequiredEvalBool(typeof(ICanBeDigested), true)]
     [AIRequiredRisk(typeof(IHaveNutrition))]
     public float BeDigested(float digestDamage)
     {
