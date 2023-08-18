@@ -237,6 +237,7 @@
     <None Include="Assets\GPT AI Integration\ElevenLabs\libs\NAudio.WinMM.dll" />
     <None Include="Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Wasapi.dll" />
     <None Include="Assets\Art\Shaders\NewSurfaceShader.shader" />
+    <None Include="Assets\DLL\Debug\netstandard2.1\BreadAI.dll" />
     <None Include="Assets\Art\Shaders\TransparentWithDepthMask.shader" />
     <None Include="Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Asio.dll" />
     <None Include="Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Core.dll" />
@@ -545,6 +546,9 @@
     </Reference>
     <Reference Include="Pathfinding.Ionic.Zip.Reduced">
       <HintPath>Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
+    <Reference Include="BreadAI">
+      <HintPath>Assets\DLL\Debug\netstandard2.1\BreadAI.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.4f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>

@@ -1,5 +1,0 @@
-C:\Users\peter\Blob\BreadAICodeGenerator\obj\Debug\netstandard2.0\BreadAICodeGenerator.csproj.AssemblyReference.cache
-C:\Users\peter\Blob\BreadAICodeGenerator\obj\Debug\netstandard2.0\BreadAICodeGenerator.GeneratedMSBuildEditorConfig.editorconfig
-C:\Users\peter\Blob\BreadAICodeGenerator\obj\Debug\netstandard2.0\BreadAICodeGenerator.AssemblyInfoInputs.cache
-C:\Users\peter\Blob\BreadAICodeGenerator\obj\Debug\netstandard2.0\BreadAICodeGenerator.AssemblyInfo.cs
-C:\Users\peter\Blob\BreadAICodeGenerator\obj\Debug\netstandard2.0\BreadAICodeGenerator.csproj.CoreCompileInputs.cache
