@@ -4,9 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using Unity.Burst.Intrinsics;
-using Unity.VisualScripting.YamlDotNet.Core;
-using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -29,8 +26,8 @@ public static class AIEditorBaker
     /// </summary>
     public static List<ClassData> BreadMethods
     {
-        get { return AIBakerData.instance.BreadMethods; }
-        private set { AIBakerData.instance.BreadMethods = value; }
+        get { return AIBakerData.Instance.BreadMethods; }
+        private set { AIBakerData.Instance.BreadMethods = value; }
     }
 
     ///// <summary>
@@ -38,8 +35,8 @@ public static class AIEditorBaker
     ///// </summary>
     //public static ConfigurationInstanceCache ConfigurationInstances
     //{
-    //    get { return AIBakerData.instance.ConfigurationInstances; }
-    //    private set { AIBakerData.instance.ConfigurationInstances = value; }
+    //    get { return AIBakerData.Instance.ConfigurationInstances; }
+    //    private set { AIBakerData.Instance.ConfigurationInstances = value; }
     //}
 
     /// <summary>
@@ -49,29 +46,29 @@ public static class AIEditorBaker
     {
         get
         {
-            return AIBakerData.instance.BreadInterfaces;
+            return AIBakerData.Instance.BreadInterfaces;
         }
         private set
         {
-            AIBakerData.instance.BreadInterfaces = value;
+            AIBakerData.Instance.BreadInterfaces = value;
         }
     }
 
     public static Dictionary<string, List<SimpleMemberInfo>> BreadDataMembers
     {
-        get { return AIBakerData.instance.BreadDataMembers; }
-        private set { AIBakerData.instance.BreadDataMembers = value; }
+        get { return AIBakerData.Instance.BreadDataMembers; }
+        private set { AIBakerData.Instance.BreadDataMembers = value; }
     }
 
     public static Dictionary<string, ScriptableObject> BreadConfigurations
     {
-        get { return AIBakerData.instance.BreadConfigurations; }
-        private set { AIBakerData.instance.BreadConfigurations = value; }
+        get { return AIBakerData.Instance.BreadConfigurations; }
+        private set { AIBakerData.Instance.BreadConfigurations = value; }
     }
     public static Dictionary<Type, List<Type>> BreadSystemInterfaces
     {
-        get { return AIBakerData.instance.BreadSystemInterfaces; }
-        private set { AIBakerData.instance.BreadSystemInterfaces = value; }
+        get { return AIBakerData.Instance.BreadSystemInterfaces; }
+        private set { AIBakerData.Instance.BreadSystemInterfaces = value; }
     }
 
 
@@ -82,8 +79,8 @@ public static class AIEditorBaker
     /// </summary>
     public static Dictionary<string, Dictionary<string, List<string>>> BreadValidConfigurations
     {
-        get { return AIBakerData.instance.BreadValidConfigurations; }
-        private set { AIBakerData.instance.BreadValidConfigurations = value; }
+        get { return AIBakerData.Instance.BreadValidConfigurations; }
+        private set { AIBakerData.Instance.BreadValidConfigurations = value; }
     }
 
     public static void StartBake()
@@ -130,20 +127,28 @@ public static class AIEditorBaker
 
     }
 
+    private static string BreadValidConfigurations_Path = Application.dataPath + @"/BreadAI/BakedData/BreadValidConfigurations.json";
+    private static string BreadConfigurations_Path = Application.dataPath + @"/BreadAI/BakedData/BreadConfigurations.json";
+    private static string BreadMethods_Path = Application.dataPath + @"/BreadAI/BakedData/BreadMethods.json";
+    private static string BreadDataMembers_Path = Application.dataPath + @"/BreadAI/BakedData/BreadDataMembers.json";
+    private static string BreadInterfaces_Path = Application.dataPath + @"/BreadAI/BakedData/BreadInterfaces.json";
+    private static string BreadSystemInterfaces_Path = Application.dataPath + @"/BreadAI/BakedData/BreadSystemInterfaces.json";
+
     private static void StoreBread()
     {
         Debug.Log("Baking Bread");
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadConfigurations, AIBakerData.instance.BreadConfigurations_Path));
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadValidConfigurations, AIBakerData.instance.BreadValidConfigurations_Path));
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadDataMembers, AIBakerData.instance.BreadDataMembers_Path));
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadMethods, AIBakerData.instance.BreadMethods_Path));
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadInterfaces, AIBakerData.instance.BreadInterfaces_Path));
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadSystemInterfaces, AIBakerData.instance.BreadSystemInterfaces_Path));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadConfigurations, BreadConfigurations_Path));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadValidConfigurations, BreadValidConfigurations_Path));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadDataMembers, BreadDataMembers_Path));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadMethods, BreadMethods_Path));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadInterfaces, BreadInterfaces_Path));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadSystemInterfaces, BreadSystemInterfaces_Path));
         LogToFile($"AI Bake process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
         Debug.Log($"AI Bake process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
     }
+
 
 
     private static void BakeConfigurationMappings()
@@ -166,18 +171,18 @@ public static class AIEditorBaker
     private static void BakeMembers()
     {
         BreadDataMembers = BakeBreadDataMembers();
-        
+
     }
     private static void BakeMethods()
     {
         BreadMethods = BakeBreadMethods();
-        
+
     }
 
     private static void BakeBreadInterfaces()
     {
         BreadInterfaces = BakeInterfaceData();
-        
+
         BreadSystemInterfaces = BakeBreadSystemInterfaces();
 
     }
@@ -194,7 +199,7 @@ public static class AIEditorBaker
         List<Type> types = new List<Type>();
         foreach (Assembly assemb in allAssemblies)
         {
-            types.AddRange(assemb.GetTypes().Where(p => (characterSystemType.IsAssignableFrom(p) 
+            types.AddRange(assemb.GetTypes().Where(p => (characterSystemType.IsAssignableFrom(p)
             || characterSystemType2.IsAssignableFrom(p)) && !p.IsInterface && !p.IsAbstract));
         }
 

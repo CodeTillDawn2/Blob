@@ -51,7 +51,7 @@ public class BasicDropdown : PropertyDrawer
 
     private void UpdateDependentDropdownList(string baseType, string primaryTypeSelection, string dependentTypeSelection)
     {
-        if (AIEditorBaker.BreadValidConfigurations.ContainsKey(baseType) && AIBakerData.instance.BreadValidConfigurations[baseType].TryGetValue(primaryTypeSelection, out var configs))
+        if (AIEditorBaker.BreadValidConfigurations.ContainsKey(baseType) && AIBakerData.Instance.BreadValidConfigurations[baseType].TryGetValue(primaryTypeSelection, out var configs))
         {
             dependentTypeNames = configs;
             if (!dependentTypeNames.Contains("None"))

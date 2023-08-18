@@ -72,7 +72,6 @@
     <Compile Include="Assets\Animation_TentacleDespawn.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\InContactWithBlobModifier.cs" />
     <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\ISearch.cs" />
-    <Compile Include="Assets\Global\Shortcuts.cs" />
     <Compile Include="Assets\GPT AI Integration\Demo Scripts\OpenAIDemo.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveThingsInMyStomach.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\IConfigDefault\IConfigDefault.cs" />
@@ -119,7 +118,6 @@
     <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\WrappedFunc.cs" />
     <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Conditional\AIRequiredField.cs" />
     <Compile Include="Assets\Events\GameEventListener.cs" />
-    <Compile Include="Assets\Global\PhysicsTools.cs" />
     <Compile Include="Assets\BreadAI\Impulses\ImpulseStep.cs" />
     <Compile Include="Assets\Things\Enemies\Pig\PigBody.cs" />
     <Compile Include="Assets\GPT AI Integration\VoiceRecorder\MicInput.cs" />
@@ -152,7 +150,6 @@
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveNutrition.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveHitPoints.cs" />
     <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Classification\AIInvoluntaryAttribute.cs" />
-    <Compile Include="Assets\Global\SOLibrary.cs" />
     <Compile Include="Assets\BreadAI\Attributes\InterfaceAttributes\SelfAttribute.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\BlobBody_Solid.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfStringAndInt.cs" />
@@ -169,7 +166,6 @@
     <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Conditional\AIRequiredEvalBoolAttribute.cs" />
     <Compile Include="Assets\Global\DamageTypeLibrary.cs" />
     <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\LastSeenData.cs" />
-    <Compile Include="Assets\Global\GOLibrary.cs" />
     <Compile Include="Assets\Static\Things Base\Senses.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveMaxTentacles.cs" />
     <Compile Include="Assets\Global\RefreshGameState.cs" />
@@ -505,6 +501,9 @@
     <Reference Include="Sirenix.Utilities">
       <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.dll</HintPath>
     </Reference>
+    <Reference Include="BreadAI">
+      <HintPath>Assets\DLL\Debug\netstandard2.1\BreadAI.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
     </Reference>
@@ -528,9 +527,6 @@
     </Reference>
     <Reference Include="Pathfinding.Ionic.Zip.Reduced">
       <HintPath>Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
-    </Reference>
-    <Reference Include="BreadAI">
-      <HintPath>Assets\DLL\Debug\netstandard2.1\BreadAI.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.4f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>

@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class PigBody : Body, IUseMeshRenderer, IAmAlive, IHaveHitPoints, IHaveNutrition,

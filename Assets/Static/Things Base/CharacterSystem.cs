@@ -4,7 +4,6 @@ using System.Linq;
 using System.Reflection;
 using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.Analytics;
 
 public abstract class CharacterSystem : MonoBehaviour
 {
@@ -28,7 +27,7 @@ public abstract class CharacterSystem : MonoBehaviour
         List<Type> interfaceTypes;
 
         // If the dictionary contains the type of the instance
-        if (AIBakerData.instance.BreadSystemInterfaces.TryGetValue(instanceType, out interfaceTypes))
+        if (AIBakerData.Instance.BreadSystemInterfaces.TryGetValue(instanceType, out interfaceTypes))
         {
             if (interfaceTypes.Contains(targetType)) // The Contains method works for both HashSet and List
             {
@@ -55,7 +54,7 @@ public abstract class CharacterSystem : MonoBehaviour
     public bool Am(params Type[] interfaceTypes)
     {
         List<Type> knownInterfaces;
-        if (AIBakerData.instance.BreadSystemInterfaces.TryGetValue(this.GetType(), out knownInterfaces))
+        if (AIBakerData.Instance.BreadSystemInterfaces.TryGetValue(this.GetType(), out knownInterfaces))
         {
             foreach (var targetType in interfaceTypes)
             {
@@ -116,7 +115,7 @@ public abstract class CharacterSystem : MonoBehaviour
     private void SetupInterfaceDictionary()
     {
         Type currentType = this.GetType();
-        if (AIBakerData.instance.BreadSystemInterfaces.TryGetValue(currentType, out var interfaceTypes))
+        if (AIBakerData.Instance.BreadSystemInterfaces.TryGetValue(currentType, out var interfaceTypes))
         {
             foreach (var iface in interfaceTypes)
             {
@@ -124,6 +123,7 @@ public abstract class CharacterSystem : MonoBehaviour
             }
         }
     }
+
     #endregion
 
     public void AssignConfiguration(string configName)
@@ -135,7 +135,7 @@ public abstract class CharacterSystem : MonoBehaviour
         }
 
         // 1. Get the ConfigurationBase instance.
-        if (!AIBakerData.instance.BreadConfigurations.TryGetValue(configName, out var configObj))
+        if (!AIBakerData.Instance.BreadConfigurations.TryGetValue(configName, out var configObj))
         {
             Debug.LogError($"Configuration {configName} not found.");
             return;
@@ -150,7 +150,7 @@ public abstract class CharacterSystem : MonoBehaviour
 
         // 2. Loop through the interfaces of CharacterSystem.
         Type currentType = this.GetType();
-        if (!AIBakerData.instance.BreadSystemInterfaces.TryGetValue(currentType, out var interfaceList))
+        if (!AIBakerData.Instance.BreadSystemInterfaces.TryGetValue(currentType, out var interfaceList))
         {
             Debug.LogError($"No interfaces found for type: {currentType.FullName}");
             return;
@@ -158,7 +158,7 @@ public abstract class CharacterSystem : MonoBehaviour
 
         bool AllImplemented = true;
 
-        if (!AIBakerData.instance.BreadDataMembers.TryGetValue(currentType.FullName, out var members))
+        if (!AIBakerData.Instance.BreadDataMembers.TryGetValue(currentType.FullName, out var members))
         {
             Debug.LogError($"No members found for type: {currentType.FullName}");
             return;
@@ -187,7 +187,7 @@ public abstract class CharacterSystem : MonoBehaviour
 
                 // Check if the ConfigurationBase instance also implements this interface
                 List<Type> configInterfaces;
-                if (!AIBakerData.instance.BreadSystemInterfaces.TryGetValue(configInstance.GetType(), out configInterfaces)
+                if (!AIBakerData.Instance.BreadSystemInterfaces.TryGetValue(configInstance.GetType(), out configInterfaces)
                     || !configInterfaces.Contains(iface))
                 {
                     continue;  // Skip to the next interface if configInstance does not implement iface
@@ -237,12 +237,12 @@ public abstract class CharacterSystem : MonoBehaviour
             }
             else
             {
-                systemInfo.SetValue(character, configValue); 
+                systemInfo.SetValue(character, configValue);
             }
 
             // Set value to character using a different, appropriate SimpleDataMemberInfo
 
-            
+
         }
         catch (TargetInvocationException invE)
         {

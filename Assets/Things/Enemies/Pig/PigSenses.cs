@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class PigSenses : Senses, ICanSee, IHaveEyes, IUseSightBox
@@ -34,8 +30,8 @@ public class PigSenses : Senses, ICanSee, IHaveEyes, IUseSightBox
 
 
     #region Interface Fields
-    private GameObjectRuntimeSet _eyes;  
-    private Dict_GameObjectToLastSeen _thingsSeen; 
+    private GameObjectRuntimeSet _eyes;
+    private Dict_GameObjectToLastSeen _thingsSeen;
     private GameObjectRuntimeSet _thingsNearby;
 
     public FloatVariable SightDistance { get; set; }
@@ -78,7 +74,7 @@ public class PigSenses : Senses, ICanSee, IHaveEyes, IUseSightBox
         }
     }
 
-    
+
     public GameObjectRuntimeSet ThingsNearby
     {
         get

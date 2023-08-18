@@ -42,7 +42,7 @@ public abstract class Senses : CharacterSystem
     {
         if (Am(typeof(ICanSee), typeof(IHaveEyes), typeof(IUseSightBox)))
         {
-            
+
             SeeWithEyes(I<ICanSee>(), I<IHaveEyes>(), I<IUseSightBox>());
         }
 

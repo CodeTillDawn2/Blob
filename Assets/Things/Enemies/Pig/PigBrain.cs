@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 
 public class PigBrain : Brain

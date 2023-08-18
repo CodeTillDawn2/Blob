@@ -9,7 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30a05512b78383c4d960036d277a2e6e, type: 3}
+  m_Script: {fileID: -393575110, guid: 39fd360ae202c654e81ae648e2812e6d, type: 3}
   m_Name: BakerSO
   m_EditorClassIdentifier: 
+  BreadValidConfigurations_Path: C:/Users/peter/Blob/Assets/BreadAI/BreadBake/BakedData/BreadValidConfigurations.json
+  BreadConfigurations_Path: C:/Users/peter/Blob/Assets/BreadAI/BreadBake/BakedData/BreadConfigurations.json
+  BreadMethods_Path: C:/Users/peter/Blob/Assets/BreadAI/BreadBake/BakedData/BreadMethods.json
+  BreadDataMembers_Path: C:/Users/peter/Blob/Assets/BreadAI/BreadBake/BakedData/BreadDataMembers.json
+  BreadInterfaces_Path: C:/Users/peter/Blob/Assets/BreadAI/BreadBake/BakedData/BreadInterfaces.json
+  BreadSystemInterfaces_Path: C:/Users/peter/Blob/Assets/BreadAI/BreadBake/BakedData/BreadSystemInterfaces.json
   enableLogging: 1

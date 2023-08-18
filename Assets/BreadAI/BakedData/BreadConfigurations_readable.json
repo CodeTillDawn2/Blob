@@ -1,0 +1,11 @@
+{
+  "BlobConfiguration": {
+    "asset": "BlobConfiguration"
+  },
+  "PigConfiguration 1": {
+    "asset": "PigConfiguration 1"
+  },
+  "PigConfiguration": {
+    "asset": "PigConfiguration"
+  }
+}
