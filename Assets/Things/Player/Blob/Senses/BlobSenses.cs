@@ -1,4 +1,4 @@
-public class BlobSenses : Senses
+public class BlobSenses : BasicSenses
 {
 
 

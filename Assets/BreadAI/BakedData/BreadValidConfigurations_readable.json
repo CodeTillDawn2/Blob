@@ -43,6 +43,12 @@
     ]
   },
   "Senses": {
+    "BasicSenses": [
+      "None",
+      "BlobConfiguration",
+      "PigConfiguration 1",
+      "PigConfiguration"
+    ],
     "PigSenses": [
       "None",
       "BlobConfiguration",

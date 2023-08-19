@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PigSenses : Senses, ICanSee, IHaveEyes, IUseSightBox
+public class PigSenses : BasicSenses, ICanSee, IHaveEyes, IUseSightBox
 {
 
 

@@ -59,157 +59,88 @@
     <Analyzer Include="C:\Program Files\Unity\Hub\Editor\2022.3.4f1\Editor\Data\Tools\Unity.SourceGenerators\Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\IntegerVariable.cs" />
     <Compile Include="Assets\Animation_TentacleReadied.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\BooleanVariable.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\ComponentAtributes\IsTriggerAttribute.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Weights\AIRequiredInfluencerAttribute.cs" />
-    <Compile Include="Assets\Executive\EnemyConsumer.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Markers\IAmImmuneToTargetingByTentacles.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\SerializableDictionary.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Risks\AIOptionalRisk.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveEyes.cs" />
     <Compile Include="Assets\Animation_TentacleDespawn.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\InContactWithBlobModifier.cs" />
-    <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\ISearch.cs" />
     <Compile Include="Assets\GPT AI Integration\Demo Scripts\OpenAIDemo.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveThingsInMyStomach.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\IConfigDefault\IConfigDefault.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\ELSpeaker.cs" />
-    <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\IAttack.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanSee.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanBeDigested.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Classification\AIAttackAttribute.cs" />
     <Compile Include="Assets\GPT AI Integration\VoiceRecorder\VoiceRecorder.cs" />
-    <Compile Include="Assets\BreadAI\Configurations\Base\ConfigurationBase.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Configuration\ELAuthArgsV1.cs" />
-    <Compile Include="Assets\Static\Things Base\Eye.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveMassPerCubicFoot.cs" />
     <Compile Include="Assets\GPT AI Integration\VoiceRecorder\WavUtility.cs" />
     <Compile Include="Assets\Things\Player\Blob\Locomotion\BlobLocomotion.cs" />
     <Compile Include="Assets\Things\Enemies\Pig\PigNerves.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Conditional\AIRequiredEvalFloatAttribute.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Classification\AIMovementAttribute.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\ComponentProperties\IUseSightBox.cs" />
     <Compile Include="Assets\GPT AI Integration\Demo Scripts\ImageGenerator\OpenAiImageGenerator.cs" />
-    <Compile Include="Assets\BreadAI\Impulses\Impulse.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\RaycastHitInfo.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveRotateSpeed.cs" />
     <Compile Include="Assets\Things\Sensors\MomentumSensor.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGameObjectAndLastSeenData.cs" />
-    <Compile Include="Assets\Static\Things Base\Nerves.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Base\BlobBody.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\DigestNutritionModifier.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Conditional\IAmAlive.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGameObjectAndVector3.cs" />
     <Compile Include="Assets\Things\Player\Blob\BlobAnimation.cs" />
     <Compile Include="Assets\Things\Enemies\Pig\PigLocomotion.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Test\BlobJiggle.cs" />
     <Compile Include="Assets\Things\Modifiers\Tentacle\TentacleWhapModifer.cs" />
     <Compile Include="Assets\Animation_TentacleSmack.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_GameObjectToLastSeen.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\TransformData.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_StringIntVariable.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveDigestDamageDealt.cs" />
     <Compile Include="Assets\Things\Player\Blob\Tentacles\Tentacle\TentacleController.cs" />
     <Compile Include="Assets\Things\Modifiers\Base\GameObjectInListModifierCondition.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Test\BlobJiggleNew.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveSuckSpeed.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\WrappedFunc.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Conditional\AIRequiredField.cs" />
-    <Compile Include="Assets\Events\GameEventListener.cs" />
-    <Compile Include="Assets\BreadAI\Impulses\ImpulseStep.cs" />
     <Compile Include="Assets\Things\Enemies\Pig\PigBody.cs" />
     <Compile Include="Assets\GPT AI Integration\VoiceRecorder\MicInput.cs" />
     <Compile Include="Assets\Things\Player\Blob\Tentacles\BlobTentacles.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Input\AIRequiredInputAttributeOr.cs" />
     <Compile Include="Assets\Things\Player\Blob\Tentacles\Tentacle\SmoothTentacleWhap.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveMass.cs" />
     <Compile Include="Assets\Things\Enemies\Pig\PigSenses.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\Test\BlobStomach_Segmented.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveThingsSeen.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\StringVariable.cs" />
-    <Compile Include="Assets\Events\GameEvent.cs" />
-    <Compile Include="Assets\Static\Things Base\Locomotion.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGameObjectAndString.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_GameObjectToString.cs" />
     <Compile Include="Assets\Things\Modifiers\Base\ModifierClass.cs" />
     <Compile Include="Assets\Things\Enemies\EnemyController.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveTentacleHitSpeed.cs" />
-    <Compile Include="Assets\BreadAI\Configurations\NervePlan.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ProducerConsumerStream.cs" />
-    <Compile Include="Assets\Executive\EnemySucker.cs" />
     <Compile Include="Assets\BreadAI\AILibrary.cs" />
-    <Compile Include="Assets\Static\Things Base\Body.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveMoveSpeed.cs" />
     <Compile Include="Assets\Things\Modifiers\Digestion\InBlobsStomachModifier.cs" />
     <Compile Include="Assets\Things\Enemies\Pig\PigController.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\UnityLayerVariable.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanGainNutrition.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\RuntimeSets\RuntimeSet.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveNutrition.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveHitPoints.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Classification\AIInvoluntaryAttribute.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\InterfaceAttributes\SelfAttribute.cs" />
     <Compile Include="Assets\Things\Player\Blob\Body\BlobBody_Solid.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfStringAndInt.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_GOGOVariable.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveTentacleReach.cs" />
     <Compile Include="Assets\Things\Player\Blob\Senses\BlobSenses.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Risks\AIRequiredRisk.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\ComponentProperties\IUseRigidBody.cs" />
-    <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\IDespawn.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\RuntimeSets\ScriptableObjectRuntimeSet.cs" />
     <Compile Include="Assets\Things\Player\Blob\Tentacles\Tentacle\TentacleBrain.cs" />
     <Compile Include="Assets\Global\BuildLogger.cs" />
     <Compile Include="Assets\Static\Enums\DamageTypeEnum.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Conditional\AIRequiredEvalBoolAttribute.cs" />
     <Compile Include="Assets\Global\DamageTypeLibrary.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\LastSeenData.cs" />
-    <Compile Include="Assets\Static\Things Base\Senses.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveMaxTentacles.cs" />
     <Compile Include="Assets\Global\RefreshGameState.cs" />
     <Compile Include="Assets\Things\Modifiers\Base\GameObjectIsGameObjectCondition.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Dictionary\Dict_GameObjectToVector3.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ELStreamingEngine.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\RuntimeSets\RaycastInfoRuntimeSet.cs" />
     <Compile Include="Assets\Camera\FollowPlayerCamera.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\GameObjectVariable.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\QuaternionVariable.cs" />
-    <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\ISpawn.cs" />
-    <Compile Include="Assets\BreadAI\Neurons\Neuron.cs" />
     <Compile Include="Assets\Things\Modifiers\Damage\DealDamageModifier.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\Vector3Variable.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\ComponentProperties\IUseMeshRenderer.cs" />
     <Compile Include="Assets\BreadAI\Configurations\PreyAnimalConfiguration.cs" />
     <Compile Include="Assets\BreadAI\Configurations\BlobConfiguration.cs" />
     <Compile Include="Assets\Animation_TentacleSpawn.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Properties\IHaveGrowthSpeed.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanDie.cs" />
-    <Compile Include="Assets\Static\Things Base\CharacterSystem.cs" />
-    <Compile Include="Assets\Executive\EnemyReleaser.cs" />
+    <Compile Include="Assets\Things\CharacterSystems\BasicSenses.cs" />
     <Compile Include="Assets\GPT AI Integration\ElevenLabs\Streaming\ReadFullyStream.cs" />
     <Compile Include="Assets\Things\Modifiers\Tentacle\TargetedByTentacleModifier.cs" />
-    <Compile Include="Assets\Static\Things Base\Brain.cs" />
-    <Compile Include="Assets\BreadAI\Impulses\ImpulseInterfaces\IImpulse.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Input\AIRequiredInputAttributeAnd.cs" />
     <Compile Include="Assets\BreadAI\Reflection\GeneratedCode\InterfacesEnum.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\RuntimeSets\GameObjectRuntimeSet.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Weights\AIOptionalInfluencerAttribute.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\LayerMaskVariable.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Dictionary\Base\DictionaryOfGOAndGO.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Rewards\AIOptionalReward.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\FloatVariable.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Rewards\AIRequiredReward.cs" />
     <Compile Include="Assets\Things\Player\Blob\Brain\BlobBrain.cs" />
     <Compile Include="Assets\BreadAI\AI Interfaces\Methods\ICanBeDamaged.cs" />
     <Compile Include="Assets\GPT AI Integration\Demo Scripts\Visual Scripting\OpenAiVS.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Structs\OBB.cs" />
     <Compile Include="Assets\Global\ModifierLibrary.cs" />
     <Compile Include="Assets\Things\Modifiers\Base\OneTimeModifierCondition.cs" />
     <Compile Include="Assets\Things\Enemies\Pig\PigBrain.cs" />
-    <Compile Include="Assets\BreadAI\Attributes\AIAttributes\MethodAttributes\Conditional\AIRequiredEvalIntegerAttribute.cs" />
-    <Compile Include="Assets\Static\VariableTemplates\Variables\Scriptable Objects\ImpulseVariable.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\GPT AI Integration\ElevenLabs\libs\NAudio.WinMM.dll" />
@@ -222,6 +153,7 @@
     <None Include="Assets\GPT AI Integration\ElevenLabs\libs\NAudio.dll" />
     <None Include="Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Midi.dll" />
     <None Include="Assets\Art\Shaders\ColorMask0.shader" />
+    <None Include="Assets\DLL\Debug\netstandard2.1\BreadAIEditor.dll" />
     <None Include="Assets\Imported\VertexColorFarmAnimals\Shaders\VertexColorUnlit.shader" />
   </ItemGroup>
   <ItemGroup>
@@ -527,6 +459,9 @@
     </Reference>
     <Reference Include="Pathfinding.Ionic.Zip.Reduced">
       <HintPath>Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
+    </Reference>
+    <Reference Include="BreadAIEditor">
+      <HintPath>Assets\DLL\Debug\netstandard2.1\BreadAIEditor.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
       <HintPath>C:\Program Files\Unity\Hub\Editor\2022.3.4f1\Editor\Data\NetStandard\ref\2.1.0\netstandard.dll</HintPath>
@@ -897,20 +832,62 @@
     <Reference Include="Unity.2D.IK.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.2D.IK.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="PsdPlugin">
-      <HintPath>Library\ScriptAssemblies\PsdPlugin.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Burst.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Burst.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Burst">
-      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
+    <Reference Include="Unity.Animation.Rigging.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Common.Path.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Path.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.PixelPerfect.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Rider.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Aseprite.Common">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Aseprite.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Sprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.VisualScripting.Flow">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Mathematics.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Tilemap.Extras.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Collections">
+      <HintPath>Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.SpriteShape.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.PixelPerfect">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.TextMeshPro">
+      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.2D.Aseprite.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Aseprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Animation.Rigging">
+      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.dll</HintPath>
+    </Reference>
+    <Reference Include="PsdPlugin">
+      <HintPath>Library\ScriptAssemblies\PsdPlugin.dll</HintPath>
     </Reference>
     <Reference Include="Unity.PlasticSCM.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.PlasticSCM.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.2D.Common.Path.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Path.Editor.dll</HintPath>
+    <Reference Include="Unity.Burst">
+      <HintPath>Library\ScriptAssemblies\Unity.Burst.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
@@ -927,47 +904,29 @@
     <Reference Include="Unity.VisualScripting.Core">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.2D.Animation.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Runtime.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.2D.Tilemap.Extras">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.Core.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Core.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Rider.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Aseprite.Common">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Aseprite.Common.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Sprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Sprite.Editor.dll</HintPath>
+    <Reference Include="Unity.2D.Animation.Runtime">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Animation.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEditorBridge.005">
       <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.005.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.001">
       <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.001.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Mathematics.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.2D.Common.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Tilemap.Extras.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.dll</HintPath>
@@ -978,32 +937,17 @@
     <Reference Include="Unity.InputSystem.ForUI">
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Animation.Rigging.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Collections">
-      <HintPath>Library\ScriptAssemblies\Unity.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.Psdimporter.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Psdimporter.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InternalAPIEditorBridge.001">
       <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEditorBridge.001.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.2D.SpriteShape.Runtime">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Runtime.dll</HintPath>
+    <Reference Include="Unity.2D.Psdimporter.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.2D.Psdimporter.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.State.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.2D.PixelPerfect">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.PixelPerfect.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.dll</HintPath>
@@ -1011,20 +955,11 @@
     <Reference Include="Unity.2D.Common.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.TextMeshPro">
-      <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.2D.Aseprite.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.2D.Aseprite.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.State">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.State.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Animation.Rigging">
-      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.SpriteShape.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.SpriteShape.Editor.dll</HintPath>
@@ -1044,14 +979,6 @@
       <Project>{942EE966-DED0-F8B3-92D7-B2E88412F9A7}</Project>
       <Name>AdjustPivot.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="openai.api.unity.editor.csproj">
-      <Project>{89132D93-795D-0F2E-9738-0AB22EE6C303}</Project>
-      <Name>openai.api.unity.editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Sirenix.OdinInspector.Modules.UnityMathematics.csproj">
-      <Project>{313DD723-0862-6853-5F3E-3B87F45B34E4}</Project>
-      <Name>Sirenix.OdinInspector.Modules.UnityMathematics</Name>
-    </ProjectReference>
     <ProjectReference Include="PackageToolsEditor.csproj">
       <Project>{726AFA8A-6532-E894-4BEC-E255CB223930}</Project>
       <Name>PackageToolsEditor</Name>
@@ -1060,13 +987,21 @@
       <Project>{C9C1FD00-F4F5-8BB0-2CFF-F382AFC1746E}</Project>
       <Name>AstarPathfindingProjectEditor</Name>
     </ProjectReference>
-    <ProjectReference Include="AstarPathfindingProject.csproj">
-      <Project>{21C372D8-A9E7-A610-234D-CE70891A07FD}</Project>
-      <Name>AstarPathfindingProject</Name>
-    </ProjectReference>
     <ProjectReference Include="openai.api.unity.csproj">
       <Project>{515B55D5-0355-7122-C48F-BF86C363DCE9}</Project>
       <Name>openai.api.unity</Name>
+    </ProjectReference>
+    <ProjectReference Include="openai.api.unity.editor.csproj">
+      <Project>{89132D93-795D-0F2E-9738-0AB22EE6C303}</Project>
+      <Name>openai.api.unity.editor</Name>
+    </ProjectReference>
+    <ProjectReference Include="Sirenix.OdinInspector.Modules.UnityMathematics.csproj">
+      <Project>{313DD723-0862-6853-5F3E-3B87F45B34E4}</Project>
+      <Name>Sirenix.OdinInspector.Modules.UnityMathematics</Name>
+    </ProjectReference>
+    <ProjectReference Include="AstarPathfindingProject.csproj">
+      <Project>{21C372D8-A9E7-A610-234D-CE70891A07FD}</Project>
+      <Name>AstarPathfindingProject</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
