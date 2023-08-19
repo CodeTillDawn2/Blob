@@ -378,8 +378,6 @@ public static class AIEditorBaker
                     .Select(kv => kv.Key)
                     .ToList();
 
-                configTypeInstances.Insert(0, "None");
-
                 configDictionary[characterSystem.FullName] = configTypeInstances;
                 TotalPopulated = TotalPopulated + configTypeInstances.Count;
                 LogToFile($"Populated {configTypeInstances.Count} ConfigurationBase types for {characterSystem.FullName} that implement all required interfaces.");

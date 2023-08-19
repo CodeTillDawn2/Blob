@@ -1,94 +1,166 @@
+using Sirenix.OdinInspector;
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "NervePlan", menuName = "AI/NervePlan")]
 public class NervePlan : ScriptableObject
 {
-    [Header("Brain")]
+
+    //Brain
     [SerializeField]
-    [CompountDependentDropdown("Brain")]
+    [ValueDropdown("BrainTypes")]
     private string brain;
+    public string Brain { get { return brain; } }
 
-    public string Brain
+    public IEnumerable BrainTypes
     {
         get
         {
-            if (brain == "None") return null;
-            return brain.Split(":")[0];
+            return GetDropdownList("Brain");
         }
     }
-
-    public string BrainConfig
-    {
-        get
-        {
-            if (brain == "None") return null;
-            return brain.Split(":")[1];
-        }
-    }
-
-    [Header("Senses")]
+    [Required]
+    [ShowIf(nameof(IsBrainSelected))]
+    [ValueDropdown("BrainConfigurations")]
     [SerializeField]
-    [CompountDependentDropdown("Senses")]
+    private string brainConfig;
+    public string BrainConfig { get { return brainConfig; } }
+
+    public IEnumerable BrainConfigurations
+    {
+        get
+        {
+            return GetConfigurations("Brain", brain);
+        }
+    }
+
+    
+
+
+    // Senses
+    [SerializeField]
+    [ValueDropdown("SensesTypes")]
     private string senses;
+    public string Senses { get { return senses; } }
 
-    public string Senses
+    public IEnumerable SensesTypes
     {
         get
         {
-            if (senses == "None") return null;
-            return senses.Split(":")[0];
-        }
-    }
-    public string SensesConfig
-    {
-        get
-        {
-            if (senses == "None") return null;
-            return senses.Split(":")[1];
+            return GetDropdownList("Senses");
         }
     }
 
-    [Header("Locomotion")]
+    [Required]
+    [ShowIf(nameof(IsSensesSelected))]
+    [ValueDropdown("SensesConfigurations")]
     [SerializeField]
-    [CompountDependentDropdown("Locomotion")]
+    private string sensesConfig;
+    public string SensesConfig { get { return sensesConfig; } }
+
+    public IEnumerable SensesConfigurations
+    {
+        get
+        {
+            return GetConfigurations("Senses", senses);
+        }
+    }
+
+    // Locomotion
+    [SerializeField]
+    [ValueDropdown("LocomotionTypes")]
     private string locomotion;
+    public string Locomotion { get { return locomotion; } }
 
-    public string Locomotion
+    public IEnumerable LocomotionTypes
     {
         get
         {
-            if (locomotion == "None") return null;
-            return locomotion.Split(":")[0];
-        }
-    }
-    public string LocomotionConfig
-    {
-        get
-        {
-            if (locomotion == "None") return null;
-            return locomotion.Split(":")[1];
+            return GetDropdownList("Locomotion");
         }
     }
 
-    [Header("Body")]
+    [Required]
+    [ShowIf(nameof(IsLocomotionSelected))]
+    [ValueDropdown("LocomotionConfigurations")]
     [SerializeField]
-    [CompountDependentDropdown("Body")]
-    private string body;
+    private string locomotionConfig;
+    public string LocomotionConfig { get { return locomotionConfig; } }
 
-    public string Body
+    public IEnumerable LocomotionConfigurations
     {
         get
         {
-            if (body == "None") return null;
-            return body.Split(":")[0];
+            return GetConfigurations("Locomotion", locomotion);
         }
     }
-    public string BodyConfig
+
+    // Body
+    [SerializeField]
+    [ValueDropdown("BodyTypes")]
+    private string body;
+    public string Body { get { return body; } }
+
+    public IEnumerable BodyTypes
     {
         get
         {
-            if (body == "None") return null;
-            return body.Split(":")[1];
+            return GetDropdownList("Body");
         }
+    }
+
+    [Required]
+    [ShowIf(nameof(IsBodySelected))]
+    [ValueDropdown("BodyConfigurations")]
+    [SerializeField]
+    private string bodyConfig;
+    public string BodyConfig { get { return bodyConfig; } }
+
+    public IEnumerable BodyConfigurations
+    {
+        get
+        {
+            return GetConfigurations("Body", body);
+        }
+    }
+
+    private IEnumerable GetDropdownList(string key)
+    {
+        var result = new ValueDropdownList<string>();
+        if (AIBakerData.Instance.BreadValidConfigurations.TryGetValue(key, out var configs))
+        {
+            foreach (var k in configs.Keys)
+            {
+                result.Add(k, k);
+            }
+            result.Insert(0, new ValueDropdownItem<string>("None", ""));
+        }
+        return result;
+    }
+
+    private IEnumerable GetConfigurations(string key, string subKey)
+    {
+        var result = new ValueDropdownList<string>();
+        if (AIBakerData.Instance.BreadValidConfigurations.TryGetValue(key, out var configs))
+        {
+            if (configs.TryGetValue(subKey, out var values))
+            {
+                foreach (var value in values)
+                {
+                    result.Add(value, value);
+                }
+            }
+        }
+        return result;
+    }
+
+    public bool IsBrainSelected() => IsSelected(brain);
+    public bool IsSensesSelected() => IsSelected(senses);
+    public bool IsLocomotionSelected() => IsSelected(locomotion);
+    public bool IsBodySelected() => IsSelected(body);
+
+    public bool IsSelected(string value)
+    {
+        return !string.IsNullOrEmpty(value) && value != "None";
     }
 }

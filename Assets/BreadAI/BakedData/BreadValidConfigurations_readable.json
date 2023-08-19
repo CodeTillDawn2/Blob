@@ -1,19 +1,16 @@
 {
   "Brain": {
     "BlobBrain": [
-      "None",
       "BlobConfiguration",
       "PigConfiguration 1",
       "PigConfiguration"
     ],
     "TentacleBrain": [
-      "None",
       "BlobConfiguration",
       "PigConfiguration 1",
       "PigConfiguration"
     ],
     "PigBrain": [
-      "None",
       "BlobConfiguration",
       "PigConfiguration 1",
       "PigConfiguration"
@@ -21,22 +18,18 @@
   },
   "Body": {
     "BlobBody_Solid": [
-      "None",
       "BlobConfiguration"
     ],
     "BlobStomach_Segmented": [
-      "None",
       "BlobConfiguration"
     ],
     "PigBody": [
-      "None",
       "PigConfiguration 1",
       "PigConfiguration"
     ]
   },
   "Nerves": {
     "PigNerves": [
-      "None",
       "BlobConfiguration",
       "PigConfiguration 1",
       "PigConfiguration"
@@ -44,19 +37,16 @@
   },
   "Senses": {
     "BasicSenses": [
-      "None",
       "BlobConfiguration",
       "PigConfiguration 1",
       "PigConfiguration"
     ],
     "BlobSenses": [
-      "None",
       "BlobConfiguration",
       "PigConfiguration 1",
       "PigConfiguration"
     ],
     "PigSenses": [
-      "None",
       "BlobConfiguration",
       "PigConfiguration 1",
       "PigConfiguration"
@@ -64,13 +54,11 @@
   },
   "Locomotion": {
     "BlobLocomotion": [
-      "None",
       "BlobConfiguration",
       "PigConfiguration 1",
       "PigConfiguration"
     ],
     "PigLocomotion": [
-      "None",
       "BlobConfiguration",
       "PigConfiguration 1",
       "PigConfiguration"
