@@ -61,10 +61,12 @@
   <ItemGroup>
     <Compile Include="Assets\Editor\BreadAI\AIBakerSOInitializer.cs" />
     <Compile Include="Assets\Editor\BreadAI\AIEditorBaker.cs" />
+    <Compile Include="Assets\Editor\GUIAttributes\CompoundDependentDropdownAttribute.cs" />
     <Compile Include="Assets\Editor\BreadAI\RuntimeSetEditor.cs" />
-    <Compile Include="Assets\Editor\BreadAI\BuiltIn\Drawers\CompoundDependentDropdown.cs" />
-    <Compile Include="Assets\Editor\BreadAI\BuiltIn\Drawers\BasicDropdown.cs" />
+    <Compile Include="Assets\Editor\GUIAttributes\BasicDropdownAttribute.cs" />
     <Compile Include="Assets\Editor\ScriptedImporterEditorScript.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\Editors\BasicDropdown.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\Editors\DependentDropdown.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Editor\BreadAI\BuiltIn\DLL\Debug\netstandard2.1\BreadAIEditor.dll" />

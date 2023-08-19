@@ -1,5 +1,159 @@
 [
   {
+    "ClassType": "Body",
+    "MethodsData": [
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      }
+    ]
+  },
+  {
+    "ClassType": "Brain",
+    "MethodsData": [
+      {
+        "MemberName": "DoActions",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+      },
+      {
+        "MemberName": "AddImpulse",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Impulse+ImpulseType, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "System.Func`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+          "ImpulseStep[], BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      }
+    ]
+  },
+  {
+    "ClassType": "Locomotion",
+    "MethodsData": [
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      }
+    ]
+  },
+  {
+    "ClassType": "Nerves",
+    "MethodsData": [
+      {
+        "MemberName": "AddComponentFromType",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "Nerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "CreateAndAttachSystem",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "Nerves, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+          "UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      }
+    ]
+  },
+  {
+    "ClassType": "Senses",
+    "MethodsData": [
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      }
+    ]
+  },
+  {
     "ClassType": "BasicSenses",
     "MethodsData": [
       {
@@ -17,7 +171,7 @@
         "MemberName": "Am",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -26,190 +180,7 @@
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      }
-    ]
-  },
-  {
-    "ClassType": "PigBody",
-    "MethodsData": [
-      {
-        "MemberName": "BeDigested",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ],
-        "InterfaceAttributes": {
-          "ICanBeDigested": []
-        }
-      },
-      {
-        "MemberName": "BeDamaged",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-          "DamageTypeEnum, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-        ],
-        "InterfaceAttributes": {
-          "ICanBeDamaged": []
-        }
-      },
-      {
-        "MemberName": "Die",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "InterfaceAttributes": {
-          "ICanDie": []
-        }
-      },
-      {
-        "MemberName": "Am",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      },
-      {
-        "MemberName": "AssignConfiguration",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      }
-    ]
-  },
-  {
-    "ClassType": "PigBrain",
-    "MethodsData": [
-      {
-        "MemberName": "DoActions",
-        "MemberType": "Method",
-        "Accessibility": "Protected",
-        "declaringTypeName": "PigBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "MemberName": "AddImpulse",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "Brain, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "Impulse+ImpulseType, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "System.Func`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-          "ImpulseStep[], BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        ]
-      },
-      {
-        "MemberName": "Am",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      },
-      {
-        "MemberName": "AssignConfiguration",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      }
-    ]
-  },
-  {
-    "ClassType": "PigLocomotion",
-    "MethodsData": [
-      {
-        "MemberName": "Move",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "MemberName": "Am",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      },
-      {
-        "MemberName": "AssignConfiguration",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      }
-    ]
-  },
-  {
-    "ClassType": "PigNerves",
-    "MethodsData": [
-      {
-        "MemberName": "Am",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      },
-      {
-        "MemberName": "AssignConfiguration",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      }
-    ]
-  },
-  {
-    "ClassType": "PigSenses",
-    "MethodsData": [
-      {
-        "MemberName": "SeeWithEyes",
-        "MemberType": "Method",
-        "Accessibility": "Protected",
-        "declaringTypeName": "BasicSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "ICanSee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "IHaveEyes, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-        ]
-      },
-      {
-        "MemberName": "Am",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      },
-      {
-        "MemberName": "AssignConfiguration",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -289,7 +260,7 @@
         "MemberName": "Am",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -298,7 +269,7 @@
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -383,7 +354,7 @@
         "MemberName": "Am",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -392,7 +363,152 @@
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      }
+    ]
+  },
+  {
+    "ClassType": "BlobBrain",
+    "MethodsData": [
+      {
+        "MemberName": "DoActions",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BlobBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+      },
+      {
+        "MemberName": "AddImpulse",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "Impulse+ImpulseType, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "System.Func`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+          "ImpulseStep[], BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      }
+    ]
+  },
+  {
+    "ClassType": "BlobLocomotion",
+    "MethodsData": [
+      {
+        "MemberName": "DetectSteps",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+      },
+      {
+        "MemberName": "OnForward",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.InputSystem.InputValue, Unity.InputSystem, Version=1.6.3.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "OnBackward",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.InputSystem.InputValue, Unity.InputSystem, Version=1.6.3.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "OnTurnLeft",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.InputSystem.InputValue, Unity.InputSystem, Version=1.6.3.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "OnTurnRight",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "UnityEngine.InputSystem.InputValue, Unity.InputSystem, Version=1.6.3.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Move",
+        "MemberType": "Method",
+        "Accessibility": "Private",
+        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+      },
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      }
+    ]
+  },
+  {
+    "ClassType": "BlobSenses",
+    "MethodsData": [
+      {
+        "MemberName": "SeeWithEyes",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BasicSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ICanSee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IHaveEyes, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
+      {
+        "MemberName": "Am",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ]
+      },
+      {
+        "MemberName": "AssignConfiguration",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -485,7 +601,7 @@
         "MemberName": "Am",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -494,152 +610,7 @@
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      }
-    ]
-  },
-  {
-    "ClassType": "BlobBrain",
-    "MethodsData": [
-      {
-        "MemberName": "DoActions",
-        "MemberType": "Method",
-        "Accessibility": "Protected",
-        "declaringTypeName": "BlobBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "MemberName": "AddImpulse",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "Brain, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "Impulse+ImpulseType, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "System.Func`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-          "ImpulseStep[], BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
-        ]
-      },
-      {
-        "MemberName": "Am",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      },
-      {
-        "MemberName": "AssignConfiguration",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      }
-    ]
-  },
-  {
-    "ClassType": "BlobLocomotion",
-    "MethodsData": [
-      {
-        "MemberName": "DetectSteps",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "MemberName": "OnForward",
-        "MemberType": "Method",
-        "Accessibility": "Private",
-        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "UnityEngine.InputSystem.InputValue, Unity.InputSystem, Version=1.6.3.0, Culture=neutral, PublicKeyToken=null"
-        ]
-      },
-      {
-        "MemberName": "OnBackward",
-        "MemberType": "Method",
-        "Accessibility": "Private",
-        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "UnityEngine.InputSystem.InputValue, Unity.InputSystem, Version=1.6.3.0, Culture=neutral, PublicKeyToken=null"
-        ]
-      },
-      {
-        "MemberName": "OnTurnLeft",
-        "MemberType": "Method",
-        "Accessibility": "Private",
-        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "UnityEngine.InputSystem.InputValue, Unity.InputSystem, Version=1.6.3.0, Culture=neutral, PublicKeyToken=null"
-        ]
-      },
-      {
-        "MemberName": "OnTurnRight",
-        "MemberType": "Method",
-        "Accessibility": "Private",
-        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "UnityEngine.InputSystem.InputValue, Unity.InputSystem, Version=1.6.3.0, Culture=neutral, PublicKeyToken=null"
-        ]
-      },
-      {
-        "MemberName": "Move",
-        "MemberType": "Method",
-        "Accessibility": "Private",
-        "declaringTypeName": "BlobLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-      },
-      {
-        "MemberName": "Am",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      },
-      {
-        "MemberName": "AssignConfiguration",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      }
-    ]
-  },
-  {
-    "ClassType": "BlobSenses",
-    "MethodsData": [
-      {
-        "MemberName": "SeeWithEyes",
-        "MemberType": "Method",
-        "Accessibility": "Protected",
-        "declaringTypeName": "BasicSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "ICanSee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "IHaveEyes, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
-        ]
-      },
-      {
-        "MemberName": "Am",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      },
-      {
-        "MemberName": "AssignConfiguration",
-        "MemberType": "Method",
-        "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -659,7 +630,7 @@
         "MemberName": "AddImpulse",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "Brain, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "Impulse+ImpulseType, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "System.Func`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -670,7 +641,7 @@
         "MemberName": "Am",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -679,7 +650,7 @@
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -687,13 +658,47 @@
     ]
   },
   {
-    "ClassType": "Body",
+    "ClassType": "PigBody",
     "MethodsData": [
+      {
+        "MemberName": "BeDigested",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+        ],
+        "InterfaceAttributes": {
+          "ICanBeDigested": []
+        }
+      },
+      {
+        "MemberName": "BeDamaged",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "System.Single, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
+          "DamageTypeEnum, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ],
+        "InterfaceAttributes": {
+          "ICanBeDamaged": []
+        }
+      },
+      {
+        "MemberName": "Die",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "InterfaceAttributes": {
+          "ICanDie": []
+        }
+      },
       {
         "MemberName": "Am",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -702,7 +707,7 @@
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -710,19 +715,19 @@
     ]
   },
   {
-    "ClassType": "Brain",
+    "ClassType": "PigBrain",
     "MethodsData": [
       {
         "MemberName": "DoActions",
         "MemberType": "Method",
         "Accessibility": "Protected",
-        "declaringTypeName": "Brain, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+        "declaringTypeName": "PigBrain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
       },
       {
         "MemberName": "AddImpulse",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "Brain, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "Brain, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "Impulse+ImpulseType, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "System.Func`1[[System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
@@ -733,7 +738,7 @@
         "MemberName": "Am",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -742,7 +747,7 @@
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -750,13 +755,19 @@
     ]
   },
   {
-    "ClassType": "Locomotion",
+    "ClassType": "PigLocomotion",
     "MethodsData": [
+      {
+        "MemberName": "Move",
+        "MemberType": "Method",
+        "Accessibility": "Public",
+        "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+      },
       {
         "MemberName": "Am",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -765,7 +776,7 @@
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -773,35 +784,13 @@
     ]
   },
   {
-    "ClassType": "Nerves",
+    "ClassType": "PigNerves",
     "MethodsData": [
-      {
-        "MemberName": "AddComponentFromType",
-        "MemberType": "Method",
-        "Accessibility": "Private",
-        "declaringTypeName": "Nerves, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      },
-      {
-        "MemberName": "CreateAndAttachSystem",
-        "MemberType": "Method",
-        "Accessibility": "Private",
-        "declaringTypeName": "Nerves, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-        "ParameterTypes": [
-          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089",
-          "UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-          "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
-        ]
-      },
       {
         "MemberName": "Am",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -810,7 +799,7 @@
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -818,13 +807,24 @@
     ]
   },
   {
-    "ClassType": "Senses",
+    "ClassType": "PigSenses",
     "MethodsData": [
+      {
+        "MemberName": "SeeWithEyes",
+        "MemberType": "Method",
+        "Accessibility": "Protected",
+        "declaringTypeName": "BasicSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "ParameterTypes": [
+          "ICanSee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IHaveEyes, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+        ]
+      },
       {
         "MemberName": "Am",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.Type[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]
@@ -833,7 +833,7 @@
         "MemberName": "AssignConfiguration",
         "MemberType": "Method",
         "Accessibility": "Public",
-        "declaringTypeName": "CharacterSystem, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+        "declaringTypeName": "CharacterSystem, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "ParameterTypes": [
           "System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
         ]

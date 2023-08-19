@@ -1,14 +1,179 @@
 {
-  "BlobConfiguration": [
+  "BlobBody": [
+    {
+      "MemberName": "DigestDamageDealt",
+      "MemberType": "Property",
+      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IHaveDigestDamageDealt": []
+      }
+    }
+  ],
+  "BlobBody_Solid": [
+    {
+      "MemberName": "DigestDamageDealt",
+      "MemberType": "Property",
+      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IHaveDigestDamageDealt": []
+      }
+    }
+  ],
+  "BlobStomach_Segmented": [
+    {
+      "MemberName": "DigestDamageDealt",
+      "MemberType": "Property",
+      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IHaveDigestDamageDealt": []
+      }
+    }
+  ],
+  "PigBody": [
+    {
+      "MemberName": "Nutrition",
+      "MemberType": "Property",
+      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IHaveNutrition": []
+      }
+    },
+    {
+      "MemberName": "MyMeshRenderer",
+      "MemberType": "Property",
+      "VariableType": "UnityEngine.MeshRenderer, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IUseMeshRenderer": []
+      }
+    },
+    {
+      "MemberName": "HitPoints",
+      "MemberType": "Property",
+      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IHaveHitPoints": []
+      }
+    },
+    {
+      "MemberName": "Mass",
+      "MemberType": "Property",
+      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IHaveMass": []
+      }
+    },
+    {
+      "MemberName": "IsAlive",
+      "MemberType": "Property",
+      "VariableType": "BooleanVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IAmAlive": []
+      }
+    }
+  ],
+  "PigLocomotion": [
+    {
+      "MemberName": "RotateSpeed",
+      "MemberType": "Property",
+      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IHaveRotateSpeed": []
+      }
+    },
     {
       "MemberName": "MoveSpeed",
       "MemberType": "Property",
       "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveMoveSpeed": []
       }
+    }
+  ],
+  "PigSenses": [
+    {
+      "MemberName": "SightDistance",
+      "MemberType": "Property",
+      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "ICanSee": []
+      }
     },
+    {
+      "MemberName": "OnlySeeMask",
+      "MemberType": "Property",
+      "VariableType": "LayerMaskVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "ICanSee": []
+      }
+    },
+    {
+      "MemberName": "ThingsSeen",
+      "MemberType": "Property",
+      "VariableType": "Dict_GameObjectToLastSeen, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "ICanSee": []
+      }
+    },
+    {
+      "MemberName": "Eyes",
+      "MemberType": "Property",
+      "VariableType": "GameObjectRuntimeSet, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IHaveEyes": []
+      }
+    },
+    {
+      "MemberName": "MySightBox",
+      "MemberType": "Property",
+      "VariableType": "UnityEngine.BoxCollider, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IUseSightBox": [
+          {
+            "AttributeTypeName": "IsTriggerAttribute",
+            "AttributeProperties": {
+              "order": [
+                "0"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "MemberName": "ThingsNearbyFilter",
+      "MemberType": "Property",
+      "VariableType": "UnityLayerVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IUseSightBox": []
+      }
+    },
+    {
+      "MemberName": "ThingsNearby",
+      "MemberType": "Property",
+      "VariableType": "GameObjectRuntimeSet, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IUseSightBox": []
+      }
+    }
+  ],
+  "BlobConfiguration": [
     {
       "MemberName": "RotateSpeed",
       "MemberType": "Property",
@@ -179,19 +344,19 @@
       "InterfaceAttributes": {
         "IHaveMassPerCubicFoot": []
       }
+    },
+    {
+      "MemberName": "MoveSpeed",
+      "MemberType": "Property",
+      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IHaveMoveSpeed": []
+      }
     }
   ],
   "PreyAnimalConfiguration": [
     {
-      "MemberName": "MoveSpeed",
-      "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IHaveMoveSpeed": []
-      }
-    },
-    {
       "MemberName": "Nutrition",
       "MemberType": "Property",
       "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -316,179 +481,14 @@
       "InterfaceAttributes": {
         "IHaveMass": []
       }
-    }
-  ],
-  "PigBody": [
-    {
-      "MemberName": "Nutrition",
-      "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IHaveNutrition": []
-      }
     },
-    {
-      "MemberName": "MyMeshRenderer",
-      "MemberType": "Property",
-      "VariableType": "UnityEngine.MeshRenderer, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IUseMeshRenderer": []
-      }
-    },
-    {
-      "MemberName": "HitPoints",
-      "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IHaveHitPoints": []
-      }
-    },
-    {
-      "MemberName": "Mass",
-      "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IHaveMass": []
-      }
-    },
-    {
-      "MemberName": "IsAlive",
-      "MemberType": "Property",
-      "VariableType": "BooleanVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IAmAlive": []
-      }
-    }
-  ],
-  "PigLocomotion": [
     {
       "MemberName": "MoveSpeed",
       "MemberType": "Property",
       "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveMoveSpeed": []
-      }
-    },
-    {
-      "MemberName": "RotateSpeed",
-      "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IHaveRotateSpeed": []
-      }
-    }
-  ],
-  "PigSenses": [
-    {
-      "MemberName": "SightDistance",
-      "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "ICanSee": []
-      }
-    },
-    {
-      "MemberName": "OnlySeeMask",
-      "MemberType": "Property",
-      "VariableType": "LayerMaskVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "ICanSee": []
-      }
-    },
-    {
-      "MemberName": "ThingsSeen",
-      "MemberType": "Property",
-      "VariableType": "Dict_GameObjectToLastSeen, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "ICanSee": []
-      }
-    },
-    {
-      "MemberName": "Eyes",
-      "MemberType": "Property",
-      "VariableType": "GameObjectRuntimeSet, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IHaveEyes": []
-      }
-    },
-    {
-      "MemberName": "MySightBox",
-      "MemberType": "Property",
-      "VariableType": "UnityEngine.BoxCollider, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IUseSightBox": [
-          {
-            "AttributeTypeName": "IsTriggerAttribute",
-            "AttributeProperties": {
-              "order": [
-                "0"
-              ]
-            }
-          }
-        ]
-      }
-    },
-    {
-      "MemberName": "ThingsNearbyFilter",
-      "MemberType": "Property",
-      "VariableType": "UnityLayerVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IUseSightBox": []
-      }
-    },
-    {
-      "MemberName": "ThingsNearby",
-      "MemberType": "Property",
-      "VariableType": "GameObjectRuntimeSet, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IUseSightBox": []
-      }
-    }
-  ],
-  "BlobBody": [
-    {
-      "MemberName": "DigestDamageDealt",
-      "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IHaveDigestDamageDealt": []
-      }
-    }
-  ],
-  "BlobBody_Solid": [
-    {
-      "MemberName": "DigestDamageDealt",
-      "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IHaveDigestDamageDealt": []
-      }
-    }
-  ],
-  "BlobStomach_Segmented": [
-    {
-      "MemberName": "DigestDamageDealt",
-      "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IHaveDigestDamageDealt": []
       }
     }
   ]
