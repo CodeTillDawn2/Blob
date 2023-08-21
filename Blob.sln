@@ -11,7 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirenix.OdinInspector.Modul
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BreadAIEditor", "..\BreadAI\BreadAIEditor\BreadAIEditor.csproj", "{E14E83B6-91DE-47B8-9F19-6135AEA95FAC}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BreadAI", "..\BreadAI\BreadAI\BreadAI.csproj", "{AC8BF43B-8EE8-42FB-ADCE-2042079B679B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BreadAIExe", "..\BreadAI\BreadAI\BreadAIExe.csproj", "{AC8BF43B-8EE8-42FB-ADCE-2042079B679B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
