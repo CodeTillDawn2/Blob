@@ -34,15 +34,6 @@
   ],
   "PigBody": [
     {
-      "MemberName": "Nutrition",
-      "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IHaveNutrition": []
-      }
-    },
-    {
       "MemberName": "MyMeshRenderer",
       "MemberType": "Property",
       "VariableType": "UnityEngine.MeshRenderer, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -76,6 +67,15 @@
       "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IAmAlive": []
+      }
+    },
+    {
+      "MemberName": "Nutrition",
+      "MemberType": "Property",
+      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IHaveNutrition": []
       }
     }
   ],
@@ -141,10 +141,20 @@
       "MemberType": "Property",
       "VariableType": "UnityEngine.BoxCollider, UnityEngine.PhysicsModule, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "Attributes": [
+        {
+          "AttributeTypeName": "IsTriggerAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "AttributeProperties": {
+            "order": [
+              "0"
+            ]
+          }
+        }
+      ],
       "InterfaceAttributes": {
         "IUseSightBox": [
           {
-            "AttributeTypeName": "IsTriggerAttribute",
+            "AttributeTypeName": "IsTriggerAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {
               "order": [
                 "0"
@@ -317,7 +327,7 @@
       "InterfaceAttributes": {
         "IUseSightBox": [
           {
-            "AttributeTypeName": "IsTriggerAttribute",
+            "AttributeTypeName": "IsTriggerAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {
               "order": [
                 "0"
@@ -356,15 +366,6 @@
     }
   ],
   "PreyAnimalConfiguration": [
-    {
-      "MemberName": "Nutrition",
-      "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-      "InterfaceAttributes": {
-        "IHaveNutrition": []
-      }
-    },
     {
       "MemberName": "RotateSpeed",
       "MemberType": "Property",
@@ -445,7 +446,7 @@
       "InterfaceAttributes": {
         "IUseSightBox": [
           {
-            "AttributeTypeName": "IsTriggerAttribute",
+            "AttributeTypeName": "IsTriggerAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {
               "order": [
                 "0"
@@ -489,6 +490,15 @@
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveMoveSpeed": []
+      }
+    },
+    {
+      "MemberName": "Nutrition",
+      "MemberType": "Property",
+      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "InterfaceAttributes": {
+        "IHaveNutrition": []
       }
     }
   ]

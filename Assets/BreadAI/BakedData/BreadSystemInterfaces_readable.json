@@ -6,14 +6,14 @@
     "IHaveDigestDamageDealt, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
   ],
   "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": [
-    "ICanDie, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-    "IHaveNutrition, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "IUseMeshRenderer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "IHaveHitPoints, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "IHaveMass, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "IAmAlive, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "ICanBeDamaged, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-    "ICanBeDigested, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    "ICanBeDigested, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "ICanDie, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "IHaveNutrition, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
   ],
   "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": [
     "IHaveRotateSpeed, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -40,8 +40,6 @@
     "IHaveMoveSpeed, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
   ],
   "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null": [
-    "ICanDie, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-    "IHaveNutrition, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "IHaveRotateSpeed, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "ICanSee, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "IUseMeshRenderer, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
@@ -52,6 +50,8 @@
     "IHaveMass, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "ICanBeDamaged, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
     "ICanBeDigested, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
-    "IHaveMoveSpeed, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
+    "IHaveMoveSpeed, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "ICanDie, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "IHaveNutrition, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"
   ]
 }

@@ -1,18 +1,22 @@
 #if UNITY_EDITOR
+using System;
 using UnityEditor;
 [InitializeOnLoad]
 public static class AIBakerSOInitializer
 {
+
     static AIBakerSOInitializer()
     {
         // This will be called every time the domain reloads
-        EditorApplication.delayCall += ReBakeData;
+        EditorApplication.delayCall += LogDomainDirtyTime;
     }
 
-    private static void ReBakeData()
+    private static void LogDomainDirtyTime()
     {
 
-        AIEditorBaker.StartBake();
+
+        AIBaker.EatBread();
+        AIEditorBaker.DomainLastRefreshed = DateTime.Now;
 
     }
 }

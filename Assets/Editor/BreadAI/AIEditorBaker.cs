@@ -10,7 +10,10 @@ using Debug = UnityEngine.Debug;
 
 public static class AIEditorBaker
 {
-
+    /// <summary>
+    /// The last time the domain was refreshed. Used as a hint to determine if a rebake is needed
+    /// </summary>
+    public static DateTime DomainLastRefreshed { get; set; }
 
     // Flag to determine if it's the first log of a session
     private static bool isFirstLog = true;
@@ -73,6 +76,7 @@ public static class AIEditorBaker
 
 
 
+
     /// <summary>
     /// Nested dictionary meant to fill out the menu system of the dependent dropdown box on the editor UI for Nerve Systems.
     /// Should be kept fresh after every domain reload.
@@ -82,7 +86,7 @@ public static class AIEditorBaker
         get { return AIBakerData.Instance.BreadValidConfigurations; }
         private set { AIBakerData.Instance.BreadValidConfigurations = value; }
     }
-
+    [MenuItem("BreadAI/Start Bake")]
     public static void StartBake()
     {
         ProofBread();
@@ -105,20 +109,10 @@ public static class AIEditorBaker
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
         isFirstLog = true;
-        Debug.Log("Proofing ConfigurationMappings");
         BakeConfigurationMappings();
-        Debug.Log("Proofed ConfigurationMappings");
-        Debug.Log("Proofing BakeMembers");
         BakeMembers();
-        Debug.Log("Proofed BakeMembers");
-
-        Debug.Log("Proofing Methods");
         BakeMethods();
-        Debug.Log("Proofed Methods");
-
-        Debug.Log("Proofing Interfaces");
         BakeBreadInterfaces();
-        Debug.Log("Proofed Interfaces");
 
         stopwatch.Stop();
         LogToFile($"AI proof process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
@@ -127,24 +121,19 @@ public static class AIEditorBaker
 
     }
 
-    private static string BreadValidConfigurations_Path = Application.dataPath + @"/BreadAI/BakedData/BreadValidConfigurations.json";
-    private static string BreadConfigurations_Path = Application.dataPath + @"/BreadAI/BakedData/BreadConfigurations.json";
-    private static string BreadMethods_Path = Application.dataPath + @"/BreadAI/BakedData/BreadMethods.json";
-    private static string BreadDataMembers_Path = Application.dataPath + @"/BreadAI/BakedData/BreadDataMembers.json";
-    private static string BreadInterfaces_Path = Application.dataPath + @"/BreadAI/BakedData/BreadInterfaces.json";
-    private static string BreadSystemInterfaces_Path = Application.dataPath + @"/BreadAI/BakedData/BreadSystemInterfaces.json";
+
 
     private static void StoreBread()
     {
         Debug.Log("Baking Bread");
         Stopwatch stopwatch = new Stopwatch();
         stopwatch.Start();
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadConfigurations, BreadConfigurations_Path));
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadValidConfigurations, BreadValidConfigurations_Path));
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadDataMembers, BreadDataMembers_Path));
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadMethods, BreadMethods_Path));
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadInterfaces, BreadInterfaces_Path));
-        LogToFileIfError(SerializationUtility.WriteToDisk(BreadSystemInterfaces, BreadSystemInterfaces_Path));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadConfigurations, AIBaker.BreadDataPaths["BreadConfigurations"]));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadValidConfigurations, AIBaker.BreadDataPaths["BreadValidConfigurations"]));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadDataMembers, AIBaker.BreadDataPaths["BreadDataMembers"]));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadMethods, AIBaker.BreadDataPaths["BreadMethods"]));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadInterfaces, AIBaker.BreadDataPaths["BreadInterfaces"]));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadSystemInterfaces, AIBaker.BreadDataPaths["BreadSystemInterfaces"]));
         LogToFile($"AI Bake process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
         Debug.Log($"AI Bake process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
     }
@@ -176,7 +165,7 @@ public static class AIEditorBaker
     private static void BakeMethods()
     {
         BreadMethods = BakeBreadMethods();
-
+        string test = "";
     }
 
     private static void BakeBreadInterfaces()
@@ -264,7 +253,9 @@ public static class AIEditorBaker
                     .Select(prop =>
                     {
                         SimplePropertyInfo info = new SimplePropertyInfo(prop);
-                        info.Attributes.RemoveAll(attr => (!(attr is BreadAIAttributeBase) && !(attr is BasicComponentAttribute)));
+                        info.Attributes.RemoveAll(attr =>
+                        (!(typeof(BreadAIAttributeBase).IsAssignableFrom(Type.GetType(attr.AttributeTypeName)) ||
+                                typeof(BasicComponentAttribute).IsAssignableFrom(Type.GetType(attr.AttributeTypeName)))));
                         var correspondingInterfaceProperty = intf.GetProperties().FirstOrDefault(iprop => iprop.Name == prop.Name && iprop.PropertyType == prop.PropertyType);
                         if (correspondingInterfaceProperty != null)
                         {
@@ -283,7 +274,9 @@ public static class AIEditorBaker
                     .Select(field =>
                     {
                         SimpleFieldInfo info = new SimpleFieldInfo(field);
-                        info.Attributes.RemoveAll(attr => (!(attr is BreadAIAttributeBase) && !(attr is BasicComponentAttribute)));
+                        info.Attributes.RemoveAll(attr =>
+                        (!(typeof(BreadAIAttributeBase).IsAssignableFrom(Type.GetType(attr.AttributeTypeName)) ||
+                                typeof(BasicComponentAttribute).IsAssignableFrom(Type.GetType(attr.AttributeTypeName)))));
                         var correspondingInterfaceField = intf.GetFields().FirstOrDefault(ifield => ifield.Name == field.Name && ifield.FieldType == field.FieldType);
                         if (correspondingInterfaceField != null)
                         {
@@ -476,10 +469,6 @@ public static class AIEditorBaker
 
 
 
-    /// <summary>
-    /// Detects custom attributes within methods of classes derived from CharacterSystem.
-    /// </summary>
-    /// <returns>Cache of detected attributes.</returns>
     public static List<ClassData> BakeBreadMethods()
     {
         LogToFile($"______________________________");
@@ -500,52 +489,47 @@ public static class AIEditorBaker
             LogToFile("No classes derived from CharacterSystem found.");
         }
 
+
         foreach (Type type in derivedTypes)
         {
             ClassData classData = new ClassData { ClassType = type.FullName };
             LogToFile($"Processing class: {type.Name}");
 
-            MethodInfo[] methods = type.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+            var interfaceMethods = type.GetInterfaces()
+                                    .Where(intf => intf.GetCustomAttribute<BreadInterfaceAttribute>() != null)
+                                    .SelectMany(intf => intf.GetMethods())
+                                    .Distinct()
+                                    .ToList();
 
-            foreach (var method in methods)
+            foreach (var method in interfaceMethods)
             {
+                MethodInfo correspondingMethod = type.GetMethod(method.Name, BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance);
+
+                if (correspondingMethod == null)
+                    continue;
+
                 // Exclude methods that are property getters or setters
-                if (method.IsSpecialName && (method.Name.StartsWith("get_") || method.Name.StartsWith("set_")))
+                if (correspondingMethod.IsSpecialName && (correspondingMethod.Name.StartsWith("get_") || correspondingMethod.Name.StartsWith("set_")))
                     continue;
 
                 // Exclude Unity's special methods
-                if (unitySpecialMethods.Contains(method.Name))
+                if (unitySpecialMethods.Contains(correspondingMethod.Name))
                     continue;
 
                 // Exclude methods with generic parameters or a generic return type
-                if (method.IsGenericMethod || method.ReturnType.IsGenericType)
+                if (correspondingMethod.IsGenericMethod || correspondingMethod.ReturnType.IsGenericType)
                     continue;
 
-                // Exclude methods that come from UnityEngine.MonoBehaviour or its ancestors
-                if (method.DeclaringType == typeof(UnityEngine.MonoBehaviour) ||
-                    method.DeclaringType == typeof(UnityEngine.Component) ||
-                    method.DeclaringType == typeof(UnityEngine.MonoBehaviour) ||
-                    method.DeclaringType == typeof(System.Object) ||
-                    method.DeclaringType == typeof(UnityEngine.Object) ||
-                    method.DeclaringType == typeof(UnityEngine.Behaviour))
-                    continue;
-
-                SimpleMethodInfo info = new SimpleMethodInfo(method);
-                info.Attributes.RemoveAll(attr => (!(attr is BreadAIAttributeBase) && !(attr is BasicComponentAttribute)));
-
-                foreach (var intf in type.GetInterfaces().Where(intf => intf.GetCustomAttribute<BreadInterfaceAttribute>() != null))
+                SimpleMethodInfo info = new SimpleMethodInfo(correspondingMethod);
+                foreach (var attr in info.Attributes)
                 {
-                    var correspondingInterfaceMethod = intf.GetMethods().FirstOrDefault(imethod => imethod.Name == method.Name && imethod.ReturnType == method.ReturnType);
-
-                    if (correspondingInterfaceMethod != null)
-                    {
-                        var interfaceAttributes = correspondingInterfaceMethod.GetCustomAttributes(true)
-                                                                              .OfType<Attribute>()
-                                                                              .Select(attr => new SimpleAttributeInfo(attr))
-                                                                              .ToList();
-                        info.InterfaceAttributes[intf] = interfaceAttributes;
-                    }
+                    Debug.Log($"Attribute: {attr.GetType().Name}");
                 }
+
+                info.Attributes.RemoveAll(attr =>
+                (!(typeof(BreadAIAttributeBase).IsAssignableFrom(Type.GetType(attr.AttributeTypeName)) ||
+                        typeof(BasicComponentAttribute).IsAssignableFrom(Type.GetType(attr.AttributeTypeName)))));
+                // You can add more specific logic here if needed
 
                 classData.MethodsData.Add(info);
             }
@@ -555,6 +539,7 @@ public static class AIEditorBaker
                 cache.Add(classData);
             }
         }
+
 
         LogToFile($"Total number of classes processed: {cache.Count}");
         int totalMethods = cache.Sum(cd => cd.MethodsData.Count);
@@ -567,6 +552,7 @@ public static class AIEditorBaker
 
         return cache;
     }
+
 
 
 

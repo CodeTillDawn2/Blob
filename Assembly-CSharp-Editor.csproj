@@ -60,12 +60,34 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Editor\BreadAI\AIBakerSOInitializer.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Visual_Component.cs" />
     <Compile Include="Assets\Editor\BreadAI\AIEditorBaker.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Visual_ComponentList.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Visual_Parameter.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Visual_MemberList.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Drawers\Visual_ComponentDrawer.cs" />
     <Compile Include="Assets\Editor\BreadAI\RuntimeSetEditor.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Helpers\StyleHelper.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Visual_AttributeProperty.cs" />
     <Compile Include="Assets\Editor\ScriptedImporterEditorScript.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Drawers\Visual_PropertyListDrawer.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Visual_Component_Base.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Visual_Attribute.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Visual_Method.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Drawers\Visual_MethodDrawer.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Drawers\Visual_PropertyDrawer.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Visual_PropertyList.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Visual_MethodList.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Drawers\Visual_ComponentListDrawer.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Drawers\Visual_MethodListDrawer.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Visual_Interface.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\AIWindows\BreadAIWindow.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Visual_Member.cs" />
+    <Compile Include="Assets\Editor\BreadAI\BuiltIn\VisualRepresentationClasses\Visual_Property.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Editor\BreadAI\BuiltIn\DLL\Debug\netstandard2.1\BreadAIEditor.dll" />
+    <None Include="Assets\Editor\BreadAI\BuiltIn\DLL\Debug\netstandard2.1\BreadAI.dll" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
@@ -353,14 +375,8 @@
     <Reference Include="Sirenix.OdinInspector.Editor">
       <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.OdinInspector.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="NAudio.WinMM">
-      <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.WinMM.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.Plastic.Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.0.5\Lib\Editor\PlasticSCM\Unity.Plastic.Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio.Wasapi">
-      <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Wasapi.dll</HintPath>
     </Reference>
     <Reference Include="log4netPlastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.0.5\Lib\Editor\PlasticSCM\log4netPlastic.dll</HintPath>
@@ -380,32 +396,17 @@
     <Reference Include="Unity.VisualScripting.Antlr3.Runtime">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Runtime\VisualScripting.Flow\Dependencies\NCalc\Unity.VisualScripting.Antlr3.Runtime.dll</HintPath>
     </Reference>
-    <Reference Include="NAudio.Asio">
-      <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Asio.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio.Core">
-      <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="NAudio">
-      <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.dll</HintPath>
-    </Reference>
     <Reference Include="Sirenix.Utilities.Editor">
       <HintPath>Assets\Plugins\Sirenix\Assemblies\Sirenix.Utilities.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>Library\PackageCache\com.unity.nuget.newtonsoft-json@3.2.1\Runtime\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="NAudio.Midi">
-      <HintPath>Assets\GPT AI Integration\ElevenLabs\libs\NAudio.Midi.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.VisualScripting.TextureAssets">
       <HintPath>Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\EditorAssetResources\Unity.VisualScripting.TextureAssets.dll</HintPath>
     </Reference>
     <Reference Include="unityplastic">
       <HintPath>Library\PackageCache\com.unity.collab-proxy@2.0.5\Lib\Editor\PlasticSCM\unityplastic.dll</HintPath>
-    </Reference>
-    <Reference Include="Pathfinding.Ionic.Zip.Reduced">
-      <HintPath>Assets\AstarPathfindingProject\Plugins\DotNetZip\Pathfinding.Ionic.Zip.Reduced.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
       <HintPath>Library\PackageCache\com.unity.ext.nunit@1.0.6\net35\unity-custom\nunit.framework.dll</HintPath>
@@ -809,6 +810,9 @@
     <Reference Include="Unity.2D.Common.Path.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Path.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Animation.Rigging.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Timeline.Editor.dll</HintPath>
     </Reference>
@@ -851,17 +855,20 @@
     <Reference Include="Unity.VisualScripting.Flow">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.VisualScripting.Flow.Editor">
+      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.InternalAPIEngineBridge.001">
       <HintPath>Library\ScriptAssemblies\Unity.InternalAPIEngineBridge.001.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.VisualScripting.Flow.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.Flow.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="Unity.2D.Common.Runtime">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Common.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.UI">
+      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Extras.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.2D.Tilemap.Extras.Editor.dll</HintPath>
@@ -874,12 +881,6 @@
     </Reference>
     <Reference Include="Unity.InputSystem.ForUI">
       <HintPath>Library\ScriptAssemblies\Unity.InputSystem.ForUI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Animation.Rigging.Editor">
-      <HintPath>Library\ScriptAssemblies\Unity.Animation.Rigging.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\ScriptAssemblies\UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualScripting.SettingsProvider.Editor">
       <HintPath>Library\ScriptAssemblies\Unity.VisualScripting.SettingsProvider.Editor.dll</HintPath>
@@ -945,29 +946,9 @@
       <Project>{942EE966-DED0-F8B3-92D7-B2E88412F9A7}</Project>
       <Name>AdjustPivot.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="openai.api.unity.editor.csproj">
-      <Project>{89132D93-795D-0F2E-9738-0AB22EE6C303}</Project>
-      <Name>openai.api.unity.editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Sirenix.OdinInspector.Modules.UnityMathematics.csproj">
       <Project>{313DD723-0862-6853-5F3E-3B87F45B34E4}</Project>
       <Name>Sirenix.OdinInspector.Modules.UnityMathematics</Name>
-    </ProjectReference>
-    <ProjectReference Include="PackageToolsEditor.csproj">
-      <Project>{726AFA8A-6532-E894-4BEC-E255CB223930}</Project>
-      <Name>PackageToolsEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="AstarPathfindingProjectEditor.csproj">
-      <Project>{C9C1FD00-F4F5-8BB0-2CFF-F382AFC1746E}</Project>
-      <Name>AstarPathfindingProjectEditor</Name>
-    </ProjectReference>
-    <ProjectReference Include="AstarPathfindingProject.csproj">
-      <Project>{21C372D8-A9E7-A610-234D-CE70891A07FD}</Project>
-      <Name>AstarPathfindingProject</Name>
-    </ProjectReference>
-    <ProjectReference Include="openai.api.unity.csproj">
-      <Project>{515B55D5-0355-7122-C48F-BF86C363DCE9}</Project>
-      <Name>openai.api.unity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

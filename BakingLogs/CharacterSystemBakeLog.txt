@@ -18,7 +18,7 @@ Populated 3 ConfigurationBase types for PigSenses that implement all required in
 Found 2 derived types for base type Locomotion.
 Populated 3 ConfigurationBase types for BlobLocomotion that implement all required interfaces.
 Populated 3 ConfigurationBase types for PigLocomotion that implement all required interfaces.
-PopulateDerivedTypeDictionary completed in: 0.2524986 seconds.
+PopulateDerivedTypeDictionary completed in: 0.247217 seconds.
 ______________________________
 
 Starting BakeBreadDataMembers.
@@ -52,7 +52,7 @@ Processing class: PreyAnimalConfiguration
 Detected 14 members (usable) in class PreyAnimalConfiguration.
 Total number of classes processed: 8
 Total number of usable members detected: 50
-Total time taken: 0.0626467 seconds.
+Total time taken: 0.0566849 seconds.
 ______________________________
 
 Starting BakeBreadMethods.
@@ -74,10 +74,10 @@ Processing class: PigBrain
 Processing class: PigLocomotion
 Processing class: PigNerves
 Processing class: PigSenses
-Total number of classes processed: 18
-Total number of methods with custom attributes: 91
+Total number of classes processed: 1
+Total number of methods with custom attributes: 3
 Total number of custom attributes detected: 0
-Total time taken: 0.0530555 seconds.
+Total time taken: 0.0488281 seconds.
 ______________________________
 
 Starting BakeInterfaceData.
@@ -106,7 +106,7 @@ Processed interface IHaveTentacleHitSpeed. Members found: 1
 Processed interface IHaveTentacleReach. Members found: 2
 Processed interface IHaveThingsInMyStomach. Members found: 2
 Processed interface IHaveThingsSeen. Members found: 1
-Total time taken: 0.0607772 seconds.
-Baked CharacterSystem Interface Implementations in 46ms
-AI proof process completed in 0.6521479 seconds.
-AI Bake process completed in 0.2123865 seconds.
+Total time taken: 0.0495575 seconds.
+Baked CharacterSystem Interface Implementations in 39ms
+AI proof process completed in 1.1254689 seconds.
+AI Bake process completed in 0.0589506 seconds.

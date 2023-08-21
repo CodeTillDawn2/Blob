@@ -34,7 +34,7 @@ public class NervePlan : ScriptableObject
         }
     }
 
-    
+
 
 
     // Senses

@@ -23,7 +23,7 @@
       "declaringTypeName": "IUseSightBox, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "Attributes": [
         {
-          "AttributeTypeName": "IsTriggerAttribute",
+          "AttributeTypeName": "IsTriggerAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "AttributeProperties": {
             "order": [
               "0"

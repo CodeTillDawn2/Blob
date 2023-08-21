@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public abstract class Senses : CharacterSystem
@@ -40,29 +36,29 @@ public abstract class Senses : CharacterSystem
 
     protected virtual void Update()
     {
-      
+
 
 
     }
 
     protected virtual void FixedUpdate()
     {
-       
+
 
     }
 
     protected virtual void OnTriggerEnter(Collider col)
     {
-      
+
     }
 
     protected virtual void OnTriggerExit(Collider col)
     {
 
-        
+
 
     }
-   
+
 
 
 
