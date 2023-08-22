@@ -937,10 +937,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="AdjustPivot.Editor.csproj">
-      <Project>{942EE966-DED0-F8B3-92D7-B2E88412F9A7}</Project>
-      <Name>AdjustPivot.Editor</Name>
-    </ProjectReference>
     <ProjectReference Include="Sirenix.OdinInspector.Modules.UnityMathematics.csproj">
       <Project>{313DD723-0862-6853-5F3E-3B87F45B34E4}</Project>
       <Name>Sirenix.OdinInspector.Modules.UnityMathematics</Name>
