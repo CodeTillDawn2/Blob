@@ -1,24 +1,17 @@
 ______________________________
 
 Starting BakeBreadValidConfigurations.
-Found 3 derived types for base type Brain.
-Populated 3 ConfigurationBase types for BlobBrain that implement all required interfaces.
-Populated 3 ConfigurationBase types for TentacleBrain that implement all required interfaces.
-Populated 3 ConfigurationBase types for PigBrain that implement all required interfaces.
-Found 3 derived types for base type Body.
-Populated 1 ConfigurationBase types for BlobBody_Solid that implement all required interfaces.
-Populated 1 ConfigurationBase types for BlobStomach_Segmented that implement all required interfaces.
-Populated 2 ConfigurationBase types for PigBody that implement all required interfaces.
-Found 1 derived types for base type Nerves.
-Populated 3 ConfigurationBase types for PigNerves that implement all required interfaces.
-Found 3 derived types for base type Senses.
-Populated 3 ConfigurationBase types for BasicSenses that implement all required interfaces.
-Populated 3 ConfigurationBase types for BlobSenses that implement all required interfaces.
-Populated 3 ConfigurationBase types for PigSenses that implement all required interfaces.
-Found 2 derived types for base type Locomotion.
-Populated 3 ConfigurationBase types for BlobLocomotion that implement all required interfaces.
-Populated 3 ConfigurationBase types for PigLocomotion that implement all required interfaces.
-PopulateDerivedTypeDictionary completed in: 0.247217 seconds.
+Found 0 derived types for base type Brain.
+Found 0 derived types for base type Body.
+Found 0 derived types for base type Nerves.
+Found 0 derived types for base type Senses.
+Found 0 derived types for base type Locomotion.
+PopulateDerivedTypeDictionary completed in: 0.3000401 seconds.
+______________________________
+
+Starting BakeBreadTypes.
+Total number of classes and interfaces processed: 0
+Total time taken: 0.1082102 seconds.
 ______________________________
 
 Starting BakeBreadDataMembers.
@@ -27,32 +20,9 @@ Processing class: Brain
 Processing class: Locomotion
 Processing class: Nerves
 Processing class: Senses
-Processing class: BasicSenses
-Processing class: BlobBody
-Detected 1 members (usable) in class BlobBody.
-Processing class: BlobBody_Solid
-Detected 1 members (usable) in class BlobBody_Solid.
-Processing class: BlobBrain
-Processing class: BlobLocomotion
-Processing class: BlobSenses
-Processing class: BlobStomach_Segmented
-Detected 1 members (usable) in class BlobStomach_Segmented.
-Processing class: TentacleBrain
-Processing class: PigBody
-Detected 5 members (usable) in class PigBody.
-Processing class: PigBrain
-Processing class: PigLocomotion
-Detected 2 members (usable) in class PigLocomotion.
-Processing class: PigNerves
-Processing class: PigSenses
-Detected 7 members (usable) in class PigSenses.
-Processing class: BlobConfiguration
-Detected 19 members (usable) in class BlobConfiguration.
-Processing class: PreyAnimalConfiguration
-Detected 14 members (usable) in class PreyAnimalConfiguration.
-Total number of classes processed: 8
-Total number of usable members detected: 50
-Total time taken: 0.0566849 seconds.
+Total number of classes processed: 0
+Total number of usable members detected: 0
+Total time taken: 0.0594063 seconds.
 ______________________________
 
 Starting BakeBreadMethods.
@@ -61,52 +31,14 @@ Processing class: Brain
 Processing class: Locomotion
 Processing class: Nerves
 Processing class: Senses
-Processing class: BasicSenses
-Processing class: BlobBody
-Processing class: BlobBody_Solid
-Processing class: BlobBrain
-Processing class: BlobLocomotion
-Processing class: BlobSenses
-Processing class: BlobStomach_Segmented
-Processing class: TentacleBrain
-Processing class: PigBody
-Processing class: PigBrain
-Processing class: PigLocomotion
-Processing class: PigNerves
-Processing class: PigSenses
-Total number of classes processed: 1
-Total number of methods with custom attributes: 3
+Total number of classes processed: 0
+Total number of methods with custom attributes: 0
 Total number of custom attributes detected: 0
-Total time taken: 0.0488281 seconds.
+Total time taken: 0.0462663 seconds.
 ______________________________
 
 Starting BakeInterfaceData.
-Processed interface IUseMeshRenderer. Members found: 1
-Processed interface IUseRigidbody. Members found: 1
-Processed interface IUseSightBox. Members found: 3
-Processed interface IAmAlive. Members found: 1
-Processed interface IAmImmuneToTargetingByTentacles. Members found: 0
-Processed interface ICanBeDamaged. Members found: 1
-Processed interface ICanBeDigested. Members found: 1
-Processed interface ICanDie. Members found: 1
-Processed interface ICanGainNutrition. Members found: 1
-Processed interface ICanSee. Members found: 3
-Processed interface IHaveDigestDamageDealt. Members found: 2
-Processed interface IHaveEyes. Members found: 1
-Processed interface IHaveGrowthSpeed. Members found: 1
-Processed interface IHaveHitPoints. Members found: 1
-Processed interface IHaveMass. Members found: 1
-Processed interface IHaveMassPerCubicFoot. Members found: 1
-Processed interface IHaveMaxTentacles. Members found: 1
-Processed interface IHaveMoveSpeed. Members found: 1
-Processed interface IHaveNutrition. Members found: 1
-Processed interface IHaveRotateSpeed. Members found: 1
-Processed interface IHaveSuckSpeed. Members found: 1
-Processed interface IHaveTentacleHitSpeed. Members found: 1
-Processed interface IHaveTentacleReach. Members found: 2
-Processed interface IHaveThingsInMyStomach. Members found: 2
-Processed interface IHaveThingsSeen. Members found: 1
-Total time taken: 0.0495575 seconds.
-Baked CharacterSystem Interface Implementations in 39ms
-AI proof process completed in 1.1254689 seconds.
-AI Bake process completed in 0.0589506 seconds.
+Total time taken: 0.0457495 seconds.
+Baked CharacterSystem Interface Implementations in 49ms
+AI proof process completed in 0.6596235 seconds.
+AI Bake process completed in 0.0842762 seconds.

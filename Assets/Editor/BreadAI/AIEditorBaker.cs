@@ -57,6 +57,19 @@ public static class AIEditorBaker
         }
     }
 
+    public static Dictionary<string, Type> BreadTypes
+    {
+        get
+        {
+            return AIBakerData.Instance.BreadTypes;
+        }
+        private set
+        {
+            AIBakerData.Instance.BreadTypes = value;
+        }
+    }
+
+
     public static Dictionary<string, List<SimpleMemberInfo>> BreadDataMembers
     {
         get { return AIBakerData.Instance.BreadDataMembers; }
@@ -110,6 +123,7 @@ public static class AIEditorBaker
         stopwatch.Start();
         isFirstLog = true;
         BakeConfigurationMappings();
+        BakeClasses();
         BakeMembers();
         BakeMethods();
         BakeBreadInterfaces();
@@ -134,10 +148,11 @@ public static class AIEditorBaker
         LogToFileIfError(SerializationUtility.WriteToDisk(BreadMethods, AIBaker.BreadDataPaths["BreadMethods"]));
         LogToFileIfError(SerializationUtility.WriteToDisk(BreadInterfaces, AIBaker.BreadDataPaths["BreadInterfaces"]));
         LogToFileIfError(SerializationUtility.WriteToDisk(BreadSystemInterfaces, AIBaker.BreadDataPaths["BreadSystemInterfaces"]));
+        LogToFileIfError(SerializationUtility.WriteToDisk(BreadTypes, AIBaker.BreadDataPaths["BreadTypes"]));
         LogToFile($"AI Bake process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
         Debug.Log($"AI Bake process completed in {stopwatch.Elapsed.TotalSeconds} seconds.");
     }
-
+    
 
 
     private static void BakeConfigurationMappings()
@@ -162,6 +177,15 @@ public static class AIEditorBaker
         BreadDataMembers = BakeBreadDataMembers();
 
     }
+
+    private static void BakeClasses()
+    {
+        BreadTypes = BakeBreadTypes();
+
+    }
+
+    
+
     private static void BakeMethods()
     {
         BreadMethods = BakeBreadMethods();
@@ -464,6 +488,53 @@ public static class AIEditorBaker
     }
 
 
+    public static Dictionary<string, Type> BakeBreadTypes()
+    {
+        LogToFile($"______________________________");
+        LogToFile($"");
+        LogToFile($"Starting {System.Reflection.MethodBase.GetCurrentMethod().Name}.");
+
+        Dictionary<string, Type> result = new Dictionary<string, Type>();
+        Stopwatch stopwatch = new Stopwatch();
+        stopwatch.Start();
+
+        var allAssemblies = AppDomain.CurrentDomain.GetAssemblies();
+
+        foreach (var assembly in allAssemblies)
+        {
+            // Process classes derived from CharacterSystem or ConfigurationBase
+            var derivedTypes = assembly.GetTypes()
+                .Where(t => t.IsSubclassOf(typeof(CharacterSystem)) || t.IsSubclassOf(typeof(ConfigurationBase)))
+                .ToList();
+
+            foreach (var type in derivedTypes)
+            {
+                if (!type.IsAbstract)
+                {
+                    LogToFile($"Processing class: {type.Name}");
+                    result[type.FullName] = type; // Using FullName to include the namespace
+                }
+            }
+
+            // Process interfaces with the AIBreadAttribute
+            var interfacesWithAttribute = assembly.GetTypes()
+                .Where(t => t.IsInterface && t.GetCustomAttributes(typeof(BreadAIAttributeBase), true).Any())
+                .ToList();
+
+            foreach (var iface in interfacesWithAttribute)
+            {
+                LogToFile($"Processing interface: {iface.Name}");
+                result[iface.FullName] = iface; // Using FullName to include the namespace
+            }
+        }
+
+        LogToFile($"Total number of classes and interfaces processed: {result.Count}");
+
+        stopwatch.Stop();
+        LogToFile($"Total time taken: {stopwatch.Elapsed.TotalSeconds} seconds.");
+
+        return result;
+    }
 
 
 

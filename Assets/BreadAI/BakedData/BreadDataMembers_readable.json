@@ -3,7 +3,7 @@
     {
       "MemberName": "DigestDamageDealt",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveDigestDamageDealt": []
@@ -14,7 +14,7 @@
     {
       "MemberName": "DigestDamageDealt",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveDigestDamageDealt": []
@@ -25,7 +25,7 @@
     {
       "MemberName": "DigestDamageDealt",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveDigestDamageDealt": []
@@ -45,7 +45,7 @@
     {
       "MemberName": "HitPoints",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveHitPoints": []
@@ -54,7 +54,7 @@
     {
       "MemberName": "Mass",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveMass": []
@@ -63,7 +63,7 @@
     {
       "MemberName": "IsAlive",
       "MemberType": "Property",
-      "VariableType": "BooleanVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "BooleanVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IAmAlive": []
@@ -72,7 +72,7 @@
     {
       "MemberName": "Nutrition",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveNutrition": []
@@ -83,7 +83,7 @@
     {
       "MemberName": "RotateSpeed",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveRotateSpeed": []
@@ -92,7 +92,7 @@
     {
       "MemberName": "MoveSpeed",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigLocomotion, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveMoveSpeed": []
@@ -103,7 +103,7 @@
     {
       "MemberName": "SightDistance",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "ICanSee": []
@@ -112,7 +112,7 @@
     {
       "MemberName": "OnlySeeMask",
       "MemberType": "Property",
-      "VariableType": "LayerMaskVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "LayerMaskVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "ICanSee": []
@@ -121,7 +121,7 @@
     {
       "MemberName": "ThingsSeen",
       "MemberType": "Property",
-      "VariableType": "Dict_GameObjectToLastSeen, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "Dict_GameObjectToLastSeen, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "ICanSee": []
@@ -130,7 +130,7 @@
     {
       "MemberName": "Eyes",
       "MemberType": "Property",
-      "VariableType": "GameObjectRuntimeSet, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "GameObjectRuntimeSet, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveEyes": []
@@ -143,7 +143,7 @@
       "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "Attributes": [
         {
-          "AttributeTypeName": "IsTriggerAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+          "AttributeTypeName": "IsTriggerAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
           "AttributeProperties": {
             "order": [
               "0"
@@ -154,7 +154,7 @@
       "InterfaceAttributes": {
         "IUseSightBox": [
           {
-            "AttributeTypeName": "IsTriggerAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "AttributeTypeName": "IsTriggerAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {
               "order": [
                 "0"
@@ -167,7 +167,7 @@
     {
       "MemberName": "ThingsNearbyFilter",
       "MemberType": "Property",
-      "VariableType": "UnityLayerVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "UnityLayerVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IUseSightBox": []
@@ -176,7 +176,7 @@
     {
       "MemberName": "ThingsNearby",
       "MemberType": "Property",
-      "VariableType": "GameObjectRuntimeSet, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "GameObjectRuntimeSet, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PigSenses, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IUseSightBox": []
@@ -187,7 +187,7 @@
     {
       "MemberName": "RotateSpeed",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveRotateSpeed": []
@@ -196,7 +196,7 @@
     {
       "MemberName": "SuckSpeed",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveSuckSpeed": []
@@ -205,7 +205,7 @@
     {
       "MemberName": "SightDistance",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "ICanSee": []
@@ -214,7 +214,7 @@
     {
       "MemberName": "OnlySeeMask",
       "MemberType": "Property",
-      "VariableType": "LayerMaskVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "LayerMaskVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "ICanSee": []
@@ -223,7 +223,7 @@
     {
       "MemberName": "ThingsSeen",
       "MemberType": "Property",
-      "VariableType": "Dict_GameObjectToLastSeen, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "Dict_GameObjectToLastSeen, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "ICanSee": []
@@ -232,7 +232,7 @@
     {
       "MemberName": "TentacleHitSpeed",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveTentacleHitSpeed": []
@@ -241,7 +241,7 @@
     {
       "MemberName": "DigestDamageDealt",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveDigestDamageDealt": []
@@ -250,7 +250,7 @@
     {
       "MemberName": "Eyes",
       "MemberType": "Property",
-      "VariableType": "GameObjectRuntimeSet, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "GameObjectRuntimeSet, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveEyes": []
@@ -259,7 +259,7 @@
     {
       "MemberName": "MinTentacleReach",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveTentacleReach": []
@@ -268,7 +268,7 @@
     {
       "MemberName": "MaxTentacleReach",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveTentacleReach": []
@@ -277,7 +277,7 @@
     {
       "MemberName": "GrowthSpeed",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveGrowthSpeed": []
@@ -286,7 +286,7 @@
     {
       "MemberName": "DragInsideStomach",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveThingsInMyStomach": []
@@ -295,7 +295,7 @@
     {
       "MemberName": "AngularDragInsideStomach",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveThingsInMyStomach": []
@@ -304,7 +304,7 @@
     {
       "MemberName": "ThingsNearby",
       "MemberType": "Property",
-      "VariableType": "GameObjectRuntimeSet, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "GameObjectRuntimeSet, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IUseSightBox": []
@@ -313,7 +313,7 @@
     {
       "MemberName": "ThingsNearbyFilter",
       "MemberType": "Property",
-      "VariableType": "UnityLayerVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "UnityLayerVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IUseSightBox": []
@@ -327,7 +327,7 @@
       "InterfaceAttributes": {
         "IUseSightBox": [
           {
-            "AttributeTypeName": "IsTriggerAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "AttributeTypeName": "IsTriggerAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {
               "order": [
                 "0"
@@ -340,7 +340,7 @@
     {
       "MemberName": "Mass",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveMass": []
@@ -349,7 +349,7 @@
     {
       "MemberName": "MassPerCubicFoot",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveMassPerCubicFoot": []
@@ -358,7 +358,7 @@
     {
       "MemberName": "MoveSpeed",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "BlobConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveMoveSpeed": []
@@ -369,7 +369,7 @@
     {
       "MemberName": "RotateSpeed",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveRotateSpeed": []
@@ -378,7 +378,7 @@
     {
       "MemberName": "OnlySeeMask",
       "MemberType": "Property",
-      "VariableType": "LayerMaskVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "LayerMaskVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "ICanSee": []
@@ -387,7 +387,7 @@
     {
       "MemberName": "ThingsSeen",
       "MemberType": "Property",
-      "VariableType": "Dict_GameObjectToLastSeen, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "Dict_GameObjectToLastSeen, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "ICanSee": []
@@ -396,7 +396,7 @@
     {
       "MemberName": "SightDistance",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "ICanSee": []
@@ -414,7 +414,7 @@
     {
       "MemberName": "Eyes",
       "MemberType": "Property",
-      "VariableType": "GameObjectRuntimeSet, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "GameObjectRuntimeSet, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveEyes": []
@@ -423,7 +423,7 @@
     {
       "MemberName": "ThingsNearbyFilter",
       "MemberType": "Property",
-      "VariableType": "UnityLayerVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "UnityLayerVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IUseSightBox": []
@@ -432,7 +432,7 @@
     {
       "MemberName": "ThingsNearby",
       "MemberType": "Property",
-      "VariableType": "GameObjectRuntimeSet, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "GameObjectRuntimeSet, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IUseSightBox": []
@@ -446,7 +446,7 @@
       "InterfaceAttributes": {
         "IUseSightBox": [
           {
-            "AttributeTypeName": "IsTriggerAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "AttributeTypeName": "IsTriggerAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {
               "order": [
                 "0"
@@ -459,7 +459,7 @@
     {
       "MemberName": "HitPoints",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveHitPoints": []
@@ -468,7 +468,7 @@
     {
       "MemberName": "IsAlive",
       "MemberType": "Property",
-      "VariableType": "BooleanVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "BooleanVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IAmAlive": []
@@ -477,7 +477,7 @@
     {
       "MemberName": "Mass",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveMass": []
@@ -486,7 +486,7 @@
     {
       "MemberName": "MoveSpeed",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveMoveSpeed": []
@@ -495,7 +495,7 @@
     {
       "MemberName": "Nutrition",
       "MemberType": "Property",
-      "VariableType": "FloatVariable, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+      "VariableType": "FloatVariable, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
       "declaringTypeName": "PreyAnimalConfiguration, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
       "InterfaceAttributes": {
         "IHaveNutrition": []

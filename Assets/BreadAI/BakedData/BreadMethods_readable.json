@@ -13,11 +13,11 @@
         ],
         "Attributes": [
           {
-            "AttributeTypeName": "AIInvoluntaryAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "AttributeTypeName": "AIInvoluntaryAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {}
           },
           {
-            "AttributeTypeName": "AIRequiredRiskAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "AttributeTypeName": "AIRequiredRiskAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {
               "RiskType": [
                 "IHaveHitPoints"
@@ -25,7 +25,7 @@
             }
           },
           {
-            "AttributeTypeName": "AIRequiredRiskAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "AttributeTypeName": "AIRequiredRiskAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {
               "RiskType": [
                 "ICanDie"
@@ -33,7 +33,7 @@
             }
           },
           {
-            "AttributeTypeName": "AIRequiredInputOrAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "AttributeTypeName": "AIRequiredInputOrAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {
               "InputTypes": [
                 "IHaveDigestDamageDealt"
@@ -52,11 +52,11 @@
         ],
         "Attributes": [
           {
-            "AttributeTypeName": "AIInvoluntaryAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "AttributeTypeName": "AIInvoluntaryAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {}
           },
           {
-            "AttributeTypeName": "AIRequiredEvalBoolAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "AttributeTypeName": "AIRequiredEvalBoolAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {
               "FieldToEvaluate": [
                 "IAmAlive"
@@ -67,7 +67,7 @@
             }
           },
           {
-            "AttributeTypeName": "AIRequiredEvalBoolAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "AttributeTypeName": "AIRequiredEvalBoolAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {
               "FieldToEvaluate": [
                 "ICanBeDigested"
@@ -78,7 +78,7 @@
             }
           },
           {
-            "AttributeTypeName": "AIRequiredRiskAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "AttributeTypeName": "AIRequiredRiskAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {
               "RiskType": [
                 "IHaveNutrition"
@@ -94,11 +94,11 @@
         "declaringTypeName": "PigBody, Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null",
         "Attributes": [
           {
-            "AttributeTypeName": "AIInvoluntaryAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "AttributeTypeName": "AIInvoluntaryAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {}
           },
           {
-            "AttributeTypeName": "AIRequiredRiskAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "AttributeTypeName": "AIRequiredRiskAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {
               "RiskType": [
                 "IAmAlive"
@@ -106,7 +106,7 @@
             }
           },
           {
-            "AttributeTypeName": "AIOptionalInfluencerAttribute, BreadAI, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+            "AttributeTypeName": "AIOptionalInfluencerAttribute, BreadAIExe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
             "AttributeProperties": {
               "InfluencerType": [
                 "IHaveHitPoints"
